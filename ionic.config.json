@@ -1,0 +1,8 @@
+{
+  "name": "ProveedorApp_JoBid",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,21 @@
+page-add-payment-method {
+    .barraRoja{
+		background:$Red;
+    }
+    .btnBottom{
+        width: 80%;
+        margin: auto;
+        button{
+            background: $Red;
+            color:white;
+            margin:0;
+            width: 100%;
+            height: 48px;
+            border-radius: 5px;
+        }
+    }
+    .braintree-placeholder{
+        text-align: center;
+        margin-top: 20px;
+    }
+}

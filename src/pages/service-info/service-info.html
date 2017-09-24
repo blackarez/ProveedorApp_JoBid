@@ -1,0 +1,55 @@
+<!--
+  Generated template for the ServiceInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>joBid</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <img src="assets/img/fondoLineas.jpg"  class="imageFull imagenContent">
+    <div class="contenedor">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <img src="{{imagenUser}}"  class="imagenUser"/>
+          </ion-col>
+          <ion-col col-6>
+            <h3>${{offer}}</h3>
+            <p>{{userName}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="barraRoja">
+      <h4>Service Information</h4>
+    </div>
+    <img src="assets/img/User/FotoServiceInfo.JPG"  class="imageFull"/>
+    <div padding>
+      <p>{{info}}</p>
+      <h4 class="tituloCondator">
+          Time to start the sale.
+      </h4>
+      <h4 class="contador">00:00:15</h4>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div class="btnBottom">
+          <button  ion-button (click)="goSale()">
+              Enter the sale
+              <ion-icon name="arrow-dropright"></ion-icon> 
+          </button> 
+        </div>
+    </ion-toolbar>
+  </ion-footer>

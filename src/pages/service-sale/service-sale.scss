@@ -1,0 +1,142 @@
+page-service-sale {
+	.imgFull{ width: 100%; height: 300px; position: relative;
+	}
+	
+	.Offers{
+		margin: 0px;
+		padding: 5px;
+		background: $Red;
+		text-align: center;
+		border-bottom: 1px solid white;
+		p{
+			color: white;
+		}
+		h2{
+			color: yellow;
+			margin:5px;
+		}
+	}
+	
+	ion-icon[name=timer]{
+		color: white;
+		margin-top: 10px;
+		font-size: 2em;
+		span{color:orange;}
+	}
+	h4,h5{ font-weight: bold; }
+	.contador{
+		position: absolute;
+		top:27%;
+		width: 100%;
+		&>h3{ color: white;
+			background:$Red;
+			height: 80px;
+			/* line-height: 30px; */
+			width: 30%;
+			border-radius: 7px;
+			margin: 0 auto;
+			padding: 27px 0 0 0;
+			text-align: center;}
+	}
+	ion-item.item-md, ion-item.item-ios{
+		padding-bottom: 0;
+	}
+	ion-footer ion-toolbar {
+		padding: 0;
+		margin: 0;
+		.grid{
+			padding: 0;
+			margin: 0;
+		}
+		&.toolbar{margin-bottom: 0;padding-bottom: 0;
+		padding:0px;}
+		/*.grid{margin-bottom: 0;padding-bottom: 0;}*/
+		.toolbar-background-md,.toolbar-background-ios{
+			color:$Red;
+			/*background: $Red;*/
+
+		}
+		#btnSalir,#btnDetalle{
+			margin: 0;
+			padding: 0;
+			color: white !important;
+		}
+		#btnSalir{
+			background: $Gray !important;
+		}
+		#btnDetalle{
+			background: $Green !important;
+		}
+		.newOffer{
+			background: $Red;
+			height: 60px;
+			margin: 0;
+			padding: 0;
+			p,span{
+				font-size: 16px;
+				margin: 0;
+			}
+			p{
+				text-align: center;
+				color: white;
+				padding: 2px;
+				span{
+					margin-right: 2px;
+					padding-right: 2px;
+					color:yellow;
+				}
+			}
+			ion-item .ion-input{
+				height: 5px;
+			}
+			.button{
+				height: 50px;
+				margin: 0px;
+				color: $GrayText;
+				background: white;
+			}
+		}
+	}
+
+	ion-content ion-grid.body{
+		ion-row.row{
+			border: 1px solid #aaa; 
+			margin: 5px 0;
+			height: 60px;
+			.col,[col-6]{
+				padding:0;
+			}
+		}
+		h5{ text-align: center; background:$Red; 	color: white;    
+			margin: 8px 0;
+			height: 40px;
+			padding-top: 10px;
+			border-radius:5px;}
+		ion-icon[name=trophy]{
+			color: orange;
+			font-size: 2em;
+			padding: 10px;
+			padding-top: 16px;
+		}
+		.button{
+			padding: 0;
+			width: 45px;
+			height: 45px;
+			background: #444;
+			color: white;
+			box-shadow: none;
+			display: block;
+			margin: 0 auto;
+			margin-top: 6px;
+			ion-icon[name=search]{
+				color:white;
+				width: 45px;
+				height: 45px;
+				font-size: 28px;
+				padding: 7.5px !important;
+				padding-top: 13px !important;
+				
+			}
+		}
+	}	
+}

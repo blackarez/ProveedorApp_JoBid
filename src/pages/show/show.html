@@ -1,0 +1,70 @@
+<!--
+  Generated template for the ShowPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+  <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>joBid</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item padding class="statusPage">
+    
+      <ion-label>{{labelToogle}}</ion-label>
+      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>
+  </ion-item>
+
+  <div class="barraRoja" *ngIf="StatusProvider">
+      <h4>Select a service and start the auction</h4>
+  </div>
+  <ion-grid class="body" *ngIf="StatusProvider">
+    <!-- <ion-row >
+      <ion-col col-2>
+       <ion-item>
+        <ion-avatar item-start>
+          <img src="{{imgDefault}}">
+        </ion-avatar>
+       </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <h5>${{offer}}</h5>
+      </ion-col>
+      <ion-col col-6>
+        <p><strong>{{nameUser}}</strong></p>
+        <p>{{Description}}</p>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button icon-only round color="light" (click)="goInfo()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row> -->
+    <ion-row *ngFor="let item of ListService">
+      <ion-col col-2>
+        <ion-item>
+         <ion-avatar item-start>
+           <img src="{{item.img}}">
+         </ion-avatar>
+        </ion-item>
+       </ion-col>
+       <ion-col col-2>
+         <h5>${{item.sale}}</h5>
+       </ion-col>
+       <ion-col col-6>
+         <p><strong>{{item.name}}</strong></p>
+         <p>{{item.infoShow}}</p>
+       </ion-col>
+       <ion-col col-2>
+         <button ion-button icon-only round color="light" (click)="goInfo(item)">
+           <ion-icon name="search"></ion-icon>
+         </button>
+       </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

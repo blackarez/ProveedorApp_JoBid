@@ -1,0 +1,49 @@
+page-show {
+    ion-content ion-grid.body{
+		ion-row.row{
+			border: 1px solid #aaa; 
+			margin: 5px 0;
+			height: 60px;
+			.col,[col-6]{
+				padding:0;
+			}
+			h5{
+				color: $Red;
+				font-size: 20px;
+			}
+			p{
+				color: $GrayText;
+				padding: 2px;
+				margin: 5px;
+			}
+		}
+	.button{
+			padding: 0;
+			width: 45px;
+			height: 45px;
+			background: $Red;
+			color: white;
+			box-shadow: none;
+			display: block;
+			margin: 0 auto;
+			margin-top: 6px;
+			ion-icon[name=search]{
+				color:white;
+				width: 45px;
+				height: 45px;
+				font-size: 28px;
+				padding: 7.5px !important;
+				padding-top: 13px !important;
+				
+			}
+		}
+	}
+	.statusPage{
+		border-bottom: 1px solid $Gray;
+		border-top: 1px solid $Gray;
+		margin: 0;
+		ion-label.label{
+			font-size: 20px;
+		}
+	} 
+}
