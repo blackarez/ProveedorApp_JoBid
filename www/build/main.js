@@ -23,12 +23,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ProfessionalsService = (function () {
     function ProfessionalsService(afDB) {
         this.afDB = afDB;
-        this.professionals = [];
-        //  this.professionals= this.getProfessionals();
-        //  console.log('load ProfessionalsService');
-        //  console.log(this.professionals);
-        //  console.log(this.afDB);
     }
+    //-get
     ProfessionalsService.prototype.getProfessionals = function () {
         // console.log(this.afDB.list('/professionals/'));
         return this.afDB.list('/professionals/');
@@ -46,6 +42,20 @@ var ProfessionalsService = (function () {
             }
         });
     };
+    ProfessionalsService.prototype.getUserLoginPwd = function (pwd) {
+        // let password = this.encriptyService.GenerateEncripty(pwd);
+        var password = pwd;
+        var listBD = this.afDB.list('/professionals', {
+            query: {
+                orderByChild: 'prof_password',
+                equalTo: password
+            }
+        });
+        // console.log(listBD);
+        // console.log(JSON.stringify( listBD) );
+        return listBD;
+    };
+    //-new
     ProfessionalsService.prototype.newUser = function (userData, keyNew) {
         //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
         if (userData === void 0) { userData = []; }
@@ -87,23 +97,18 @@ var ProfessionalsService = (function () {
             }
         }
     };
-    ProfessionalsService.prototype.getUserLoginPwd = function (pwd) {
-        // let password = this.encriptyService.GenerateEncripty(pwd);
-        var password = pwd;
-        var listBD = this.afDB.list('/professionals', {
-            query: {
-                orderByChild: 'prof_password',
-                equalTo: password
-            }
-        });
-        // console.log(listBD);
-        // console.log(JSON.stringify( listBD) );
-        return listBD;
+    ProfessionalsService.prototype.newContract = function (keyProvider, keyOffer, objContract) {
+        console.log(objContract);
+        this.afDB.object('/professionals/' + keyProvider + '/Contracts/' + keyOffer).set(objContract).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
     };
+    //-set
     ProfessionalsService.prototype.setInfoServiceUser = function (KeyUser, serviceData) {
         console.log(serviceData);
         this.afDB.object('/professionals/' + KeyUser + '/Information').set(serviceData).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
         console.info('professionals create');
+    };
+    ProfessionalsService.prototype.setContractStatus = function (keyProvider, keyOffer, status) {
+        this.afDB.object('/professionals/' + keyProvider + '/Contracts/' + keyOffer + '/status').set(status).catch(function (error) { console.log('error professionals setContractStatus'); console.log(error); console.log(JSON.stringify(error)); });
     };
     return ProfessionalsService;
 }());
@@ -230,7 +235,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 272:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -310,85 +315,6 @@ SaleService = __decorate([
 /***/ }),
 
 /***/ 273:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfessionsService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-//import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-var ProfessionsService = (function () {
-    function ProfessionsService() {
-        this.professions = [
-            { name: 'Care', class: 'red' },
-            { name: 'Cleaning', class: 'yellow' },
-            { name: 'Janotorial', class: 'orange' },
-            { name: 'Transportation', class: 'green' },
-            { name: 'Food & Beverage', class: 'purple' },
-            { name: 'Legal services', class: 'blue' },
-            { name: 'Beauty', class: 'pink' }
-        ];
-        this.dataCategoria = [];
-    }
-    ProfessionsService.prototype.getProfessions = function () {
-        return this.professions;
-    };
-    ProfessionsService.prototype.getCategoryByProfession = function (nameService) {
-        if (nameService === void 0) { nameService = ""; }
-        //console.log(nameService);
-        switch (nameService) {
-            case "Care": {
-                this.dataCategoria = ["Child care", "Senior care", "Family asistance", "Dog walker", "Personal shopper"];
-                break;
-            }
-            case "Cleaning": {
-                this.dataCategoria = ["Maids", "Car washers", "Pressure cleaning", "Carpet & upholstery cleaning"];
-                break;
-            }
-            case "Janotorial": {
-                this.dataCategoria = ["Handyman", "Pluming", "Electrician", "Pool cleaning", "Luck smith"];
-                break;
-            }
-            case "Transportation": {
-                this.dataCategoria = ["Day VIP chofer", "Taxi", "Car pool", "Moving services", "Delivery"];
-                break;
-            }
-            case "Food & Beverage": {
-                this.dataCategoria = ["Bartenders", "Waitress", "Chef", "Runners", "Valet parking", "Hostess"];
-                break;
-            }
-            case "Legal services": {
-                this.dataCategoria = ["Notary"];
-                break;
-            }
-            case "Beauty": {
-                this.dataCategoria = ["Personal trainer", "Hair cut and DIY", "Manicure and pedicure", "Makeup", "Massage"];
-                break;
-            }
-            default: {
-                console.log("Invalid choice");
-                break;
-            }
-        }
-        return this.dataCategoria;
-    };
-    return ProfessionsService;
-}());
-ProfessionsService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])()
-], ProfessionsService);
-
-//# sourceMappingURL=professions.service.js.map
-
-/***/ }),
-
-/***/ 274:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -476,7 +402,7 @@ OfferService = __decorate([
 
 /***/ }),
 
-/***/ 275:
+/***/ 274:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -716,6 +642,85 @@ UserService = __decorate([
 
 /***/ }),
 
+/***/ 275:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfessionsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+//import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+var ProfessionsService = (function () {
+    function ProfessionsService() {
+        this.professions = [
+            { name: 'Care', class: 'red' },
+            { name: 'Cleaning', class: 'yellow' },
+            { name: 'Janotorial', class: 'orange' },
+            { name: 'Transportation', class: 'green' },
+            { name: 'Food & Beverage', class: 'purple' },
+            { name: 'Legal services', class: 'blue' },
+            { name: 'Beauty', class: 'pink' }
+        ];
+        this.dataCategoria = [];
+    }
+    ProfessionsService.prototype.getProfessions = function () {
+        return this.professions;
+    };
+    ProfessionsService.prototype.getCategoryByProfession = function (nameService) {
+        if (nameService === void 0) { nameService = ""; }
+        //console.log(nameService);
+        switch (nameService) {
+            case "Care": {
+                this.dataCategoria = ["Child care", "Senior care", "Family asistance", "Dog walker", "Personal shopper"];
+                break;
+            }
+            case "Cleaning": {
+                this.dataCategoria = ["Maids", "Car washers", "Pressure cleaning", "Carpet & upholstery cleaning"];
+                break;
+            }
+            case "Janotorial": {
+                this.dataCategoria = ["Handyman", "Pluming", "Electrician", "Pool cleaning", "Luck smith"];
+                break;
+            }
+            case "Transportation": {
+                this.dataCategoria = ["Day VIP chofer", "Taxi", "Car pool", "Moving services", "Delivery"];
+                break;
+            }
+            case "Food & Beverage": {
+                this.dataCategoria = ["Bartenders", "Waitress", "Chef", "Runners", "Valet parking", "Hostess"];
+                break;
+            }
+            case "Legal services": {
+                this.dataCategoria = ["Notary"];
+                break;
+            }
+            case "Beauty": {
+                this.dataCategoria = ["Personal trainer", "Hair cut and DIY", "Manicure and pedicure", "Makeup", "Massage"];
+                break;
+            }
+            default: {
+                console.log("Invalid choice");
+                break;
+            }
+        }
+        return this.dataCategoria;
+    };
+    return ProfessionsService;
+}());
+ProfessionsService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])()
+], ProfessionsService);
+
+//# sourceMappingURL=professions.service.js.map
+
+/***/ }),
+
 /***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -746,11 +751,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_user_service__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_user_service__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_professionals_service__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_professions_service__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_offer_service__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_sale_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_professions_service__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_offer_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_sale_service__ = __webpack_require__(271);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

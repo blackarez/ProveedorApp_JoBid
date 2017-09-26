@@ -41,7 +41,7 @@ export class ServiceInfoPage {
   goSale(){
     this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,'-');
     let Data = {'datos':this.DataService};
-    this.navCtrl.push('ServiceSalePage',Data);
+    this.navCtrl.setRoot('ServiceSalePage',Data);
   }
 
   callInfo(){

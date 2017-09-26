@@ -23,34 +23,29 @@ import { SaleService } from '../../services/sale.service';
 export class ServiceSalePage {
   //-data
   DataService:any=[];
+  Workers:any=[];
   userActual:any;
   newOffer:any;
   
+  saleSub:any;
   //--valiables por defecto provider
   imgJobDefault ="assets/img/professions/cleaning.png";
   galleryJobDefault ="assets/img/gallery.png";
+  //-variables por defecto service
+  imgServiceDefault ="assets/img/User/FotoServiceInfo.JPG";
   //-final offer
   MenosPrecio:any;
   //--sale
   maxOffer:any;
   myOffer:any;
 
-  dataOffer:any;
-  keyOffer:any;
-
-  Workers:any=[];
-  WorkersInfo:any=[];
-  dataService:any;
-  //--datas
-
-  professionals = [];
-  professsional = [];
   //--timer
   segundos:number = 0;
   minutos:number = 2;
   contador:string;
   showContador: boolean = true;
   objNodeTimer:any;
+  
   //-- geoLocation
   lat: number= 37.09024;
   lng: number= -95.71289100000001;
@@ -86,33 +81,42 @@ loadView(){
 
 newOfferProvider(){
   if(this.MenosPrecio > Number(this.newOffer) ){
-    this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,this.newOffer);
+    console.log(Number(this.newOffer));
     this.myOffer =  Number(this.newOffer);
+    console.log(this.myOffer);
+    this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,this.newOffer);
   }else{
-    alert('The offer must be less than the current');
+    // alert('The offer must be less than the current');
+    this.offerError();
   }
   // this.navCtrl.setRoot('ServiceWinPage');
 }
 
 detailsService(){
-  let description = '<img src="assets/img/User/FotoServiceInfo.JPG"  class="imageFull"/><p>'+this.DataService.info+'</p>';
+  let description = '<img src="'+this.imgServiceDefault+'"  class="imageFull"/><p>'+this.DataService.info+'</p>';
   let alert = this.alertCtrl.create({
     title: 'Service Information',
-
     message: description,
     buttons: ['OK']
   });
   alert.present();
 }
+offerError(){
+  let alert = this.alertCtrl.create({
+    title: 'Information',
+    message: 'The offer must be less than the current',
+    buttons: ['OK']
+  });
+  alert.present();
+}
 
-// goCleaningContractor(ganador?){
-goCleaningContractor(){
-  // console.info('goCleaningContractor');
-  // console.log(ganador);
-  // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":ganador}};
-  // console.log(DataService);
-  // this.navCtrl.setRoot('ServiceWinPage',DataService);
-  this.navCtrl.setRoot('ServiceWinPage');
+goServiceWin(){
+  console.info('goServiceWin');
+  this.DataService['sale']=this.myOffer;
+  let dataService = {'datos':this.DataService};
+  console.log(dataService);
+  this.navCtrl.setRoot('ServiceWinPage',dataService);
+  // this.navCtrl.setRoot('ServiceWinPage');
 }
 
 goIndex(){
@@ -157,58 +161,39 @@ async getSale(){
   let finRegistro:boolean= false;
   console.log(this.DataService.idOff);
   console.log(this.DataService.idUser);
-  this.saleService.getSale(this.DataService.idUser,this.DataService.idOff)
+  this.saleSub = this.saleService.getSale(this.DataService.idUser,this.DataService.idOff)
   .subscribe((result) =>{
     this.Workers = [];
-    this.WorkersInfo =[];
     this.MenosPrecio = undefined;
     console.log(result);
-    //console.log(result.sale);
-    //console.log(result.providers);
     if(this.MenosPrecio ==  undefined){
       this.MenosPrecio = Number(result.sale);
     }
     let trabajadores = result.providers;
     for(let trabajador in trabajadores){
-      // console.log(trabajadores);
-      // console.log(trabajadores[trabajador]);
-      //console.log(trabajadores[trabajador]['offer']);
-      // console.log(trabajador);
       if(this.MenosPrecio > Number(trabajadores[trabajador]['offer']) ) { this.MenosPrecio= Number(trabajadores[trabajador]['offer']);}
-      let PromiseUser =this.professionalsService.getProfessional(trabajador);
-      // console.log(PromiseUser);
-      PromiseUser.subscribe((user) =>{
+      let PromiseUser =this.professionalsService.getProfessional(trabajador).subscribe((user) =>{
         //console.log(user);
-        this.WorkersInfo.push(user);
         let img = this.imgJobDefault;
         if(user.prof_picture && user.prof_picture != undefined && user.prof_picture != ''){
           img = user.prof_picture;
         }
         this.Workers.push({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
+        // PromiseUser.unsubscribe();
       });
     }
     finRegistro = true;
-    console.log(this.Workers);
-    console.log(this.WorkersInfo);
-    console.log(this.MenosPrecio);
-    let estadoUser= this.Workers;
-    console.log(estadoUser);
-    // for(let jobs in estadoUser){
-    //   console.log('jobs');
-    //   console.log(jobs);
-    //   console.log(estadoUser[jobs]);
-    // }
-    // console.log('verifcar la informacion');
-
   });
   
 }
 
 ganador(){
   if(this.MenosPrecio == this.myOffer){
-    this.goCleaningContractor();
+    this.goServiceWin();
+    this.saleSub.unsubscribe();
   }else{
     this.navCtrl.setRoot('ShowPage');
+    this.saleSub.unsubscribe();
   }
 }
 

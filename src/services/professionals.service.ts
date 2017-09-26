@@ -6,17 +6,15 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Injectable()
 
 export class ProfessionalsService{
-	professionals:any = [];
+
 	constructor( private afDB: AngularFireDatabase) {
-		//  this.professionals= this.getProfessionals();
-		//  console.log('load ProfessionalsService');
-		//  console.log(this.professionals);
-		//  console.log(this.afDB);
 	}
+	//-get
 	public getProfessionals(){
 		// console.log(this.afDB.list('/professionals/'));
 		return this.afDB.list('/professionals/');
 	}
+
 	public getProfessional(id){
 		console.log('getProfessionalId');
 		console.log(id);
@@ -32,6 +30,21 @@ export class ProfessionalsService{
 		});
 	}
 
+	public getUserLoginPwd(pwd: any ){
+		// let password = this.encriptyService.GenerateEncripty(pwd);
+		let password = pwd;
+		let listBD =this.afDB.list('/professionals',{
+			query: {
+				orderByChild: 'prof_password',
+				equalTo: password
+			  }
+		})
+		// console.log(listBD);
+		// console.log(JSON.stringify( listBD) );
+		return listBD;
+	}
+
+	//-new
 	public newUser(userData : any = [],keyNew?:any ){
 		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
 		
@@ -76,23 +89,19 @@ export class ProfessionalsService{
 		}
 	}
 
-	public getUserLoginPwd(pwd: any ){
-		// let password = this.encriptyService.GenerateEncripty(pwd);
-		let password = pwd;
-		let listBD =this.afDB.list('/professionals',{
-			query: {
-				orderByChild: 'prof_password',
-				equalTo: password
-			  }
-		})
-		// console.log(listBD);
-		// console.log(JSON.stringify( listBD) );
-		return listBD;
+	public newContract(keyProvider,keyOffer,objContract){
+		console.log(objContract);
+		this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
 	}
 
+	//-set
 	setInfoServiceUser(KeyUser,serviceData){
 		console.log(serviceData);
 		this.afDB.object('/professionals/'+KeyUser+'/Information').set(serviceData).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('professionals create');
+	}
+
+	setContractStatus(keyProvider,keyOffer,status){
+		this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer+'/status').set(status).catch(error => {console.log('error professionals setContractStatus'); console.log(error);console.log(JSON.stringify(error));});
 	}
 }

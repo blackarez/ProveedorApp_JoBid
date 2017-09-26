@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-// import { SaleService } from '../../services/sale.service';
-// import { OfferService } from '../../services/offer.service';
+import { SaleService } from '../../services/sale.service';
+import { OfferService } from '../../services/offer.service';
 /**
  * Generated class for the ServiceJobPage page.
  *
@@ -19,6 +19,13 @@ export class ServiceJobPage {
 
   //-- default
   imgUserDefault ="assets/img/User/UserService.png";
+
+  //-load 
+  Datos:any;
+  DataService:any;
+  DataUser:any;
+  user:any;
+  
   //-load data
   datasService:any;
   dataService:any;
@@ -44,43 +51,24 @@ export class ServiceJobPage {
   cont=1;
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    // private saleService: SaleService , private offerService : OfferService,
+    private saleService: SaleService , private offerService : OfferService,
   ) {
+    //-ej
+    this.serviceCode = '0986548605';
+    //-load data
+    this.Datos = this.navParams.get('datos');
+    console.log(this.Datos);
+    this.DataService =  this.navParams.get('service');
+    this.DataUser = this.navParams.get('user');
+    this.user = this.DataService['idUser'];
+    this.serviceCode = this.DataService['idOff'].substring(6);
+    console.log(this.user);
+    console.log(this.DataService);
+    this.userInfo();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceJobPage');
-  
-    // this.datasService = this.navParams.get('datos');
-    // this.dataService = this.datasService['dataService'];
-    // this.keyOffer = this.datasService['offer']; 
-    // this.worker = this.datasService['win']; 
-    // this.userActual = localStorage.getItem('verificacion');
-    // this.sale=this.worker['offer'];
-    // this.information= this.dataService['Clasificacion']['informacion']['moreInformation'];
-    // this.serviceCode = this.keyOffer.substring(6);
-    // console.log(this.datasService);
-    // console.log(this.dataService);
-    // console.log(this.keyOffer);
-    // console.log(this.worker);
-    // console.log(this.userActual);
-    // this.getProfessionals(this.worker['id']);
-    // this.saleService.getStatus(this.userActual,this.keyOffer).subscribe((resul)=>{
-    //   console.log(resul);
-    //   console.log(resul['$value']);
-    //   this.status = resul['$value'];
-    //   if(resul['$value'] == 'In progress'){
-    //     this.status = 'Service in progress';
-    //   }
-    //   if(resul['$value'] == 'Finalized'){
-    //     this.status = 'Service completed';
-    //   }
-    // });
-    this.serviceCode = '0986548605';
-    //-provicional
-    // this.startTimer()
-    
-    this.userInfo();
   }
   goServiceOk(){
     // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
@@ -88,12 +76,19 @@ export class ServiceJobPage {
   	// this.navCtrl.setRoot(,DataService);
   	this.navCtrl.setRoot('ServiceOkPage');
   }
-
+  setStatus(){
+    this.saleService.setStatus(this.userActual,this.keyOffer,'Finalized');
+    this.offerService.setStatus(this.keyOffer,'Finalized');
+   }
   userInfo(){
-    this.imgUser=this.imgUserDefault;
-    this.nameUser = 'Alejandro Albello';
-    this.addresUser = 'Calle 123 #45 - 65 Ed Miramar Apartamento BB Torre 2';
-    this.phoneUser = '(+57) 5-300 811 45 65';
+    // this.imgUser=this.imgUserDefault;
+    // this.nameUser = 'Alejandro Albello';
+    // this.addresUser = 'Calle 123 #45 - 65 Ed Miramar Apartamento BB Torre 2';
+    // this.phoneUser = '(+57) 5-300 811 45 65';
+    this.nameUser = this.DataUser['nameUser'];
+    this.addresUser= this.DataUser['address'];
+    this.phoneUser = this.DataUser['tel'];
+    this.imgUser=this.DataUser['img'];
   }
 
   //--- timer

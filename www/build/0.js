@@ -296,7 +296,7 @@ module.exports = DropinError;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var Promise = global.Promise || __webpack_require__(271);
+var Promise = global.Promise || __webpack_require__(272);
 
 module.exports = Promise;
 
@@ -350,7 +350,7 @@ module.exports = BaseView;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var Promise = global.Promise || __webpack_require__(271);
+var Promise = global.Promise || __webpack_require__(272);
 
 module.exports = Promise;
 
