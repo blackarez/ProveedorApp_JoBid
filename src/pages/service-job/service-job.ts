@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { SaleService } from '../../services/sale.service';
 import { OfferService } from '../../services/offer.service';
+import { ProfessionalsService } from '../../services/professionals.service';
 /**
  * Generated class for the ServiceJobPage page.
  *
@@ -19,25 +20,21 @@ export class ServiceJobPage {
 
   //-- default
   imgUserDefault ="assets/img/User/UserService.png";
-
+  
+  //-datos BD
+  status="Service in progress";
+  
   //-load 
   Datos:any;
   DataService:any;
   DataUser:any;
   user:any;
   
-  //-load data
-  datasService:any;
-  dataService:any;
   keyOffer:any;
-  worker:any;
   userActual:any;
-  sale:any;
   information:any;
   serviceCode:any;
 
-  //-datos BD
-  status="Service in progress";
 
   //--load vista
   imgUser:any;
@@ -52,6 +49,7 @@ export class ServiceJobPage {
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     private saleService: SaleService , private offerService : OfferService,
+    private professionalsService:ProfessionalsService,
   ) {
     //-ej
     this.serviceCode = '0986548605';
@@ -61,9 +59,13 @@ export class ServiceJobPage {
     this.DataService =  this.navParams.get('service');
     this.DataUser = this.navParams.get('user');
     this.user = this.DataService['idUser'];
+    this.keyOffer=this.DataService['idOff'];
     this.serviceCode = this.DataService['idOff'].substring(6);
     console.log(this.user);
     console.log(this.DataService);
+    //-localStorage
+    this.userActual = localStorage.getItem('verificacion');
+    console.log(this.userActual);
     this.userInfo();
   }
 
@@ -71,13 +73,18 @@ export class ServiceJobPage {
     console.log('ionViewDidLoad ServiceJobPage');
   }
   goServiceOk(){
+    this.setStatusService();
     // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
     // console.log(DataService);
   	// this.navCtrl.setRoot(,DataService);
   	this.navCtrl.setRoot('ServiceOkPage');
   }
-  setStatus(){
-    this.saleService.setStatus(this.userActual,this.keyOffer,'Finalized');
+  setStatusService(){
+    console.log('set2');
+    console.log(this.userActual);
+    console.log(this.keyOffer);
+    this.professionalsService.setContractStatus(this.userActual,this.keyOffer,'Finalized');
+    this.saleService.setStatus(this.user,this.keyOffer,'Finalized');
     this.offerService.setStatus(this.keyOffer,'Finalized');
    }
   userInfo(){

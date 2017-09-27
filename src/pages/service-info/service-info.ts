@@ -31,12 +31,12 @@ export class ServiceInfoPage {
     this.DataService = this.navParams.get('datos');
     console.log(this.DataService);
     this.callInfo();
-    console.log(localStorage);
     this.userActual= localStorage.getItem('verificacion');
   }
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceInfoPage');
+    // console.log(localStorage);
   }
   goSale(){
     this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,'-');

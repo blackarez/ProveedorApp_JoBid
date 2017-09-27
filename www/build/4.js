@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 421:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceWinPageModule", function() { return ServiceWinPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowPageModule", function() { return ShowPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_win__ = __webpack_require__(568);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__show__ = __webpack_require__(576);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ServiceWinPageModule = (function () {
-    function ServiceWinPageModule() {
+var ShowPageModule = (function () {
+    function ShowPageModule() {
     }
-    return ServiceWinPageModule;
+    return ShowPageModule;
 }());
-ServiceWinPageModule = __decorate([
+ShowPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__service_win__["a" /* ServiceWinPage */],
+            __WEBPACK_IMPORTED_MODULE_2__show__["a" /* ShowPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_win__["a" /* ServiceWinPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__show__["a" /* ShowPage */]),
         ],
     })
-], ServiceWinPageModule);
+], ShowPageModule);
 
-//# sourceMappingURL=service-win.module.js.map
+//# sourceMappingURL=show.module.js.map
 
 /***/ }),
 
-/***/ 568:
+/***/ 576:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceWinPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShowPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_sale_service__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_offer_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_user_service__ = __webpack_require__(274);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,102 +58,105 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-//-service
+//-services
 
 
 /**
- * Generated class for the ServiceWinPage page.
+ * Generated class for the ShowPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ServiceWinPage = (function () {
-    function ServiceWinPage(navCtrl, navParams, alertCtrl, saleService, professionalsService) {
+var ShowPage = (function () {
+    function ShowPage(navCtrl, navParams, offerService, userService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
-        this.saleService = saleService;
-        this.professionalsService = professionalsService;
+        this.offerService = offerService;
+        this.userService = userService;
         //-data
-        this.DataService = [];
-        this.DataService = this.navParams.get('datos');
-        this.user = this.DataService['idUser'];
-        this.offer = this.DataService['idOff'];
-        this.sale = this.DataService['sale'];
-        console.log(this.DataService);
-        this.userActual = localStorage.getItem('verificacion');
-        console.log(this.userActual);
-        this.getStatusService();
+        this.ListService = [];
+        //-default value
+        this.imgDefault = 'assets/img/User/UserService.png';
+        this.imgDescripcionDefault = 'assets/img/User/FotoServiceInfo.JPG';
+        this.offer = '100';
+        this.nameUser = 'Alejando Alberto';
+        this.Description = 'Cleaning ...';
+        //--default value toggle 
+        this.labelToogle = 'Offline';
+        this.StatusProvider = false;
     }
-    ServiceWinPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ServiceWinPage');
+    ShowPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ShowPage');
+        // console.log(localStorage);
     };
-    ServiceWinPage.prototype.getStatusService = function () {
+    ShowPage.prototype.goInfo = function (item) {
+        this.listOffer.unsubscribe();
+        var Data = { 'datos': item };
+        this.navCtrl.push('ServiceInfoPage', Data);
+    };
+    ShowPage.prototype.notify = function () {
+        console.log("Toggled: " + this.StatusProvider);
+        if (this.StatusProvider == false) {
+            this.labelToogle = "Offline";
+        }
+        else {
+            this.labelToogle = "Online";
+            this.showServices();
+        }
+    };
+    ShowPage.prototype.showServices = function () {
         var _this = this;
-        this.statusSub = this.saleService.getStatus(this.user, this.offer).subscribe(function (status) {
-            console.log(status);
-            if (status['$value']) {
-                if (status['$value'] == 'Waiting for the professional') {
-                    _this.goServiceNew();
-                    _this.statusSub.unsubscribe();
+        var imagen;
+        this.listOffer = this.offerService.getOfferNew().subscribe(function (list) {
+            _this.ListService = [];
+            var _loop_1 = function (keys) {
+                var InfmaxOffer = list[keys].Clasificacion.informacion.maxOffer;
+                var InfmoreInformacion = list[keys].Clasificacion.informacion.moreInformation;
+                var InfFoto = list[keys].Clasificacion.informacion.foto;
+                var key = list[keys]['$key'];
+                var InfshortMoreInformacion = InfmoreInformacion.substr(0, 10) + '...';
+                // console.log(list[key]);
+                // console.log(list[key].Clasificacion.informacion.maxOffer);
+                // console.log(list[key].Clasificacion.informacion.moreInformation);
+                // console.log(InfmoreInformacion);
+                if (InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto) {
+                    InfFoto = _this.imgDescripcionDefault;
                 }
-                if (status['$value'] == 'Cancelled') {
-                    _this.goIndexService();
-                    _this.statusSub.unsubscribe();
-                }
+                // console.log(list[key].User);
+                _this.userService.getUser(list[keys].User).subscribe(function (user) {
+                    // console.log(user);
+                    // console.log(user['user_picture']);
+                    // console.log('-'+user['user_picture']+'-');
+                    if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']) {
+                        imagen = _this.imgDefault;
+                    }
+                    else {
+                        imagen = user['user_picture'];
+                    }
+                    // console.log(imagen);
+                    _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer, "infoShow": InfshortMoreInformacion, "info": InfmoreInformacion, "idOff": key, "idUser": user['$key'] });
+                    console.log(_this.ListService);
+                });
+                // this.ListService=list;
+            };
+            // console.log(list);
+            for (var keys in list) {
+                _loop_1(keys);
             }
         });
     };
-    ServiceWinPage.prototype.goServiceNew = function () {
-        console.info('goServiceWin');
-        this.showAlertService();
-        //-contarct
-        var objContract = { "status": 'Waiting for the professional', 'User': this.user };
-        console.log(this.DataService);
-        // this.professionalsService.newContract(this.userActual,this.DataService['dataService'],objContract);
-        //-data
-        var dataService = { 'datos': this.DataService };
-        console.log(dataService);
-        this.navCtrl.setRoot('ServiceNewPage', dataService);
-        // this.navCtrl.setRoot('ServiceNewPage');
-        // console.log(this.statusSub);
-    };
-    ServiceWinPage.prototype.goIndexService = function () {
-        this.showAlertCancel();
-        this.navCtrl.setRoot('ShowPage');
-        // this.statusSub.unsubscribe();
-        // console.log(this.statusSub);
-    };
-    //-alert
-    ServiceWinPage.prototype.showAlertService = function () {
-        var alerteMail = this.alertCtrl.create({
-            title: 'Information',
-            message: 'Congratulations, the customer has accepted your offer, you can go to the customer to start the service.',
-            buttons: ['OK']
-        });
-        alerteMail.present();
-    };
-    ServiceWinPage.prototype.showAlertCancel = function () {
-        var alerteMail = this.alertCtrl.create({
-            title: 'Information',
-            message: 'Sorry. The client has canceled the service.',
-            buttons: ['OK']
-        });
-        alerteMail.present();
-    };
-    return ServiceWinPage;
+    return ShowPage;
 }());
-ServiceWinPage = __decorate([
+ShowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-win',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-win\service-win.html"*/'<!--\n\n  Generated template for the ServiceWinPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n    \n\n<ion-content>\n\n  <img src="assets/img/BackgroundWin.JPG"  />\n\n\n\n  <h4>Congratulations</h4>\n\n  <h3>You have won  a Job</h3>\n\n  <p>value of the sale</p>\n\n  <h2>${{sale}}</h2>\n\n  <div class="centrarIcon">\n\n    <ion-icon class="icon-ok" name="checkmark-circle"></ion-icon>\n\n  </div>\n\n  <p>You have won a job! You must wait for the customer to confirm the service</p>\n\n    <!-- <div class="btnBottom" padding>\n\n    <button ion-button color="danger" block (click)="goServiceNew()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n  </div> -->\n\n</ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-win\service-win.html"*/,
+        selector: 'page-show',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/'<!--\n\n  Generated template for the ShowPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-item padding class="statusPage">\n\n    \n\n      <ion-label>{{labelToogle}}</ion-label>\n\n      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>\n\n  </ion-item>\n\n\n\n  <div class="barraRoja" *ngIf="StatusProvider">\n\n      <h4>Select a service and start the auction</h4>\n\n  </div>\n\n  <ion-grid class="body" *ngIf="StatusProvider">\n\n    <!-- <ion-row >\n\n      <ion-col col-2>\n\n       <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="{{imgDefault}}">\n\n        </ion-avatar>\n\n       </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p><strong>{{nameUser}}</strong></p>\n\n        <p>{{Description}}</p>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <button ion-button icon-only round color="light" (click)="goInfo()">\n\n          <ion-icon name="search"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row> -->\n\n    <ion-row *ngFor="let item of ListService">\n\n      <ion-col col-2>\n\n        <ion-item>\n\n         <ion-avatar item-start>\n\n           <img src="{{item.img}}">\n\n         </ion-avatar>\n\n        </ion-item>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <h5>${{item.sale}}</h5>\n\n       </ion-col>\n\n       <ion-col col-6>\n\n         <p><strong>{{item.name}}</strong></p>\n\n         <p>{{item.infoShow}}</p>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <button ion-button icon-only round color="light" (click)="goInfo(item)">\n\n           <ion-icon name="search"></ion-icon>\n\n         </button>\n\n       </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__services_sale_service__["a" /* SaleService */],
-        __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__["a" /* ProfessionalsService */]])
-], ServiceWinPage);
+        __WEBPACK_IMPORTED_MODULE_2__services_offer_service__["a" /* OfferService */], __WEBPACK_IMPORTED_MODULE_3__services_user_service__["a" /* UserService */]])
+], ShowPage);
 
-//# sourceMappingURL=service-win.js.map
+//# sourceMappingURL=show.js.map
 
 /***/ })
 

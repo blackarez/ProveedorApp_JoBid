@@ -1,14 +1,14 @@
 webpackJsonp([13],{
 
-/***/ 412:
+/***/ 415:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PoliciesPageModule", function() { return PoliciesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProviderInfoAPageModule", function() { return ProviderInfoAPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__policies__ = __webpack_require__(559);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__provider_info_a__ = __webpack_require__(567);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,33 +18,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PoliciesPageModule = (function () {
-    function PoliciesPageModule() {
+var ProviderInfoAPageModule = (function () {
+    function ProviderInfoAPageModule() {
     }
-    return PoliciesPageModule;
+    return ProviderInfoAPageModule;
 }());
-PoliciesPageModule = __decorate([
+ProviderInfoAPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__policies__["a" /* PoliciesPage */],
+            __WEBPACK_IMPORTED_MODULE_2__provider_info_a__["a" /* ProviderInfoAPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__policies__["a" /* PoliciesPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__provider_info_a__["a" /* ProviderInfoAPage */]),
         ],
     })
-], PoliciesPageModule);
+], ProviderInfoAPageModule);
 
-//# sourceMappingURL=policies.module.js.map
+//# sourceMappingURL=provider-info-a.module.js.map
 
 /***/ }),
 
-/***/ 559:
+/***/ 567:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PoliciesPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProviderInfoAPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professions_service__ = __webpack_require__(275);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -56,31 +57,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 /**
- * Generated class for the PoliciesPage page.
+ * Generated class for the ProviderInfoAPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var PoliciesPage = (function () {
-    function PoliciesPage(navCtrl, navParams) {
+var ProviderInfoAPage = (function () {
+    function ProviderInfoAPage(navCtrl, navParams, professionsService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.professionsService = professionsService;
+        //-list
+        this.ListServices = [];
+        this.ListSubServices = [];
+        //-paq
+        this.DataService = [];
+        this.ListServices = this.professionsService.getProfessions();
+        console.log(this.ListServices);
     }
-    PoliciesPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad PoliciesPage');
+    ProviderInfoAPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProviderInfoAPage');
     };
-    return PoliciesPage;
+    ProviderInfoAPage.prototype.goProviderInfoB = function () {
+        this.DataService = { "prof_service": this.service, "prof_subService": this.subService, "prof_typeBusiness": this.typeBusiness };
+        var Data = { 'datos': this.DataService };
+        this.navCtrl.push('ProviderInfoBPage', Data);
+    };
+    ProviderInfoAPage.prototype.setSubServices = function () {
+        console.log(this.service);
+        this.ListSubServices = this.professionsService.getCategoryByProfession(this.service);
+        console.log(this.ListSubServices);
+    };
+    return ProviderInfoAPage;
 }());
-PoliciesPage = __decorate([
+ProviderInfoAPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-policies',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\policies\policies.html"*/'<!--\n\n  Generated template for the PoliciesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n  <h3>Policies</h3>\n\n  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur facilisis, lacus id tincidunt dapibus, turpis justo aliquet ante, ut vulputate turpis lacus non nulla. Suspendisse potenti. Maecenas arcu massa, volutpat quis auctor eget, mattis sit amet purus. Donec ac laoreet felis. Mauris dictum sapien congue eros ornare, id iaculis nunc pretium. Mauris bibendum blandit nisl, id finibus turpis volutpat nec. Ut interdum elementum tortor, non accumsan ligula interdum at. Donec mauris arcu, pellentesque lobortis venenatis sit amet, dictum a purus. Nam laoreet tellus quis justo imperdiet, quis placerat lectus pulvinar. Mauris interdum libero vel eleifend sodales. Aliquam ut dolor id mauris condimentum hendrerit. Nam blandit congue nulla ut viverra. Sed suscipit massa non auctor suscipit</p>\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\policies\policies.html"*/,
+        selector: 'page-provider-info-a',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\provider-info-a\provider-info-a.html"*/'<!--\n\n  Generated template for the ProviderInfoAPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    <ion-title>General data</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <ion-item>\n\n      <p><strong>Select your profession:</strong></p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <!-- <ion-label class="labelHide">Service</ion-label> -->\n\n      <ion-select [(ngModel)]="service" name="service" (ngModelChange)="setSubServices()" placeholder="service">\n\n        <ion-option *ngFor="let service of ListServices" value="{{service.name}}">{{service.name}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-select [(ngModel)]="subService" name="subService" placeholder="Sub Service">\n\n        <ion-option *ngFor="let subService of ListSubServices" value="{{subService}}">{{subService}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    <ion-item>\n\n      <p>Business Type:</p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-select [(ngModel)]="typeBusiness" name="typeBusiness" placeholder="Type Business">\n\n        <ion-option  value="Personal">Personal</ion-option>\n\n        <ion-option  value="Business">Business</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n<ion-footer>\n\n  <ion-toolbar>\n\n      <div class="btnBottom">\n\n        <button ion-button (click)="goProviderInfoB()">\n\n            Continue\n\n            <ion-icon name="arrow-dropright"></ion-icon> \n\n        </button> \n\n      </div>\n\n  </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\provider-info-a\provider-info-a.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-], PoliciesPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_2__services_professions_service__["a" /* ProfessionsService */]])
+], ProviderInfoAPage);
 
-//# sourceMappingURL=policies.js.map
+//# sourceMappingURL=provider-info-a.js.map
 
 /***/ })
 

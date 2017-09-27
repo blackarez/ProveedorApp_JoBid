@@ -14,24 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'edit-user.html',
 })
 export class EditUserPage {
-  DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
-  responseData :any;
-  responseDataUser :any;
-  findNameEstado: string;
-
-  codeAreaList : any;
-  codeAreaEstadoSelect: any = [];
-  country:any;area:any;prefix:any;line:any;
-  userData = {"username":"","password":"","email":"","name":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
   
-  ciudades: any =  [];
-  ciudad: string =  undefined;
-  stateZipcode: string = undefined;
-  estados : any = [];
-
-  windowRef: any;
-  user:any;
-  userB:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -39,4 +22,10 @@ export class EditUserPage {
     console.log('ionViewDidLoad EditUserPage');
   }
 
+  goEdit(){
+    this.navCtrl.push('EditProviderPage');
+  }
+  goNewservice(){
+    this.navCtrl.push('AddServicePage');
+  }
 }

@@ -1,4 +1,4 @@
-webpackJsonp([19],{
+webpackJsonp([21],{
 
 /***/ 138:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -31,7 +31,7 @@ var ProfessionalsService = (function () {
     };
     ProfessionalsService.prototype.getProfessional = function (id) {
         console.log('getProfessionalId');
-        console.log(id);
+        // console.log(id);
         return this.afDB.object('/professionals/' + id);
     };
     ProfessionalsService.prototype.getProfessionalExists = function (email) {
@@ -57,7 +57,7 @@ var ProfessionalsService = (function () {
     };
     //-new
     ProfessionalsService.prototype.newUser = function (userData, keyNew) {
-        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
+        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
         if (userData === void 0) { userData = []; }
         var key = undefined;
         //default star
@@ -71,6 +71,9 @@ var ProfessionalsService = (function () {
             var d = new Date();
             key = d.getTime();
             var keyUser = "prof_" + (key);
+        }
+        if (userData['star'] != star) {
+            star = userData['star'];
         }
         console.log('userKey' + keyUser);
         //console.log(newKeyAddres);
@@ -99,16 +102,19 @@ var ProfessionalsService = (function () {
     };
     ProfessionalsService.prototype.newContract = function (keyProvider, keyOffer, objContract) {
         console.log(objContract);
-        this.afDB.object('/professionals/' + keyProvider + '/Contracts/' + keyOffer).set(objContract).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
+        // this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+        this.afDB.object('/Contracts/' + keyProvider + '/' + keyOffer).set(objContract).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
+        console.info('professionals new contract');
     };
     //-set
     ProfessionalsService.prototype.setInfoServiceUser = function (KeyUser, serviceData) {
         console.log(serviceData);
         this.afDB.object('/professionals/' + KeyUser + '/Information').set(serviceData).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
-        console.info('professionals create');
+        console.info('professionals info service create or set');
     };
     ProfessionalsService.prototype.setContractStatus = function (keyProvider, keyOffer, status) {
-        this.afDB.object('/professionals/' + keyProvider + '/Contracts/' + keyOffer + '/status').set(status).catch(function (error) { console.log('error professionals setContractStatus'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/Contracts/' + keyProvider + '/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
+        console.info('professionals ContractStatus create or set');
     };
     return ProfessionalsService;
 }());
@@ -146,76 +152,84 @@ var map = {
 		405,
 		1
 	],
-	"../pages/edit-user/edit-user.module": [
+	"../pages/add-service/add-service.module": [
 		406,
-		18
+		20
+	],
+	"../pages/edit-provider/edit-provider.module": [
+		407,
+		3
+	],
+	"../pages/edit-user/edit-user.module": [
+		408,
+		19
 	],
 	"../pages/home/home.module": [
-		407,
-		17
+		409,
+		18
 	],
 	"../pages/login/login.module": [
-		408,
-		16
+		410,
+		17
 	],
 	"../pages/my-services/my-services.module": [
-		409,
-		15
+		411,
+		16
 	],
 	"../pages/payment-methods/payment-methods.module": [
-		410,
+		412,
 		0
 	],
 	"../pages/payments/payments.module": [
-		411,
-		14
+		413,
+		15
 	],
 	"../pages/policies/policies.module": [
-		412,
-		13
+		414,
+		14
 	],
 	"../pages/provider-info-a/provider-info-a.module": [
-		413,
-		12
+		415,
+		13
 	],
 	"../pages/provider-info-b/provider-info-b.module": [
-		414,
-		11
+		416,
+		12
 	],
 	"../pages/service-info/service-info.module": [
-		415,
-		10
+		417,
+		11
 	],
 	"../pages/service-job/service-job.module": [
-		416,
-		9
+		418,
+		10
 	],
 	"../pages/service-new/service-new.module": [
-		417,
-		8
+		419,
+		9
 	],
 	"../pages/service-ok/service-ok.module": [
-		418,
-		7
+		420,
+		8
 	],
 	"../pages/service-sale/service-sale.module": [
-		419,
-		6
+		421,
+		7
 	],
 	"../pages/service-vote/service-vote.module": [
-		420,
-		5
+		422,
+		6
 	],
 	"../pages/service-win/service-win.module": [
-		421,
-		4
+		423,
+		5
 	],
 	"../pages/show/show.module": [
-		422,
-		3
+		424,
+		4
 	],
 	"../pages/singup/singup.module": [
-		423,
+		425,
 		2
 	]
 };
@@ -810,6 +824,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                 links: [
                     { loadChildren: '../pages/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule', name: 'AddPaymentMethodPage', segment: 'add-payment-method', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/add-service/add-service.module#AddServicePageModule', name: 'AddServicePage', segment: 'add-service', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/edit-provider/edit-provider.module#EditProviderPageModule', name: 'EditProviderPage', segment: 'edit-provider', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/edit-user/edit-user.module#EditUserPageModule', name: 'EditUserPage', segment: 'edit-user', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },

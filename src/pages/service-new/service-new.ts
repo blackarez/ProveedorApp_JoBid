@@ -6,6 +6,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SaleService } from '../../services/sale.service';
 import { OfferService } from '../../services/offer.service';
 import { UserService } from '../../services/user.service';
+import { ProfessionalsService } from '../../services/professionals.service';
 
 /**
  * Generated class for the ServiceNewPage page.
@@ -23,27 +24,20 @@ export class ServiceNewPage {
 
   //-- default
   imgUserDefault ="assets/img/User/UserService.png";
+  
+   //-datos BD
+   status="Waiting for the professional";
 
   //-data
   DataService:any=[];
   DataUser:any= [];
   user:string;
-
- //-datos BD
- status="Waiting for the professional";
+  keyOffer:any;
+  userActual:any;
+  serviceCode:any;
 
   //-subcrip
   userSubs:any;
-
-  //-load data
-  datasService:any;
-  dataService:any;
-  keyOffer:any;
-  worker:any;
-  userActual:any;
-  sale:any;
-  information:any;
-  serviceCode:any;
 
   //--load vista
   imgUser:any;
@@ -58,19 +52,22 @@ export class ServiceNewPage {
     private saleService: SaleService, 
     private offerService : OfferService,
     private userService : UserService,
+    private professionalsService:ProfessionalsService,
   ) {    
     //-ej
     this.serviceCode = '0986548605';
     //-data
     this.DataService = this.navParams.get('datos');
+    console.log(this.DataService);
     this.user = this.DataService['idUser'];
+    this.keyOffer=this.DataService['idOff'];
+    console.log(this.keyOffer);
+
     this.serviceCode = this.DataService['idOff'].substring(6);
     console.log(this.user);
-    console.log(this.DataService);
     //-localStorage
     this.userActual = localStorage.getItem('verificacion');
     console.log(this.userActual);
-
     this.userInfo();
   }
 
@@ -78,10 +75,13 @@ export class ServiceNewPage {
     console.log('ionViewDidLoad ServiceNewPage');
   }
   goServiceJob(){
-    this.setStatus();
+    console.log('goServiceJob');
+    this.setStatusService();
     // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
     console.log(this.DataService);
     console.log(this.DataUser);
+
+    this.userSubs.unsubscribe();
     
     let dataService = {'service':this.DataService,"user":this.DataUser};
   	// this.navCtrl.setRoot(,DataService);
@@ -89,8 +89,12 @@ export class ServiceNewPage {
     
   }
 
- setStatus(){
-  this.saleService.setStatus(this.userActual,this.keyOffer,'In progress');
+ setStatusService(){
+   console.log('set');
+   console.log(this.userActual);
+   console.log(this.keyOffer);
+  this.professionalsService.setContractStatus(this.userActual,this.keyOffer,'In progress');
+  this.saleService.setStatus(this.user,this.keyOffer,'In progress');
   this.offerService.setStatus(this.keyOffer,'In progress');
  }
   userInfo(){
@@ -100,9 +104,8 @@ export class ServiceNewPage {
     // this.phoneUser = '(+57) 5-300 811 45 65';
     console.log('UserInfo');
     console.log(this.user);
-    // this.userSubs=this.userService.getUser(this.user).subscribe(
-    this.userService.getUser(this.user).subscribe(
-    // this.userSubs=this.userService.getUser('user_1504881933094').subscribe(
+    this.userSubs=this.userService.getUser(this.user).subscribe(
+    // this.userService.getUser(this.user).subscribe(
       (userDB)=>{
         console.log(userDB);
         if(userDB){
@@ -120,7 +123,7 @@ export class ServiceNewPage {
           }
           this.DataUser = {"nameUser":this.nameUser,"address":this.addresUser,"tel":this.phoneUser,"img":this.imgUser};
         }
-        // this.userSubs.unsubscribe();
+        
       });
    
   }

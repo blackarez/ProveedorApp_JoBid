@@ -25553,7 +25553,7 @@ page-add-payment-method .braintree-placeholder {
   margin-top: 20px;
 }
 
-page-edit-user img {
+page-edit-provider img {
   display: block;
   width: 100%;
   height: 200px;
@@ -25561,24 +25561,24 @@ page-edit-user img {
   margin-right: auto;
 }
 
-page-edit-user #signup-heading2 {
+page-edit-provider #signup-heading2 {
   color: #000000;
   text-align: center;
 }
 
-page-edit-user .force-back-button .back-button {
+page-edit-provider .force-back-button .back-button {
   display: inline-block;
 }
 
-page-edit-user ion-list ion-grid.grid {
+page-edit-provider ion-list ion-grid.grid {
   padding: 0;
 }
 
-page-edit-user ion-list ion-grid.grid .col {
+page-edit-provider ion-list ion-grid.grid .col {
   padding: 0;
 }
 
-page-edit-user ion-list ion-grid.grid .col:first-child {
+page-edit-provider ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
 }
 

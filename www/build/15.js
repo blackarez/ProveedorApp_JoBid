@@ -1,14 +1,14 @@
 webpackJsonp([15],{
 
-/***/ 409:
+/***/ 413:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyServicesPageModule", function() { return MyServicesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentsPageModule", function() { return PaymentsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__my_services__ = __webpack_require__(556);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payments__ = __webpack_require__(565);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,31 +18,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MyServicesPageModule = (function () {
-    function MyServicesPageModule() {
+var PaymentsPageModule = (function () {
+    function PaymentsPageModule() {
     }
-    return MyServicesPageModule;
+    return PaymentsPageModule;
 }());
-MyServicesPageModule = __decorate([
+PaymentsPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */],
+            __WEBPACK_IMPORTED_MODULE_2__payments__["a" /* PaymentsPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payments__["a" /* PaymentsPage */]),
         ],
     })
-], MyServicesPageModule);
+], PaymentsPageModule);
 
-//# sourceMappingURL=my-services.module.js.map
+//# sourceMappingURL=payments.module.js.map
 
 /***/ }),
 
-/***/ 556:
+/***/ 565:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyServicesPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -57,30 +57,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the MyServicesPage page.
+ * Generated class for the PaymentsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MyServicesPage = (function () {
-    function MyServicesPage(navCtrl, navParams) {
+var PaymentsPage = (function () {
+    function PaymentsPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    MyServicesPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MyServicesPage');
+    PaymentsPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad PaymentsPage');
     };
-    return MyServicesPage;
+    PaymentsPage.prototype.goAddPaymentMethod = function () {
+        this.navCtrl.push('AddPaymentMethodPage');
+    };
+    return PaymentsPage;
 }());
-MyServicesPage = __decorate([
+PaymentsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-my-services',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/'<!--\n\n  Generated template for the MyServicesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n  <h3>My services</h3>\n\n  <h4>List:</h4>\n\n  \n\n  <!-- <ion-list>\n\n    <button ion-item *ngFor="let p of OffersList" (click)="goInfoService(p)" class="btnItem">\n\n      <p> <strong>{{p.name}}</strong>: {{p.Clasificacion.categoria}}</p>\n\n      \n\n      <p><strong>Status</strong>:{{p.status}}</p>\n\n      <p *ngIf="p.status != \'Cancelled\' "><strong>Sale</strong>:{{p.sale}}</p>\n\n    </button>\n\n  </ion-list> -->\n\n  <!-- (click)="openPage(p) -->\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/,
+        selector: 'page-payments',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\payments\payments.html"*/'<!--\n\n  Generated template for the PaymentsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <h3>My payments</h3>\n\n  <h4>List:</h4>\n\n    <ion-list>\n\n    </ion-list>\n\n  </ion-content>\n\n  <ion-footer>\n\n    <ion-toolbar>\n\n        <div class="btnBottom">\n\n          <button (click)="goAddPaymentMethod()">\n\n            Add payment method\n\n          </button> \n\n        </div>\n\n    </ion-toolbar>\n\n  </ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\payments\payments.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-], MyServicesPage);
+], PaymentsPage);
 
-//# sourceMappingURL=my-services.js.map
+//# sourceMappingURL=payments.js.map
 
 /***/ })
 

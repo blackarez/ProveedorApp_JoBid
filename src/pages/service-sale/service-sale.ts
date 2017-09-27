@@ -64,15 +64,15 @@ export class ServiceSalePage {
       this.startTimer();
       this.DataService = this.navParams.get('datos');
       console.log(this.DataService);
-      console.log(localStorage);
       this.userActual= localStorage.getItem('verificacion');
       this.loadView();
       this.getUserLocationGeolocation();
       this.getSale();
     }
     
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ServiceSalePage');
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad ServiceSalePage');
+      // console.log(localStorage);
 }
 
 loadView(){
@@ -81,7 +81,7 @@ loadView(){
 
 newOfferProvider(){
   if(this.MenosPrecio > Number(this.newOffer) ){
-    console.log(Number(this.newOffer));
+    // console.log(Number(this.newOffer));
     this.myOffer =  Number(this.newOffer);
     console.log(this.myOffer);
     this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,this.newOffer);

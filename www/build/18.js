@@ -1,14 +1,14 @@
 webpackJsonp([18],{
 
-/***/ 406:
+/***/ 409:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditUserPageModule", function() { return EditUserPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_user__ = __webpack_require__(553);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(561);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,33 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var EditUserPageModule = (function () {
-    function EditUserPageModule() {
+var HomePageModule = (function () {
+    function HomePageModule() {
     }
-    return EditUserPageModule;
+    return HomePageModule;
 }());
-EditUserPageModule = __decorate([
+HomePageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__edit_user__["a" /* EditUserPage */],
+            __WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__edit_user__["a" /* EditUserPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */]),
         ],
     })
-], EditUserPageModule);
+], HomePageModule);
 
-//# sourceMappingURL=edit-user.module.js.map
+//# sourceMappingURL=home.module.js.map
 
 /***/ }),
 
-/***/ 553:
+/***/ 561:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditUserPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_app__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase_app__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,36 +61,136 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the EditUserPage page.
+ * Generated class for the HomePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var EditUserPage = (function () {
-    function EditUserPage(navCtrl, navParams) {
+
+
+
+var HomePage = (function () {
+    function HomePage(navCtrl, 
+        // private facebook:  Facebook,
+        professionalsService, afAuth) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.codeAreaEstadoSelect = [];
-        this.userData = { "username": "", "password": "", "email": "", "name": "", "zipcode": "", "state": "", "picture": "", "verificacion": "", "pais": "", "direccion": "", "tel": "" };
-        this.ciudades = [];
-        this.ciudad = undefined;
-        this.stateZipcode = undefined;
-        this.estados = [];
+        this.professionalsService = professionalsService;
+        this.afAuth = afAuth;
+        this.userData = null;
+        this.mensage = '';
+        //-identifica y redirecciona usuario logeado.
+        // this.usuarioLogeado();
     }
-    EditUserPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad EditUserPage');
+    HomePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HomePage');
     };
-    return EditUserPage;
+    HomePage.prototype.facebookir = function () {
+        var _this = this;
+        var goPagePrehome = false;
+        var userDB;
+        var provider = new __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"].FacebookAuthProvider();
+        provider.addScope('email');
+        __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"]().signInWithPopup(provider)
+            .then(function (res) {
+            console.log(res);
+            // console.info(JSON.stringify(res));
+            // console.log(res.user.email);
+            // console.log('res.additionalUserInfo.profile.email');
+            // console.log(res.additionalUserInfo.profile.email);
+            //console.log(res);
+            var getProfesionals = _this.professionalsService.getProfessionals()
+                .subscribe(function (Jobers) {
+                // console.log(Jobers);
+                Jobers.forEach(function (Job) {
+                    // console.log(Job);
+                    // console.log(Job['user_email']);
+                    if (res.additionalUserInfo.providerId == "facebook.com") {
+                        // console.info(' additionUser facebook');
+                        if (Job['user_email'] == res.additionalUserInfo.profile.email) {
+                            console.info('Find User Datos');
+                            // console.log('res.additionalUserInfo.profile.email');
+                            // console.log(res.additionalUserInfo.profile.email);
+                            // console.log(res.additionalUserInfo.providerId);
+                            console.log(Job);
+                            userDB = Job;
+                            goPagePrehome = true;
+                        }
+                    }
+                });
+                console.log(userDB);
+                console.log(goPagePrehome);
+                if (goPagePrehome != false) {
+                    _this.goNextPagePrehome(userDB);
+                }
+                else {
+                    _this.singup();
+                }
+                getProfesionals.unsubscribe();
+            });
+        });
+    };
+    HomePage.prototype.goNextPagePrehome = function (datos) {
+        console.log(datos);
+        // //console.log(datos['$key']);
+        // this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
+        // //console.log(this.userDataUpdate);
+        // let Data = {'datos':this.userDataUpdate}
+        // this.navCtrl.setRoot('ShowPage',Data);
+        this.navCtrl.setRoot('ShowPage');
+    };
+    HomePage.prototype.login = function () {
+        this.navCtrl.push('LoginPage');
+    };
+    HomePage.prototype.singup = function () {
+        this.navCtrl.push('SingupPage');
+    };
+    HomePage.prototype.usuarioLogeado = function () {
+        // let userDBLoad:any;
+        // let goPagePrehomeLoad = false;
+        // let homeStatus=this.afAuth.authState.subscribe( userAuth => {
+        //   if (userAuth){
+        //         console.info('find user home login');
+        //         let email=  userAuth.providerData["0"].email;
+        //         let Userexists= this.userService.getUserEmailPerfil(email);
+        //         Userexists.then((users) => {
+        //           users.forEach((user) =>{
+        //             if(user != undefined && user != null){
+        //                 userDBLoad = user;
+        //                 goPagePrehomeLoad= true;
+        //                 console.log(goPagePrehomeLoad);
+        //                 if(goPagePrehomeLoad){
+        //                   this.goNextPagePrehomeFace(userDBLoad);
+        //                   // this.goNextPagePrehomeFace();
+        //                 }
+        //             }
+        //           });
+        //         });
+        //   } else {
+        //     console.info('find user home login - no');
+        //   }
+        // });
+        // homeStatus.unsubscribe();
+    };
+    HomePage.prototype.goNextPagePrehomeFace = function (datos) {
+        // goNextPagePrehomeFace(){
+        //   this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
+        //  let Data = {'datos':this.userDataUpdate}
+        //   this.navCtrl.setRoot('ShowPage',Data);
+        this.navCtrl.setRoot('ShowPage');
+    };
+    return HomePage;
 }());
-EditUserPage = __decorate([
+HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-edit-user',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\edit-user\edit-user.html"*/'<!--\n\n  Generated template for the EditUserPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    <ion-title>JoBid</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content>\n\n<form id="signup-form3" class="list" padding>\n\n    <ion-list id="signup-list3">\n\n      <ion-item>\n\n        <!-- <ion-icon name="person" item-start></ion-icon> -->\n\n        <ion-input type="text" placeholder="Name" [(ngModel)]="userData.name"  name="name"></ion-input>\n\n      </ion-item>\n\n      <ion-item>\n\n        <!-- <ion-icon name="person" item-start></ion-icon> -->\n\n        <ion-input type="text" placeholder="Last name" [(ngModel)]="userData.lastName"  name="lastName"></ion-input>\n\n      </ion-item>\n\n      <ion-item>    \n\n        <!-- <ion-icon name="person" item-start></ion-icon> -->\n\n        <ion-input type="date" class="mitad" placeholder="Last name" [(ngModel)]="userData.date"  name="date"></ion-input>\n\n        <ion-input type="text" class="mitad" placeholder="Last name" [(ngModel)]="userData.SocialSecurity"  name="socialSecurity"></ion-input>\n\n      </ion-item>\n\n      <ion-item>\n\n        <!-- <ion-icon name="pin" item-start></ion-icon> -->\n\n        <ion-select [(ngModel)]="userData.pais" name="pais" placeholder="Country">\n\n          <ion-option value="USA" selected>U.S.A</ion-option>\n\n        </ion-select>\n\n       </ion-item>\n\n      <ion-item>\n\n          <!-- <ion-icon name="flag" item-start></ion-icon> -->\n\n        <ion-select class="mitad" [(ngModel)]="userData.state" name="state" (ngModelChange)="setCity()" placeholder="State">\n\n          <ion-option *ngFor="let state of estados" value="{{state.nameShort}}">{{state.name}}</ion-option>\n\n        </ion-select>\n\n        <ion-select  class="mitad" [(ngModel)]="userData.zipcode" name="zipcode" (ngModelChange)="setZipCode()" placeholder="City"> [(ngModel)]="gaming"\n\n          <ion-option selected>....</ion-option>\n\n          <ion-option *ngFor="let city of ciudades" value="{{city.zipcode}}">{{city.name}} - {{city.zipcode}}</ion-option>\n\n        </ion-select>\n\n      </ion-item>\n\n      <ion-item>\n\n        <!-- <ion-icon name="home" item-start></ion-icon> -->\n\n        <ion-input type="number" placeholder="1234" class="mitad" [(ngModel)]="DirecA" name="DirecA"></ion-input>\n\n        <ion-input type="text" placeholder="avenue" value="" class="mitad" [(ngModel)]="DirecB" name="DirecB"></ion-input>\n\n      </ion-item>\n\n      <ion-item>\n\n          <!-- <ion-icon name="home" item-start style="background:transparent; color:transparent;"></ion-icon> -->\n\n        <ion-input type="text" placeholder="City" class="mitad" [(ngModel)]="DirecC" name="DirecC" ></ion-input>\n\n        <ion-input type="text" placeholder="NJ 0000" value="{{DirecD}}" class="mitad" [(ngModel)]="DirecD" name="DirecD"></ion-input>\n\n      </ion-item>\n\n      <ion-item>\n\n        <!-- <ion-icon name="mail" item-start></ion-icon> -->\n\n        <ion-input type="email" placeholder="Mail" [(ngModel)]="userData.email" name="email" ></ion-input>\n\n       </ion-item>\n\n      <ion-item>\n\n        <!-- <ion-icon name="contact" item-start></ion-icon> -->\n\n        <ion-input type="text" placeholder="User" [(ngModel)]="userData.username"  name="username"></ion-input>\n\n      </ion-item>\n\n      <ion-item>\n\n        <!-- <ion-icon name="lock" item-start></ion-icon> -->\n\n        <ion-input type="password" placeholder="Password" [(ngModel)]="userData.password" name="password"></ion-input>\n\n      </ion-item>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-4>\n\n            <ion-item>\n\n              <!-- <ion-icon name="call" item-start></ion-icon>this.codeAreaEstadoSelect -->\n\n               <ion-select [(ngModel)]="telA" name="telA" placeholder="Area code">\n\n                <ion-option *ngFor="let stateCod of codeAreaEstadoSelect" value="{{stateCod.code}}">{{stateCod.code}}</ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-8>\n\n            <ion-item>\n\n              <ion-input type="tel" placeholder="Phone #" [(ngModel)]="telB" name="telB"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n      \n\n      <div class="btnBottom">\n\n        <button ion-button color="danger" block (click)="goPhoneV()" id="sign-in-button">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n      </div>\n\n    </ion-list>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\edit-user\edit-user.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-content>\n\n  <!--  <h3>Ionic Menu Starter</h3>\n\n \n\n   <p>\n\n     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.\n\n   </p>\n\n   <button ion-button secondary menuToggle>Toggle Menu</button> -->\n\n  \n\n   <ion-card *ngIf="userData" >\n\n     <ion-card-header> {{userData.username}} </ion-card-header>\n\n     <img [src]= "userData.picture">\n\n     <ion-card-content>\n\n       <p>Email: {{ userData.email}}</p>\n\n       <p>Name: {{ userData.name}}</p>\n\n     </ion-card-content>\n\n   </ion-card>\n\n   <img src="assets/img/LogoJoBid.png" >\n\n     <h5 id="home-heading1" style="">Sing up or Log in</h5>\n\n     <div padding>\n\n       <!-- <button ion-button block color="danger" (click)="googleir()">Log in with Google</button> -->\n\n       <button ion-button block (click)="facebookir()">Sing in with Faceook</button>\n\n     </div>\n\n     <ion-grid class="tabMenu">\n\n      <ion-row>\n\n       <ion-col>\n\n         <button ion-button block color="light" (click)="singup()">\n\n           <ion-grid>\n\n             <ion-row>\n\n               <ion-icon name="contact"></ion-icon>\n\n             </ion-row>  \n\n             <ion-row> \n\n              <p>sing up</p>\n\n             </ion-row>\n\n           </ion-grid> \n\n         </button>\n\n       </ion-col>\n\n       <ion-col>\n\n         <button ion-button block color="light"(click)="login()">\n\n         <ion-grid>\n\n             <ion-row>\n\n               <ion-icon name="lock"></ion-icon>\n\n             </ion-row>  \n\n             <ion-row> \n\n              <p>login</p>\n\n             </ion-row>\n\n           </ion-grid> \n\n         </button>\n\n       </ion-col>\n\n      </ion-row>\n\n     </ion-grid>  \n\n </ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-], EditUserPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */],
+        __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]])
+], HomePage);
 
-//# sourceMappingURL=edit-user.js.map
+//# sourceMappingURL=home.js.map
 
 /***/ })
 

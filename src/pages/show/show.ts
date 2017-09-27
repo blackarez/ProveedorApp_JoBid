@@ -31,6 +31,9 @@ export class ShowPage {
   //-data
   ListService:any=[];
 
+  //-firebase
+  listOffer:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private offerService: OfferService, private userService: UserService,
   ) {
@@ -47,10 +50,11 @@ export class ShowPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShowPage');
-    console.log(localStorage);
+    // console.log(localStorage);
   }
 
   goInfo(item){
+    this.listOffer.unsubscribe();
     let Data = {'datos':item};
     this.navCtrl.push('ServiceInfoPage',Data);
   }
@@ -67,7 +71,7 @@ export class ShowPage {
 
   showServices(){
     let imagen;
-    this.offerService.getOfferNew().subscribe( (list)=>{
+   this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
       this.ListService=[];
       // console.log(list);
       for(let keys in list){

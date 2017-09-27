@@ -39,7 +39,7 @@ export class ServiceWinPage {
     this.sale = this.DataService['sale'];
     console.log(this.DataService);
     this.userActual = localStorage.getItem('verificacion');
-    console.log(this.userActual);
+    // console.log(this.userActual);
     this.getStatusService();
   }
 
@@ -68,9 +68,10 @@ goServiceNew(){
   console.info('goServiceWin');
   this.showAlertService();
   //-contarct
-  let objContract = {"status":'Waiting for the professional','User':this.user};
   console.log(this.DataService);
-  // this.professionalsService.newContract(this.userActual,this.DataService['dataService'],objContract);
+  let objContract = {"status":'Waiting for the professional','User':this.user};
+  // console.log(objContract);
+  this.professionalsService.newContract(this.userActual,this.offer,objContract);
 
   //-data
   let dataService = {'datos':this.DataService};

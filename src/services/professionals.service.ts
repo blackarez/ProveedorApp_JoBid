@@ -17,7 +17,7 @@ export class ProfessionalsService{
 
 	public getProfessional(id){
 		console.log('getProfessionalId');
-		console.log(id);
+		// console.log(id);
 		return this.afDB.object('/professionals/'+id);
 	}
 
@@ -46,7 +46,7 @@ export class ProfessionalsService{
 
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
-		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
+		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
 		
 		let key = undefined;
 		//default star
@@ -60,6 +60,11 @@ export class ProfessionalsService{
 			key = d.getTime();
 			var keyUser = "prof_"+(key);
 		}
+
+		if(userData['star'] != star){
+			star= userData['star'];
+		}
+		
 		console.log('userKey'+keyUser);
 		//console.log(newKeyAddres);
 		
@@ -91,17 +96,20 @@ export class ProfessionalsService{
 
 	public newContract(keyProvider,keyOffer,objContract){
 		console.log(objContract);
-		this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		// this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		console.info('professionals new contract');
 	}
 
 	//-set
 	setInfoServiceUser(KeyUser,serviceData){
 		console.log(serviceData);
 		this.afDB.object('/professionals/'+KeyUser+'/Information').set(serviceData).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
-		console.info('professionals create');
+		console.info('professionals info service create or set');
 	}
-
+	
 	setContractStatus(keyProvider,keyOffer,status){
-		this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer+'/status').set(status).catch(error => {console.log('error professionals setContractStatus'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer+'/status/').set(status).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		console.info('professionals ContractStatus create or set');
 	}
 }

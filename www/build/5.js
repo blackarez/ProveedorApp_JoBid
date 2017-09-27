@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 420:
+/***/ 423:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceVotePageModule", function() { return ServiceVotePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceWinPageModule", function() { return ServiceWinPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_vote__ = __webpack_require__(567);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_win__ = __webpack_require__(575);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,33 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ServiceVotePageModule = (function () {
-    function ServiceVotePageModule() {
+var ServiceWinPageModule = (function () {
+    function ServiceWinPageModule() {
     }
-    return ServiceVotePageModule;
+    return ServiceWinPageModule;
 }());
-ServiceVotePageModule = __decorate([
+ServiceWinPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__service_vote__["a" /* ServiceVotePage */],
+            __WEBPACK_IMPORTED_MODULE_2__service_win__["a" /* ServiceWinPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_vote__["a" /* ServiceVotePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_win__["a" /* ServiceWinPage */]),
         ],
     })
-], ServiceVotePageModule);
+], ServiceWinPageModule);
 
-//# sourceMappingURL=service-vote.module.js.map
+//# sourceMappingURL=service-win.module.js.map
 
 /***/ }),
 
-/***/ 567:
+/***/ 575:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceVotePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceWinPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_sale_service__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(138);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -56,34 +58,103 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+//-service
+
+
 /**
- * Generated class for the ServiceVotePage page.
+ * Generated class for the ServiceWinPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ServiceVotePage = (function () {
-    function ServiceVotePage(navCtrl, navParams) {
+var ServiceWinPage = (function () {
+    function ServiceWinPage(navCtrl, navParams, alertCtrl, saleService, professionalsService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.saleService = saleService;
+        this.professionalsService = professionalsService;
+        //-data
+        this.DataService = [];
+        this.DataService = this.navParams.get('datos');
+        this.user = this.DataService['idUser'];
+        this.offer = this.DataService['idOff'];
+        this.sale = this.DataService['sale'];
+        console.log(this.DataService);
+        this.userActual = localStorage.getItem('verificacion');
+        // console.log(this.userActual);
+        this.getStatusService();
     }
-    ServiceVotePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ServiceVotePage');
+    ServiceWinPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ServiceWinPage');
     };
-    ServiceVotePage.prototype.goIndex = function () {
+    ServiceWinPage.prototype.getStatusService = function () {
+        var _this = this;
+        this.statusSub = this.saleService.getStatus(this.user, this.offer).subscribe(function (status) {
+            console.log(status);
+            if (status['$value']) {
+                if (status['$value'] == 'Waiting for the professional') {
+                    _this.goServiceNew();
+                    _this.statusSub.unsubscribe();
+                }
+                if (status['$value'] == 'Cancelled') {
+                    _this.goIndexService();
+                    _this.statusSub.unsubscribe();
+                }
+            }
+        });
+    };
+    ServiceWinPage.prototype.goServiceNew = function () {
+        console.info('goServiceWin');
+        this.showAlertService();
+        //-contarct
+        console.log(this.DataService);
+        var objContract = { "status": 'Waiting for the professional', 'User': this.user };
+        // console.log(objContract);
+        this.professionalsService.newContract(this.userActual, this.offer, objContract);
+        //-data
+        var dataService = { 'datos': this.DataService };
+        console.log(dataService);
+        this.navCtrl.setRoot('ServiceNewPage', dataService);
+        // this.navCtrl.setRoot('ServiceNewPage');
+        // console.log(this.statusSub);
+    };
+    ServiceWinPage.prototype.goIndexService = function () {
+        this.showAlertCancel();
         this.navCtrl.setRoot('ShowPage');
+        // this.statusSub.unsubscribe();
+        // console.log(this.statusSub);
     };
-    return ServiceVotePage;
+    //-alert
+    ServiceWinPage.prototype.showAlertService = function () {
+        var alerteMail = this.alertCtrl.create({
+            title: 'Information',
+            message: 'Congratulations, the customer has accepted your offer, you can go to the customer to start the service.',
+            buttons: ['OK']
+        });
+        alerteMail.present();
+    };
+    ServiceWinPage.prototype.showAlertCancel = function () {
+        var alerteMail = this.alertCtrl.create({
+            title: 'Information',
+            message: 'Sorry. The client has canceled the service.',
+            buttons: ['OK']
+        });
+        alerteMail.present();
+    };
+    return ServiceWinPage;
 }());
-ServiceVotePage = __decorate([
+ServiceWinPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-vote',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/'<!--\n\n  Generated template for the ServiceVotePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <div class="barraRoja">\n\n    <h4>Service qualification</h4>\n\n  </div>\n\n  <p>Now you can qualify the client and leave a comment of the service received.</p>\n\n  <form id="signup-form3" class="list" padding>\n\n    <ion-list >\n\n      <ion-item>\n\n        <h4>Qualification <img src="assets/img/Estrellas.png" alt=""></h4>\n\n      </ion-item>\n\n      <ion-item>\n\n      <input type="text">\n\n        <ion-textarea placeholder="Comments"></ion-textarea>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="btnBottom">\n\n      <button ion-button color="danger" block icon-left (click)="goIndex()">Qualify and continue<ion-icon name="arrow-dropright"></ion-icon></button>\n\n    </div>\n\n  </form>\n\n  </ion-content>\n\n  '/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/,
+        selector: 'page-service-win',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-win\service-win.html"*/'<!--\n\n  Generated template for the ServiceWinPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n    \n\n<ion-content>\n\n  <img src="assets/img/BackgroundWin.JPG"  />\n\n\n\n  <h4>Congratulations</h4>\n\n  <h3>You have won  a Job</h3>\n\n  <p>value of the sale</p>\n\n  <h2>${{sale}}</h2>\n\n  <div class="centrarIcon">\n\n    <ion-icon class="icon-ok" name="checkmark-circle"></ion-icon>\n\n  </div>\n\n  <p>You have won a job! You must wait for the customer to confirm the service</p>\n\n    <!-- <div class="btnBottom" padding>\n\n    <button ion-button color="danger" block (click)="goServiceNew()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n  </div> -->\n\n</ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-win\service-win.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-], ServiceVotePage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__services_sale_service__["a" /* SaleService */],
+        __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__["a" /* ProfessionalsService */]])
+], ServiceWinPage);
 
-//# sourceMappingURL=service-vote.js.map
+//# sourceMappingURL=service-win.js.map
 
 /***/ })
 
