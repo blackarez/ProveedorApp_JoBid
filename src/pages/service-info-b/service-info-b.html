@@ -1,0 +1,85 @@
+<!--
+  Generated template for the ServiceInfoBPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      <ion-title>Personal record</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+  <ion-grid>
+      <ion-row class="steps">
+        <ion-col col-4 class="active">
+          <div class="numb">1</div>
+          <div class="text">
+            <p>General</p>
+            <p>data</p>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="numb">2</div>
+          <div class="text">
+            <p>Upload</p>
+            <p>documents</p>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="numb">3</div>
+          <div class="text">
+            <p>Photo</p>  
+            <p>gallery</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list padding>
+      <ion-item>
+        <p><strong>Personal record:</strong></p>
+      </ion-item>
+      <ion-item *ngIf="!showPersonalB">
+        <ion-input type="text" [(ngModel)]="Tradename" name="Tradename" placeholder="Tradename"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!showPersonalB">
+        <ion-input type="text" [(ngModel)]="LegalName" name="LegalName" placeholder="Legal Name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!showPersonalB">
+        <ion-input type="text" [(ngModel)]="TaxID" name="TaxID" placeholder="Tax ID"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="address" name="address" placeholder="Address"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Phone" class="mitad" [(ngModel)]="Phone" name="Phone"></ion-input>
+        <ion-input type="text" placeholder="Mobile" class="mitad" [(ngModel)]="Mobile" name="Mobile"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label class="mitad">Experience time</ion-label>
+        <ion-select  class="mitad"  [(ngModel)]="experiencia" name="experiencia" placeholder="Experience"> <!--[(ngModel)]="gaming"-->
+          <ion-option value="1Y" >1 Year</ion-option>
+          <ion-option value="2Y" >2 Year</ion-option>
+          <ion-option value="3Y" >3 Year</ion-option>
+          <ion-option value="3YM" >&gt; 3 Year</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-textarea type="text" placeholder="Short description of your business" [(ngModel)]="moreInformation" name="moreInformation"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+        <div class="btnBottom">
+          <button ion-button (click)="goDocument()">
+              Continue
+              <ion-icon name="arrow-dropright"></ion-icon> 
+          </button> 
+        </div>
+    </ion-toolbar>
+  </ion-footer>
+  

@@ -172,6 +172,7 @@ enviarCorreo(){
 
     this.userData['verificacion'] = keyUser;
     localStorage.setItem('verificacion',keyUser);
+    localStorage.setItem('username',this.userData['username']);
     console.log(this.userData);
 
     this.professionalsService.newUser(this.userData,keyUser);

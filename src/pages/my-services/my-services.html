@@ -20,13 +20,11 @@
   <h3>My services</h3>
   <h4>List:</h4>
   
-  <!-- <ion-list>
-    <button ion-item *ngFor="let p of OffersList" (click)="goInfoService(p)" class="btnItem">
-      <p> <strong>{{p.name}}</strong>: {{p.Clasificacion.categoria}}</p>
-      
-      <p><strong>Status</strong>:{{p.status}}</p>
-      <p *ngIf="p.status != 'Cancelled' "><strong>Sale</strong>:{{p.sale}}</p>
+  <ion-list>
+    <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">
+      <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>
+      <p><strong>Status:</strong> {{list.status}}</p>
+      <p><strong>Sale:</strong> {{list.sale}}</p>
     </button>
-  </ion-list> -->
-  <!-- (click)="openPage(p) -->
+  </ion-list>
   </ion-content>

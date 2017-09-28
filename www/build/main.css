@@ -4107,6 +4107,46 @@ form{
   color: pink;
 }
 
+ion-grid.grid {
+  padding: 0px;
+}
+
+ion-grid.grid ion-row.steps {
+  border-bottom: 4px solid #b20000;
+  height: 80px;
+}
+
+ion-grid.grid ion-row.steps ion-col {
+  height: 80px;
+  background: transparent;
+}
+
+ion-grid.grid ion-row.steps ion-col div.text {
+  width: 78%;
+  color: #444;
+  display: inline-table;
+}
+
+ion-grid.grid ion-row.steps ion-col div.numb {
+  width: 18%;
+  color: #444;
+  display: inline-table;
+  vertical-align: -15px;
+  font-size: 20px;
+}
+
+ion-grid.grid ion-row.steps ion-col.active {
+  background: #b20000;
+}
+
+ion-grid.grid ion-row.steps ion-col.active div.text p {
+  color: white;
+}
+
+ion-grid.grid ion-row.steps ion-col.active div.numb {
+  color: yellow;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -25582,6 +25622,11 @@ page-edit-provider ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
 }
 
+page-edit-user .button .button-md, page-edit-user .button .button-ios {
+  width: 30px;
+  height: 30px;
+}
+
 page-home img {
   display: block;
   width: 100%;
@@ -25606,6 +25651,53 @@ page-login img {
 page-login #login-heading1 {
   color: #000000;
   text-align: center;
+}
+
+page-my-service-info h4 {
+  color: #b20000;
+}
+
+page-my-service-info h3, page-my-service-info h5, page-my-service-info h6, page-my-service-info .textoCentrado {
+  text-align: center;
+}
+
+page-my-service-info h6, page-my-service-info h3 {
+  margin: 0;
+}
+
+page-my-service-info .item-md ion-avatar > img, page-my-service-info .item-ios ion-avatar > img {
+  margin: 0;
+  width: 80px;
+  height: 80px;
+}
+
+page-my-service-info h3 {
+  margin-top: 5px;
+}
+
+page-my-service-info .textRed {
+  color: #b20000;
+}
+
+page-my-service-info p {
+  margin: 7px 0;
+}
+
+page-my-service-info .space {
+  height: 8px;
+}
+
+page-my-service-info .textoCentrado {
+  margin: 0;
+  color: #2b8300;
+}
+
+page-my-services strong {
+  color: #b20000;
+}
+
+page-my-services .btnItem {
+  border-bottom: 1px solid #666666;
 }
 
 page-payment-methods img {
@@ -25729,6 +25821,18 @@ page-service-info .tituloCondator {
 page-service-info .contador {
   text-align: center;
   color: #b20000;
+}
+
+page-service-info-a p {
+  text-align: center;
+}
+
+.alert-md .alert-head, .alert-ios .alert-head {
+  display: none;
+}
+
+page-service-info-b p {
+  text-align: center;
 }
 
 page-service-job .imageFull {

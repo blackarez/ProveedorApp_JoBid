@@ -44,6 +44,14 @@ export class ProfessionalsService{
 		return listBD;
 	}
 
+	getContract(keyProvider){
+		console.info('get contracts');
+		return this.afDB.object('/Contracts/'+keyProvider);
+	}
+
+	public getServicesProfessional(keyProvider){
+		return this.afDB.object('/professionals/'+keyProvider+'/Service/');
+	}
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
 		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
@@ -102,14 +110,28 @@ export class ProfessionalsService{
 	}
 
 	//-set
-	setInfoServiceUser(KeyUser,serviceData){
+	setInfoServiceUser(KeyProveedor,serviceData,KeyService?){
+		let keyS;
+		
+		if(KeyService && KeyService != null  && KeyService != undefined){
+			keyS = KeyService;
+		}else{
+			var Key = new Date().getTime();
+			keyS = "Serv_"+(Key);
+		}
+
 		console.log(serviceData);
-		this.afDB.object('/professionals/'+KeyUser+'/Information').set(serviceData).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/').set(serviceData).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('professionals info service create or set');
 	}
 	
 	setContractStatus(keyProvider,keyOffer,status){
-		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer+'/status/').set(status).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer+'/status').set(status).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('professionals ContractStatus create or set');
+	}
+
+	//-drop
+	public dropService(KeyProveedor,keyService){
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyService+'/').remove();
 	}
 }

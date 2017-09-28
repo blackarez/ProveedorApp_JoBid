@@ -12,13 +12,47 @@
       <ion-title>Personal record</ion-title>
     </ion-navbar>
   </ion-header>
-  <ion-content padding>
-    <ion-list>
+  <ion-content>
+  <ion-grid>
+      <ion-row class="steps">
+        <ion-col col-4 class="active">
+          <div class="numb">1</div>
+          <div class="text">
+            <p>General</p>
+            <p>data</p>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="numb">2</div>
+          <div class="text">
+            <p>Upload</p>
+            <p>documents</p>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="numb">3</div>
+          <div class="text">
+            <p>Photo</p>  
+            <p>gallery</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list padding>
       <ion-item>
         <p><strong>Personal record:</strong></p>
       </ion-item>
+      <ion-item *ngIf="!showPersonalB">
+        <ion-input type="text" [(ngModel)]="Tradename" name="Tradename" placeholder="Tradename"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!showPersonalB">
+        <ion-input type="text" [(ngModel)]="LegalName" name="LegalName" placeholder="Legal Name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!showPersonalB">
+        <ion-input type="text" [(ngModel)]="TaxID" name="TaxID" placeholder="Tax ID"></ion-input>
+      </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="textPersonal" name="textPersonal"></ion-input>
+        <ion-input type="text" [(ngModel)]="address" name="address" placeholder="Address"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" placeholder="Phone" class="mitad" [(ngModel)]="Phone" name="Phone"></ion-input>

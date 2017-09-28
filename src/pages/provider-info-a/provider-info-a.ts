@@ -37,7 +37,7 @@ export class ProviderInfoAPage {
   }
   
   goProviderInfoB(){
-    this.DataService = {"prof_service":this.service,"prof_subService":this.subService,"prof_typeBusiness":this.typeBusiness};
+    this.DataService = {"serv_service":this.service,"serv_subService":this.subService,"serv_typeBusiness":this.typeBusiness};
     let Data = {'datos':this.DataService};
     this.navCtrl.push('ProviderInfoBPage',Data);
   }

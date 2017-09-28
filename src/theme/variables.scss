@@ -291,3 +291,31 @@ form{
 .purple{color:purple;}
 .blue{color:blue;}
 .pink{color:pink;}
+
+//- tab x3
+ion-grid.grid{
+	padding: 0px;
+ ion-row.steps{
+	border-bottom: 4px solid $Red;
+	height: 80px;
+	ion-col{
+		height: 80px;
+		background: transparent;
+		div.text{ 
+			width: 78%;color:$GrayText; 
+			display:inline-table;
+		}
+		div.numb{ 
+			width: 18%; color:$GrayText; 
+			display:inline-table;
+			vertical-align: -15px;
+			font-size: 20px;
+		}
+		&.active{
+			background: $Red;
+			div.text{ p{color:white;} }
+			div.numb{ color: yellow;}
+		}
+	}
+ }
+}

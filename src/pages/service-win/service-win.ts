@@ -69,7 +69,7 @@ goServiceNew(){
   this.showAlertService();
   //-contarct
   console.log(this.DataService);
-  let objContract = {"status":'Waiting for the professional','User':this.user};
+  let objContract = {"status":'Waiting for the professional','User':this.user,'info':this.DataService['info'],'sale':this.DataService['sale']};
   // console.log(objContract);
   this.professionalsService.newContract(this.userActual,this.offer,objContract);
 

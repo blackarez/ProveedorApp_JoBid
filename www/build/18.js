@@ -1,14 +1,14 @@
 webpackJsonp([18],{
 
-/***/ 409:
+/***/ 412:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyServicesPageModule", function() { return MyServicesPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(561);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__my_services__ = __webpack_require__(573);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var HomePageModule = (function () {
-    function HomePageModule() {
+var MyServicesPageModule = (function () {
+    function MyServicesPageModule() {
     }
-    return HomePageModule;
+    return MyServicesPageModule;
 }());
-HomePageModule = __decorate([
+MyServicesPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */]),
         ],
     })
-], HomePageModule);
+], MyServicesPageModule);
 
-//# sourceMappingURL=home.module.js.map
+//# sourceMappingURL=my-services.module.js.map
 
 /***/ }),
 
-/***/ 561:
+/***/ 573:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyServicesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_app__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase_app__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_user_service__ = __webpack_require__(273);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,137 +58,101 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 /**
- * Generated class for the HomePage page.
+ * Generated class for the MyServicesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-
-
-var HomePage = (function () {
-    function HomePage(navCtrl, 
-        // private facebook:  Facebook,
-        professionalsService, afAuth) {
+var MyServicesPage = (function () {
+    function MyServicesPage(navCtrl, navParams, professionalsService, userService, alertCtrl) {
         this.navCtrl = navCtrl;
+        this.navParams = navParams;
         this.professionalsService = professionalsService;
-        this.afAuth = afAuth;
-        this.userData = null;
-        this.mensage = '';
-        //-identifica y redirecciona usuario logeado.
-        // this.usuarioLogeado();
+        this.userService = userService;
+        this.alertCtrl = alertCtrl;
+        this.ListService = [];
+        //-- default
+        this.imgUserDefault = "assets/img/User/UserService.png";
+        this.UserActual = localStorage.getItem('verificacion');
+        console.log(this.UserActual);
+        this.loadView();
     }
-    HomePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HomePage');
+    MyServicesPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MyServicesPage');
     };
-    HomePage.prototype.facebookir = function () {
+    MyServicesPage.prototype.goInfoService = function (list) {
+        console.log(list);
+        var Data = { 'datos': list };
+        this.navCtrl.push('MyServiceInfoPage', Data);
+    };
+    MyServicesPage.prototype.loadView = function () {
         var _this = this;
-        var goPagePrehome = false;
-        var userDB;
-        var provider = new __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"].FacebookAuthProvider();
-        provider.addScope('email');
-        __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"]().signInWithPopup(provider)
-            .then(function (res) {
-            console.log(res);
-            // console.info(JSON.stringify(res));
-            // console.log(res.user.email);
-            // console.log('res.additionalUserInfo.profile.email');
-            // console.log(res.additionalUserInfo.profile.email);
-            //console.log(res);
-            var getProfesionals = _this.professionalsService.getProfessionals()
-                .subscribe(function (Jobers) {
-                // console.log(Jobers);
-                Jobers.forEach(function (Job) {
-                    // console.log(Job);
-                    // console.log(Job['user_email']);
-                    if (res.additionalUserInfo.providerId == "facebook.com") {
-                        // console.info(' additionUser facebook');
-                        if (Job['user_email'] == res.additionalUserInfo.profile.email) {
-                            console.info('Find User Datos');
-                            // console.log('res.additionalUserInfo.profile.email');
-                            // console.log(res.additionalUserInfo.profile.email);
-                            // console.log(res.additionalUserInfo.providerId);
-                            console.log(Job);
-                            userDB = Job;
-                            goPagePrehome = true;
+        console.log('loadView');
+        this.contractSubs = this.professionalsService.getContract(this.UserActual).subscribe(function (dataList) {
+            // console.log('datalist');
+            // console.log(dataList);
+            if (dataList['$value']) {
+                _this.showAlertNoServices();
+            }
+            else {
+                var _loop_1 = function (key) {
+                    console.log(dataList[key]);
+                    // console.log(dataList[key]['User']);
+                    console.log(dataList[key]['$key']);
+                    _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
+                        // console.log(userDB);
+                        if (userDB) {
+                            var nameUser = userDB['user_username'];
+                            var addresU = userDB['user_address'];
+                            var addresUser = void 0;
+                            var imgUser = void 0;
+                            for (var key_1 in addresU) {
+                                addresUser = addresU[key_1]['addr_info'];
+                            }
+                            var phoneUser = userDB['user_tel'];
+                            console.log(userDB['user_picture']);
+                            if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
+                                imgUser = _this.imgUserDefault;
+                            }
+                            else {
+                                imgUser = userDB['user_picture'];
+                            }
+                            var DataUser = { "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
+                            _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser });
                         }
-                    }
-                });
-                console.log(userDB);
-                console.log(goPagePrehome);
-                if (goPagePrehome != false) {
-                    _this.goNextPagePrehome(userDB);
+                    });
+                };
+                for (var key in dataList) {
+                    _loop_1(key);
                 }
-                else {
-                    _this.singup();
-                }
-                getProfesionals.unsubscribe();
-            });
+            }
+            _this.contractSubs.unsubscribe();
         });
+        console.log(this.ListService);
     };
-    HomePage.prototype.goNextPagePrehome = function (datos) {
-        console.log(datos);
-        // //console.log(datos['$key']);
-        // this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
-        // //console.log(this.userDataUpdate);
-        // let Data = {'datos':this.userDataUpdate}
-        // this.navCtrl.setRoot('ShowPage',Data);
-        this.navCtrl.setRoot('ShowPage');
+    MyServicesPage.prototype.showAlertNoServices = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Information',
+            message: 'User does not have services',
+            buttons: ['OK']
+        });
+        alert.present();
     };
-    HomePage.prototype.login = function () {
-        this.navCtrl.push('LoginPage');
-    };
-    HomePage.prototype.singup = function () {
-        this.navCtrl.push('SingupPage');
-    };
-    HomePage.prototype.usuarioLogeado = function () {
-        // let userDBLoad:any;
-        // let goPagePrehomeLoad = false;
-        // let homeStatus=this.afAuth.authState.subscribe( userAuth => {
-        //   if (userAuth){
-        //         console.info('find user home login');
-        //         let email=  userAuth.providerData["0"].email;
-        //         let Userexists= this.userService.getUserEmailPerfil(email);
-        //         Userexists.then((users) => {
-        //           users.forEach((user) =>{
-        //             if(user != undefined && user != null){
-        //                 userDBLoad = user;
-        //                 goPagePrehomeLoad= true;
-        //                 console.log(goPagePrehomeLoad);
-        //                 if(goPagePrehomeLoad){
-        //                   this.goNextPagePrehomeFace(userDBLoad);
-        //                   // this.goNextPagePrehomeFace();
-        //                 }
-        //             }
-        //           });
-        //         });
-        //   } else {
-        //     console.info('find user home login - no');
-        //   }
-        // });
-        // homeStatus.unsubscribe();
-    };
-    HomePage.prototype.goNextPagePrehomeFace = function (datos) {
-        // goNextPagePrehomeFace(){
-        //   this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
-        //  let Data = {'datos':this.userDataUpdate}
-        //   this.navCtrl.setRoot('ShowPage',Data);
-        this.navCtrl.setRoot('ShowPage');
-    };
-    return HomePage;
+    return MyServicesPage;
 }());
-HomePage = __decorate([
+MyServicesPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-content>\n\n  <!--  <h3>Ionic Menu Starter</h3>\n\n \n\n   <p>\n\n     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.\n\n   </p>\n\n   <button ion-button secondary menuToggle>Toggle Menu</button> -->\n\n  \n\n   <ion-card *ngIf="userData" >\n\n     <ion-card-header> {{userData.username}} </ion-card-header>\n\n     <img [src]= "userData.picture">\n\n     <ion-card-content>\n\n       <p>Email: {{ userData.email}}</p>\n\n       <p>Name: {{ userData.name}}</p>\n\n     </ion-card-content>\n\n   </ion-card>\n\n   <img src="assets/img/LogoJoBid.png" >\n\n     <h5 id="home-heading1" style="">Sing up or Log in</h5>\n\n     <div padding>\n\n       <!-- <button ion-button block color="danger" (click)="googleir()">Log in with Google</button> -->\n\n       <button ion-button block (click)="facebookir()">Sing in with Faceook</button>\n\n     </div>\n\n     <ion-grid class="tabMenu">\n\n      <ion-row>\n\n       <ion-col>\n\n         <button ion-button block color="light" (click)="singup()">\n\n           <ion-grid>\n\n             <ion-row>\n\n               <ion-icon name="contact"></ion-icon>\n\n             </ion-row>  \n\n             <ion-row> \n\n              <p>sing up</p>\n\n             </ion-row>\n\n           </ion-grid> \n\n         </button>\n\n       </ion-col>\n\n       <ion-col>\n\n         <button ion-button block color="light"(click)="login()">\n\n         <ion-grid>\n\n             <ion-row>\n\n               <ion-icon name="lock"></ion-icon>\n\n             </ion-row>  \n\n             <ion-row> \n\n              <p>login</p>\n\n             </ion-row>\n\n           </ion-grid> \n\n         </button>\n\n       </ion-col>\n\n      </ion-row>\n\n     </ion-grid>  \n\n </ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\home\home.html"*/,
+        selector: 'page-my-services',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/'<!--\n\n  Generated template for the MyServicesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n  <h3>My services</h3>\n\n  <h4>List:</h4>\n\n  \n\n  <ion-list>\n\n    <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">\n\n      <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>\n\n      <p><strong>Status:</strong> {{list.status}}</p>\n\n      <p><strong>Sale:</strong> {{list.sale}}</p>\n\n    </button>\n\n  </ion-list>\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */],
-        __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]])
-], HomePage);
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_user_service__["a" /* UserService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
+], MyServicesPage);
 
-//# sourceMappingURL=home.js.map
+var _a, _b, _c, _d, _e;
+//# sourceMappingURL=my-services.js.map
 
 /***/ })
 

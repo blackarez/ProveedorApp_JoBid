@@ -1,0 +1,15 @@
+page-my-service-info {
+    h4{ color:$Red;}
+	h3,h5,h6,.textoCentrado{text-align: center;}
+    h6,h3{margin: 0;}
+    .item-md ion-avatar>img,.item-ios ion-avatar>img{ margin:0; width: 80px; height: 80px; }
+	h3{margin-top: 5px;}
+	.textRed{
+        color:$Red;
+	}
+	p{margin: 7px 0;}
+	.space{
+        height: 8px;
+	}
+    .textoCentrado{margin:0;color: $Green; }
+}
