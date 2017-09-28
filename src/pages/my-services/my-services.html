@@ -12,14 +12,11 @@
       </button>
       <ion-title>joBid</ion-title>
     </ion-navbar>
-  
   </ion-header>
-  
-  
+
   <ion-content padding>
   <h3>My services</h3>
   <h4>List:</h4>
-  
   <ion-list>
     <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">
       <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>
