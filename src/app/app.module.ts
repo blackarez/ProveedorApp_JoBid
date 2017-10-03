@@ -17,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { Geolocation } from '@ionic-native/geolocation';
 
 //-service
 import { UserService } from '../services/user.service';
@@ -59,6 +60,7 @@ export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
     AngularFireModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    Geolocation,
     UserService,
     ProfessionalsService,
     ProfessionsService,
