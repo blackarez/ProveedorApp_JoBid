@@ -101,6 +101,7 @@ var ShowPage = (function () {
         // console.log(localStorage);
     };
     ShowPage.prototype.goInfo = function (item) {
+        this.userSubs.unsubscribe();
         this.serviceSubs.unsubscribe();
         this.listOffer.unsubscribe();
         var Data = { 'datos': item };
@@ -135,10 +136,12 @@ var ShowPage = (function () {
         var _this = this;
         var imagen;
         for (var keySP in BDListServicesProvider) {
-            console.log(BDListServicesProvider[keySP]);
+            // console.log(BDListServicesProvider[keySP]);
+            // console.log('BDListServicesProvider[keySP]serv_service:'+BDListServicesProvider[keySP]['serv_service']);
+            console.log('p-BDList.[serv_subService]' + BDListServicesProvider[keySP]['serv_subService']);
             var _loop_1 = function (keys) {
                 console.log(BDListOffer[keys]);
-                // console.log(BDListOffer[keys].Clasificacion.categoria);
+                console.log('o-BDListOffer.categoria' + BDListOffer[keys].Clasificacion.categoria);
                 // console.log(BDListOffer[keys].Clasificacion.distancia);
                 if (BDListOffer[keys].UserLocacion) {
                     // console.log(BDListOffer[keys].UserLocacion.latitud);
@@ -148,6 +151,10 @@ var ShowPage = (function () {
                     var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
                     // console.log(distanceMillas);
                     // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
+                    console.log('filtros');
+                    console.log('off:' + BDListOffer[keys].Clasificacion.categoria);
+                    console.log('listPro:' + BDListServicesProvider[keySP]['serv_subService']);
+                    console.log(this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas));
                     if (BDListOffer[keys].Clasificacion.categoria == BDListServicesProvider[keySP]['serv_subService'] && true == this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas)) {
                         var InfmaxOffer_1 = BDListOffer[keys].Clasificacion.informacion.maxOffer;
                         var InfmoreInformacion_1 = BDListOffer[keys].Clasificacion.informacion.moreInformation;
@@ -171,15 +178,12 @@ var ShowPage = (function () {
                             // console.log(imagen);
                             _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "idUser": user['$key'] });
                             console.log(_this.ListService);
-                            _this.userSubs.unsubscribe();
                         });
                         // this.ListService=list;
                     }
                 }
             };
             var this_1 = this;
-            // console.log(BDListServicesProvider[keySP]['serv_service']);
-            // console.log(BDListServicesProvider[keySP]['serv_subService']);
             for (var keys in BDListOffer) {
                 _loop_1(keys);
             }

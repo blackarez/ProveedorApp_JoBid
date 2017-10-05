@@ -68,6 +68,7 @@ export class ShowPage {
   }
 
   goInfo(item){
+    this.userSubs.unsubscribe();
     this.serviceSubs.unsubscribe();
     this.listOffer.unsubscribe();
     let Data = {'datos':item};
@@ -77,9 +78,9 @@ export class ShowPage {
   public notify() {
     console.log("Toggled: "+ this.StatusProvider);
     if(this.StatusProvider == false){
-      this.labelToogle ="Offline" 
+      this.labelToogle ="Offline";
     }else{
-      this.labelToogle ="Online" ;
+      this.labelToogle ="Online";
       this.showServices();
     }
   }
@@ -103,12 +104,12 @@ export class ShowPage {
   showListData(BDListOffer,BDListServicesProvider){
     let imagen;
     for(let keySP in BDListServicesProvider){
-      console.log(BDListServicesProvider[keySP]);
-      // console.log(BDListServicesProvider[keySP]['serv_service']);
-      // console.log(BDListServicesProvider[keySP]['serv_subService']);
+      // console.log(BDListServicesProvider[keySP]);
+      // console.log('BDListServicesProvider[keySP]serv_service:'+BDListServicesProvider[keySP]['serv_service']);
+      console.log('p-BDList.[serv_subService]'+BDListServicesProvider[keySP]['serv_subService']);
       for(let keys in BDListOffer){
         console.log(BDListOffer[keys]);
-        // console.log(BDListOffer[keys].Clasificacion.categoria);
+        console.log('o-BDListOffer.categoria'+BDListOffer[keys].Clasificacion.categoria);
         // console.log(BDListOffer[keys].Clasificacion.distancia);
         if(BDListOffer[keys].UserLocacion){
           // console.log(BDListOffer[keys].UserLocacion.latitud);
@@ -118,6 +119,10 @@ export class ShowPage {
           let distanceMillas = this.getConvertKilometrosMillas(distanceKilo);
           // console.log(distanceMillas);
           // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
+          console.log('filtros');
+          console.log('off:'+BDListOffer[keys].Clasificacion.categoria);
+          console.log('listPro:'+BDListServicesProvider[keySP]['serv_subService']);
+          console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
           
           if( BDListOffer[keys].Clasificacion.categoria ==  BDListServicesProvider[keySP]['serv_subService'] && true ==this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas) ){
           
@@ -140,7 +145,7 @@ export class ShowPage {
               // console.log(imagen);
               this.ListService.push({"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"idOff":key,"idUser":user['$key']});
               console.log(this.ListService);
-              this.userSubs.unsubscribe();
+              
             });
             // this.ListService=list;
        

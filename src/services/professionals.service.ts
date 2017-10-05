@@ -58,7 +58,7 @@ export class ProfessionalsService{
 		
 		let key = undefined;
 		//default star
-		let star = '3';
+		let star = '5';
 		// console.log('key:'+key);
 		// console.log('keyNew:'+keyNew);
 		if(keyNew && keyNew != null  && keyNew != undefined){

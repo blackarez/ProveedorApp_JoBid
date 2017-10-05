@@ -68,7 +68,7 @@ var ProfessionalsService = (function () {
         if (userData === void 0) { userData = []; }
         var key = undefined;
         //default star
-        var star = '3';
+        var star = '5';
         // console.log('key:'+key);
         // console.log('keyNew:'+keyNew);
         if (keyNew && keyNew != null && keyNew != undefined) {
