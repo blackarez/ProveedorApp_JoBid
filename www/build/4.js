@@ -121,18 +121,24 @@ var ShowPage = (function () {
         var _this = this;
         this.listOffer = this.offerService.getOfferNew().subscribe(function (list) {
             _this.ListService = [];
-            // console.log(list);
+            console.log(list);
             _this.getServiceProvider(list);
         });
     };
     ShowPage.prototype.getServiceProvider = function (BDListOffer) {
         var _this = this;
         this.serviceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (BDListServicesProvider) {
-            // console.log(BDListServicesProvider);
-            _this.showListData(BDListOffer, BDListServicesProvider);
+            console.log(BDListServicesProvider);
+            _this.professionalsService.getStar(_this.UserActual).subscribe(function (starProvider) {
+                console.log('starP');
+                console.log(starProvider);
+                if (starProvider['$value']) {
+                    _this.showListData(BDListOffer, BDListServicesProvider, starProvider['$value']);
+                }
+            });
         });
     };
-    ShowPage.prototype.showListData = function (BDListOffer, BDListServicesProvider) {
+    ShowPage.prototype.showListData = function (BDListOffer, BDListServicesProvider, stars) {
         var _this = this;
         var imagen;
         for (var keySP in BDListServicesProvider) {
@@ -140,46 +146,55 @@ var ShowPage = (function () {
             // console.log('BDListServicesProvider[keySP]serv_service:'+BDListServicesProvider[keySP]['serv_service']);
             console.log('p-BDList.[serv_subService]' + BDListServicesProvider[keySP]['serv_subService']);
             var _loop_1 = function (keys) {
-                console.log(BDListOffer[keys]);
-                console.log('o-BDListOffer.categoria' + BDListOffer[keys].Clasificacion.categoria);
-                // console.log(BDListOffer[keys].Clasificacion.distancia);
-                if (BDListOffer[keys].UserLocacion) {
-                    // console.log(BDListOffer[keys].UserLocacion.latitud);
-                    // console.log(BDListOffer[keys].UserLocacion.longitud);
-                    var distanceKilo = this_1.getDistanceKilometros(Number(this_1.lat), Number(this_1.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
-                    // console.log(distanceKilo);
-                    var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
-                    // console.log(distanceMillas);
-                    // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
-                    console.log('filtros');
-                    console.log('off:' + BDListOffer[keys].Clasificacion.categoria);
-                    console.log('listPro:' + BDListServicesProvider[keySP]['serv_subService']);
-                    console.log(this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas));
-                    if (BDListOffer[keys].Clasificacion.categoria == BDListServicesProvider[keySP]['serv_subService'] && true == this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas)) {
-                        var InfmaxOffer_1 = BDListOffer[keys].Clasificacion.informacion.maxOffer;
-                        var InfmoreInformacion_1 = BDListOffer[keys].Clasificacion.informacion.moreInformation;
-                        var InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
-                        var key_1 = BDListOffer[keys]['$key'];
-                        var InfshortMoreInformacion_1 = InfmoreInformacion_1.substr(0, 10) + '...';
-                        if (InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto) {
-                            InfFoto = this_1.imgDescripcionDefault;
+                console.log('bdoff-star' + Number(BDListOffer[keys].Star));
+                console.log('pro-star' + Number(stars));
+                if (Number(stars) >= Number(BDListOffer[keys].Star)) {
+                    console.info('star ok');
+                    console.log(BDListOffer[keys]);
+                    console.log('o-BDListOffer.categoria' + BDListOffer[keys].Clasificacion.categoria);
+                    // console.log(BDListOffer[keys].Clasificacion.distancia);
+                    if (BDListOffer[keys].UserLocacion) {
+                        // console.log(BDListOffer[keys].UserLocacion.latitud);
+                        // console.log(BDListOffer[keys].UserLocacion.longitud);
+                        var distanceKilo = this_1.getDistanceKilometros(Number(this_1.lat), Number(this_1.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
+                        // console.log(distanceKilo);
+                        var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
+                        // console.log(distanceMillas);
+                        // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
+                        console.log('filtros');
+                        console.log('off:' + BDListOffer[keys].Clasificacion.categoria);
+                        console.log('listPro:' + BDListServicesProvider[keySP]['serv_subService']);
+                        console.log('listPro:' + BDListServicesProvider[keySP]['Star']);
+                        console.log(this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas));
+                        if (BDListOffer[keys].Clasificacion.categoria == BDListServicesProvider[keySP]['serv_subService'] && true == this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas)) {
+                            var InfmaxOffer_1 = BDListOffer[keys].Clasificacion.informacion.maxOffer;
+                            var InfmoreInformacion_1 = BDListOffer[keys].Clasificacion.informacion.moreInformation;
+                            var InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
+                            var key_1 = BDListOffer[keys]['$key'];
+                            var InfshortMoreInformacion_1 = InfmoreInformacion_1.substr(0, 10) + '...';
+                            if (InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto) {
+                                InfFoto = this_1.imgDescripcionDefault;
+                            }
+                            // console.log(BDListOffer[key].User);
+                            this_1.userSubs = this_1.userService.getUser(BDListOffer[keys].User).subscribe(function (user) {
+                                // console.log(user);
+                                // console.log(user['user_picture']);
+                                // console.log('-'+user['user_picture']+'-');
+                                // console.log('-'+user['prof_star']+'-');
+                                // if(user['user_picture']){
+                                if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']) {
+                                    imagen = _this.imgDefault;
+                                }
+                                else {
+                                    imagen = user['user_picture'];
+                                }
+                                // console.log(imagen);
+                                _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "idUser": user['$key'] });
+                                console.log(_this.ListService);
+                                // }
+                            });
+                            // this.ListService=list;
                         }
-                        // console.log(BDListOffer[key].User);
-                        this_1.userSubs = this_1.userService.getUser(BDListOffer[keys].User).subscribe(function (user) {
-                            // console.log(user);
-                            // console.log(user['user_picture']);
-                            // console.log('-'+user['user_picture']+'-');
-                            if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']) {
-                                imagen = _this.imgDefault;
-                            }
-                            else {
-                                imagen = user['user_picture'];
-                            }
-                            // console.log(imagen);
-                            _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "idUser": user['$key'] });
-                            console.log(_this.ListService);
-                        });
-                        // this.ListService=list;
                     }
                 }
             };

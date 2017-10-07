@@ -52,6 +52,12 @@ export class ProfessionalsService{
 	public getServicesProfessional(keyProvider){
 		return this.afDB.object('/professionals/'+keyProvider+'/Service/');
 	}
+
+	public getStar(keyProvider){
+		console.log('getStar');
+		return this.afDB.object('/professionals/'+keyProvider+'/prof_star');
+	}
+
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
 		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
