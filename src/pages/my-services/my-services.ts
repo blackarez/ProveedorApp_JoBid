@@ -22,6 +22,7 @@ export class MyServicesPage {
 
   //-subs
   contractSubs:any;
+  userSubs:any;
 
   //-- default
   imgUserDefault ="assets/img/User/UserService.png";
@@ -60,7 +61,7 @@ export class MyServicesPage {
             console.log(dataList[key]);
             // console.log(dataList[key]['User']);
             console.log(dataList[key]['$key']);
-            this.userService.getUser(dataList[key]['User']).subscribe(
+            this.userSubs = this.userService.getUser(dataList[key]['User']).subscribe(
               (userDB)=>{
                 // console.log(userDB);
                 if(userDB){
@@ -84,6 +85,7 @@ export class MyServicesPage {
             });
           }
         }
+        this.userSubs.unsubscribe();
         this.contractSubs.unsubscribe();
       }
     );

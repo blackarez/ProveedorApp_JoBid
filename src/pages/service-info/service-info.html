@@ -40,13 +40,13 @@
       <h4 class="tituloCondator">
           Time to start the sale.
       </h4>
-      <h4 class="contador">00:00:15</h4>
+      <h4 class="contador">{{contador}}</h4>
     </div>
 </ion-content>
 <ion-footer>
     <ion-toolbar>
         <div class="btnBottom">
-          <button  ion-button (click)="goSale()">
+          <button  ion-button (click)="goSale()" [disabled]="NoGoSale">
               Enter the sale
               <ion-icon name="arrow-dropright"></ion-icon> 
           </button> 

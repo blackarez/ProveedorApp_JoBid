@@ -2,8 +2,19 @@ page-service-info-a {
     p{
         text-align: center;
     }
+    .btnAddPicture{
+        background:$Red; 
+        padding-left:10px; 
+        width:200px;
+        button{
+            background:$Red; 
+            color:white;
+            border: none;
+            box-shadow: none;;
+        }
+    }
     
 }
-.alert-md .alert-head,.alert-ios .alert-head{
-    display: none;
-}
+// .alert-md .alert-head,.alert-ios .alert-head{
+//     display: none;
+// }

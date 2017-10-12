@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams,AlertController,Platform} from 'ion
 
 import { ProfessionalsService } from '../../services/professionals.service';
 import { SaleService } from '../../services/sale.service';
-// import { OfferService } from '../../services/offer.service';
+import { OfferService } from '../../services/offer.service';
 
 
 // import { Geolocation } from '@ionic-native/geolocation';
@@ -27,7 +27,6 @@ export class ServiceSalePage {
   userActual:any;
   newOffer:any;
   
-  saleSub:any;
   //--valiables por defecto provider
   imgJobDefault ="assets/img/professions/cleaning.png";
   galleryJobDefault ="assets/img/gallery.png";
@@ -38,18 +37,27 @@ export class ServiceSalePage {
   //--sale
   maxOffer:any;
   myOffer:any;
-
+  
   //--timer
   segundos:number = 0;
   minutos:number = 2;
   contador:string;
   showContador: boolean = true;
   objNodeTimer:any;
-  
+  NumeroContador:number = 1;
+
   //-- geoLocation
   lat: number= 37.09024;
   lng: number= -95.71289100000001;
   zom: number = 16;
+  
+  //--subs
+  timerSubs:any;
+  saleSub:any;
+
+  //--disable btn
+  offerDisable:boolean=true;
+  exitDisable:boolean=false;
 
   constructor(
     public navCtrl: NavController, 
@@ -58,7 +66,7 @@ export class ServiceSalePage {
     public professionalsService : ProfessionalsService,
     // private geo: Geolocation, private platform: Platform,
     private saleService: SaleService,  
-    // private offerService: OfferService,  
+    private offerService: OfferService,  
   ) {
       this.contador = '0'+this.minutos+':'+'0'+this.segundos;
       this.startTimer();
@@ -68,6 +76,7 @@ export class ServiceSalePage {
       this.loadView();
       this.getUserLocationGeolocation();
       this.getSale();
+      this.getTimer();
     }
     
     ionViewDidLoad() {
@@ -84,30 +93,13 @@ newOfferProvider(){
     // console.log(Number(this.newOffer));
     this.myOffer =  Number(this.newOffer);
     console.log(this.myOffer);
+    this.exitDisable = true;
     this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,this.newOffer);
   }else{
     // alert('The offer must be less than the current');
     this.offerError();
   }
   // this.navCtrl.setRoot('ServiceWinPage');
-}
-
-detailsService(){
-  let description = '<img src="'+this.imgServiceDefault+'"  class="imageFull"/><p>'+this.DataService.info+'</p>';
-  let alert = this.alertCtrl.create({
-    title: 'Service Information',
-    message: description,
-    buttons: ['OK']
-  });
-  alert.present();
-}
-offerError(){
-  let alert = this.alertCtrl.create({
-    title: 'Information',
-    message: 'The offer must be less than the current',
-    buttons: ['OK']
-  });
-  alert.present();
 }
 
 goServiceWin(){
@@ -139,9 +131,17 @@ private timer(){
   if(this.minutos == 0 && this.segundos == 1){ 
   // if(this.minutos == 1 && this.segundos == 40 ){ 
     //this.showContador = false;
+    if(this.NumeroContador == 2){
       clearInterval(this.objNodeTimer);
-       this.showContador = false;
-       this.ganador();
+      this.showContador = false;
+      this.ganador();
+    }else{
+      this.minutos = 2;
+      this.segundos = 0;
+      this.NumeroContador = 2;
+      this.offerDisable = false;
+      this.showContador = false;
+    }
   }else{
     if(--this.segundos< 0){
       this.segundos = 59;
@@ -159,30 +159,40 @@ private timer(){
 async getSale(){
   this.MenosPrecio= undefined;
   let finRegistro:boolean= false;
-  console.log(this.DataService.idOff);
-  console.log(this.DataService.idUser);
+  // console.log(this.DataService.idOff);
+  // console.log(this.DataService.idUser);
   this.saleSub = this.saleService.getSale(this.DataService.idUser,this.DataService.idOff)
   .subscribe((result) =>{
     this.Workers = [];
     this.MenosPrecio = undefined;
     console.log(result);
-    if(this.MenosPrecio ==  undefined){
-      this.MenosPrecio = Number(result.sale);
+    if(result.status != 'Cancelled'){
+      // if(result.status == 'Start'){
+      //   this.offerDisable = false;
+      //   this.showContador = false;
+      // }
+      if(this.MenosPrecio ==  undefined){
+        this.MenosPrecio = Number(result.sale);
+      }
+      let trabajadores = result.providers;
+      for(let trabajador in trabajadores){
+        if(this.MenosPrecio > Number(trabajadores[trabajador]['offer']) ) { this.MenosPrecio= Number(trabajadores[trabajador]['offer']);}
+        let PromiseUser =this.professionalsService.getProfessional(trabajador).subscribe((user) =>{
+          //console.log(user);
+          let img = this.imgJobDefault;
+          if(user.prof_picture && user.prof_picture != undefined && user.prof_picture != ''){
+            img = user.prof_picture;
+          }
+          this.Workers.push({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
+          PromiseUser.unsubscribe();
+        });
+      }
+      finRegistro = true;
+    }else{
+      this.AlertCancelOffer();
+      this.navCtrl.setRoot('ShowPage');
+      this.saleSub.unsubscribe();
     }
-    let trabajadores = result.providers;
-    for(let trabajador in trabajadores){
-      if(this.MenosPrecio > Number(trabajadores[trabajador]['offer']) ) { this.MenosPrecio= Number(trabajadores[trabajador]['offer']);}
-      let PromiseUser =this.professionalsService.getProfessional(trabajador).subscribe((user) =>{
-        //console.log(user);
-        let img = this.imgJobDefault;
-        if(user.prof_picture && user.prof_picture != undefined && user.prof_picture != ''){
-          img = user.prof_picture;
-        }
-        this.Workers.push({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
-        // PromiseUser.unsubscribe();
-      });
-    }
-    finRegistro = true;
   });
   
 }
@@ -220,6 +230,49 @@ private getUserLocationGeolocation(){
   // });
 }
 
+  getTimer(){
+    this.timerSubs = this.offerService.getTimmer(this.DataService.idOff).subscribe(
+      (timer)=>{
+        // console.log(timer);
+        if(timer['$value']){
+          // console.log(timer['$value']);
+          // console.log(timer['$value'].split(":", 2));
+          let ArrayContador = timer['$value'].split(":", 2);
+          console.log(ArrayContador['0']);
+          console.log(ArrayContador['1']);
+          this.minutos = Number(ArrayContador['0']);
+          this.segundos = Number(ArrayContador['1']);
+        }
+        this.timerSubs.unsubscribe();
+      }
+    );   
+  }
+  //--alert
+  detailsService(){
+    let description = '<img src="'+this.imgServiceDefault+'"  class="imageFull"/><p>'+this.DataService.info+'</p>';
+    let alert = this.alertCtrl.create({
+      title: 'Service Information',
+      message: description,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  offerError(){
+    let alert = this.alertCtrl.create({
+      title: 'Information',
+      message: 'The offer must be less than the current',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
+  AlertCancelOffer(){
+    let alert = this.alertCtrl.create({
+      title: 'Information',
+      message: 'The auction was canceled by the Client',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 }
 

@@ -88,7 +88,7 @@ export class ShowPage {
   showServices(){
    this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
       this.ListService=[];
-      console.log(list);
+      // console.log(list);
       this.getServiceProvider(list);
     });
   }
@@ -96,10 +96,10 @@ export class ShowPage {
   getServiceProvider(BDListOffer){
     this.serviceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (BDListServicesProvider)=>{
-        console.log(BDListServicesProvider);
+        // console.log(BDListServicesProvider);
         this.professionalsService.getStar(this.UserActual).subscribe(
           (starProvider) => {
-            console.log('starP');
+            // console.log('starP');
             console.log(starProvider);
             if(starProvider['$value']){
                 this.showListData(BDListOffer,BDListServicesProvider,starProvider['$value']);
@@ -113,20 +113,18 @@ export class ShowPage {
     let imagen;
     for(let keySP in BDListServicesProvider){
 
-      
-
       // console.log(BDListServicesProvider[keySP]);
       // console.log('BDListServicesProvider[keySP]serv_service:'+BDListServicesProvider[keySP]['serv_service']);
-      console.log('p-BDList.[serv_subService]'+BDListServicesProvider[keySP]['serv_subService']);
+      // console.log('p-BDList.serv_subService: '+BDListServicesProvider[keySP]['serv_subService']);
       for(let keys in BDListOffer){
 
-        console.log('bdoff-star'+Number(BDListOffer[keys].Star));
-        console.log('pro-star'+ Number(stars));
+        // console.log('bdoff-star:'+Number(BDListOffer[keys].Star));
+        // console.log('pro-star: '+ Number(stars));
         
           if( Number(stars) >= Number(BDListOffer[keys].Star)){
             console.info('star ok');
-            console.log(BDListOffer[keys]);
-            console.log('o-BDListOffer.categoria'+BDListOffer[keys].Clasificacion.categoria);
+            // console.log(BDListOffer[keys]);
+            // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
             // console.log(BDListOffer[keys].Clasificacion.distancia);
             if(BDListOffer[keys].UserLocacion){
               // console.log(BDListOffer[keys].UserLocacion.latitud);
@@ -136,42 +134,72 @@ export class ShowPage {
               let distanceMillas = this.getConvertKilometrosMillas(distanceKilo);
               // console.log(distanceMillas);
               // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
-              console.log('filtros');
-              console.log('off:'+BDListOffer[keys].Clasificacion.categoria);
-              console.log('listPro:'+BDListServicesProvider[keySP]['serv_subService']);
-              console.log('listPro:'+BDListServicesProvider[keySP]['Star']);
-              console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
+              // console.log('filtros');
+              // console.log('listOff:'+BDListOffer[keys].Clasificacion.categoria);
+              // console.log('listPro-sub:'+BDListServicesProvider[keySP]['serv_subService']);
+              // console.log('pro-star:'+stars);
+              // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
               
               if( BDListOffer[keys].Clasificacion.categoria ==  BDListServicesProvider[keySP]['serv_subService'] && true ==this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas) ){
-              
-                let InfmaxOffer=BDListOffer[keys].Clasificacion.informacion.maxOffer;
-                let InfmoreInformacion = BDListOffer[keys].Clasificacion.informacion.moreInformation;
-                let InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
-                let key = BDListOffer[keys]['$key'];
-                let InfshortMoreInformacion = InfmoreInformacion.substr(0,10)+'...';
-                if(InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto){
-                  InfFoto = this.imgDescripcionDefault;
+                console.info('categoria y  distancia ok');
+                let ServiceProviderCertificate:any;
+                let ServiceProviderSecurity:any;
+                if(BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null){
+                  ServiceProviderCertificate= BDListServicesProvider[keySP]['serv_detail']['serv_certificate'];
+                  // console.log('listPro-cer:'+BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
+                  // console.log('off-certificado:'+BDListOffer[keys].Clasificacion.certificacion);
+                }else{
+                  // console.log('listPro-cer = false');
+                  ServiceProviderCertificate = 'false'; 
                 }
-                // console.log(BDListOffer[key].User);
-                this.userSubs = this.userService.getUser(BDListOffer[keys].User).subscribe( (user)=>{
-                  // console.log(user);
-                  // console.log(user['user_picture']);
-                  // console.log('-'+user['user_picture']+'-');
-                  // console.log('-'+user['prof_star']+'-');
-                  // if(user['user_picture']){
-                    
-                    if(user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']){
-                      imagen = this.imgDefault;
-                    }else{ imagen = user['user_picture'];}
-                    // console.log(imagen);
-                    this.ListService.push({"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"idOff":key,"idUser":user['$key']});
-                    console.log(this.ListService);
+                
+                
+                if(BDListServicesProvider[keySP]['serv_detail']['serv_insurance']  != null){
+                  ServiceProviderSecurity = BDListServicesProvider[keySP]['serv_detail']['serv_insurance']; 
+                  // console.log('listPro-zeg:'+BDListServicesProvider[keySP]['serv_detail']['serv_insurance']);
+                  // console.log('off-seguro:'+BDListOffer[keys].Clasificacion.seguro);
+                }else{
+                  // console.log('listPro-zeg = false');
+                  ServiceProviderSecurity = 'false'; 
+                }
+                console.log('listPro-exp:'+BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']);
+                console.log('off-experien:'+BDListOffer[keys].Clasificacion.experiencia);
 
-                  // }
+
+                if(ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro){
+                  console.info('certificado y seguro ok');
+                  // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
                   
-                });
-                // this.ListService=list;
-          
+                  if(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true){
+                    console.info('Experience ok');
+              
+                    let InfmaxOffer=BDListOffer[keys].Clasificacion.informacion.maxOffer;
+                    let InfmoreInformacion = BDListOffer[keys].Clasificacion.informacion.moreInformation;
+                    let InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
+                    let key = BDListOffer[keys]['$key'];
+                    let InfshortMoreInformacion = InfmoreInformacion.substr(0,10)+'...';
+                    if(InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto){
+                      InfFoto = this.imgDescripcionDefault;
+                    }
+                    // console.log(BDListOffer[key].User);
+                    this.userSubs = this.userService.getUser(BDListOffer[keys].User).subscribe( (user)=>{
+                      // console.log(user);
+                      // console.log(user['user_picture']);
+                      // console.log('-'+user['user_picture']+'-');
+                      // console.log('-'+user['prof_star']+'-');
+                      // if(user['user_picture']){
+                        
+                        if(user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']){
+                          imagen = this.imgDefault;
+                        }else{ imagen = user['user_picture'];}
+                        // console.log(imagen);
+                        this.ListService.push({"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"idOff":key,"idUser":user['$key']});
+                        console.log(this.ListService);
+                      // }
+                    });
+                    // this.ListService=list;
+                  }   
+                }
               }
             }
 
@@ -202,10 +230,10 @@ export class ShowPage {
   }
 
   getDistanceKilometros(lat1,lon1,lat2,lon2){
-    console.log('getDistanceKilometros');
-    console.log(lat1);
-    console.log(lat2);
-    console.log(lat2 - lat1);
+    // console.log('getDistanceKilometros');
+    // console.log(lat1);
+    // console.log(lat2);
+    // console.log(lat2 - lat1);
     
     let rad = function(x) {return x*Math.PI/180;}
     var R = 6378.137; //Radio de la tierra en km
@@ -267,6 +295,67 @@ export class ShowPage {
       }
     }
     return dentroDeDistancia;
+    // return false;
+  }
+
+  getNumeroExperienciOffer(offerExperiense,providerExperience){
+    console.log(offerExperiense);
+    console.log(providerExperience);
+    let experienciaMayor=false;
+    let numbOfferExperiense:number = 0;
+    let numbProviderExperiense:number = 0;
+    switch(offerExperiense){
+      case '1Y':{
+        numbOfferExperiense = 1;
+        break;
+      }
+      case '2Y':{
+        numbOfferExperiense = 2;
+        break;
+      }
+      case '3Y':{
+        numbOfferExperiense = 3;
+        break;
+      }
+      case '3YM':{
+        numbOfferExperiense = 4;
+        break;
+      }
+      default: { 
+        console.log("Invalid choice"); 
+        break;              
+      }
+    }
+    switch(providerExperience){
+      case '1Y':{
+        numbProviderExperiense = 1;
+        break;
+      }
+      case '2Y':{
+        numbProviderExperiense = 2;
+        break;
+      }
+      case '3Y':{
+        numbProviderExperiense = 3;
+        break;
+      }
+      case '3YM':{
+        numbProviderExperiense = 4;
+        break;
+      }
+      default: { 
+        console.log("Invalid choice"); 
+        break;              
+      }
+    }
+    console.log('nExpeProvider: '+numbProviderExperiense);
+    console.log('nExpeOffer: '+numbOfferExperiense);
+    if(numbProviderExperiense >= numbOfferExperiense){
+      experienciaMayor= true;
+    }else{
+      experienciaMayor= false;
+    }
+    return experienciaMayor;
     // return false;
   }
 

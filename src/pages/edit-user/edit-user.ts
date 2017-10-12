@@ -54,11 +54,13 @@ export class EditUserPage {
     this.listServiceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (value)=>{
         this.ListServicesVista=[];
-        console.log(value);
+        // console.log(value);
         for(let key in value){
-          console.log(value[key]);
-          this.ListServicesVista.push({"id":key,"TypeBusiness":value[key]['serv_typeBusiness'],"Service":value[key]['serv_service'],"SubService":value[key]['serv_subService']});
+          if(value[key] != null){
+            console.log(value[key]);
+            this.ListServicesVista.push({"id":key,"TypeBusiness":value[key]['serv_typeBusiness'],"Service":value[key]['serv_service'],"SubService":value[key]['serv_subService']});
           // console.log(this.ListServicesVista);
+          }
         }
     });
     // console.log(this.ListServicesVista);

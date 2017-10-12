@@ -54,7 +54,7 @@ export class ProfessionalsService{
 	}
 
 	public getStar(keyProvider){
-		console.log('getStar');
+		// console.log('getStar');
 		return this.afDB.object('/professionals/'+keyProvider+'/prof_star');
 	}
 

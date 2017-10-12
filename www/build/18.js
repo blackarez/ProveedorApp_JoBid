@@ -46,7 +46,7 @@ MyServicesPageModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_user_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_user_service__ = __webpack_require__(274);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -102,7 +102,7 @@ var MyServicesPage = (function () {
                     console.log(dataList[key]);
                     // console.log(dataList[key]['User']);
                     console.log(dataList[key]['$key']);
-                    _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
+                    _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
                         // console.log(userDB);
                         if (userDB) {
                             var nameUser = userDB['user_username'];
@@ -129,6 +129,7 @@ var MyServicesPage = (function () {
                     _loop_1(key);
                 }
             }
+            _this.userSubs.unsubscribe();
             _this.contractSubs.unsubscribe();
         });
         console.log(this.ListService);

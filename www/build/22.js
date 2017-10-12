@@ -93,11 +93,13 @@ var EditUserPage = (function () {
         var _this = this;
         this.listServiceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (value) {
             _this.ListServicesVista = [];
-            console.log(value);
+            // console.log(value);
             for (var key in value) {
-                console.log(value[key]);
-                _this.ListServicesVista.push({ "id": key, "TypeBusiness": value[key]['serv_typeBusiness'], "Service": value[key]['serv_service'], "SubService": value[key]['serv_subService'] });
-                // console.log(this.ListServicesVista);
+                if (value[key] != null) {
+                    console.log(value[key]);
+                    _this.ListServicesVista.push({ "id": key, "TypeBusiness": value[key]['serv_typeBusiness'], "Service": value[key]['serv_service'], "SubService": value[key]['serv_subService'] });
+                    // console.log(this.ListServicesVista);
+                }
             }
         });
         // console.log(this.ListServicesVista);

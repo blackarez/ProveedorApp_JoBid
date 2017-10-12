@@ -48,12 +48,12 @@ UserActual:any;
   goProviderInfoB(){
     this.DataService = {"serv_service":this.service,"serv_subService":this.subService};
     // let Data = {'datos':this.DataService};
-    // this.navCtrl.push('ServiceInfoBPage',Data);
     let DataServiceInfo = {"serv_experiencia":this.experiencia,"serv_moreInformation":this.moreInformation,"serv_insurance":this.seguro,"serv_certificate":this.certificacion};
     this.DataService["serv_detail"]=DataServiceInfo;
     console.log(this.DataService);
     this.professionalsService.setInfoServiceUser(this.UserActual,this.DataService);
-     
+    this.navCtrl.setRoot('EditUserPage');
+    // this.navCtrl.pop();
   }
   
   setSubServices(){

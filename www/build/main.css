@@ -25622,11 +25622,6 @@ page-edit-provider ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
 }
 
-page-edit-user .button .button-md, page-edit-user .button .button-ios {
-  width: 30px;
-  height: 30px;
-}
-
 page-home img {
   display: block;
   width: 100%;
@@ -25760,10 +25755,6 @@ page-provider-info-a p {
   text-align: center;
 }
 
-.alert-md .alert-head, .alert-ios .alert-head {
-  display: none;
-}
-
 page-provider-info-b p {
   text-align: center;
 }
@@ -25827,8 +25818,18 @@ page-service-info-a p {
   text-align: center;
 }
 
-.alert-md .alert-head, .alert-ios .alert-head {
-  display: none;
+page-service-info-a .btnAddPicture {
+  background: #b20000;
+  padding-left: 10px;
+  width: 200px;
+}
+
+page-service-info-a .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 page-service-info-b p {
@@ -26022,20 +26023,28 @@ page-service-sale h4, page-service-sale h5 {
 
 page-service-sale .contador {
   position: absolute;
-  top: 27%;
+  top: 8%;
   width: 100%;
 }
 
-page-service-sale .contador > h3 {
-  color: white;
+page-service-sale .contador > .contenido {
+  border: 1px solid white;
   background: #b20000;
-  height: 80px;
-  /* line-height: 30px; */
+  height: 75px;
   width: 30%;
   border-radius: 7px;
   margin: 0 auto;
-  padding: 27px 0 0 0;
   text-align: center;
+}
+
+page-service-sale .contador > .contenido p, page-service-sale .contador > .contenido h3 {
+  color: white;
+  margin-top: 0;
+}
+
+page-service-sale .contador > .contenido p {
+  margin-bottom: 1px;
+  padding-top: 10px;
 }
 
 page-service-sale ion-item.item-md, page-service-sale ion-item.item-ios {

@@ -24,6 +24,11 @@
       </agm-marker>
     </agm-map>
   </div> -->
+  <div class="contador" *ngIf="showContador" >
+    <div class="contenido" >
+      <h3><p>Start</p>{{contador}}</h3>
+    </div>
+  </div>
   <div class="Offers">
     <p>Initial offer ${{maxOffer}}</p>
     <h2>${{MenosPrecio}}</h2>
@@ -60,18 +65,18 @@
           </ion-col>
         <ion-col col-6>
           <ion-item>
-            <ion-input type="text" [(ngModel)]="newOffer" name="newOffer"></ion-input>
+            <ion-input type="text" [(ngModel)]="newOffer" name="newOffer" [disabled]="offerDisable"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-3>
-          <button ion-button block color="light"(click)="newOfferProvider()">Offer
+          <button ion-button block color="light"(click)="newOfferProvider()" [disabled]="offerDisable">Offer
           </button>
         </ion-col>
        </ion-row>
        <ion-row>
         <ion-col col-5>
           <div class="btnIconInverse">
-          <button id="btnSalir" ion-button block color="light"(click)="goIndex()">
+          <button id="btnSalir" ion-button block color="light"(click)="goIndex()" [disabled]="exitDisable">
               <ion-icon name="arrow-dropleft"></ion-icon> 
               Exit
             </button>

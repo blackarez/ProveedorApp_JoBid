@@ -63,4 +63,8 @@ export class OfferService{
 			  }
 		});
 	}
+
+	public getTimmer(keyOffer){
+		return	this.afDB.object('/time/'+keyOffer+'/Timer');
+	}
 }

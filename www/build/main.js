@@ -63,7 +63,7 @@ var ProfessionalsService = (function () {
         return this.afDB.object('/professionals/' + keyProvider + '/Service/');
     };
     ProfessionalsService.prototype.getStar = function (keyProvider) {
-        console.log('getStar');
+        // console.log('getStar');
         return this.afDB.object('/professionals/' + keyProvider + '/prof_star');
     };
     //-new
@@ -363,7 +363,98 @@ SaleService = __decorate([
 
 /***/ }),
 
-/***/ 273:
+/***/ 272:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OfferService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(58);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+var OfferService = (function () {
+    function OfferService(afDB) {
+        this.afDB = afDB;
+        this.dataCategoria = [];
+        this.dataService = [];
+    }
+    //---new offer 
+    OfferService.prototype.newOffer = function (serviceData, keyNew) {
+        if (serviceData === void 0) { serviceData = []; }
+        // public newOffer(serviceData : any = [],subCategory:string,keyNew?:any){
+        console.log('metodoNewOffer');
+        var key = undefined;
+        //default star
+        console.log(JSON.stringify(serviceData));
+        // console.log('key:'+key);
+        console.log('keyNew:' + keyNew);
+        if (keyNew && keyNew != null && keyNew != undefined) {
+            keyOffer = keyNew;
+        }
+        else {
+            var d = new Date();
+            key = d.getTime();
+            var keyOffer = "offer_" + (key);
+        }
+        console.log(serviceData);
+        // console.log(JSON.stringify(serviceData));
+        // console.log(subCategory);
+        this.afDB.object('/offer/' + keyOffer).set(serviceData).catch(function (error) { console.log('error offer setNOff'); console.log(error); console.log(JSON.stringify(error)); });
+        console.info('offer create');
+    };
+    //sets
+    OfferService.prototype.setStatus = function (keyOffer, status) {
+        return this.afDB.object('/offer/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error offer setstatus'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    OfferService.prototype.setSale = function (keyOffer, sale) {
+        return this.afDB.object('/offer/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error offer setSale'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    OfferService.prototype.setUser = function (keyOffer, User) {
+        return this.afDB.object('/offer/' + keyOffer + '/User/').set(User).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    OfferService.prototype.setProvider = function (keyOffer, Provider) {
+        return this.afDB.object('/offer/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    //-gets
+    OfferService.prototype.getStatus = function (keyOffer) {
+        return this.afDB.object('/offer/' + keyOffer + '/status/');
+    };
+    OfferService.prototype.getOffer = function (keyOffer) {
+        return this.afDB.object('/offer/' + keyOffer);
+    };
+    OfferService.prototype.getOfferNew = function () {
+        return this.afDB.list('/offer/', {
+            query: {
+                orderByChild: 'status',
+                equalTo: 'Published'
+            }
+        });
+    };
+    OfferService.prototype.getTimmer = function (keyOffer) {
+        return this.afDB.object('/time/' + keyOffer + '/Timer');
+    };
+    return OfferService;
+}());
+OfferService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+], OfferService);
+
+//# sourceMappingURL=offer.service.js.map
+
+/***/ }),
+
+/***/ 274:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -603,94 +694,6 @@ UserService = __decorate([
 
 /***/ }),
 
-/***/ 274:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OfferService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(58);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
-var OfferService = (function () {
-    function OfferService(afDB) {
-        this.afDB = afDB;
-        this.dataCategoria = [];
-        this.dataService = [];
-    }
-    //---new offer 
-    OfferService.prototype.newOffer = function (serviceData, keyNew) {
-        if (serviceData === void 0) { serviceData = []; }
-        // public newOffer(serviceData : any = [],subCategory:string,keyNew?:any){
-        console.log('metodoNewOffer');
-        var key = undefined;
-        //default star
-        console.log(JSON.stringify(serviceData));
-        // console.log('key:'+key);
-        console.log('keyNew:' + keyNew);
-        if (keyNew && keyNew != null && keyNew != undefined) {
-            keyOffer = keyNew;
-        }
-        else {
-            var d = new Date();
-            key = d.getTime();
-            var keyOffer = "offer_" + (key);
-        }
-        console.log(serviceData);
-        // console.log(JSON.stringify(serviceData));
-        // console.log(subCategory);
-        this.afDB.object('/offer/' + keyOffer).set(serviceData).catch(function (error) { console.log('error offer setNOff'); console.log(error); console.log(JSON.stringify(error)); });
-        console.info('offer create');
-    };
-    //sets
-    OfferService.prototype.setStatus = function (keyOffer, status) {
-        return this.afDB.object('/offer/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error offer setstatus'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    OfferService.prototype.setSale = function (keyOffer, sale) {
-        return this.afDB.object('/offer/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error offer setSale'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    OfferService.prototype.setUser = function (keyOffer, User) {
-        return this.afDB.object('/offer/' + keyOffer + '/User/').set(User).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    OfferService.prototype.setProvider = function (keyOffer, Provider) {
-        return this.afDB.object('/offer/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    //-gets
-    OfferService.prototype.getStatus = function (keyOffer) {
-        return this.afDB.object('/offer/' + keyOffer + '/status/');
-    };
-    OfferService.prototype.getOffer = function (keyOffer) {
-        return this.afDB.object('/offer/' + keyOffer);
-    };
-    OfferService.prototype.getOfferNew = function () {
-        return this.afDB.list('/offer/', {
-            query: {
-                orderByChild: 'status',
-                equalTo: 'Published'
-            }
-        });
-    };
-    return OfferService;
-}());
-OfferService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-], OfferService);
-
-//# sourceMappingURL=offer.service.js.map
-
-/***/ }),
-
 /***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -801,10 +804,10 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_geolocation__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_user_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_user_service__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_professionals_service__ = __webpack_require__(139);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_professions_service__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_offer_service__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_offer_service__ = __webpack_require__(272);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_sale_service__ = __webpack_require__(271);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
