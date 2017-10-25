@@ -11,8 +11,6 @@
     </ion-navbar>
   
   </ion-header>
-  
-  
   <ion-content>
     <div class="barraRoja">
         <h4>New payment</h4>
@@ -20,15 +18,13 @@
     <div padding>
       <div id="dropin-container"></div> 
     </div>
-    <ion-list>
-  </ion-list>
   </ion-content>
   <ion-footer>
-      <ion-toolbar>
-          <div class="btnBottom">
-            <button (click)="goSavePaymentMethod()">
-              Save payment method
-            </button> 
-          </div>
-      </ion-toolbar>
-    </ion-footer>
+    <ion-toolbar>
+        <div class="btnBottom">
+          <button (click)="goAddPaymentMethod()">
+            Add payment method
+          </button> 
+        </div>
+    </ion-toolbar>
+  </ion-footer>

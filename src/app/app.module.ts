@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 //-pages
@@ -20,6 +21,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Geolocation } from '@ionic-native/geolocation';
 
 //-service
+import { BraintreeService } from '../services/braintree.service';
 import { UserService } from '../services/user.service';
 import { ProfessionalsService } from '../services/professionals.service';
 import { ProfessionsService } from '../services/professions.service';
@@ -43,7 +45,7 @@ export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
     MyApp
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
@@ -66,6 +68,7 @@ export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
     ProfessionsService,
     OfferService,
     SaleService,
+    BraintreeService,
   ]
 })
 export class AppModule {}

@@ -100,7 +100,7 @@ export class ShowPage {
         this.professionalsService.getStar(this.UserActual).subscribe(
           (starProvider) => {
             // console.log('starP');
-            console.log(starProvider);
+            // console.log(starProvider);
             if(starProvider['$value']){
                 this.showListData(BDListOffer,BDListServicesProvider,starProvider['$value']);
               }
@@ -162,15 +162,15 @@ export class ShowPage {
                   // console.log('listPro-zeg = false');
                   ServiceProviderSecurity = 'false'; 
                 }
-                console.log('listPro-exp:'+BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']);
-                console.log('off-experien:'+BDListOffer[keys].Clasificacion.experiencia);
+                // console.log('listPro-exp:'+BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']);
+                // console.log('off-experien:'+BDListOffer[keys].Clasificacion.experiencia);
 
 
                 if(ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro){
                   console.info('certificado y seguro ok');
                   // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
                   
-                  if(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true){
+                  if(this.getNumeroExperienciOffer (BDListOffer[keys].Clasificacion.experiencia,BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true){
                     console.info('Experience ok');
               
                     let InfmaxOffer=BDListOffer[keys].Clasificacion.informacion.maxOffer;
@@ -198,11 +198,20 @@ export class ShowPage {
                       // }
                     });
                     // this.ListService=list;
+                  }else{
+                    console.info('Experience no');
                   }   
+                }else{
+                  console.info('certificado y seguro no');
                 }
+              }else{
+                console.info('categoria y  distancia no');
               }
             }
 
+          }else{
+            console.info('star no');
+            
           }
 
         }
@@ -217,9 +226,9 @@ export class ShowPage {
         timeout: 5000
       };
       this.geo.getCurrentPosition(options).then(resp => {
-        console.log('geoLocation');
-        console.info(resp.coords.latitude);
-        console.info(resp.coords.longitude);
+        console.info('geoLocation');
+        // console.info(resp.coords.latitude);
+        // console.info(resp.coords.longitude);
         this.lat = resp.coords.latitude;
         this.lng = resp.coords.longitude;
 
@@ -299,8 +308,8 @@ export class ShowPage {
   }
 
   getNumeroExperienciOffer(offerExperiense,providerExperience){
-    console.log(offerExperiense);
-    console.log(providerExperience);
+    // console.log(offerExperiense);
+    // console.log(providerExperience);
     let experienciaMayor=false;
     let numbOfferExperiense:number = 0;
     let numbProviderExperiense:number = 0;

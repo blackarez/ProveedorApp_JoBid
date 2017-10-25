@@ -6,7 +6,7 @@ import { SaleService } from '../../services/sale.service';
 import { OfferService } from '../../services/offer.service';
 
 
-// import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the ServiceSalePage page.
@@ -64,7 +64,7 @@ export class ServiceSalePage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public professionalsService : ProfessionalsService,
-    // private geo: Geolocation, private platform: Platform,
+    private geo: Geolocation, private platform: Platform,
     private saleService: SaleService,  
     private offerService: OfferService,  
   ) {
@@ -73,8 +73,8 @@ export class ServiceSalePage {
       this.DataService = this.navParams.get('datos');
       console.log(this.DataService);
       this.userActual= localStorage.getItem('verificacion');
-      this.loadView();
       this.getUserLocationGeolocation();
+      this.loadView();
       this.getSale();
       this.getTimer();
     }
@@ -92,7 +92,7 @@ newOfferProvider(){
   if(this.MenosPrecio > Number(this.newOffer) ){
     // console.log(Number(this.newOffer));
     this.myOffer =  Number(this.newOffer);
-    console.log(this.myOffer);
+    // console.log(this.myOffer);
     this.exitDisable = true;
     this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,this.newOffer);
   }else{
@@ -165,7 +165,7 @@ async getSale(){
   .subscribe((result) =>{
     this.Workers = [];
     this.MenosPrecio = undefined;
-    console.log(result);
+    // console.log(result);
     if(result.status != 'Cancelled'){
       // if(result.status == 'Start'){
       //   this.offerDisable = false;
@@ -214,20 +214,23 @@ private dobleCifra(num:number):any{
 
 
 private getUserLocationGeolocation(){
-  // this.platform.ready().then(() => {
-  //   let options = {
-  //     timeout: 5000
-  //   };
-  //   this.geo.getCurrentPosition(options).then(resp => {
-  //     console.log('geoLocation');
-  //     console.info(resp.coords.latitude);
-  //     console.info(resp.coords.longitude);
-  //     this.lat = resp.coords.latitude;
-  //     this.lng = resp.coords.longitude;
-  //   }).catch(() => {
-  //     console.log("Error to get location");
-  //   });
-  // });
+  this.platform.ready().then(() => {
+    let options = {
+      timeout: 5000
+    };
+    this.geo.getCurrentPosition(options).then(resp => {
+      console.info('geoLocation');
+      // console.info(resp.coords.latitude);
+      // console.info(resp.coords.longitude);
+      this.lat = resp.coords.latitude;
+      this.lng = resp.coords.longitude;
+      if(this.lat == resp.coords.latitude && this.lng == resp.coords.longitude){
+        this.saleService.setSaleUserLocation(this.DataService.idUser,this.DataService.idOff,this.userActual,{'latitud':this.lat,'longitud':this.lng});
+      }
+    }).catch(() => {
+      console.log("Error to get location");
+    });
+  });
 }
 
   getTimer(){

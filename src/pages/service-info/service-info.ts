@@ -31,6 +31,9 @@ export class ServiceInfoPage {
   timerSubs:any;
   statusSubs:any;
 
+  //-default
+  serviceImage = 'assets/img/User/FotoServiceInfo.JPG';
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private saleService: SaleService, private offerService :OfferService,
     public alertCtrl: AlertController,

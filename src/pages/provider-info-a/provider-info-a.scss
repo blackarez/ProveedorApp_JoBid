@@ -2,7 +2,20 @@ page-provider-info-a {
     p{
         text-align: center;
     }
-    
+    .btnAddPicture{
+        // background:$Red; 
+        // padding-left:10px; 
+        width:200px;
+        button{
+            background:$Red; 
+            color:white;
+            border: none;
+            box-shadow: none;
+            // &.button-md:hover:not(.disable-hover){
+            //     background: $Red;
+            // } 
+        }
+    }
 }
 // .alert-md .alert-head,.alert-ios .alert-head{
 //     display: none;

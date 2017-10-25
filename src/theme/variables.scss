@@ -319,3 +319,20 @@ ion-grid.grid{
 	}
  }
 }
+
+[data-braintree-id="payment-options-container"] {
+	// display: none;
+	// background: red;
+	// padding: 5px;
+	&>div{
+		border-radius: 4px;
+		border-width: 1px 1px 1px 1px;
+	}
+	&>div:first-child{
+		display: none;
+	}
+	&>div:last-child{
+		border-radius: 4px;
+		border-width: 1px 1px 1px 1px;
+	}
+}

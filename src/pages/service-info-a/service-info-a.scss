@@ -3,14 +3,17 @@ page-service-info-a {
         text-align: center;
     }
     .btnAddPicture{
-        background:$Red; 
-        padding-left:10px; 
+        // background:$Red; 
+        // padding-left:10px; 
         width:200px;
         button{
             background:$Red; 
             color:white;
             border: none;
-            box-shadow: none;;
+            box-shadow: none;
+            // &.button-md:hover:not(.disable-hover){
+            //     background: $Red;
+            // }            
         }
     }
     

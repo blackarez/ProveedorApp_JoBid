@@ -74,9 +74,10 @@ export class ProfessionalsService{
 			key = d.getTime();
 			var keyUser = "prof_"+(key);
 		}
-
-		if(userData['star'] != star){
-			star= userData['star'];
+		if(userData['star'] != undefined && userData['star'] != null){
+			if(userData['star'] != star){
+				star= userData['star'];
+			}
 		}
 		
 		console.log('userKey'+keyUser);
@@ -98,7 +99,7 @@ export class ProfessionalsService{
 		let direccion = userData['direccion'];
 		let tel = userData['tel'];
 
-		//console.log(userData);
+		console.log(userData);
 
 		if( (userData['username']) && (userData['password']) && (userData['email']) ){
 			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){

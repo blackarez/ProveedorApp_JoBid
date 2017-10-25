@@ -4147,6 +4147,20 @@ ion-grid.grid ion-row.steps ion-col.active div.numb {
   color: yellow;
 }
 
+[data-braintree-id="payment-options-container"] > div {
+  border-radius: 4px;
+  border-width: 1px 1px 1px 1px;
+}
+
+[data-braintree-id="payment-options-container"] > div:first-child {
+  display: none;
+}
+
+[data-braintree-id="payment-options-container"] > div:last-child {
+  border-radius: 4px;
+  border-width: 1px 1px 1px 1px;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -25755,6 +25769,18 @@ page-provider-info-a p {
   text-align: center;
 }
 
+page-provider-info-a .btnAddPicture {
+  width: 200px;
+}
+
+page-provider-info-a .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 page-provider-info-b p {
   text-align: center;
 }
@@ -25819,8 +25845,6 @@ page-service-info-a p {
 }
 
 page-service-info-a .btnAddPicture {
-  background: #b20000;
-  padding-left: 10px;
   width: 200px;
 }
 

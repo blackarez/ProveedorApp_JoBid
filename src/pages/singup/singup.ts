@@ -72,7 +72,7 @@ export class SingupPage {
     console.log(userA);
     this.userB=this.afAuth.auth.currentUser;
     // console.log(this.userB);
-    this.afAuth.authState.subscribe( user => {
+    let aftSbus=this.afAuth.authState.subscribe( user => {
       console.log('find user facebook 2');
       // console.log(user);
       if (user){
@@ -85,8 +85,10 @@ export class SingupPage {
             // console.log(this.userData);
           }
         }
+        aftSbus.unsubscribe();
       } else {
         console.info('find user facebook 2 - no');
+        aftSbus.unsubscribe();
       }
     });
 }
@@ -140,8 +142,10 @@ crearUserFirebase(){
   }
 ).catch(
   (err) => {
-    console.error('error user ya creado en firebase auth - ya se encuentra creado');
-    console.error(err);
+    console.info('error user ya creado en firebase auth - ya se encuentra creado');
+    // console.error(err);
+    //-usuario ya puede tener cuenta usuario
+    this.crearUserBD();
     //-crear Usuario en la base de datos de profedores
     //-usuario ya puede tener cuenta usuario
     // this.crearUserBD();
