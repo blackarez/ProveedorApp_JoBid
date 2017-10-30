@@ -7,7 +7,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
 // import { EditUserPage } from '../pages/edit-user/edit-user';
-// import { ShowPage } from '../pages/show/show';
+import { ShowPage } from '../pages/show/show';
 // import { MyServicesPage } from '../pages/my-services/my-services';
 // import { PaymentsPage } from '../pages/payments/payments';
 // import { PoliciesPage } from '../pages/policies/policies';
@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AgmCoreModule } from '@agm/core';
 
 //-service
 import { BraintreeService } from '../services/braintree.service';
@@ -38,7 +39,8 @@ export const firebaseConfig = {
   messagingSenderId: "679089691484"
 };
 
-export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
+// export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
+export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
 
 @NgModule({
   declarations: [
@@ -50,10 +52,13 @@ export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AgmCoreModule.forRoot({
+      apiKey: googleMapsKey
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    MyApp
   ],
   providers: [
     StatusBar,

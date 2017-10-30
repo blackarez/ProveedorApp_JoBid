@@ -68,15 +68,20 @@ export class ServiceSalePage {
     private saleService: SaleService,  
     private offerService: OfferService,  
   ) {
-      this.contador = '0'+this.minutos+':'+'0'+this.segundos;
-      this.startTimer();
-      this.DataService = this.navParams.get('datos');
-      console.log(this.DataService);
-      this.userActual= localStorage.getItem('verificacion');
-      this.getUserLocationGeolocation();
-      this.loadView();
-      this.getSale();
-      this.getTimer();
+    this.DataService = this.navParams.get('datos');
+    //-load only
+    // this.DataService = {"name":"Angel","img":"assets/img/User/UserService.png","sale":"178","infoShow":"fdgsfg...","info":"fdgsfg","idOff":"offer_1509323664011","idUser":"user_1509139021478"};
+    //-fin load only
+    
+    console.log(this.DataService);
+    console.log(JSON.stringify(this.DataService));
+    this.userActual= localStorage.getItem('verificacion');
+    this.getUserLocationGeolocation();
+    this.loadView();
+    this.getSale();
+    this.getTimer();
+    this.contador = '0'+this.minutos+':'+'0'+this.segundos;
+    this.startTimer();
     }
     
     ionViewDidLoad() {
@@ -104,6 +109,11 @@ newOfferProvider(){
 
 goServiceWin(){
   console.info('goServiceWin');
+  this.offerService.setOfferProviderLocation(this.DataService.idOff,{'latitud':this.lat,'longitud':this.lng});
+  //- saved provider contract
+  this.offerService.setProvider(this.DataService.idOff,this.userActual);
+  this.saleService.setProvider(this.DataService.idUser,this.DataService.idOff,this.userActual);
+  
   this.DataService['sale']=this.myOffer;
   let dataService = {'datos':this.DataService};
   console.log(dataService);

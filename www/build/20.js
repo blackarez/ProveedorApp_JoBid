@@ -1,14 +1,14 @@
 webpackJsonp([20],{
 
-/***/ 414:
+/***/ 442:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyServicesPageModule", function() { return MyServicesPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(575);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__my_services__ = __webpack_require__(605);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var LoginPageModule = (function () {
-    function LoginPageModule() {
+var MyServicesPageModule = (function () {
+    function MyServicesPageModule() {
     }
-    return LoginPageModule;
+    return MyServicesPageModule;
 }());
-LoginPageModule = __decorate([
+MyServicesPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
+            __WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */]),
         ],
     })
-], LoginPageModule);
+], MyServicesPageModule);
 
-//# sourceMappingURL=login.module.js.map
+//# sourceMappingURL=my-services.module.js.map
 
 /***/ }),
 
-/***/ 575:
+/***/ 605:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyServicesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase_app__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_firebase_app__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_user_service__ = __webpack_require__(295);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,143 +58,104 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-//-page
-//-provider
 
-
-//-service
 
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the MyServicesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var LoginPage = (function () {
-    function LoginPage(navCtrl, navParams, alertCtrl, professionalsService, afAuth) {
+var MyServicesPage = (function () {
+    function MyServicesPage(navCtrl, navParams, professionalsService, userService, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
         this.professionalsService = professionalsService;
-        this.afAuth = afAuth;
-        //-Data
-        this.userData = { "username": "", "password": "" };
-        this.userDataUpdate = [];
-        // this.pass ="mi clave";
+        this.userService = userService;
+        this.alertCtrl = alertCtrl;
+        this.ListService = [];
+        //-- default
+        this.imgUserDefault = "assets/img/User/UserService.png";
+        this.UserActual = localStorage.getItem('verificacion');
+        console.log(this.UserActual);
+        this.loadView();
     }
-    LoginPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad LoginPage');
+    MyServicesPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MyServicesPage');
     };
-    LoginPage.prototype.login = function () {
+    MyServicesPage.prototype.goInfoService = function (list) {
+        console.log(list);
+        var Data = { 'datos': list };
+        this.navCtrl.push('MyServiceInfoPage', Data);
+    };
+    MyServicesPage.prototype.loadView = function () {
         var _this = this;
-        var getUserLogin = this.professionalsService.getUserLoginPwd(this.userData["password"]);
-        // console.log(getUserLogin);
-        // console.log(JSON.stringify( getUserLogin) );
-        var userPromesa = getUserLogin.subscribe(function (value) {
-            // console.log('success');
-            console.log(value);
-            if (value['0']) {
-                // console.log(value['0']['prof_username']);
-                // console.log(value['0']['prof_email']);
-                if ((_this.userData["username"] == value['0']['prof_username']) || (_this.userData["username"] == value['0']['prof_email'])) {
-                    console.info('existeUserPwd');
-                    _this.loginFirebaseUserMail(value['0']);
-                }
+        console.log('loadView');
+        this.contractSubs = this.professionalsService.getContract(this.UserActual).subscribe(function (dataList) {
+            // console.log('datalist');
+            // console.log(dataList);
+            if (dataList['$value']) {
+                _this.showAlertNoServices();
             }
             else {
-                _this.showAlertLogin();
-                console.error('-usuario no se encuentra en base de datos');
-            }
-        });
-    };
-    LoginPage.prototype.loginFirebaseUserMail = function (datos) {
-        //   console.log(datos);
-        //   console.log(datos['$key']);
-        //   console.log (datos['prof_email']);
-        //  console.log ( datos['prof_password']);
-        var _this = this;
-        this.userDataUpdate = { "username": datos["prof_username"], "password": datos["prof_password"], "email": datos["prof_email"], "name": datos["prof_name"], "lastName": datos["prof_lastName"], "date": datos["prof_date"], "socialSecurity": datos["prof_socialSecurity"], "zipcode": datos["prof_zipcode"], "state": datos["prof_state"], "picture": datos["prof_picture"], "pais": datos["prof_pais"], "direccion": datos["prof_direccion"], "tel": datos["prof_tel"], "star": datos["prof_star"] };
-        console.log(this.userDataUpdate);
-        try {
-            var result = this.afAuth.auth.signInWithEmailAndPassword(datos['prof_email'], datos['prof_password']);
-            console.log(result);
-            result.catch(function (error) {
-                _this.showAlertLogin();
-            });
-            if (result) {
-                this.userDataUpdate['verificacion'] = datos['$key'];
-                localStorage.setItem('verificacion', datos['$key']);
-                console.log(this.userDataUpdate);
-                // let Data = {'datos':this.userDataUpdate}
-                // this.navCtrl.setRoot(ShowPage,Data);
-                this.navCtrl.setRoot('ShowPage');
-            }
-        }
-        catch (e) {
-            console.error(e);
-            console.error('error ');
-        }
-    };
-    LoginPage.prototype.facebookir = function () {
-        var _this = this;
-        // let goPagePrehome:boolean = false;
-        // let userDB:any;
-        try {
-            __WEBPACK_IMPORTED_MODULE_3_firebase_app__["auth"]().signInWithPopup(new __WEBPACK_IMPORTED_MODULE_3_firebase_app__["auth"].FacebookAuthProvider())
-                .then(function (res) {
-                //console.log(res.user.email);
-                console.log(res);
-                console.info(JSON.stringify(res));
-                if (res.user.providerData["0"].email) {
-                    var userBD = _this.professionalsService.getProfessionalExists(res.user.providerData["0"].email).subscribe(function (value) {
-                        console.log(value);
-                        if (value['0']) {
-                            console.log(value['0']);
-                            _this.goNextPagePrehomeFace(value['0']);
+                var _loop_1 = function (key) {
+                    console.log(dataList[key]);
+                    // console.log(dataList[key]['User']);
+                    console.log(dataList[key]['$key']);
+                    _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
+                        // console.log(userDB);
+                        if (userDB) {
+                            var nameUser = userDB['user_username'];
+                            var addresU = userDB['user_address'];
+                            var addresUser = void 0;
+                            var imgUser = void 0;
+                            for (var key_1 in addresU) {
+                                addresUser = addresU[key_1]['addr_info'];
+                            }
+                            var phoneUser = userDB['user_tel'];
+                            console.log(userDB['user_picture']);
+                            if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
+                                imgUser = _this.imgUserDefault;
+                            }
+                            else {
+                                imgUser = userDB['user_picture'];
+                            }
+                            var DataUser = { "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
+                            _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser });
                         }
                     });
+                };
+                for (var key in dataList) {
+                    _loop_1(key);
                 }
-            });
-        }
-        catch (e) {
-            console.error(e);
-        }
+            }
+            _this.userSubs.unsubscribe();
+            _this.contractSubs.unsubscribe();
+        });
+        console.log(this.ListService);
     };
-    LoginPage.prototype.goNextPagePrehomeFace = function (datos) {
-        //   console.log(datos);
-        console.log(datos['$key']);
-        console.log(datos['prof_email']);
-        console.log(datos['prof_password']);
-        this.userDataUpdate = { "username": datos["prof_username"], "password": datos["prof_password"], "email": datos["prof_email"], "name": datos["prof_name"], "lastName": datos["prof_lastName"], "date": datos["prof_date"], "socialSecurity": datos["prof_socialSecurity"], "zipcode": datos["prof_zipcode"], "state": datos["prof_state"], "picture": datos["prof_picture"], "pais": datos["prof_pais"], "direccion": datos["prof_direccion"], "tel": datos["prof_tel"], "star": datos["prof_star"] };
-        // console.log(this.userDataUpdate);
-        this.userDataUpdate['verificacion'] = datos['$key'];
-        localStorage.setItem('verificacion', datos['$key']);
-        console.log(this.userDataUpdate);
-        this.navCtrl.setRoot('ShowPage');
-    };
-    LoginPage.prototype.showAlertLogin = function () {
+    MyServicesPage.prototype.showAlertNoServices = function () {
         var alert = this.alertCtrl.create({
-            title: 'login failed',
-            subTitle: 'Bad request wrong username or email and password',
+            title: 'Information',
+            message: 'User does not have services',
             buttons: ['OK']
         });
         alert.present();
     };
-    return LoginPage;
+    return MyServicesPage;
 }());
-LoginPage = __decorate([
+MyServicesPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\login\login.html"*/'<!--\n\n  Generated template for the LoginPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>login</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <img src="assets/img/LogoJoBid.png">\n\n    <h5 id="login-heading1">Log in</h5>\n\n    <div padding>\n\n        <button ion-button block (click)="facebookir()">Log in with Faceook</button>\n\n      </div>\n\n    <ion-list padding>\n\n	  <ion-item>\n\n      <ion-icon name="person" item-start></ion-icon>\n\n      <ion-input type="text" placeholder="User / Email" [(ngModel)]="userData.username" name="username" ></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-icon name="home" item-start></ion-icon>\n\n      <ion-input type="password" placeholder="Password" [(ngModel)]="userData.password" name="password"></ion-input>\n\n	  </ion-item>\n\n    <div class="btnBottom">\n\n	   <button  ion-button block color="danger" (click)="login()" >Enter<ion-icon name="arrow-dropright"></ion-icon></button> \n\n    </div>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\login\login.html"*/,
+        selector: 'page-my-services',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/'<!--\n\n  Generated template for the MyServicesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n  <ion-content padding>\n\n  <h3>My services</h3>\n\n  <h4>List:</h4>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">\n\n      <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>\n\n      <p><strong>Status:</strong> {{list.status}}</p>\n\n      <p><strong>Sale:</strong> {{list.sale}}</p>\n\n    </button>\n\n  </ion-list>\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__["a" /* ProfessionalsService */],
-        __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
-], LoginPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */],
+        __WEBPACK_IMPORTED_MODULE_3__services_user_service__["a" /* UserService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+], MyServicesPage);
 
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=my-services.js.map
 
 /***/ })
 

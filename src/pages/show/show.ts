@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 
 
@@ -9,6 +9,8 @@ import { UserService } from '../../services/user.service';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
+
+import { AgmCoreModule } from '@agm/core';
 /**
  * Generated class for the ShowPage page.
  *
@@ -21,6 +23,15 @@ import { Geolocation } from '@ionic-native/geolocation';
   selector: 'page-show',
   templateUrl: 'show.html',
 })
+// @NgModule({
+//   imports: [
+//     AgmCoreModule.forRoot({
+//       // apiKey: 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA'
+//       apiKey: 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg'  
+//     })
+//   ],
+//   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
+// })
 export class ShowPage {
   //-vista data
   imgDefault:string;
@@ -35,13 +46,22 @@ export class ShowPage {
   ListService:any=[];
   ListContracts:any=[];
   UserActual:string;
-  lat:any;
-  lng:any;
+  lat: number = 51.678418;
+  lng: number = 7.809007;
 
   //-firebase
   listOffer:any;
   serviceSubs:any;
   userSubs:any;
+
+  //-map
+  Userlat:any=37.09024;
+  Userlng:any=-95.71289100000001;
+  zom: number = 14;
+  providerLatitud:any=37.09024;
+  providerLongitud:any=-95.71289100000001;
+
+  
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private offerService: OfferService, private userService: UserService,

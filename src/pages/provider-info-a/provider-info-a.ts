@@ -59,7 +59,7 @@ export class ProviderInfoAPage {
 
     // this.navCtrl.push('ProviderInfoBPage',Data);
     // this.navCtrl.push('ProviderInfoBPage');
-    this.navCtrl.push('PaymentMethodsPage');
+    this.navCtrl.push('EditUserPage');
   }
   
   setSubServices(){

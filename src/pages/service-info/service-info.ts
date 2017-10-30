@@ -62,6 +62,7 @@ export class ServiceInfoPage {
     this.offer = this.DataService.sale;
     this.userName = this.DataService.name;
     this.info = this.DataService.info;
+    this.loadDescripcion();
   }
 
   LoadTimmer(){
@@ -115,6 +116,16 @@ export class ServiceInfoPage {
       // this.timerSubs.unsubscribe();
       // }
     }
+
+  loadDescripcion(){
+     let offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(
+       (DetailBD) =>{
+          console.log(DetailBD);
+          offerDetailSub.unsubscribe();
+       }
+     );
+  }
+  
   goShowPage(){
     this.navCtrl.setRoot('ShowPage');
     this.statusSubs.unsubscribe();

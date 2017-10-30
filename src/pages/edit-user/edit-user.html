@@ -17,9 +17,14 @@
     <ion-item *ngFor="let p of ListServicesVista">
       <ion-grid>
         <ion-row>
-          <ion-col col-10>
+          <ion-col col-8>
             <h3><strong> Business: </strong>{{p.TypeBusiness}}</h3>
             <p><strong>{{p.Service}}</strong> > {{p.SubService}}</p>
+          </ion-col>
+          <ion-col col-2>
+              <button  ion-button block (click)="EditService(p.id)" icon-only round color="danger">
+                  <ion-icon name='sync'></ion-icon>
+              </button>
           </ion-col>
           <ion-col col-2>
               <button  ion-button block (click)="DropService(p.id)" icon-only round color="danger">

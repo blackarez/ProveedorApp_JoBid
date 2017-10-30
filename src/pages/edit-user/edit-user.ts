@@ -50,6 +50,12 @@ export class EditUserPage {
     this.professionalsService.dropService(this.UserActual,id);
   }
 
+  EditService(id){
+    console.log(id);
+    let Data = {'datos':id};
+    this.navCtrl.push('UpdateServicePage',Data);
+  }
+
   getServices(){
     this.listServiceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (value)=>{

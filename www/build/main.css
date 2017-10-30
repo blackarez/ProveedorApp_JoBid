@@ -4161,6 +4161,12 @@ ion-grid.grid ion-row.steps ion-col.active div.numb {
   border-width: 1px 1px 1px 1px;
 }
 
+.mapa agm-map {
+  width: 100%;
+  height: 300px;
+  background: orange;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -26220,8 +26226,8 @@ page-service-win .centrarIcon {
 page-service-win .centrarIcon ion-icon.icon-ok {
   font-size: 90px;
   color: #2b8300;
-  margin: 10px auto;
-  width: 90px;
+  margin: 0 auto;
+  width: 74px;
   display: block;
 }
 
@@ -26287,6 +26293,10 @@ page-show .statusPage {
 
 page-show .statusPage ion-label.label {
   font-size: 20px;
+}
+
+page-show agm-map {
+  height: 300px;
 }
 
 page-singup img {

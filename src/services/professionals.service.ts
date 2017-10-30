@@ -53,6 +53,10 @@ export class ProfessionalsService{
 		return this.afDB.object('/professionals/'+keyProvider+'/Service/');
 	}
 
+	public getServiceProfessional(keyProvider,KeyService){
+		return this.afDB.object('/professionals/'+keyProvider+'/Service/'+KeyService);
+	}
+
 	public getStar(keyProvider){
 		// console.log('getStar');
 		return this.afDB.object('/professionals/'+keyProvider+'/prof_star');

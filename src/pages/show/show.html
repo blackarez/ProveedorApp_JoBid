@@ -19,7 +19,14 @@
       <ion-label>{{labelToogle}}</ion-label>
       <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>
   </ion-item>
-
+  <!-- <div class="mapa">
+    <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">
+      <agm-marker style="z-index:9;"
+        [latitude]="Userlat"
+        [longitude]="Userlng" >
+      </agm-marker>
+    </agm-map>
+  </div> -->
   <div class="barraRoja" *ngIf="StatusProvider">
       <h4>Select a service and start the auction</h4>
   </div>

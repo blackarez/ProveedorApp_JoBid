@@ -12,7 +12,7 @@ let apiUrlBase = "https://us-central1-usuarioappjobid.cloudfunctions.net/api";
 export class BraintreeService{
 
     constructor(public http: Http) {
-        console.log('Hello BraintreeServiceProvider Provider');
+        // console.log('Hello BraintreeServiceProvider Provider');
     }
         
     

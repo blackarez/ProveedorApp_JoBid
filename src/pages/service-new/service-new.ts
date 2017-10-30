@@ -38,13 +38,20 @@ export class ServiceNewPage {
 
   //-subcrip
   userSubs:any;
+  OfferUserLocationSubs:any;
+  OfferProviderLocationSubs:any;
 
   //--load vista
   imgUser:any;
   nameUser:any;
   addresUser:any;
   phoneUser:any;
-
+ //-map
+  Userlat:any=37.09024;
+  Userlng:any=-95.71289100000001;
+  zom: number = 14;
+  providerLatitud:any=37.09024;
+  providerLongitud:any=-95.71289100000001;
  
 
   constructor(
@@ -68,6 +75,7 @@ export class ServiceNewPage {
     //-localStorage
     this.userActual = localStorage.getItem('verificacion');
     console.log(this.userActual);
+    this.getUsersLocation();
     this.userInfo();
   }
 
@@ -126,6 +134,29 @@ export class ServiceNewPage {
         
       });
    
+  }
+
+  getUsersLocation(){
+    this.OfferUserLocationSubs = this.offerService.getOfferUserLocation(this.keyOffer).subscribe(
+      (LocationUser)=>{
+        console.info(LocationUser);        
+        this.Userlat =LocationUser.latitud;
+        this.Userlng =LocationUser.longitud;
+        console.log(this.Userlat);
+        console.log(this.Userlng);
+        this.OfferUserLocationSubs.unsubscribe();
+      }
+    );
+    this.OfferProviderLocationSubs = this.offerService.getOfferProviderLocation(this.keyOffer).subscribe(
+      (LocationProvider)=>{
+        console.info(LocationProvider);        
+        this.providerLatitud =LocationProvider.latitud;
+        this.providerLongitud =LocationProvider.longitud;
+        console.log(this.providerLatitud);
+        console.log(this.providerLongitud);
+        this.OfferProviderLocationSubs.unsubscribe();
+      }
+    );
   }
 
 }
