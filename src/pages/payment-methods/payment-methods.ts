@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams , AlertController , LoadingController} from 'ionic-angular';
 
 // import * as braintree from "braintree";
 // import * as braintree from "braintree-web";
@@ -40,11 +40,12 @@ export class PaymentMethodsPage {
     public alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams,
     private braintreeService : BraintreeService,
+    public loadingCtrl: LoadingController,
   ) {
     }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentMethodsPage');
-  
+    
     // this.userData = this.navParams.get('datos');
     // console.log(this.userData);
     // console.log(this.navParams.get('datos'));
@@ -54,6 +55,7 @@ export class PaymentMethodsPage {
     this.UserActual = localStorage.getItem('verificacion');
     console.log(this.UserActual);
     this.crearCustomer();
+    this.presentLoading();
   }
 
   goPayInfo(){
@@ -68,6 +70,7 @@ export class PaymentMethodsPage {
         }
         if(payload){ 
           console.log(payload);
+          this.navCtrl.push('ProviderOK');
         }
       });
       // console.log(this.userData);
@@ -155,5 +158,13 @@ export class PaymentMethodsPage {
 
   goHome(){
     this.navCtrl.setRoot('ShowPage');
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 5000
+    });
+    loader.present();
   }
 }

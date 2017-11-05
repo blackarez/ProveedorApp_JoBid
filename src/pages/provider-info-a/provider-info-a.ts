@@ -59,12 +59,16 @@ export class ProviderInfoAPage {
 
     // this.navCtrl.push('ProviderInfoBPage',Data);
     // this.navCtrl.push('ProviderInfoBPage');
-    this.navCtrl.push('EditUserPage');
+    this.navCtrl.push('CertificatesPage');
   }
   
   setSubServices(){
     console.log(this.service);
     this.ListSubServices=this.professionsService.getCategoryByProfession(this.service);
     console.log(this.ListSubServices);
+  }
+
+  gallery(){
+    this.navCtrl.push('GalleryPage');
   }
 }

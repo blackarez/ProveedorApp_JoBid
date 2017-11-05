@@ -50,14 +50,18 @@ export class ServiceWinPage {
 getStatusService(){
   this.statusSub = this.saleService.getStatus(this.user,this.offer).subscribe(
     (status) =>{
+      console.log('statusSub-S service-win');
       console.log(status);
       if(status['$value']){
         if(status['$value'] == 'Waiting for the professional'){
           this.goServiceNew();
+          console.log('statusSub-US service-win');
           this.statusSub.unsubscribe();
+          
         }
         if(status['$value'] == 'Cancelled'){
           this.goIndexService();
+          console.log('statusSub-US service-win');
           this.statusSub.unsubscribe();
         }
       }

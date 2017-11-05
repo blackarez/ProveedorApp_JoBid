@@ -81,20 +81,22 @@ export class MyApp {
             if(User['0']){
               this.loadViewUser(User['0']);
             }
-            Userexists.unsubscribe();
+            // Userexists.unsubscribe();
           });
         }
     });
   }
 
   loadViewUser(user){
-    console.log();
+    console.log(user);
     this.userName= user['prof_username'];
     if(user['prof_picture'] && user['prof_picture'] != '' && user['prof_picture'] != null && user['prof_picture'] != undefined){
       this.srcUser= user['prof_picture'];
     }
+    // console.log(user['prof_picture']);
+    // console.log(this.srcUser);
     if(user['prof_star'] && user['prof_star'] != '' && user['prof_star'] != null && user['prof_star'] != undefined){
-      this.star= user['prof_star'];
+      this.star= Math.round(user['prof_star']);
     }
     // localStorage.setItem('verificacion',user['$key']);
     // this.nav.setRoot('ShowPage');

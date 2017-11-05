@@ -40,7 +40,7 @@ export class ServiceSalePage {
   
   //--timer
   segundos:number = 0;
-  minutos:number = 2;
+  minutos:number = 3;
   contador:string;
   showContador: boolean = true;
   objNodeTimer:any;
@@ -70,7 +70,7 @@ export class ServiceSalePage {
   ) {
     this.DataService = this.navParams.get('datos');
     //-load only
-    // this.DataService = {"name":"Angel","img":"assets/img/User/UserService.png","sale":"178","infoShow":"fdgsfg...","info":"fdgsfg","idOff":"offer_1509323664011","idUser":"user_1509139021478"};
+    // this.DataService = {"name":"Angel","img":"assets/img/User/UserService.png","sale":"179","infoShow":"FADFASD...","info":"FADFASD","idOff":"offer_1509549987105","idUser":"user_1509139021478"};
     //-fin load only
     
     console.log(this.DataService);
@@ -80,8 +80,8 @@ export class ServiceSalePage {
     this.loadView();
     this.getSale();
     this.getTimer();
-    this.contador = '0'+this.minutos+':'+'0'+this.segundos;
     this.startTimer();
+    this.contador = '0'+this.minutos+':'+'0'+this.segundos;
     }
     
     ionViewDidLoad() {
@@ -139,7 +139,8 @@ startTimer(){
 
 private timer(){
   if(this.minutos == 0 && this.segundos == 1){ 
-  // if(this.minutos == 1 && this.segundos == 40 ){ 
+  // if(this.minutos == 1 && this.segundos == 50 ){
+     
     //this.showContador = false;
     if(this.NumeroContador == 2){
       clearInterval(this.objNodeTimer);
@@ -173,27 +174,30 @@ async getSale(){
   // console.log(this.DataService.idUser);
   this.saleSub = this.saleService.getSale(this.DataService.idUser,this.DataService.idOff)
   .subscribe((result) =>{
+    console.log('saleSub-S sale');
     this.Workers = [];
     this.MenosPrecio = undefined;
     // console.log(result);
     if(result.status != 'Cancelled'){
       // if(result.status == 'Start'){
-      //   this.offerDisable = false;
-      //   this.showContador = false;
-      // }
-      if(this.MenosPrecio ==  undefined){
-        this.MenosPrecio = Number(result.sale);
-      }
-      let trabajadores = result.providers;
-      for(let trabajador in trabajadores){
-        if(this.MenosPrecio > Number(trabajadores[trabajador]['offer']) ) { this.MenosPrecio= Number(trabajadores[trabajador]['offer']);}
-        let PromiseUser =this.professionalsService.getProfessional(trabajador).subscribe((user) =>{
+        //   this.offerDisable = false;
+        //   this.showContador = false;
+        // }
+        if(this.MenosPrecio ==  undefined){
+          this.MenosPrecio = Number(result.sale);
+        }
+        let trabajadores = result.providers;
+        for(let trabajador in trabajadores){
+          if(this.MenosPrecio > Number(trabajadores[trabajador]['offer']) ) { this.MenosPrecio= Number(trabajadores[trabajador]['offer']);}
+          let PromiseUser =this.professionalsService.getProfessional(trabajador).subscribe((user) =>{
+          console.log('PromiseUser-S sale');  
           //console.log(user);
           let img = this.imgJobDefault;
           if(user.prof_picture && user.prof_picture != undefined && user.prof_picture != ''){
             img = user.prof_picture;
           }
           this.Workers.push({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
+          console.log('PromiseUser-US sale');
           PromiseUser.unsubscribe();
         });
       }
@@ -201,18 +205,20 @@ async getSale(){
     }else{
       this.AlertCancelOffer();
       this.navCtrl.setRoot('ShowPage');
+      console.log('PromiseUser-US sale');
       this.saleSub.unsubscribe();
     }
   });
-  
 }
 
 ganador(){
   if(this.MenosPrecio == this.myOffer){
     this.goServiceWin();
+    console.log('saleSub-US sale');
     this.saleSub.unsubscribe();
   }else{
     this.navCtrl.setRoot('ShowPage');
+    console.log('saleSub-US sale');
     this.saleSub.unsubscribe();
   }
 }
@@ -246,6 +252,7 @@ private getUserLocationGeolocation(){
   getTimer(){
     this.timerSubs = this.offerService.getTimmer(this.DataService.idOff).subscribe(
       (timer)=>{
+        console.log('timerSubs-S sale');
         // console.log(timer);
         if(timer['$value']){
           // console.log(timer['$value']);
@@ -256,6 +263,7 @@ private getUserLocationGeolocation(){
           this.minutos = Number(ArrayContador['0']);
           this.segundos = Number(ArrayContador['1']);
         }
+        console.log('timerSubs-US sale');
         this.timerSubs.unsubscribe();
       }
     );   

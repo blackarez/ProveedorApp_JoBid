@@ -41,7 +41,7 @@ export class ServiceJobPage {
   nameUser:any;
   addresUser:any;
   phoneUser:any;
-
+  botonDisabled:boolean = false;
   //-tempoaral animaicion
   objNodeTimer:any;
   segundos:any=10;
@@ -64,10 +64,10 @@ export class ServiceJobPage {
     private professionalsService:ProfessionalsService,
   ) {
     //-ej
-    this.serviceCode = '0986548605';
+    // this.serviceCode = '0986548605';
     //-load data
-    this.Datos = this.navParams.get('datos');
-    console.log(this.Datos);
+    // this.Datos = this.navParams.get('datos');
+    // console.log(this.Datos);
     this.DataService =  this.navParams.get('service');
     this.DataUser = this.navParams.get('user');
     this.user = this.DataService['idUser'];
@@ -89,8 +89,17 @@ export class ServiceJobPage {
     this.setStatusService();
     // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
     // console.log(DataService);
-  	// this.navCtrl.setRoot(,DataService);
-  	this.navCtrl.setRoot('ServiceOkPage');
+    // this.navCtrl.setRoot(,DataService);
+    // this.offerService.getStatus(this.keyOffer).subscribe(
+    //   (StatusBD)=>{
+        
+    //   }
+    // ).unsubscribe();
+
+      let dataService = {'service':this.DataService,"user":this.DataUser};
+      this.navCtrl.setRoot('ServiceOkPage',dataService);
+    
+  	// this.navCtrl.setRoot('ServiceOkPage');
   }
   setStatusService(){
     console.log('set2');
@@ -99,6 +108,7 @@ export class ServiceJobPage {
     this.professionalsService.setContractStatus(this.userActual,this.keyOffer,'Finalized');
     this.saleService.setStatus(this.user,this.keyOffer,'Finalized');
     this.offerService.setStatus(this.keyOffer,'Finalized');
+    this.botonDisabled = true;
    }
   userInfo(){
     // this.imgUser=this.imgUserDefault;
@@ -130,12 +140,14 @@ export class ServiceJobPage {
   getUsersLocation(){
     this.OfferUserLocationSubs = this.offerService.getOfferUserLocation(this.keyOffer).subscribe(
       (LocationUser)=>{
+        console.log('OfferUserLocationSubs-S service-job');
         console.info(LocationUser);        
         this.Userlat =LocationUser.latitud;
         this.Userlng =LocationUser.longitud;
         console.log(this.Userlat);
         console.log(this.Userlng);
         this.OfferUserLocationSubs.unsubscribe();
+        console.log('OfferUserLocationSubs-US service-job');
       }
     );
     // this.OfferProviderLocationSubs = this.offerService.getOfferProviderLocation(this.keyOffer).subscribe(

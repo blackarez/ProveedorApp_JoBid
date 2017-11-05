@@ -50,6 +50,7 @@ export class LoginPage {
 
     let userPromesa = getUserLogin.subscribe( (value)=> {
         // console.log('success');
+        console.log('userPromesa-S login');
         console.log(value);
         if(value['0']){
           // console.log(value['0']['prof_username']);
@@ -62,6 +63,8 @@ export class LoginPage {
           this.showAlertLogin();
           console.error('-usuario no se encuentra en base de datos');
         }
+        console.log('userPromesa-US login');
+      userPromesa.unsubscribe();  
     });
 }
 
@@ -105,11 +108,14 @@ firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
     if(res.user.providerData["0"].email){
       let userBD =this.professionalsService.getProfessionalExists(res.user.providerData["0"].email).subscribe(
         (value)=>{
+          console.log('professionalsService-S login');
           console.log(value);
           if(value['0']){
             console.log(value['0']);
             this.goNextPagePrehomeFace(value['0']);
           }
+          console.log('professionalsService-US login');
+          userBD.unsubscribe();
         }
       );
     }

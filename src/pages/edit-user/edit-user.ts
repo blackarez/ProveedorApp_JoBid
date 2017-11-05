@@ -37,10 +37,12 @@ export class EditUserPage {
   }
 
   goEdit(){
+    console.log('listServiceSubs-US edit-user');
     this.listServiceSubs.unsubscribe();
     this.navCtrl.push('EditProviderPage');
   }
   goNew(){
+    console.log('listServiceSubs-US edit-user');
     this.listServiceSubs.unsubscribe();
     this.navCtrl.push('ServiceInfoAPage');
   }
@@ -59,6 +61,7 @@ export class EditUserPage {
   getServices(){
     this.listServiceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (value)=>{
+      console.log('listServiceSubs-S edit-user');
         this.ListServicesVista=[];
         // console.log(value);
         for(let key in value){

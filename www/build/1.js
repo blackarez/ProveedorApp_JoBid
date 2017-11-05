@@ -9815,11 +9815,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var PaymentMethodsPage = (function () {
-    function PaymentMethodsPage(alertCtrl, navCtrl, navParams, braintreeService) {
+    function PaymentMethodsPage(alertCtrl, navCtrl, navParams, braintreeService, loadingCtrl) {
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.braintreeService = braintreeService;
+        this.loadingCtrl = loadingCtrl;
         this.booleanCreateErr = false;
         this.booleanInstance = false;
         this.segundos = 5;
@@ -9835,6 +9836,7 @@ var PaymentMethodsPage = (function () {
         this.UserActual = localStorage.getItem('verificacion');
         console.log(this.UserActual);
         this.crearCustomer();
+        this.presentLoading();
     };
     PaymentMethodsPage.prototype.goPayInfo = function () {
         if (this.booleanCreateErr) {
@@ -9929,6 +9931,13 @@ var PaymentMethodsPage = (function () {
     PaymentMethodsPage.prototype.goHome = function () {
         this.navCtrl.setRoot('ShowPage');
     };
+    PaymentMethodsPage.prototype.presentLoading = function () {
+        var loader = this.loadingCtrl.create({
+            content: "Please wait...",
+            duration: 5000
+        });
+        loader.present();
+    };
     return PaymentMethodsPage;
 }());
 PaymentMethodsPage = __decorate([
@@ -9938,7 +9947,8 @@ PaymentMethodsPage = __decorate([
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__services_braintree_service__["a" /* BraintreeService */]])
+        __WEBPACK_IMPORTED_MODULE_2__services_braintree_service__["a" /* BraintreeService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
 ], PaymentMethodsPage);
 
 //# sourceMappingURL=payment-methods.js.map

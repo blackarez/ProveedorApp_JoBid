@@ -57,7 +57,9 @@ export class UpdateServicePage {
   }
 
   goProviderUpdateService(){
+    console.log('getServiceProfessionalSubs-uS update-service');
     this.getServiceProfessionalSubs.unsubscribe();
+
     if(this.booelanSeguro == true){
       this.seguro = 'true';
     }else{
@@ -116,6 +118,7 @@ export class UpdateServicePage {
   loadService(){
     this.getServiceProfessionalSubs = this.professionalsService.getServiceProfessional(this.UserActual,this.keyService).subscribe(
       (ServiceBD) => {
+        console.log('getServiceProfessionalSubs-S update-service');
         console.log(ServiceBD);
         if(ServiceBD){
           this.service = ServiceBD.serv_service;

@@ -114,6 +114,9 @@ var ShowPage = (function () {
         // console.log(localStorage);
     };
     ShowPage.prototype.goInfo = function (item) {
+        console.log('userSubs-US show');
+        console.log('serviceSubs-US show');
+        console.log('listOffer-US show');
         this.userSubs.unsubscribe();
         this.serviceSubs.unsubscribe();
         this.listOffer.unsubscribe();
@@ -135,19 +138,24 @@ var ShowPage = (function () {
         this.listOffer = this.offerService.getOfferNew().subscribe(function (list) {
             _this.ListService = [];
             // console.log(list);
+            console.log('listOffer-S show');
             _this.getServiceProvider(list);
         });
     };
     ShowPage.prototype.getServiceProvider = function (BDListOffer) {
         var _this = this;
         this.serviceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (BDListServicesProvider) {
+            console.log('serviceSubs-S show');
             // console.log(BDListServicesProvider);
-            _this.professionalsService.getStar(_this.UserActual).subscribe(function (starProvider) {
+            var professionalServiceSubs = _this.professionalsService.getStar(_this.UserActual).subscribe(function (starProvider) {
+                console.log('professionalsService-S show');
                 // console.log('starP');
                 // console.log(starProvider);
                 if (starProvider['$value']) {
                     _this.showListData(BDListOffer, BDListServicesProvider, starProvider['$value']);
                 }
+                console.log('professionalsService-US show');
+                professionalServiceSubs.unsubscribe();
             });
         });
     };
@@ -158,7 +166,7 @@ var ShowPage = (function () {
             var _loop_1 = function (keys) {
                 // console.log('bdoff-star:'+Number(BDListOffer[keys].Star));
                 // console.log('pro-star: '+ Number(stars));
-                if (Number(stars) >= Number(BDListOffer[keys].Star)) {
+                if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
                     console.info('star ok');
                     // console.log(BDListOffer[keys]);
                     // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
@@ -215,6 +223,7 @@ var ShowPage = (function () {
                                     }
                                     // console.log(BDListOffer[key].User);
                                     this_1.userSubs = this_1.userService.getUser(BDListOffer[keys].User).subscribe(function (user) {
+                                        console.log('userSubs-S show');
                                         // console.log(user);
                                         // console.log(user['user_picture']);
                                         // console.log('-'+user['user_picture']+'-');
@@ -418,7 +427,7 @@ var ShowPage = (function () {
 ShowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-show',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/'<!--\n\n  Generated template for the ShowPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-item padding class="statusPage">\n\n    \n\n      <ion-label>{{labelToogle}}</ion-label>\n\n      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>\n\n  </ion-item>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">\n\n      <agm-marker style="z-index:9;"\n\n        [latitude]="Userlat"\n\n        [longitude]="Userlng" >\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  <div class="barraRoja" *ngIf="StatusProvider">\n\n      <h4>Select a service and start the auction</h4>\n\n  </div>\n\n  <ion-grid class="body" *ngIf="StatusProvider">\n\n    <!-- <ion-row >\n\n      <ion-col col-2>\n\n       <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="{{imgDefault}}">\n\n        </ion-avatar>\n\n       </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p><strong>{{nameUser}}</strong></p>\n\n        <p>{{Description}}</p>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <button ion-button icon-only round color="light" (click)="goInfo()">\n\n          <ion-icon name="search"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row> -->\n\n    <ion-row *ngFor="let item of ListService">\n\n      <ion-col col-2>\n\n        <ion-item>\n\n         <ion-avatar item-start>\n\n           <img src="{{item.img}}">\n\n         </ion-avatar>\n\n        </ion-item>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <h5>${{item.sale}}</h5>\n\n       </ion-col>\n\n       <ion-col col-6>\n\n         <p><strong>{{item.name}}</strong></p>\n\n         <p>{{item.infoShow}}</p>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <button ion-button icon-only round color="light" (click)="goInfo(item)">\n\n           <ion-icon name="search"></ion-icon>\n\n         </button>\n\n       </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/,
+        selector: 'page-show',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/'<!--\n\n  Generated template for the ShowPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-item padding class="statusPage">\n\n    \n\n      <ion-label>{{labelToogle}}</ion-label>\n\n      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>\n\n  </ion-item>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">\n\n      <agm-marker style="z-index:9;"\n\n        [latitude]="Userlat"\n\n        [longitude]="Userlng" >\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  <div class="barraRoja" *ngIf="StatusProvider">\n\n      <h4>Select a service and start the bid</h4>\n\n  </div>\n\n  <ion-grid class="body" *ngIf="StatusProvider">\n\n    <!-- <ion-row >\n\n      <ion-col col-2>\n\n       <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="{{imgDefault}}">\n\n        </ion-avatar>\n\n       </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p><strong>{{nameUser}}</strong></p>\n\n        <p>{{Description}}</p>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <button ion-button icon-only round color="light" (click)="goInfo()">\n\n          <ion-icon name="search"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row> -->\n\n    <ion-row *ngFor="let item of ListService">\n\n      <ion-col col-2>\n\n        <ion-item>\n\n         <ion-avatar item-start>\n\n           <img src="{{item.img}}">\n\n         </ion-avatar>\n\n        </ion-item>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <h5>${{item.sale}}</h5>\n\n       </ion-col>\n\n       <ion-col col-6>\n\n         <p><strong>{{item.name}}</strong></p>\n\n         <p>{{item.infoShow}}</p>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <button ion-button icon-only round color="light" (click)="goInfo(item)">\n\n           <ion-icon name="search"></ion-icon>\n\n         </button>\n\n       </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/,
     })
     // @NgModule({
     //   imports: [

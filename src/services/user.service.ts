@@ -123,7 +123,6 @@ export class UserService{
 			});
 		 });
 	}
-	
 
 
 	public newUser(userData : any = [],keyNew?:any ){
@@ -202,6 +201,25 @@ export class UserService{
 		}
 	}
 
+	public setComment(keyUser,Object,keyComment?){
+			let key = undefined;
+			// console.log('key:'+key);
+			console.log('keyNew:'+keyComment);
+			if(keyComment && keyComment != null  && keyComment != undefined){
+				keyComm = keyComment;
+			}else{
+				var d = new Date();
+				key = d.getTime();
+				var keyComm = "comm_"+(key);
+			}
+			
+			console.log('comment');
+			this.afDB.object('/user/'+keyUser+'/user_comments/'+keyComm).set({'comm_description':Object['comment'],'comm_qualification':Object['estrellas'],'provider_username':Object['providerId']}).catch(()=>console.log('error set commets'));
+	}
+
+	public setStar(keyUser,userStar){
+		this.afDB.object('/user/'+keyUser+'/user_star').set(userStar);
+	}
 
 	/*  ----------------user - address ----------------------*/
 	public getAddress(userId: string =""){

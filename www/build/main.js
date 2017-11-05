@@ -389,6 +389,9 @@ var OfferService = (function () {
     OfferService.prototype.getTimmer = function (keyOffer) {
         return this.afDB.object('/time/' + keyOffer + '/Timer');
     };
+    OfferService.prototype.getAddressOffer = function (keyOffer) {
+        return this.afDB.object('/offer/' + keyOffer + '/Address');
+    };
     return OfferService;
 }());
 OfferService = __decorate([
@@ -686,6 +689,24 @@ var UserService = (function () {
                 console.info('user update');
             }
         }
+    };
+    UserService.prototype.setComment = function (keyUser, Object, keyComment) {
+        var key = undefined;
+        // console.log('key:'+key);
+        console.log('keyNew:' + keyComment);
+        if (keyComment && keyComment != null && keyComment != undefined) {
+            keyComm = keyComment;
+        }
+        else {
+            var d = new Date();
+            key = d.getTime();
+            var keyComm = "comm_" + (key);
+        }
+        console.log('comment');
+        this.afDB.object('/user/' + keyUser + '/user_comments/' + keyComm).set({ 'comm_description': Object['comment'], 'comm_qualification': Object['estrellas'], 'provider_username': Object['providerId'] }).catch(function () { return console.log('error set commets'); });
+    };
+    UserService.prototype.setStar = function (keyUser, userStar) {
+        this.afDB.object('/user/' + keyUser + '/user_star').set(userStar);
     };
     /*  ----------------user - address ----------------------*/
     UserService.prototype.getAddress = function (userId) {
@@ -1161,25 +1182,27 @@ var MyApp = (function () {
             if (userAuth) {
                 var email = userAuth.providerData["0"].email;
                 console.log(email);
-                var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                var Userexists = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
                     console.log('User Logueado');
                     console.log(User);
                     if (User['0']) {
                         _this.loadViewUser(User['0']);
                     }
-                    Userexists_1.unsubscribe();
+                    // Userexists.unsubscribe();
                 });
             }
         });
     };
     MyApp.prototype.loadViewUser = function (user) {
-        console.log();
+        console.log(user);
         this.userName = user['prof_username'];
         if (user['prof_picture'] && user['prof_picture'] != '' && user['prof_picture'] != null && user['prof_picture'] != undefined) {
             this.srcUser = user['prof_picture'];
         }
+        // console.log(user['prof_picture']);
+        // console.log(this.srcUser);
         if (user['prof_star'] && user['prof_star'] != '' && user['prof_star'] != null && user['prof_star'] != undefined) {
-            this.star = user['prof_star'];
+            this.star = Math.round(user['prof_star']);
         }
         // localStorage.setItem('verificacion',user['$key']);
         // this.nav.setRoot('ShowPage');

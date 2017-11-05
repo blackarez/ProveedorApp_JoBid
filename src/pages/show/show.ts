@@ -88,6 +88,9 @@ export class ShowPage {
   }
 
   goInfo(item){
+    console.log('userSubs-US show');
+    console.log('serviceSubs-US show');
+    console.log('listOffer-US show');
     this.userSubs.unsubscribe();
     this.serviceSubs.unsubscribe();
     this.listOffer.unsubscribe();
@@ -109,6 +112,7 @@ export class ShowPage {
    this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
       this.ListService=[];
       // console.log(list);
+      console.log('listOffer-S show');
       this.getServiceProvider(list);
     });
   }
@@ -116,14 +120,18 @@ export class ShowPage {
   getServiceProvider(BDListOffer){
     this.serviceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (BDListServicesProvider)=>{
+        console.log('serviceSubs-S show');
         // console.log(BDListServicesProvider);
-        this.professionalsService.getStar(this.UserActual).subscribe(
+        let professionalServiceSubs = this.professionalsService.getStar(this.UserActual).subscribe(
           (starProvider) => {
+            console.log('professionalsService-S show');
             // console.log('starP');
             // console.log(starProvider);
             if(starProvider['$value']){
                 this.showListData(BDListOffer,BDListServicesProvider,starProvider['$value']);
               }
+              console.log('professionalsService-US show');
+              professionalServiceSubs.unsubscribe();
             }
         );
     });
@@ -141,7 +149,7 @@ export class ShowPage {
         // console.log('bdoff-star:'+Number(BDListOffer[keys].Star));
         // console.log('pro-star: '+ Number(stars));
         
-          if( Number(stars) >= Number(BDListOffer[keys].Star)){
+          if( Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star)) ){
             console.info('star ok');
             // console.log(BDListOffer[keys]);
             // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
@@ -203,6 +211,7 @@ export class ShowPage {
                     }
                     // console.log(BDListOffer[key].User);
                     this.userSubs = this.userService.getUser(BDListOffer[keys].User).subscribe( (user)=>{
+                      console.log('userSubs-S show');
                       // console.log(user);
                       // console.log(user['user_picture']);
                       // console.log('-'+user['user_picture']+'-');

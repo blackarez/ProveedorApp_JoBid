@@ -18,15 +18,15 @@
   
   <ion-content>
   <h3>My payments</h3>
-  <h4>List:</h4>
   <div padding>
+    <h4>List:</h4>
     <div id="dropin-container"></div> 
   </div>
   </ion-content>
   <ion-footer>
     <ion-toolbar>
         <div class="btnBottom">
-          <button (click)="goAddPaymentMethod()">
+          <button ion-button color="danger" block (click)="goAddPaymentMethod()">
             Add payment method
           </button> 
         </div>

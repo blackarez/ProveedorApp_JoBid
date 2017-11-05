@@ -31,7 +31,7 @@ export class HomePage {
     public afAuth: AngularFireAuth
   ) {
     //-identifica y redirecciona usuario logeado.
-    // this.usuarioLogeado();
+    this.usuarioLogeado();
   }
 
   ionViewDidLoad() {
@@ -51,10 +51,10 @@ export class HomePage {
         // console.log('res.additionalUserInfo.profile.email');
         // console.log(res.additionalUserInfo.profile.email);
         //console.log(res);
-        let getProfesionals=this.professionalsService.getProfessionals()
-        .subscribe((Jobers) => {
+        let getProfesionals=this.professionalsService.getProfessionals().subscribe((Jobers) => {
           // console.log(Jobers);
           Jobers.forEach((Job) =>{
+          console.log('getProfesionals-S home');
             // console.log(Job);
             // console.log(Job['user_email']);
             if(res.additionalUserInfo.providerId == "facebook.com"){
@@ -77,17 +77,19 @@ export class HomePage {
           }else{
             this.singup();
           }
+
           getProfesionals.unsubscribe();
+          console.log('getProfesionals-US home');
         });
       });
   }
   goNextPagePrehome(datos:any){
     console.log(datos);
-    // //console.log(datos['$key']);
-    // this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
-    // //console.log(this.userDataUpdate);
-    // let Data = {'datos':this.userDataUpdate}
-    // this.navCtrl.setRoot('ShowPage',Data);
+    //console.log(datos['$key']);
+    this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
+    //console.log(this.userDataUpdate);
+    let Data = {'datos':this.userDataUpdate}
+    this.navCtrl.setRoot('ShowPage',Data);
     this.navCtrl.setRoot('ShowPage');
   }
 
@@ -99,7 +101,25 @@ export class HomePage {
    }
 
    
-  usuarioLogeado(){
+   usuarioLogeado(){
+    this.afAuth.authState.subscribe( userAuth => {
+        console.log('find user menu');
+        console.log(userAuth);
+        if(userAuth){
+          let email=  userAuth.providerData["0"].email;
+          console.log(email);
+          let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
+            console.log('User Logueado');
+            console.log(User);
+            if(User['0']){
+              this.goNextPagePrehome(User['0']);
+            }
+            Userexists.unsubscribe();
+          });
+        }
+    });
+  }
+// usuarioLogeado(){
     // let userDBLoad:any;
     // let goPagePrehomeLoad = false;
     // let homeStatus=this.afAuth.authState.subscribe( userAuth => {
@@ -125,13 +145,12 @@ export class HomePage {
     //   }
     // });
     // homeStatus.unsubscribe();
-  }
-  goNextPagePrehomeFace(datos:any){
-  // goNextPagePrehomeFace(){
+  // }
+  // goNextPagePrehome(datos){
   //   this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
   //  let Data = {'datos':this.userDataUpdate}
   //   this.navCtrl.setRoot('ShowPage',Data);
-    this.navCtrl.setRoot('ShowPage');
-  } 
+
+  // }
 
 }

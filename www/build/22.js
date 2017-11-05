@@ -94,6 +94,7 @@ var LoginPage = (function () {
         // console.log(JSON.stringify( getUserLogin) );
         var userPromesa = getUserLogin.subscribe(function (value) {
             // console.log('success');
+            console.log('userPromesa-S login');
             console.log(value);
             if (value['0']) {
                 // console.log(value['0']['prof_username']);
@@ -107,6 +108,8 @@ var LoginPage = (function () {
                 _this.showAlertLogin();
                 console.error('-usuario no se encuentra en base de datos');
             }
+            console.log('userPromesa-US login');
+            userPromesa.unsubscribe();
         });
     };
     LoginPage.prototype.loginFirebaseUserMail = function (datos) {
@@ -148,12 +151,15 @@ var LoginPage = (function () {
                 console.log(res);
                 console.info(JSON.stringify(res));
                 if (res.user.providerData["0"].email) {
-                    var userBD = _this.professionalsService.getProfessionalExists(res.user.providerData["0"].email).subscribe(function (value) {
+                    var userBD_1 = _this.professionalsService.getProfessionalExists(res.user.providerData["0"].email).subscribe(function (value) {
+                        console.log('professionalsService-S login');
                         console.log(value);
                         if (value['0']) {
                             console.log(value['0']);
                             _this.goNextPagePrehomeFace(value['0']);
                         }
+                        console.log('professionalsService-US login');
+                        userBD_1.unsubscribe();
                     });
                 }
             });

@@ -20,20 +20,34 @@
   <div class="barraRoja">
     <h4>Service qualification</h4>
   </div>
-  <p>Now you can qualify the client and leave a comment of the service received.</p>
   <form id="signup-form3" class="list" padding>
+  <p>Now you can qualify the client and leave a comment of the service received.</p>
     <ion-list >
       <ion-item>
-        <h4>Qualification <img src="assets/img/Estrellas.png" alt=""></h4>
+        <p class="clasificacion">
+          <input id="radio1" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="5">
+          <label for="radio1">&#9733;</label>
+  
+          <input id="radio2" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="4">
+          <label for="radio2">&#9733;</label>
+          
+          <input id="radio3" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="3">
+          <label for="radio3">&#9733;</label>
+          
+          <input id="radio4" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="2">
+          <label for="radio4">&#9733;</label>
+          
+          <input id="radio5" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="1">
+          <label for="radio5">&#9733;</label>
+        </p>
       </ion-item>
       <ion-item>
       <input type="text">
-        <ion-textarea placeholder="Comments"></ion-textarea>
+        <ion-textarea placeholder="Comments" name="comment" [(ngModel)]="vote.comment"></ion-textarea>
       </ion-item>
     </ion-list>
     <div class="btnBottom">
-      <button ion-button color="danger" block icon-left (click)="goIndex()">Qualify and continue<ion-icon name="arrow-dropright"></ion-icon></button>
+      <button ion-button color="danger" block icon-left (click)="goCleaningOk()">Continue<ion-icon name="arrow-dropright"></ion-icon></button>
     </div>
   </form>
   </ion-content>
-  

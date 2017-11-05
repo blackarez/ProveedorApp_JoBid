@@ -65,7 +65,7 @@
   <ion-footer>
     <ion-toolbar>
         <div class="btnBottom">
-          <button ion-button (click)="goServiceOk()">
+          <button ion-button color="danger" block (click)="goServiceOk()" [disabled]="botonDisabled" >
               End service
               <ion-icon name="arrow-dropright"></ion-icon> 
           </button> 

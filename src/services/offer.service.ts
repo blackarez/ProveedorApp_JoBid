@@ -79,4 +79,7 @@ export class OfferService{
 	public getTimmer(keyOffer){
 		return	this.afDB.object('/time/'+keyOffer+'/Timer');
 	}
+	public getAddressOffer(keyOffer){
+		return this.afDB.object('/offer/'+keyOffer+'/Address');
+	}
 }

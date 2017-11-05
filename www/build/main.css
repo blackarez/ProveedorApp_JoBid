@@ -4167,6 +4167,33 @@ ion-grid.grid ion-row.steps ion-col.active div.numb {
   background: orange;
 }
 
+.clasificacion {
+  direction: rtl;
+  /* right to left */
+  unicode-bidi: bidi-override;
+  /* bidi de bidireccional */
+  width: 100%;
+  text-align: center;
+}
+
+.clasificacion label {
+  color: black;
+  font-size: 25px;
+  text-align: center;
+}
+
+.clasificacion label:hover, .clasificacion label:hover ~ label {
+  color: #b20000;
+}
+
+.clasificacion input[type="radio"] {
+  display: none;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: #b20000;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -26111,10 +26138,14 @@ page-service-sale ion-footer ion-toolbar #btnSalir, page-service-sale ion-footer
 
 page-service-sale ion-footer ion-toolbar #btnSalir {
   background: #666666 !important;
+  font-size: 20px;
+  height: 48px;
 }
 
 page-service-sale ion-footer ion-toolbar #btnDetalle {
   background: #2b8300 !important;
+  font-size: 20px;
+  height: 48px;
 }
 
 page-service-sale ion-footer ion-toolbar .newOffer {
@@ -26199,6 +26230,10 @@ page-service-sale ion-content ion-grid.body .button ion-icon[name=search] {
   font-size: 28px;
   padding: 7.5px !important;
   padding-top: 13px !important;
+}
+
+page-service-sale .item-md ion-avatar[item-left], page-service-sale .item-md ion-thumbnail[item-left], page-service-sale .item-md ion-avatar[item-start], page-service-sale .item-md ion-thumbnail[item-start] {
+  margin: 8px 10px 8px 5px;
 }
 
 page-service-vote p {

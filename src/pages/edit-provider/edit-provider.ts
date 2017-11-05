@@ -78,6 +78,7 @@ export class EditProviderPage {
     console.log('load User');
      this.profSub= this.professionalsService.getProfessional(this.userActual).subscribe( 
        (dataUserDB)=>{
+        console.log('profSub-S edit-provider');
         console.log(dataUserDB);
         this.userData = {"username":dataUserDB['prof_username'],"password":dataUserDB['prof_password'],"email":dataUserDB['prof_email'],"name":dataUserDB['prof_name'],"lastName":dataUserDB['prof_lastName'],"date":dataUserDB['prof_date'],"socialSecurity":dataUserDB['prof_socialSecurity'],"zipcode":dataUserDB['prof_zipcode'],"state":dataUserDB['prof_state'],"picture":dataUserDB['prof_picture'],"verificacion":dataUserDB['$key'],"pais":dataUserDB['prof_pais'],"direccion":dataUserDB['prof_direccion'],"tel":dataUserDB['prof_tel'],"star":dataUserDB['prof_star']};
         // console.log(this.userData);
@@ -102,6 +103,8 @@ export class EditProviderPage {
     console.log(this.userActual);
     this.professionalsService.newUser(this.userData,this.userActual);
     // this.navCtrl.push('ProviderInfoAPage');
+    this.profSub.unsubscribe();
+    console.log('profSub-US edit-provider');
     this.navCtrl.pop();
   }
 

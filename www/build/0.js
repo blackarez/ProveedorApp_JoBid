@@ -9813,11 +9813,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var PaymentsPage = (function () {
-    function PaymentsPage(alertCtrl, navCtrl, navParams, braintreeService) {
+    function PaymentsPage(alertCtrl, navCtrl, navParams, braintreeService, loadingCtrl) {
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.braintreeService = braintreeService;
+        this.loadingCtrl = loadingCtrl;
         //-booleanDropIN
         this.booleanCreateErr = false;
         this.booleanInstance = false;
@@ -9827,6 +9828,7 @@ var PaymentsPage = (function () {
     }
     PaymentsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad PaymentsPage');
+        this.presentLoading();
     };
     PaymentsPage.prototype.goSavePaymentMethod = function () {
         if (this.booleanCreateErr) {
@@ -9900,16 +9902,24 @@ var PaymentsPage = (function () {
         });
         alert.present();
     };
+    PaymentsPage.prototype.presentLoading = function () {
+        var loader = this.loadingCtrl.create({
+            content: "Please wait...",
+            duration: 5000
+        });
+        loader.present();
+    };
     return PaymentsPage;
 }());
 PaymentsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-payments',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\payments\payments.html"*/'<!--\n\n  Generated template for the PaymentsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <h3>My payments</h3>\n\n  <h4>List:</h4>\n\n  <div padding>\n\n    <div id="dropin-container"></div> \n\n  </div>\n\n  </ion-content>\n\n  <ion-footer>\n\n    <ion-toolbar>\n\n        <div class="btnBottom">\n\n          <button (click)="goAddPaymentMethod()">\n\n            Add payment method\n\n          </button> \n\n        </div>\n\n    </ion-toolbar>\n\n  </ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\payments\payments.html"*/,
+        selector: 'page-payments',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\payments\payments.html"*/'<!--\n\n  Generated template for the PaymentsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <h3>My payments</h3>\n\n  <div padding>\n\n    <h4>List:</h4>\n\n    <div id="dropin-container"></div> \n\n  </div>\n\n  </ion-content>\n\n  <ion-footer>\n\n    <ion-toolbar>\n\n        <div class="btnBottom">\n\n          <button ion-button color="danger" block (click)="goAddPaymentMethod()">\n\n            Add payment method\n\n          </button> \n\n        </div>\n\n    </ion-toolbar>\n\n  </ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\payments\payments.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__services_braintree_service__["a" /* BraintreeService */]])
+        __WEBPACK_IMPORTED_MODULE_2__services_braintree_service__["a" /* BraintreeService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
 ], PaymentsPage);
 
 //# sourceMappingURL=payments.js.map

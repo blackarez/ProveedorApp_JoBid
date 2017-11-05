@@ -78,10 +78,12 @@ var EditUserPage = (function () {
         console.log('ionViewDidLoad EditUserPage');
     };
     EditUserPage.prototype.goEdit = function () {
+        console.log('listServiceSubs-US edit-user');
         this.listServiceSubs.unsubscribe();
         this.navCtrl.push('EditProviderPage');
     };
     EditUserPage.prototype.goNew = function () {
+        console.log('listServiceSubs-US edit-user');
         this.listServiceSubs.unsubscribe();
         this.navCtrl.push('ServiceInfoAPage');
     };
@@ -97,6 +99,7 @@ var EditUserPage = (function () {
     EditUserPage.prototype.getServices = function () {
         var _this = this;
         this.listServiceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (value) {
+            console.log('listServiceSubs-S edit-user');
             _this.ListServicesVista = [];
             // console.log(value);
             for (var key in value) {

@@ -73,6 +73,7 @@ export class SingupPage {
     this.userB=this.afAuth.auth.currentUser;
     // console.log(this.userB);
     let aftSbus=this.afAuth.authState.subscribe( user => {
+      console.log('aftSbus-S singup');
       console.log('find user facebook 2');
       // console.log(user);
       if (user){
@@ -85,9 +86,11 @@ export class SingupPage {
             // console.log(this.userData);
           }
         }
+        console.log('aftSbus-US singup');
         aftSbus.unsubscribe();
       } else {
         console.info('find user facebook 2 - no');
+        console.log('aftSbus-US singup');
         aftSbus.unsubscribe();
       }
     });
@@ -102,6 +105,7 @@ goPhoneV(){
     // console.log(JSON.stringify( Userexists));
     // Userexists.forEach((value)=>{ console.log(value);});
     this.SubcribeUserexists = Userexists.subscribe((value) => {
+      console.log('SubcribeUserexists-US singup');
       console.log('user1');
       console.log(value);
       if(value['0']){
@@ -121,6 +125,7 @@ goPhoneV(){
         console.log('alerta signUp');
         this.showAlertSignUp();
       }
+      console.log('SubcribeUserexists-US singup');
       this.SubcribeUserexists.unsubscribe();
     });
 }
@@ -186,7 +191,7 @@ enviarCorreo(){
       this.showAlertEmail();
     }
     // this.navCtrl.push('PaymentMethodsPage');
-    this.navCtrl.push('ProviderInfoAPage');
+    this.navCtrl.push('DocumentPage');
   }
 
 setCity(){

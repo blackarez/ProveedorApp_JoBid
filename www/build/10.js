@@ -125,7 +125,7 @@ var ServiceSalePage = (function () {
         this.imgServiceDefault = "assets/img/User/FotoServiceInfo.JPG";
         //--timer
         this.segundos = 0;
-        this.minutos = 2;
+        this.minutos = 3;
         this.showContador = true;
         this.NumeroContador = 1;
         //-- geoLocation
@@ -137,7 +137,7 @@ var ServiceSalePage = (function () {
         this.exitDisable = false;
         this.DataService = this.navParams.get('datos');
         //-load only
-        // this.DataService = {"name":"Angel","img":"assets/img/User/UserService.png","sale":"178","infoShow":"fdgsfg...","info":"fdgsfg","idOff":"offer_1509323664011","idUser":"user_1509139021478"};
+        // this.DataService = {"name":"Angel","img":"assets/img/User/UserService.png","sale":"179","infoShow":"FADFASD...","info":"FADFASD","idOff":"offer_1509549987105","idUser":"user_1509139021478"};
         //-fin load only
         console.log(this.DataService);
         console.log(JSON.stringify(this.DataService));
@@ -146,8 +146,8 @@ var ServiceSalePage = (function () {
         this.loadView();
         this.getSale();
         this.getTimer();
-        this.contador = '0' + this.minutos + ':' + '0' + this.segundos;
         this.startTimer();
+        this.contador = '0' + this.minutos + ':' + '0' + this.segundos;
     }
     ServiceSalePage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ServiceSalePage');
@@ -197,7 +197,7 @@ var ServiceSalePage = (function () {
     };
     ServiceSalePage.prototype.timer = function () {
         if (this.minutos == 0 && this.segundos == 1) {
-            // if(this.minutos == 1 && this.segundos == 40 ){ 
+            // if(this.minutos == 1 && this.segundos == 50 ){
             //this.showContador = false;
             if (this.NumeroContador == 2) {
                 clearInterval(this.objNodeTimer);
@@ -235,6 +235,7 @@ var ServiceSalePage = (function () {
                 // console.log(this.DataService.idUser);
                 this.saleSub = this.saleService.getSale(this.DataService.idUser, this.DataService.idOff)
                     .subscribe(function (result) {
+                    console.log('saleSub-S sale');
                     _this.Workers = [];
                     _this.MenosPrecio = undefined;
                     // console.log(result);
@@ -252,12 +253,14 @@ var ServiceSalePage = (function () {
                                 _this.MenosPrecio = Number(trabajadores_1[trabajador]['offer']);
                             }
                             var PromiseUser = _this.professionalsService.getProfessional(trabajador).subscribe(function (user) {
+                                console.log('PromiseUser-S sale');
                                 //console.log(user);
                                 var img = _this.imgJobDefault;
                                 if (user.prof_picture && user.prof_picture != undefined && user.prof_picture != '') {
                                     img = user.prof_picture;
                                 }
                                 _this.Workers.push({ "id": trabajador, "offer": trabajadores_1[trabajador]['offer'], "img": img, "name": user.prof_name });
+                                console.log('PromiseUser-US sale');
                                 PromiseUser.unsubscribe();
                             });
                         };
@@ -269,6 +272,7 @@ var ServiceSalePage = (function () {
                     else {
                         _this.AlertCancelOffer();
                         _this.navCtrl.setRoot('ShowPage');
+                        console.log('PromiseUser-US sale');
                         _this.saleSub.unsubscribe();
                     }
                 });
@@ -279,10 +283,12 @@ var ServiceSalePage = (function () {
     ServiceSalePage.prototype.ganador = function () {
         if (this.MenosPrecio == this.myOffer) {
             this.goServiceWin();
+            console.log('saleSub-US sale');
             this.saleSub.unsubscribe();
         }
         else {
             this.navCtrl.setRoot('ShowPage');
+            console.log('saleSub-US sale');
             this.saleSub.unsubscribe();
         }
     };
@@ -317,6 +323,7 @@ var ServiceSalePage = (function () {
     ServiceSalePage.prototype.getTimer = function () {
         var _this = this;
         this.timerSubs = this.offerService.getTimmer(this.DataService.idOff).subscribe(function (timer) {
+            console.log('timerSubs-S sale');
             // console.log(timer);
             if (timer['$value']) {
                 // console.log(timer['$value']);
@@ -327,6 +334,7 @@ var ServiceSalePage = (function () {
                 _this.minutos = Number(ArrayContador['0']);
                 _this.segundos = Number(ArrayContador['1']);
             }
+            console.log('timerSubs-US sale');
             _this.timerSubs.unsubscribe();
         });
     };

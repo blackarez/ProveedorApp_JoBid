@@ -50,6 +50,8 @@ export class ServiceInfoPage {
     // console.log(localStorage);
   }
   goSale(){
+    console.log('statusSubs-US service-info');
+    console.log('timerSubs-US service-info');
     this.statusSubs.unsubscribe();
     this.timerSubs.unsubscribe();
     this.saleService.setSaleProvider(this.DataService.idUser,this.DataService.idOff,this.userActual,'-');
@@ -71,11 +73,13 @@ export class ServiceInfoPage {
     // console.log(this.DataService.idUser);
     this.statusSubs = this.saleService.getStatus(this.DataService.idUser,this.DataService.idOff).subscribe(
       (status)=>{
+    console.log('statusSubs-S service-info');
         // console.log(status);
         // console.log(status['$value']);
         if(status['$value'] == 'Published'){
           this.timerSubs = this.offerService.getTimmer(this.DataService.idOff).subscribe(
             (timer)=>{
+                  console.log('timerSubs-S service-info');
               // console.log(timer);
               if(timer['$value'] != null){
                 this.contador= timer['$value'];
@@ -103,6 +107,8 @@ export class ServiceInfoPage {
         }else{
           this.contador ="00:00";
           this.NoGoSale = true;
+          console.log('statusSubs-US service-info');
+          console.log('timerSubs-US service-info');
           this.statusSubs.unsubscribe();
           this.timerSubs.unsubscribe();
           if(status['$value'] == 'Cancelled'){
@@ -120,14 +126,20 @@ export class ServiceInfoPage {
   loadDescripcion(){
      let offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(
        (DetailBD) =>{
-          console.log(DetailBD);
+        console.log('offerDetailSub-S service-info');
+        console.log(DetailBD);
+        if(DetailBD){
+          console.log('offerDetailSub-US service-info');
           offerDetailSub.unsubscribe();
+        }
        }
      );
   }
   
   goShowPage(){
     this.navCtrl.setRoot('ShowPage');
+    console.log('statusSubs-US service-info');
+    console.log('timerSubs-US service-info');
     this.statusSubs.unsubscribe();
     this.timerSubs.unsubscribe();
   }

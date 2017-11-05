@@ -52,6 +52,7 @@ export class MyServicesPage {
     
     this.contractSubs=this.professionalsService.getContract(this.UserActual).subscribe(
       (dataList)=>{
+        console.log('professionalsService-S my-services');
         // console.log('datalist');
         // console.log(dataList);
         if(dataList['$value']){
@@ -63,6 +64,7 @@ export class MyServicesPage {
             console.log(dataList[key]['$key']);
             this.userSubs = this.userService.getUser(dataList[key]['User']).subscribe(
               (userDB)=>{
+                console.log('professionalsService-S my-services');
                 // console.log(userDB);
                 if(userDB){
                   let nameUser = userDB['user_username'];
@@ -85,7 +87,9 @@ export class MyServicesPage {
             });
           }
         }
+        console.log('userSubs-US my-services');
         this.userSubs.unsubscribe();
+        console.log('professionalsService-US my-services');
         this.contractSubs.unsubscribe();
       }
     );

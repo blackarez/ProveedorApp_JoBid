@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item>
       <!-- <ion-label class="labelHide">Service</ion-label> -->
-      <ion-select [(ngModel)]="service" name="service" (ngModelChange)="setSubServices()" placeholder="service">
+      <ion-select [(ngModel)]="service" name="service" (ngModelChange)="setSubServices()" placeholder="Service">
         <ion-option *ngFor="let service of ListServices" value="{{service.name}}">{{service.name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -65,7 +65,7 @@
 <ion-footer>
   <ion-toolbar>
       <div class="btnBottom">
-        <button ion-button (click)="goProviderUpdateService()">
+        <button ion-button color="danger" block (click)="goProviderUpdateService()">
             Add Service
             <ion-icon name="arrow-dropright"></ion-icon> 
         </button> 

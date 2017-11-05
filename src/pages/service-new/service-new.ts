@@ -88,7 +88,8 @@ export class ServiceNewPage {
     // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
     console.log(this.DataService);
     console.log(this.DataUser);
-
+    
+    console.log('userSubs-US service-new');
     this.userSubs.unsubscribe();
     
     let dataService = {'service':this.DataService,"user":this.DataUser};
@@ -115,13 +116,15 @@ export class ServiceNewPage {
     this.userSubs=this.userService.getUser(this.user).subscribe(
     // this.userService.getUser(this.user).subscribe(
       (userDB)=>{
+      console.log('userSubs-S service-new');
         console.log(userDB);
         if(userDB){
           this.nameUser = userDB['user_username'];
-          let addresU = userDB['user_address'];
-          for(let key in addresU){
-            this.addresUser = addresU[key]['addr_info'];
-          }
+          // let addresU = userDB['user_address'];
+          // for(let key in addresU){
+          //   this.addresUser = addresU[key]['addr_info'];
+          // }
+          
           this.phoneUser = userDB['user_tel'];
           console.log(userDB['user_picture']);
           if(userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "" ){
@@ -129,31 +132,46 @@ export class ServiceNewPage {
           }else{
             this.imgUser=userDB['user_picture'];
           }
-          this.DataUser = {"nameUser":this.nameUser,"address":this.addresUser,"tel":this.phoneUser,"img":this.imgUser};
+          let AddressOfferSubs = this.offerService.getOffer(this.keyOffer).subscribe(
+            (offerBD) =>{
+              if(AddressOfferSubs){
+                console.log(offerBD);
+                console.log(offerBD['Address']['name']);
+                console.log(offerBD['sale']);
+                if(offerBD['name']){
+                  this.addresUser = offerBD['Address']['name'];
+                  this.DataUser = {"nameUser":this.nameUser,"address":this.addresUser,"tel":this.phoneUser,"img":this.imgUser,"sale":offerBD['sale']};
+                }
+                AddressOfferSubs.unsubscribe();
+              }
+            }
+          );
         }
-        
       });
-   
   }
 
   getUsersLocation(){
     this.OfferUserLocationSubs = this.offerService.getOfferUserLocation(this.keyOffer).subscribe(
       (LocationUser)=>{
+        console.log('OfferUserLocationSubs-S service-new');
         console.info(LocationUser);        
         this.Userlat =LocationUser.latitud;
         this.Userlng =LocationUser.longitud;
         console.log(this.Userlat);
         console.log(this.Userlng);
+        console.log('OfferUserLocationSubs-US service-new');
         this.OfferUserLocationSubs.unsubscribe();
       }
     );
     this.OfferProviderLocationSubs = this.offerService.getOfferProviderLocation(this.keyOffer).subscribe(
       (LocationProvider)=>{
+        console.log('OfferProviderLocationSubs-S service-new');
         console.info(LocationProvider);        
         this.providerLatitud =LocationProvider.latitud;
         this.providerLongitud =LocationProvider.longitud;
         console.log(this.providerLatitud);
         console.log(this.providerLongitud);
+        console.log('OfferProviderLocationSubs-US service-new');
         this.OfferProviderLocationSubs.unsubscribe();
       }
     );

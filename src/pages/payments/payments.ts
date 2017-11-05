@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams , AlertController, LoadingController} from 'ionic-angular';
 
 //---services
 import { BraintreeService } from '../../services/braintree.service';
@@ -30,6 +30,7 @@ booleanInstance:boolean=false;
   public alertCtrl: AlertController,
   public navCtrl: NavController, public navParams: NavParams,
   private braintreeService : BraintreeService,
+  public loadingCtrl: LoadingController,
 ) {
   this.UserActual = localStorage.getItem('verificacion');
   this.crearCustomer();
@@ -38,6 +39,7 @@ booleanInstance:boolean=false;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentsPage');
+    this.presentLoading();
   }
 
   goSavePaymentMethod(){
@@ -117,6 +119,14 @@ booleanInstance:boolean=false;
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 5000
+    });
+    loader.present();
   }
 
 }

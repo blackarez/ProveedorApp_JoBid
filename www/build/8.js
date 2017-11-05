@@ -91,14 +91,17 @@ var ServiceWinPage = (function () {
     ServiceWinPage.prototype.getStatusService = function () {
         var _this = this;
         this.statusSub = this.saleService.getStatus(this.user, this.offer).subscribe(function (status) {
+            console.log('statusSub-S service-win');
             console.log(status);
             if (status['$value']) {
                 if (status['$value'] == 'Waiting for the professional') {
                     _this.goServiceNew();
+                    console.log('statusSub-US service-win');
                     _this.statusSub.unsubscribe();
                 }
                 if (status['$value'] == 'Cancelled') {
                     _this.goIndexService();
+                    console.log('statusSub-US service-win');
                     _this.statusSub.unsubscribe();
                 }
             }

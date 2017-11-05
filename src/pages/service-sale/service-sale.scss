@@ -70,9 +70,13 @@ page-service-sale {
 		}
 		#btnSalir{
 			background: $Gray !important;
+			    font-size: 20px;
+    			height: 48px;
 		}
 		#btnDetalle{
 			background: $Green !important;
+			    font-size: 20px;
+    			height: 48px;
 		}
 		.newOffer{
 			background: $Red;
@@ -146,4 +150,7 @@ page-service-sale {
 			}
 		}
 	}	
+	.item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start]{
+		margin: 8px 10px 8px 5px;
+	}
 }

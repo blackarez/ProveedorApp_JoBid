@@ -92,6 +92,7 @@ var MyServicesPage = (function () {
         var _this = this;
         console.log('loadView');
         this.contractSubs = this.professionalsService.getContract(this.UserActual).subscribe(function (dataList) {
+            console.log('professionalsService-S my-services');
             // console.log('datalist');
             // console.log(dataList);
             if (dataList['$value']) {
@@ -103,6 +104,7 @@ var MyServicesPage = (function () {
                     // console.log(dataList[key]['User']);
                     console.log(dataList[key]['$key']);
                     _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
+                        console.log('professionalsService-S my-services');
                         // console.log(userDB);
                         if (userDB) {
                             var nameUser = userDB['user_username'];
@@ -129,7 +131,9 @@ var MyServicesPage = (function () {
                     _loop_1(key);
                 }
             }
+            console.log('userSubs-US my-services');
             _this.userSubs.unsubscribe();
+            console.log('professionalsService-US my-services');
             _this.contractSubs.unsubscribe();
         });
         console.log(this.ListService);
