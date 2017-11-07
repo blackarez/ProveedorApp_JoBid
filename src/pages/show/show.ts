@@ -9,6 +9,8 @@ import { UserService } from '../../services/user.service';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
 
 import { AgmCoreModule } from '@agm/core';
 /**
@@ -67,6 +69,7 @@ export class ShowPage {
     private offerService: OfferService, private userService: UserService,
     private professionalsService : ProfessionalsService,
     private geo: Geolocation, private platform: Platform,
+    private camera: Camera,    
   ) {
     this.UserActual = localStorage.getItem('verificacion');
     console.log(this.UserActual);
@@ -407,5 +410,29 @@ export class ShowPage {
     return experienciaMayor;
     // return false;
   }
+
+  async  clickCamara(){
+    console.log('clickCamara');
+   try{
+
+  
+    const options: CameraOptions = {
+      quality: 60,
+      targetHeight: 100,
+      targetWidth: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    // console.log(options);
+    const result = await this.camera.getPicture(options);
+    const image = 'data:image/jpeg;base64,' + result;
+    const picture = storage().ref('pictures');
+    picture.putString(result,'data_url');
+  } catch(e){
+    console.error(e);
+   }
+  }
+
 
 }
