@@ -260,8 +260,13 @@ private getUserLocationGeolocation(){
           let ArrayContador = timer['$value'].split(":", 2);
           console.log(ArrayContador['0']);
           console.log(ArrayContador['1']);
-          this.minutos = Number(ArrayContador['0']);
-          this.segundos = Number(ArrayContador['1']);
+          if(ArrayContador['1'] == '00'){
+            this.minutos = Number(ArrayContador['0'])-1;
+            this.segundos = Number(59);
+          }else{
+            this.minutos = Number(ArrayContador['0']);
+            this.segundos = Number(ArrayContador['1'])-1;
+          }
         }
         console.log('timerSubs-US sale');
         this.timerSubs.unsubscribe();

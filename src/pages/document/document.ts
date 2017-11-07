@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 /**
  * Generated class for the DocumentPage page.
@@ -14,8 +15,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'document.html',
 })
 export class DocumentPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //-form
+  private documentos : FormGroup;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private formBuilder: FormBuilder,
+  ) {
+    this.getForm();
   }
 
   ionViewDidLoad() {
@@ -25,4 +30,22 @@ export class DocumentPage {
   goTerms(){
     this.navCtrl.push('TermsPage');
   }
+
+  getForm(){
+    this.documentos = this.formBuilder.group({
+      documentFoto : ['', Validators.required],
+      licenciaFoto: ['', Validators.required],
+      // documentFoto : [''],
+      // licenciaFoto: [''],
+    });
+    
+  }
+
+  fotoDocumento(){
+
+  }
+  fotoLicencia(){
+
+  }
+
 }

@@ -14,20 +14,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-list padding>
-    <ion-item>
-      <p><strong>Select your profession:</strong></p>
-    </ion-item>
-      
-</ion-list>
+  <img src="assets/img/LogoJoBid2.png">
+  
+      <p><strong>Terms and Conditions:</strong></p>
+<p  padding class="terms"> 
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus tempora vel culpa cupiditate dolor dolores inventore accusantium quae nostrum, eum quisquam beatae tenetur eligendi ex aperiam quos, enim velit illo!
+  Sapiente at facilis quibusdam enim quasi perferendis rem voluptatem provident ex, illo accusamus facere dicta est magnam quidem minima optio debitis dolorem, omnis laborum quisquam inventore, iusto eos. Earum, iusto.
+  Fugiat tenetur obcaecati excepturi sint iste natus vel, ipsum voluptate aperiam impedit modi sequi doloremque ut quaerat amet, sapiente temporibus rem perspiciatis laboriosam porro repellendus hic autem eligendi! Vero, numquam.
+  Omnis laboriosam illum magni fugit accusantium! Soluta temporibus deleniti distinctio repellat dolor, at numquam. Commodi odio autem, ducimus beatae facilis reiciendis tempora amet? Facilis ipsa deserunt, quo doloribus ea adipisci!
+  Iusto, eius. Aliquid blanditiis expedita id iusto debitis eos, inventore voluptates eligendi libero, totam sed et? Dolorum hic eligendi officiis voluptas omnis possimus sit, laudantium magni ipsum molestiae accusantium? Incidunt.
+  Ea facere quam enim. Magnam odit impedit accusantium esse natus? Sequi repellat consequatur aut cupiditate doloribus.
+</p>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-      <div class="btnBottom">
-        <button ion-button color="danger" block (click)="goProviderInfo()">
-            Continue
-            <ion-icon name="arrow-dropright"></ion-icon> 
-        </button> 
-      </div>
-  </ion-toolbar>
-</ion-footer>
+    <ion-grid padding>
+      <ion-row>
+        <ion-col col-10>
+            <ion-list >
+            <!-- <ion-list radio-group [(ngModel)]="termsValue"> -->
+              <ion-item>
+              <ion-label>Accept the terms and conditions:</ion-label>
+              <ion-checkbox [(ngModel)]="termsValue" ></ion-checkbox>
+            </ion-item></ion-list>
+        </ion-col>
+        <ion-col col-2>
+            <button  ion-button block (click)="goProviderInfo()" icon-only round color="danger" [disabled]="!termsValue">
+								<ion-icon name="arrow-dropright"></ion-icon>
+						</button>
+            </ion-col>
+           </ion-row>
+          </ion-grid>  
+        </ion-toolbar>
+      </ion-footer>

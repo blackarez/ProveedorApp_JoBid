@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 /**
  * Generated class for the CertificatesPage page.
@@ -14,8 +15,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'certificates.html',
 })
 export class CertificatesPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //-form
+  private certificados : FormGroup;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private formBuilder : FormBuilder,
+  ) {
+    this.getForm();
   }
 
   ionViewDidLoad() {
@@ -23,5 +28,34 @@ export class CertificatesPage {
   }
   goPaymentMethods(){
     this.navCtrl.push('PaymentMethodsPage');
+  }
+
+  fotoGaleria(foto){
+    switch (foto) {
+      case 'A':
+        console.log('fotoA');
+        break;
+      case 'B':
+        console.log('fotoB');
+        break;
+      case 'C':
+        console.log('fotoC');
+        break;
+      case 'D':
+        console.log('fotoD');
+        break;
+      
+      default:
+        break;
+    }
+  }
+
+  getForm(){
+    this.certificados = this.formBuilder.group({
+      fotoA : [''],
+      fotoB: [''],
+      fotoC: [''],
+      fotoD: [''],
+    });
   }
 }

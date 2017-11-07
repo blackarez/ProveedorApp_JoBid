@@ -16,4 +16,13 @@ page-terms {
             // } 
         }
     }
+    .terms{
+        text-align: justify;
+    }
+    .toolbar {
+        .grid,ion-item.item-md, ion-item.item-ios, .list-md, .list-ios{
+            padding: 0;
+            margin: 0;
+        }
+    }
 }

@@ -70,7 +70,6 @@ export class PaymentMethodsPage {
         }
         if(payload){ 
           console.log(payload);
-          this.navCtrl.push('ProviderOK');
         }
       });
       // console.log(this.userData);
@@ -157,7 +156,8 @@ export class PaymentMethodsPage {
   }
 
   goHome(){
-    this.navCtrl.setRoot('ShowPage');
+    // this.navCtrl.setRoot('ShowPage');
+    this.navCtrl.push('ProviderOkPage');
   }
 
   presentLoading() {

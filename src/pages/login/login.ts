@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 //-page
 
@@ -29,13 +30,20 @@ export class LoginPage {
   userDataUpdate: any =[];
   pass:any;
 
+  //-form
+  private todo : FormGroup;
     constructor(public navCtrl: NavController , 
       public navParams: NavParams, 
       public alertCtrl: AlertController,
       private professionalsService : ProfessionalsService,
-      public afAuth: AngularFireAuth  
+      public afAuth: AngularFireAuth,
+      private formBuilder: FormBuilder,
     ) {
       // this.pass ="mi clave";
+      this.todo = this.formBuilder.group({
+        username: ['', Validators.required],
+        password: ['', Validators.required],
+      });
   	}
 
   ionViewDidLoad() {
@@ -109,10 +117,12 @@ firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
       let userBD =this.professionalsService.getProfessionalExists(res.user.providerData["0"].email).subscribe(
         (value)=>{
           console.log('professionalsService-S login');
-          console.log(value);
-          if(value['0']){
-            console.log(value['0']);
-            this.goNextPagePrehomeFace(value['0']);
+          for(let key in value){
+            // console.log(value[key]);
+            if(value[key]){
+              console.log(value[key]);
+              this.goNextPagePrehomeFace(value[key]);
+            }
           }
           console.log('professionalsService-US login');
           userBD.unsubscribe();

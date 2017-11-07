@@ -12,7 +12,84 @@
 
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+    <img src="assets/img/LogoJoBid2.png">
+  <form [formGroup]="gallery">
+  <ion-list padding>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-list>
+              <ion-item>
+                <input type="text" placeholder="Photo 1" [(ngModel)]="fotoA" formControlName="fotoA" name="fotoA" />
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-2 id="btn-camera">
+              <button ion-button color="danger" outline (click)="fotoGaleria('A')"><ion-icon name="camera"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-list>
+              <ion-item>
+                <input type="text" placeholder="Photo 2" [(ngModel)]="fotoB" formControlName="fotoB" name="fotoB" />
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-2 id="btn-camera">
+              <button ion-button color="danger" outline (click)="fotoGaleria('B')"><ion-icon name="camera"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-list>
+              <ion-item>
+                <input type="text" placeholder="Photo 3" [(ngModel)]="fotoC" formControlName="fotoC" name="fotoC" />
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-2 id="btn-camera">
+              <button ion-button color="danger" outline (click)="fotoGaleria('C')"><ion-icon name="camera"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-list>
+              <ion-item>
+                <input type="text" placeholder="Photo 4" [(ngModel)]="fotoD" formControlName="fotoD" name="fotoD" />
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-2 id="btn-camera">
+              <button ion-button color="danger" outline (click)="fotoGaleria('D')"><ion-icon name="camera"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</form>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <div class="btnBottom">
+        <button ion-button color="danger" block (click)="goService()" >
+            Continue
+            <ion-icon name="arrow-dropright"></ion-icon> 
+        </button> 
+      </div>
+  </ion-toolbar>
+</ion-footer>

@@ -14,17 +14,53 @@
 </ion-header>
 
 <ion-content>
+    <img src="assets/img/LogoJoBid2.png">
+  <form [formGroup]="documentos">
   <ion-list padding>
+
+    <p><strong>I took pictures of the requested documents:</strong></p>
     <ion-item>
-      <p><strong>Select your profession:</strong></p>
+      <p>Photo of your Identification Document or Social Security.</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-list>
+              <ion-item>
+                <input type="text" placeholder="" [(ngModel)]="documentFoto" formControlName="documentFoto" name="documentFoto" />
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-2 id="btn-camera">
+              <button ion-button color="danger" outline (click)="fotoDocumento()"><ion-icon name="camera"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
-      
-</ion-list>
+    <ion-item>
+      <p>Photo of your driver's license or work permit.</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-list>
+              <ion-item>
+                <input type="text" placeholder="" [(ngModel)]="licenciaFoto" formControlName="licenciaFoto" name="licenciaFoto" />
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col col-2 id="btn-camera">
+              <button ion-button color="danger" outline (click)="fotoLicencia()"><ion-icon name="camera"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    
+  </ion-list>
+</form>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
       <div class="btnBottom">
-        <button ion-button color="danger" block (click)="goTerms()">
+        <button ion-button color="danger" block (click)="goTerms()" [disabled]="!documentos.valid">
             Continue
             <ion-icon name="arrow-dropright"></ion-icon> 
         </button> 

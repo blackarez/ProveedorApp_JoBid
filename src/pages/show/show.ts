@@ -80,6 +80,7 @@ export class ShowPage {
     this.labelToogle= 'Offline';
     this.StatusProvider= false;
     this.getUserLocationGeolocation();
+    // alert('hola');
   }
   
   ionViewDidLoad() {
@@ -100,6 +101,7 @@ export class ShowPage {
 
   public notify() {
     console.log("Toggled: "+ this.StatusProvider);
+    alert("Toggled: "+ this.StatusProvider);
     if(this.StatusProvider == false){
       this.labelToogle ="Offline";
     }else{
@@ -109,6 +111,7 @@ export class ShowPage {
   }
 
   showServices(){
+    alert('showServices');
    this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
       this.ListService=[];
       // console.log(list);
@@ -118,6 +121,7 @@ export class ShowPage {
   }
 
   getServiceProvider(BDListOffer){
+    alert();
     this.serviceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (BDListServicesProvider)=>{
         console.log('serviceSubs-S show');
@@ -151,6 +155,7 @@ export class ShowPage {
         
           if( Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star)) ){
             console.info('star ok');
+            alert('star ok');
             // console.log(BDListOffer[keys]);
             // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
             // console.log(BDListOffer[keys].Clasificacion.distancia);
@@ -170,6 +175,7 @@ export class ShowPage {
               
               if( BDListOffer[keys].Clasificacion.categoria ==  BDListServicesProvider[keySP]['serv_subService'] && true ==this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas) ){
                 console.info('categoria y  distancia ok');
+                alert('categoria y  distancia ok');
                 let ServiceProviderCertificate:any;
                 let ServiceProviderSecurity:any;
                 if(BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null){
@@ -196,10 +202,12 @@ export class ShowPage {
 
                 if(ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro){
                   console.info('certificado y seguro ok');
+                  alert('certificado y seguro ok');
                   // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
                   
                   if(this.getNumeroExperienciOffer (BDListOffer[keys].Clasificacion.experiencia,BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true){
                     console.info('Experience ok');
+                    alert('Experience ok');
               
                     let InfmaxOffer=BDListOffer[keys].Clasificacion.informacion.maxOffer;
                     let InfmoreInformacion = BDListOffer[keys].Clasificacion.informacion.moreInformation;
@@ -229,12 +237,15 @@ export class ShowPage {
                     // this.ListService=list;
                   }else{
                     console.info('Experience no');
+                    alert('star ok');
                   }   
                 }else{
                   console.info('certificado y seguro no');
+                  alert('star ok');
                 }
               }else{
                 console.info('categoria y  distancia no');
+                alert('star ok');
               }
             }
 
