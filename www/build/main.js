@@ -1,4 +1,4 @@
-webpackJsonp([26],{
+webpackJsonp([31],{
 
 /***/ 151:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -182,102 +182,122 @@ var map = {
 	],
 	"../pages/add-service/add-service.module": [
 		436,
-		25
+		30
+	],
+	"../pages/certificates/certificates.module": [
+		437,
+		29
+	],
+	"../pages/document/document.module": [
+		438,
+		28
 	],
 	"../pages/edit-provider/edit-provider.module": [
-		437,
+		439,
 		4
 	],
 	"../pages/edit-user/edit-user.module": [
-		438,
-		24
+		440,
+		27
+	],
+	"../pages/gallery/gallery.module": [
+		441,
+		26
 	],
 	"../pages/home/home.module": [
-		439,
-		23
+		442,
+		25
 	],
 	"../pages/login/login.module": [
-		440,
-		22
+		443,
+		24
 	],
 	"../pages/my-service-info/my-service-info.module": [
-		441,
-		21
+		444,
+		23
 	],
 	"../pages/my-services/my-services.module": [
-		442,
-		20
+		445,
+		22
 	],
 	"../pages/payment-methods/payment-methods.module": [
-		443,
+		446,
 		1
 	],
 	"../pages/payments/payments.module": [
-		444,
+		447,
 		0
 	],
 	"../pages/policies/policies.module": [
-		445,
-		19
+		448,
+		21
 	],
 	"../pages/provider-info-a/provider-info-a.module": [
-		446,
-		18
+		449,
+		20
 	],
 	"../pages/provider-info-b/provider-info-b.module": [
-		447,
-		17
+		450,
+		19
+	],
+	"../pages/provider-ok/provider-ok.module": [
+		451,
+		18
 	],
 	"../pages/service-info-a/service-info-a.module": [
-		449,
-		16
+		453,
+		17
 	],
 	"../pages/service-info-b/service-info-b.module": [
-		450,
-		15
+		454,
+		16
 	],
 	"../pages/service-info/service-info.module": [
-		448,
-		14
+		452,
+		15
 	],
 	"../pages/service-job/service-job.module": [
-		451,
-		13
+		455,
+		14
 	],
 	"../pages/service-new/service-new.module": [
-		452,
-		12
+		456,
+		13
 	],
 	"../pages/service-ok/service-ok.module": [
-		453,
-		11
+		457,
+		12
 	],
 	"../pages/service-sale/service-sale.module": [
-		454,
-		10
+		458,
+		11
 	],
 	"../pages/service-vote/service-vote.module": [
-		455,
-		9
+		459,
+		10
 	],
 	"../pages/service-win/service-win.module": [
-		456,
-		8
+		460,
+		9
 	],
 	"../pages/show/show.module": [
 		434,
-		7
+		8
 	],
 	"../pages/singup/singup.module": [
-		457,
+		461,
 		3
 	],
+	"../pages/terms/terms.module": [
+		462,
+		7
+	],
 	"../pages/update-service/update-service.module": [
-		458,
+		463,
 		6
 	],
 	"../pages/update-user/update-user.module": [
-		459,
+		464,
 		5
 	]
 };
@@ -1044,8 +1064,11 @@ AppModule = __decorate([
                     { loadChildren: '../pages/show/show.module#ShowPageModule', name: 'ShowPage', segment: 'show', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule', name: 'AddPaymentMethodPage', segment: 'add-payment-method', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/add-service/add-service.module#AddServicePageModule', name: 'AddServicePage', segment: 'add-service', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/certificates/certificates.module#CertificatesPageModule', name: 'CertificatesPage', segment: 'certificates', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/document/document.module#DocumentPageModule', name: 'DocumentPage', segment: 'document', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/edit-provider/edit-provider.module#EditProviderPageModule', name: 'EditProviderPage', segment: 'edit-provider', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/edit-user/edit-user.module#EditUserPageModule', name: 'EditUserPage', segment: 'edit-user', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/gallery/gallery.module#GalleryPageModule', name: 'GalleryPage', segment: 'gallery', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/my-service-info/my-service-info.module#MyServiceInfoPageModule', name: 'MyServiceInfoPage', segment: 'my-service-info', priority: 'low', defaultHistory: [] },
@@ -1055,6 +1078,7 @@ AppModule = __decorate([
                     { loadChildren: '../pages/policies/policies.module#PoliciesPageModule', name: 'PoliciesPage', segment: 'policies', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/provider-info-a/provider-info-a.module#ProviderInfoAPageModule', name: 'ProviderInfoAPage', segment: 'provider-info-a', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/provider-info-b/provider-info-b.module#ProviderInfoBPageModule', name: 'ProviderInfoBPage', segment: 'provider-info-b', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/provider-ok/provider-ok.module#ProviderOkPageModule', name: 'ProviderOkPage', segment: 'provider-ok', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service-info/service-info.module#ServiceInfoPageModule', name: 'ServiceInfoPage', segment: 'service-info', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service-info-a/service-info-a.module#ServiceInfoAPageModule', name: 'ServiceInfoAPage', segment: 'service-info-a', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service-info-b/service-info-b.module#ServiceInfoBPageModule', name: 'ServiceInfoBPage', segment: 'service-info-b', priority: 'low', defaultHistory: [] },
@@ -1065,6 +1089,7 @@ AppModule = __decorate([
                     { loadChildren: '../pages/service-vote/service-vote.module#ServiceVotePageModule', name: 'ServiceVotePage', segment: 'service-vote', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service-win/service-win.module#ServiceWinPageModule', name: 'ServiceWinPage', segment: 'service-win', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/singup/singup.module#SingupPageModule', name: 'SingupPage', segment: 'singup', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/terms/terms.module#TermsPageModule', name: 'TermsPage', segment: 'terms', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/update-service/update-service.module#UpdateServicePageModule', name: 'UpdateServicePage', segment: 'update-service', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/update-user/update-user.module#UpdateUserPageModule', name: 'UpdateUserPage', segment: 'update-user', priority: 'low', defaultHistory: [] }
                 ]
