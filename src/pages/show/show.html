@@ -31,6 +31,7 @@
   <div class="barraRoja" *ngIf="StatusProvider">
       <h4>Select a service and start the bid</h4>
   </div>
+  <button ion-button (click)="clickCamara()">camara</button>
   <ion-grid class="body" *ngIf="StatusProvider">
     <!-- <ion-row >
       <ion-col col-2>
@@ -53,7 +54,6 @@
         </button>
       </ion-col>
     </ion-row> -->
-    <button ion-button (click)="clickCamara()">camara</button>
     <ion-row *ngFor="let item of ListService">
       <ion-col col-2>
         <ion-item>

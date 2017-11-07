@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
+import { Camera } from '@ionic-native/camera';
 
 //-service
 import { BraintreeService } from '../services/braintree.service';
@@ -74,6 +75,7 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
     OfferService,
     SaleService,
     BraintreeService,
+    Camera,
   ]
 })
 export class AppModule {}
