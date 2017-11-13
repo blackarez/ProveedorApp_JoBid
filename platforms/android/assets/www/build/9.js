@@ -1,14 +1,14 @@
 webpackJsonp([9],{
 
-/***/ 423:
+/***/ 507:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceNewPageModule", function() { return ServiceNewPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceWinPageModule", function() { return ServiceWinPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_new__ = __webpack_require__(584);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_win__ = __webpack_require__(675);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ServiceNewPageModule = (function () {
-    function ServiceNewPageModule() {
+var ServiceWinPageModule = (function () {
+    function ServiceWinPageModule() {
     }
-    return ServiceNewPageModule;
+    return ServiceWinPageModule;
 }());
-ServiceNewPageModule = __decorate([
+ServiceWinPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__service_new__["a" /* ServiceNewPage */],
+            __WEBPACK_IMPORTED_MODULE_2__service_win__["a" /* ServiceWinPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_new__["a" /* ServiceNewPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_win__["a" /* ServiceWinPage */]),
         ],
     })
-], ServiceNewPageModule);
+], ServiceWinPageModule);
 
-//# sourceMappingURL=service-new.module.js.map
+//# sourceMappingURL=service-win.module.js.map
 
 /***/ }),
 
-/***/ 584:
+/***/ 675:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceNewPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceWinPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_sale_service__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_offer_service__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_user_service__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_sale_service__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(165);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,111 +61,103 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //-service
 
 
-
-
 /**
- * Generated class for the ServiceNewPage page.
+ * Generated class for the ServiceWinPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ServiceNewPage = (function () {
-    function ServiceNewPage(navCtrl, navParams, saleService, offerService, userService, professionalsService) {
+var ServiceWinPage = (function () {
+    function ServiceWinPage(navCtrl, navParams, alertCtrl, saleService, professionalsService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
         this.saleService = saleService;
-        this.offerService = offerService;
-        this.userService = userService;
         this.professionalsService = professionalsService;
-        //-- default
-        this.imgUserDefault = "assets/img/User/UserService.png";
-        //-datos BD
-        this.status = "Waiting for the professional";
         //-data
         this.DataService = [];
-        this.DataUser = [];
-        //-ej
-        this.serviceCode = '0986548605';
-        //-data
         this.DataService = this.navParams.get('datos');
-        console.log(this.DataService);
         this.user = this.DataService['idUser'];
-        this.keyOffer = this.DataService['idOff'];
-        console.log(this.keyOffer);
-        this.serviceCode = this.DataService['idOff'].substring(6);
-        console.log(this.user);
-        //-localStorage
-        this.userActual = localStorage.getItem('verificacion');
-        console.log(this.userActual);
-        this.userInfo();
-    }
-    ServiceNewPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ServiceNewPage');
-    };
-    ServiceNewPage.prototype.goServiceJob = function () {
-        console.log('goServiceJob');
-        this.setStatusService();
-        // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
+        this.offer = this.DataService['idOff'];
+        this.sale = this.DataService['sale'];
         console.log(this.DataService);
-        console.log(this.DataUser);
-        this.userSubs.unsubscribe();
-        var dataService = { 'service': this.DataService, "user": this.DataUser };
-        // this.navCtrl.setRoot(,DataService);
-        this.navCtrl.setRoot('ServiceJobPage', dataService);
+        this.userActual = localStorage.getItem('verificacion');
+        // console.log(this.userActual);
+        this.getStatusService();
+    }
+    ServiceWinPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ServiceWinPage');
     };
-    ServiceNewPage.prototype.setStatusService = function () {
-        console.log('set');
-        console.log(this.userActual);
-        console.log(this.keyOffer);
-        this.professionalsService.setContractStatus(this.userActual, this.keyOffer, 'In progress');
-        this.saleService.setStatus(this.user, this.keyOffer, 'In progress');
-        this.offerService.setStatus(this.keyOffer, 'In progress');
-    };
-    ServiceNewPage.prototype.userInfo = function () {
+    ServiceWinPage.prototype.getStatusService = function () {
         var _this = this;
-        // this.imgUser=this.imgUserDefault;
-        // this.nameUser = 'Alejandro Albello';
-        // this.addresUser = 'Calle 123 #45 - 65 Ed Miramar Apartamento BB Torre 2';
-        // this.phoneUser = '(+57) 5-300 811 45 65';
-        console.log('UserInfo');
-        console.log(this.user);
-        this.userSubs = this.userService.getUser(this.user).subscribe(
-        // this.userService.getUser(this.user).subscribe(
-        function (userDB) {
-            console.log(userDB);
-            if (userDB) {
-                _this.nameUser = userDB['user_username'];
-                var addresU = userDB['user_address'];
-                for (var key in addresU) {
-                    _this.addresUser = addresU[key]['addr_info'];
+        this.statusSub = this.saleService.getStatus(this.user, this.offer).subscribe(function (status) {
+            console.log('statusSub-S service-win');
+            console.log(status);
+            if (status['$value']) {
+                if (status['$value'] == 'Waiting for the professional') {
+                    _this.goServiceNew();
+                    console.log('statusSub-US service-win');
+                    _this.statusSub.unsubscribe();
                 }
-                _this.phoneUser = userDB['user_tel'];
-                console.log(userDB['user_picture']);
-                if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
-                    _this.imgUser = _this.imgUserDefault;
+                if (status['$value'] == 'Cancelled') {
+                    _this.goIndexService();
+                    console.log('statusSub-US service-win');
+                    _this.statusSub.unsubscribe();
                 }
-                else {
-                    _this.imgUser = userDB['user_picture'];
-                }
-                _this.DataUser = { "nameUser": _this.nameUser, "address": _this.addresUser, "tel": _this.phoneUser, "img": _this.imgUser };
             }
         });
     };
-    return ServiceNewPage;
+    ServiceWinPage.prototype.goServiceNew = function () {
+        console.info('goServiceWin');
+        this.showAlertService();
+        //-contarct
+        console.log(this.DataService);
+        var objContract = { "status": 'Waiting for the professional', 'User': this.user, 'info': this.DataService['info'], 'sale': this.DataService['sale'] };
+        // console.log(objContract);
+        this.professionalsService.newContract(this.userActual, this.offer, objContract);
+        //-data
+        var dataService = { 'datos': this.DataService };
+        console.log(dataService);
+        this.navCtrl.setRoot('ServiceNewPage', dataService);
+        // this.navCtrl.setRoot('ServiceNewPage');
+        // console.log(this.statusSub);
+    };
+    ServiceWinPage.prototype.goIndexService = function () {
+        this.showAlertCancel();
+        this.navCtrl.setRoot('ShowPage');
+        // this.statusSub.unsubscribe();
+        // console.log(this.statusSub);
+    };
+    //-alert
+    ServiceWinPage.prototype.showAlertService = function () {
+        var alerteMail = this.alertCtrl.create({
+            title: 'Information',
+            message: 'Congratulations, the customer has accepted your offer, you can go to the customer to start the service.',
+            buttons: ['OK']
+        });
+        alerteMail.present();
+    };
+    ServiceWinPage.prototype.showAlertCancel = function () {
+        var alerteMail = this.alertCtrl.create({
+            title: 'Information',
+            message: 'Sorry. The client has canceled the service.',
+            buttons: ['OK']
+        });
+        alerteMail.present();
+    };
+    return ServiceWinPage;
 }());
-ServiceNewPage = __decorate([
+ServiceWinPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-new',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-new\service-new.html"*/'<!--\n\n  Generated template for the ServiceNewPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <img src="assets/img/map.png" class="imageFull">\n\n  <div class="barraGris">\n\n    <h4>Service information</h4>\n\n  </div>\n\n  <h3>Service code: #{{serviceCode}}</h3>\n\n  <p class="textoCentrado">State</p>\n\n  <h6 id="estadoServicio">{{status}}</h6>\n\n  <div padding>\n\n    <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-3>\n\n        <ion-list>\n\n          <ion-item>\n\n            <ion-avatar>\n\n              <img src="{{imgUser}}">\n\n            </ion-avatar>\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-col>\n\n      <ion-col col-9>\n\n        <ion-row>\n\n          <ion-col>\n\n            <h4>{{nameUser}}</h4>\n\n            <p>{{addresUser}}</p>\n\n            <p>{{phoneUser}}</p>\n\n          </ion-col>\n\n        </ion-row>	\n\n      </ion-col>\n\n    </ion-row>	\n\n  </ion-grid>\n\n  </div>\n\n  \n\n  <!-- <div class="btnBottom">\n\n    <button id="verifyYourPhone-button6" ion-button block color="danger" (click)="goCleaningVote()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n  </div> -->\n\n  \n\n  </ion-content>\n\n<ion-footer>\n\n  <ion-toolbar>\n\n      <div class="btnBottom">\n\n        <button ion-button (click)="goServiceJob()">\n\n            Start service\n\n            <ion-icon name="arrow-dropright"></ion-icon> \n\n        </button> \n\n      </div>\n\n  </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-new\service-new.html"*/,
+        selector: 'page-service-win',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-win\service-win.html"*/'<!--\n\n  Generated template for the ServiceWinPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n    \n\n<ion-content>\n\n  <img src="assets/img/BackgroundWin.JPG"  />\n\n\n\n  <h4>Congratulations</h4>\n\n  <h3>You have won  a Job</h3>\n\n  <p>value of the sale</p>\n\n  <h2>${{sale}}</h2>\n\n  <div class="centrarIcon">\n\n    <ion-icon class="icon-ok" name="checkmark-circle"></ion-icon>\n\n  </div>\n\n  <p>You have won a job! You must wait for the customer to confirm the service</p>\n\n    <!-- <div class="btnBottom" padding>\n\n    <button ion-button color="danger" block (click)="goServiceNew()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n  </div> -->\n\n</ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-win\service-win.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__services_sale_service__["a" /* SaleService */],
-        __WEBPACK_IMPORTED_MODULE_3__services_offer_service__["a" /* OfferService */],
-        __WEBPACK_IMPORTED_MODULE_4__services_user_service__["a" /* UserService */],
-        __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */]])
-], ServiceNewPage);
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__services_sale_service__["a" /* SaleService */],
+        __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__["a" /* ProfessionalsService */]])
+], ServiceWinPage);
 
-//# sourceMappingURL=service-new.js.map
+//# sourceMappingURL=service-win.js.map
 
 /***/ })
 

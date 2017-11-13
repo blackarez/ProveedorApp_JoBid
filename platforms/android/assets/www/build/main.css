@@ -4147,6 +4147,53 @@ ion-grid.grid ion-row.steps ion-col.active div.numb {
   color: yellow;
 }
 
+[data-braintree-id="payment-options-container"] > div {
+  border-radius: 4px;
+  border-width: 1px 1px 1px 1px;
+}
+
+[data-braintree-id="payment-options-container"] > div:first-child {
+  display: none;
+}
+
+[data-braintree-id="payment-options-container"] > div:last-child {
+  border-radius: 4px;
+  border-width: 1px 1px 1px 1px;
+}
+
+.mapa agm-map {
+  width: 100%;
+  height: 300px;
+  background: orange;
+}
+
+.clasificacion {
+  direction: rtl;
+  /* right to left */
+  unicode-bidi: bidi-override;
+  /* bidi de bidireccional */
+  width: 100%;
+  text-align: center;
+}
+
+.clasificacion label {
+  color: black;
+  font-size: 25px;
+  text-align: center;
+}
+
+.clasificacion label:hover, .clasificacion label:hover ~ label {
+  color: #b20000;
+}
+
+.clasificacion input[type="radio"] {
+  display: none;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: #b20000;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -25593,6 +25640,66 @@ page-add-payment-method .braintree-placeholder {
   margin-top: 20px;
 }
 
+page-certificates .grid .row, page-certificates .grid .col {
+  margin: 0;
+  padding: 0;
+}
+
+page-certificates .grid .row .list-md > .item-block ion-label, page-certificates .grid .row .list-ios > .item-block ion-label, page-certificates .grid .col .list-md > .item-block ion-label, page-certificates .grid .col .list-ios > .item-block ion-label {
+  margin: 0;
+}
+
+page-certificates .grid .row input, page-certificates .grid .col input {
+  height: 36px;
+  width: 100%;
+  padding: 5px;
+}
+
+page-certificates ion-item.item-md, page-certificates ion-item.item-ios, page-certificates .list-md, page-certificates .list-ios {
+  padding: 0;
+  margin: 0;
+}
+
+page-certificates ion-item.item-md ion-label.label, page-certificates ion-item.item-ios ion-label.label {
+  margin: 10px 0;
+}
+
+page-document p {
+  text-align: center;
+}
+
+page-document .btnAddPicture {
+  width: 200px;
+}
+
+page-document .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+page-document .grid {
+  border-bottom: 2px solid #b20000;
+}
+
+page-document .grid .row, page-document .grid .col {
+  margin: 0;
+  padding: 0;
+}
+
+page-document .grid .row .list-md > .item-block ion-label, page-document .grid .row .list-ios > .item-block ion-label, page-document .grid .col .list-md > .item-block ion-label, page-document .grid .col .list-ios > .item-block ion-label {
+  padding-top: 2px;
+  margin: 0;
+}
+
+page-document .grid .row input, page-document .grid .col input {
+  height: 36px;
+  width: 100%;
+  padding: 5px;
+}
+
 page-edit-provider img {
   display: block;
   width: 100%;
@@ -25622,9 +25729,28 @@ page-edit-provider ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
 }
 
-page-edit-user .button .button-md, page-edit-user .button .button-ios {
-  width: 30px;
-  height: 30px;
+page-gallery .grid .row, page-gallery .grid .col {
+  margin: 0;
+  padding: 0;
+}
+
+page-gallery .grid .row .list-md > .item-block ion-label, page-gallery .grid .row .list-ios > .item-block ion-label, page-gallery .grid .col .list-md > .item-block ion-label, page-gallery .grid .col .list-ios > .item-block ion-label {
+  margin: 0;
+}
+
+page-gallery .grid .row input, page-gallery .grid .col input {
+  height: 36px;
+  width: 100%;
+  padding: 5px;
+}
+
+page-gallery ion-item.item-md, page-gallery ion-item.item-ios, page-gallery .list-md, page-gallery .list-ios {
+  padding: 0;
+  margin: 0;
+}
+
+page-gallery ion-item.item-md ion-label.label, page-gallery ion-item.item-ios ion-label.label {
+  margin: 10px 0;
 }
 
 page-home img {
@@ -25703,7 +25829,6 @@ page-my-services .btnItem {
 page-payment-methods img {
   display: block;
   width: 100%;
-  height: 250px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -25760,12 +25885,51 @@ page-provider-info-a p {
   text-align: center;
 }
 
-.alert-md .alert-head, .alert-ios .alert-head {
-  display: none;
+page-provider-info-a .btnAddPicture {
+  width: 200px;
+}
+
+page-provider-info-a .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 page-provider-info-b p {
   text-align: center;
+}
+
+page-provider-ok img {
+  width: 100%;
+}
+
+page-provider-ok .centrarIcon {
+  width: 100%;
+}
+
+page-provider-ok .centrarIcon ion-icon.icon-ok {
+  font-size: 90px;
+  color: #2b8300;
+  margin: 20px auto;
+  width: 74px;
+  display: block;
+}
+
+page-provider-ok p {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+page-provider-ok p span {
+  color: #b20000;
+  font: 16px;
+}
+
+page-provider-ok .btnBottom {
+  margin-top: 40px;
 }
 
 page-service-info .imageFull {
@@ -25827,8 +25991,16 @@ page-service-info-a p {
   text-align: center;
 }
 
-.alert-md .alert-head, .alert-ios .alert-head {
-  display: none;
+page-service-info-a .btnAddPicture {
+  width: 200px;
+}
+
+page-service-info-a .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 page-service-info-b p {
@@ -25964,7 +26136,7 @@ page-service-ok .centrarIcon ion-icon.icon-ok {
   font-size: 90px;
   color: #2b8300;
   margin: 20px auto;
-  width: 90px;
+  width: 74px;
   display: block;
 }
 
@@ -26022,20 +26194,28 @@ page-service-sale h4, page-service-sale h5 {
 
 page-service-sale .contador {
   position: absolute;
-  top: 27%;
+  top: 8%;
   width: 100%;
 }
 
-page-service-sale .contador > h3 {
-  color: white;
+page-service-sale .contador > .contenido {
+  border: 1px solid white;
   background: #b20000;
-  height: 80px;
-  /* line-height: 30px; */
+  height: 75px;
   width: 30%;
   border-radius: 7px;
   margin: 0 auto;
-  padding: 27px 0 0 0;
   text-align: center;
+}
+
+page-service-sale .contador > .contenido p, page-service-sale .contador > .contenido h3 {
+  color: white;
+  margin-top: 0;
+}
+
+page-service-sale .contador > .contenido p {
+  margin-bottom: 1px;
+  padding-top: 10px;
 }
 
 page-service-sale ion-item.item-md, page-service-sale ion-item.item-ios {
@@ -26072,10 +26252,14 @@ page-service-sale ion-footer ion-toolbar #btnSalir, page-service-sale ion-footer
 
 page-service-sale ion-footer ion-toolbar #btnSalir {
   background: #666666 !important;
+  font-size: 20px;
+  height: 48px;
 }
 
 page-service-sale ion-footer ion-toolbar #btnDetalle {
   background: #2b8300 !important;
+  font-size: 20px;
+  height: 48px;
 }
 
 page-service-sale ion-footer ion-toolbar .newOffer {
@@ -26162,6 +26346,10 @@ page-service-sale ion-content ion-grid.body .button ion-icon[name=search] {
   padding-top: 13px !important;
 }
 
+page-service-sale .item-md ion-avatar[item-left], page-service-sale .item-md ion-thumbnail[item-left], page-service-sale .item-md ion-avatar[item-start], page-service-sale .item-md ion-thumbnail[item-start] {
+  margin: 8px 10px 8px 5px;
+}
+
 page-service-vote p {
   text-align: center;
   margin: 40px 0;
@@ -26187,8 +26375,8 @@ page-service-win .centrarIcon {
 page-service-win .centrarIcon ion-icon.icon-ok {
   font-size: 90px;
   color: #2b8300;
-  margin: 10px auto;
-  width: 90px;
+  margin: 0 auto;
+  width: 74px;
   display: block;
 }
 
@@ -26256,6 +26444,10 @@ page-show .statusPage ion-label.label {
   font-size: 20px;
 }
 
+page-show agm-map {
+  height: 300px;
+}
+
 page-singup img {
   display: block;
   width: 100%;
@@ -26283,4 +26475,45 @@ page-singup ion-list ion-grid.grid .col {
 
 page-singup ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
+}
+
+page-terms p {
+  text-align: center;
+}
+
+page-terms .btnAddPicture {
+  width: 200px;
+}
+
+page-terms .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+page-terms .terms {
+  text-align: justify;
+}
+
+page-terms .toolbar .grid, page-terms .toolbar ion-item.item-md, page-terms .toolbar ion-item.item-ios, page-terms .toolbar .list-md, page-terms .toolbar .list-ios {
+  padding: 0;
+  margin: 0;
+}
+
+page-update-service p {
+  text-align: center;
+}
+
+page-update-service .btnAddPicture {
+  width: 200px;
+}
+
+page-update-service .btnAddPicture button {
+  background: #b20000;
+  color: white;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

@@ -1,14 +1,14 @@
 webpackJsonp([10],{
 
-/***/ 422:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceJobPageModule", function() { return ServiceJobPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceVotePageModule", function() { return ServiceVotePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_job__ = __webpack_require__(583);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_vote__ = __webpack_require__(674);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ServiceJobPageModule = (function () {
-    function ServiceJobPageModule() {
+var ServiceVotePageModule = (function () {
+    function ServiceVotePageModule() {
     }
-    return ServiceJobPageModule;
+    return ServiceVotePageModule;
 }());
-ServiceJobPageModule = __decorate([
+ServiceVotePageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__service_job__["a" /* ServiceJobPage */],
+            __WEBPACK_IMPORTED_MODULE_2__service_vote__["a" /* ServiceVotePage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_job__["a" /* ServiceJobPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__service_vote__["a" /* ServiceVotePage */]),
         ],
     })
-], ServiceJobPageModule);
+], ServiceVotePageModule);
 
-//# sourceMappingURL=service-job.module.js.map
+//# sourceMappingURL=service-vote.module.js.map
 
 /***/ }),
 
-/***/ 583:
+/***/ 674:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceJobPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceVotePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_sale_service__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_offer_service__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_user_service__ = __webpack_require__(320);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,102 +58,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
 /**
- * Generated class for the ServiceJobPage page.
+ * Generated class for the ServiceVotePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ServiceJobPage = (function () {
-    function ServiceJobPage(navCtrl, navParams, saleService, offerService, professionalsService) {
+var ServiceVotePage = (function () {
+    function ServiceVotePage(navCtrl, navParams, userService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.saleService = saleService;
-        this.offerService = offerService;
-        this.professionalsService = professionalsService;
-        //-- default
-        this.imgUserDefault = "assets/img/User/UserService.png";
-        //-datos BD
-        this.status = "Service in progress";
-        this.segundos = 10;
-        this.cont = 1;
-        //-ej
-        this.serviceCode = '0986548605';
-        //-load data
-        this.Datos = this.navParams.get('datos');
-        console.log(this.Datos);
-        this.DataService = this.navParams.get('service');
-        this.DataUser = this.navParams.get('user');
-        this.user = this.DataService['idUser'];
-        this.keyOffer = this.DataService['idOff'];
-        this.serviceCode = this.DataService['idOff'].substring(6);
-        console.log(this.user);
-        console.log(this.DataService);
+        this.userService = userService;
+        //-view
+        //-view
+        this.vote = [];
+        this.loadView();
+    }
+    ServiceVotePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ServiceVotePage');
+    };
+    ServiceVotePage.prototype.goCleaningOk = function () {
+        var _this = this;
+        console.log(this.vote);
+        this.vote['providerId'] = this.userActual;
+        this.userService.setComment(this.user, this.vote);
+        //-cambiar calificacion proveedor
+        var userServiceSubs = this.userService.getUser(this.user).subscribe(function (userDB) {
+            if (userServiceSubs != undefined) {
+                console.log('userServiceSubs S - service-vote');
+                if (userDB['user_star']) {
+                    var calificacion = (Number(_this.vote.estrellas) + Number(userDB['user_star'])) / 2;
+                    console.log(calificacion);
+                    _this.userService.setStar(_this.user, calificacion);
+                }
+                console.log('userServiceSubs US - service-vote');
+                userServiceSubs.unsubscribe();
+            }
+        });
+        this.navCtrl.setRoot('ShowPage');
+    };
+    ServiceVotePage.prototype.loadView = function () {
+        // this.DataService =  this.navParams.get('service');
+        // this.DataUser = this.navParams.get('user');
+        // console.log(this.DataService);
+        // console.log(this.DataUser);
+        // this.user = this.DataService['idUser'];
         //-localStorage
         this.userActual = localStorage.getItem('verificacion');
         console.log(this.userActual);
-        this.userInfo();
-    }
-    ServiceJobPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ServiceJobPage');
+        this.user = "user_1509139021478";
     };
-    ServiceJobPage.prototype.goServiceOk = function () {
-        this.setStatusService();
-        // let DataService = {'datos':{"dataService":this.dataService,"offer":this.keyOffer,"win":this.worker}};
-        // console.log(DataService);
-        // this.navCtrl.setRoot(,DataService);
-        this.navCtrl.setRoot('ServiceOkPage');
-    };
-    ServiceJobPage.prototype.setStatusService = function () {
-        console.log('set2');
-        console.log(this.userActual);
-        console.log(this.keyOffer);
-        this.professionalsService.setContractStatus(this.userActual, this.keyOffer, 'Finalized');
-        this.saleService.setStatus(this.user, this.keyOffer, 'Finalized');
-        this.offerService.setStatus(this.keyOffer, 'Finalized');
-    };
-    ServiceJobPage.prototype.userInfo = function () {
-        // this.imgUser=this.imgUserDefault;
-        // this.nameUser = 'Alejandro Albello';
-        // this.addresUser = 'Calle 123 #45 - 65 Ed Miramar Apartamento BB Torre 2';
-        // this.phoneUser = '(+57) 5-300 811 45 65';
-        this.nameUser = this.DataUser['nameUser'];
-        this.addresUser = this.DataUser['address'];
-        this.phoneUser = this.DataUser['tel'];
-        this.imgUser = this.DataUser['img'];
-    };
-    //--- timer
-    ServiceJobPage.prototype.startTimer = function () {
-        var _this = this;
-        this.objNodeTimer = setInterval(function () { return _this.timer(); }, 1000);
-    };
-    ServiceJobPage.prototype.timer = function () {
-        // console.log(this.segundos);
-        // console.log(this.status);
-        if (this.status == 'Service completed' && this.segundos == 1) {
-            clearInterval(this.objNodeTimer);
-        }
-        else {
-            if (--this.segundos < 0) {
-                this.segundos = 10;
-            }
-        }
-    };
-    return ServiceJobPage;
+    return ServiceVotePage;
 }());
-ServiceJobPage = __decorate([
+ServiceVotePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-job',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-job\service-job.html"*/'<!--\n\n  Generated template for the ServiceJobPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    \n\n      <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>joBid</ion-title>\n\n      </ion-navbar>\n\n    \n\n    </ion-header>\n\n    \n\n    \n\n    <ion-content>\n\n    <img src="assets/img/map.png" class="imageFull">\n\n    <div class="barraGris">\n\n      <h4>Service information</h4>\n\n    </div>\n\n    <h3>Service code: #{{serviceCode}}</h3>\n\n    <p class="textoCentrado">State</p>\n\n    <h6 id="estadoServicio">{{status}}</h6>\n\n    <div padding>\n\n      <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-list>\n\n            <ion-item>\n\n              <ion-avatar>\n\n                <img src="{{imgUser}}">\n\n              </ion-avatar>\n\n            </ion-item>\n\n          </ion-list>\n\n        </ion-col>\n\n        <ion-col col-9>\n\n          <ion-row>\n\n            <ion-col>\n\n              <h4>{{nameUser}}</h4>\n\n              <p>{{addresUser}}</p>\n\n              <p>{{phoneUser}}</p>\n\n            </ion-col>\n\n          </ion-row>	\n\n        </ion-col>\n\n      </ion-row>	\n\n    </ion-grid>\n\n    </div>\n\n    \n\n    <!-- <div class="btnBottom">\n\n      <button id="verifyYourPhone-button6" ion-button block color="danger" (click)="goCleaningVote()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n    </div> -->\n\n    \n\n    </ion-content>\n\n  <ion-footer>\n\n    <ion-toolbar>\n\n        <div class="btnBottom">\n\n          <button ion-button (click)="goServiceOk()">\n\n              End service\n\n              <ion-icon name="arrow-dropright"></ion-icon> \n\n          </button> \n\n        </div>\n\n    </ion-toolbar>\n\n  </ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-job\service-job.html"*/,
+        selector: 'page-service-vote',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/'<!--\n\n  Generated template for the ServiceVotePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <div class="barraRoja">\n\n    <h4>Service qualification</h4>\n\n  </div>\n\n  <form id="signup-form3" class="list" padding>\n\n  <p>Now you can qualify the client and leave a comment of the service received.</p>\n\n    <ion-list >\n\n      <ion-item>\n\n        <p class="clasificacion">\n\n          <input id="radio1" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="5">\n\n          <label for="radio1">&#9733;</label>\n\n  \n\n          <input id="radio2" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="4">\n\n          <label for="radio2">&#9733;</label>\n\n          \n\n          <input id="radio3" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="3">\n\n          <label for="radio3">&#9733;</label>\n\n          \n\n          <input id="radio4" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="2">\n\n          <label for="radio4">&#9733;</label>\n\n          \n\n          <input id="radio5" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="1">\n\n          <label for="radio5">&#9733;</label>\n\n        </p>\n\n      </ion-item>\n\n      <ion-item>\n\n      <input type="text">\n\n        <ion-textarea placeholder="Comments" name="comment" [(ngModel)]="vote.comment"></ion-textarea>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="btnBottom">\n\n      <button ion-button color="danger" block icon-left (click)="goCleaningOk()">Continue<ion-icon name="arrow-dropright"></ion-icon></button>\n\n    </div>\n\n  </form>\n\n  </ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__services_sale_service__["a" /* SaleService */], __WEBPACK_IMPORTED_MODULE_3__services_offer_service__["a" /* OfferService */],
-        __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__["a" /* ProfessionalsService */]])
-], ServiceJobPage);
+        __WEBPACK_IMPORTED_MODULE_2__services_user_service__["a" /* UserService */]])
+], ServiceVotePage);
 
-//# sourceMappingURL=service-job.js.map
+//# sourceMappingURL=service-vote.js.map
 
 /***/ })
 
