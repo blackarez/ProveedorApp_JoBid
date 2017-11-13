@@ -7,6 +7,14 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-camera": {
+      "CAMERA_USAGE_DESCRIPTION": " ",
+      "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.JoBit.com"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.JoBit.com"
+    },
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.JoBit.com"
     },
@@ -15,6 +23,9 @@
     },
     "cordova-plugin-geolocation": {
       "GEOLOCATION_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.JoBit.com"
+    },
+    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "com.JoBit.com"
     },
     "cordova-plugin-splashscreen": {
@@ -27,14 +38,6 @@
       "PACKAGE_NAME": "com.JoBit.com"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-compat": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-camera": {
-      "CAMERA_USAGE_DESCRIPTION": " ",
-      "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
       "PACKAGE_NAME": "com.JoBit.com"
     }
   },

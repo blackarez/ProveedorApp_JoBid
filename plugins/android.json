@@ -7,13 +7,16 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-geolocation": {
+    "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.JoBit.com"
     },
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.JoBit.com"
     },
     "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.JoBit.com"
+    },
+    "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.JoBit.com"
     },
     "cordova-plugin-splashscreen": {
@@ -28,10 +31,7 @@
     "ionic-plugin-keyboard": {
       "PACKAGE_NAME": "com.JoBit.com"
     },
-    "cordova-plugin-compat": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-camera": {
+    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "com.JoBit.com"
     }
   },
