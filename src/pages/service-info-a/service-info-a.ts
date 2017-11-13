@@ -23,8 +23,10 @@ export class ServiceInfoAPage {
   typeBusiness:any;
   experiencia:any;
   moreInformation:any;
-  certificacion
-  seguro
+  certificacion:any;
+  seguro:any;
+
+  keyService:any;
   //-list
   ListServices:any = [];
   ListSubServices:any = [];
@@ -40,6 +42,8 @@ UserActual:any;
     this.ListServices=this.professionsService.getProfessions();
     console.log(this.ListServices);
     this.UserActual = localStorage.getItem('verificacion');
+    var Key = new Date().getTime();
+    this.keyService = "Serv_"+(Key);
   }
 
   ionViewDidLoad() {
@@ -51,7 +55,7 @@ UserActual:any;
     let DataServiceInfo = {"serv_experiencia":this.experiencia,"serv_moreInformation":this.moreInformation,"serv_insurance":this.seguro,"serv_certificate":this.certificacion};
     this.DataService["serv_detail"]=DataServiceInfo;
     console.log(this.DataService);
-    this.professionalsService.setInfoServiceUser(this.UserActual,this.DataService);
+    this.professionalsService.setInfoServiceUser(this.UserActual,this.DataService,this.keyService);
     this.navCtrl.setRoot('EditUserPage');
     // this.navCtrl.pop();
   }
@@ -62,4 +66,8 @@ UserActual:any;
     console.log(this.ListSubServices);
   }
 
+  addPictures(){
+    let Data = {'datos':this.keyService};
+    this.navCtrl.push('GalleryPage',Data);
+  }
 }

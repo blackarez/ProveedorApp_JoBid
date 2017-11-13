@@ -7,7 +7,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
 // import { EditUserPage } from '../pages/edit-user/edit-user';
-import { ShowPage } from '../pages/show/show';
+// import { ShowPage } from '../pages/show/show';
 // import { MyServicesPage } from '../pages/my-services/my-services';
 // import { PaymentsPage } from '../pages/payments/payments';
 // import { PoliciesPage } from '../pages/policies/policies';
@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
 import { Camera } from '@ionic-native/camera';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 //-service
 import { BraintreeService } from '../services/braintree.service';
@@ -29,6 +30,7 @@ import { ProfessionalsService } from '../services/professionals.service';
 import { ProfessionsService } from '../services/professions.service';
 import { OfferService } from '../services/offer.service';
 import { SaleService } from '../services/sale.service';
+import { CameraService } from '../services/camera.service';
 
 //- config 
 export const firebaseConfig = {
@@ -75,7 +77,9 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
     OfferService,
     SaleService,
     BraintreeService,
+    CameraService,
     Camera,
+    NativeAudio,
   ]
 })
 export class AppModule {}

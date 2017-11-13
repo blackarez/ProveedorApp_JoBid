@@ -1,4 +1,4 @@
-import { Component, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 
 
@@ -9,10 +9,8 @@ import { UserService } from '../../services/user.service';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { storage } from 'firebase';
 
-import { AgmCoreModule } from '@agm/core';
+// import { AgmCoreModule } from '@agm/core';
 /**
  * Generated class for the ShowPage page.
  *
@@ -63,13 +61,10 @@ export class ShowPage {
   providerLatitud:any=37.09024;
   providerLongitud:any=-95.71289100000001;
 
-  
-  
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private offerService: OfferService, private userService: UserService,
     private professionalsService : ProfessionalsService,
     private geo: Geolocation, private platform: Platform,
-    private camera: Camera,    
   ) {
     this.UserActual = localStorage.getItem('verificacion');
     console.log(this.UserActual);
@@ -84,6 +79,7 @@ export class ShowPage {
     this.StatusProvider= false;
     this.getUserLocationGeolocation();
     // alert('hola');
+    this.notify();
   }
   
   ionViewDidLoad() {
@@ -95,16 +91,18 @@ export class ShowPage {
     console.log('userSubs-US show');
     console.log('serviceSubs-US show');
     console.log('listOffer-US show');
-    this.userSubs.unsubscribe();
-    this.serviceSubs.unsubscribe();
-    this.listOffer.unsubscribe();
+    
+    if(this.userSubs != undefined){this.userSubs.unsubscribe();}
+    if(this.serviceSubs != undefined){this.serviceSubs.unsubscribe();}
+    if(this.listOffer != undefined){this.listOffer.unsubscribe();}
     let Data = {'datos':item};
     this.navCtrl.push('ServiceInfoPage',Data);
   }
 
   public notify() {
+    // console.log("Toggled: ");
     console.log("Toggled: "+ this.StatusProvider);
-    alert("Toggled: "+ this.StatusProvider);
+    // alert("Toggled: "+ this.StatusProvider);
     if(this.StatusProvider == false){
       this.labelToogle ="Offline";
     }else{
@@ -114,7 +112,7 @@ export class ShowPage {
   }
 
   showServices(){
-    alert('showServices');
+    // alert('showServices');
    this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
       this.ListService=[];
       // console.log(list);
@@ -124,7 +122,7 @@ export class ShowPage {
   }
 
   getServiceProvider(BDListOffer){
-    alert();
+    // alert();
     this.serviceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (BDListServicesProvider)=>{
         console.log('serviceSubs-S show');
@@ -158,7 +156,7 @@ export class ShowPage {
         
           if( Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star)) ){
             console.info('star ok');
-            alert('star ok');
+            // alert('star ok');
             // console.log(BDListOffer[keys]);
             // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
             // console.log(BDListOffer[keys].Clasificacion.distancia);
@@ -166,7 +164,8 @@ export class ShowPage {
               // console.log(BDListOffer[keys].UserLocacion.latitud);
               // console.log(BDListOffer[keys].UserLocacion.longitud);
               let distanceKilo = this.getDistanceKilometros(Number(this.lat),Number(this.lng),Number(BDListOffer[keys].UserLocacion.latitud),Number(BDListOffer[keys].UserLocacion.longitud));
-              // console.log(distanceKilo);
+              console.log(distanceKilo);
+              
               let distanceMillas = this.getConvertKilometrosMillas(distanceKilo);
               // console.log(distanceMillas);
               // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
@@ -178,7 +177,7 @@ export class ShowPage {
               
               if( BDListOffer[keys].Clasificacion.categoria ==  BDListServicesProvider[keySP]['serv_subService'] && true ==this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas) ){
                 console.info('categoria y  distancia ok');
-                alert('categoria y  distancia ok');
+                // alert('categoria y  distancia ok');
                 let ServiceProviderCertificate:any;
                 let ServiceProviderSecurity:any;
                 if(BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null){
@@ -205,12 +204,12 @@ export class ShowPage {
 
                 if(ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro){
                   console.info('certificado y seguro ok');
-                  alert('certificado y seguro ok');
+                  // alert('certificado y seguro ok');
                   // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
                   
                   if(this.getNumeroExperienciOffer (BDListOffer[keys].Clasificacion.experiencia,BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true){
                     console.info('Experience ok');
-                    alert('Experience ok');
+                    // alert('Experience ok');
               
                     let InfmaxOffer=BDListOffer[keys].Clasificacion.informacion.maxOffer;
                     let InfmoreInformacion = BDListOffer[keys].Clasificacion.informacion.moreInformation;
@@ -240,15 +239,15 @@ export class ShowPage {
                     // this.ListService=list;
                   }else{
                     console.info('Experience no');
-                    alert('star ok');
+                    // alert('star ok');
                   }   
                 }else{
                   console.info('certificado y seguro no');
-                  alert('star ok');
+                  // alert('star ok');
                 }
               }else{
                 console.info('categoria y  distancia no');
-                alert('star ok');
+                // alert('categoria y  distancia no');
               }
             }
 
@@ -410,29 +409,5 @@ export class ShowPage {
     return experienciaMayor;
     // return false;
   }
-
-  async  clickCamara(){
-    console.log('clickCamara');
-   try{
-
-  
-    const options: CameraOptions = {
-      quality: 60,
-      targetHeight: 100,
-      targetWidth: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    // console.log(options);
-    const result = await this.camera.getPicture(options);
-    const image = 'data:image/jpeg;base64,' + result;
-    const picture = storage().ref('pictures');
-    picture.putString(result,'data_url');
-  } catch(e){
-    console.error(e);
-   }
-  }
-
 
 }

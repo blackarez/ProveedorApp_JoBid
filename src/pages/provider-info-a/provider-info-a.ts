@@ -32,6 +32,7 @@ export class ProviderInfoAPage {
 
   //-data
   UserActual:any;
+  keyService:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private professionsService : ProfessionsService,
@@ -40,6 +41,8 @@ export class ProviderInfoAPage {
     this.ListServices=this.professionsService.getProfessions();
     console.log(this.ListServices);    
     this.UserActual = localStorage.getItem('verificacion');
+    var Key = new Date().getTime();
+    this.keyService = "Serv_"+(Key);
   }
   
   ionViewDidLoad() {
@@ -47,19 +50,17 @@ export class ProviderInfoAPage {
   }
   
   goProviderInfoB(){
-    this.DataService = {"serv_service":this.service,"serv_subService":this.subService,"serv_typeBusiness":this.typeBusiness};
-    let Data = {'datos':this.DataService};
-
     this.DataService = {"serv_service":this.service,"serv_subService":this.subService};
     // let Data = {'datos':this.DataService};
     let DataServiceInfo = {"serv_experiencia":this.experiencia,"serv_moreInformation":this.moreInformation,"serv_insurance":this.seguro,"serv_certificate":this.certificacion};
     this.DataService["serv_detail"]=DataServiceInfo;
     console.log(this.DataService);
-    this.professionalsService.setInfoServiceUser(this.UserActual,this.DataService);
+    this.professionalsService.setInfoServiceUser(this.UserActual,this.DataService,this.keyService);
 
     // this.navCtrl.push('ProviderInfoBPage',Data);
     // this.navCtrl.push('ProviderInfoBPage');
-    this.navCtrl.push('CertificatesPage');
+    // this.navCtrl.push('CertificatesPage');
+    this.navCtrl.push('PaymentMethodsPage');
   }
   
   setSubServices(){
@@ -68,7 +69,8 @@ export class ProviderInfoAPage {
     console.log(this.ListSubServices);
   }
 
-  gallery(){
-    this.navCtrl.push('GalleryPage');
+  addPictures(){
+    let Data = {'datos':this.keyService};
+    this.navCtrl.push('GalleryPage',Data);
   }
 }

@@ -5,7 +5,7 @@ import { ProfessionalsService } from '../../services/professionals.service';
 import { SaleService } from '../../services/sale.service';
 import { OfferService } from '../../services/offer.service';
 
-
+import { NativeAudio } from '@ionic-native/native-audio';
 import { Geolocation } from '@ionic-native/geolocation';
 
 /**
@@ -67,6 +67,7 @@ export class ServiceSalePage {
     private geo: Geolocation, private platform: Platform,
     private saleService: SaleService,  
     private offerService: OfferService,  
+    private nativeAudio : NativeAudio,
   ) {
     this.DataService = this.navParams.get('datos');
     //-load only
@@ -145,6 +146,7 @@ private timer(){
     if(this.NumeroContador == 2){
       clearInterval(this.objNodeTimer);
       this.showContador = false;
+      this.audio();
       this.ganador();
     }else{
       this.minutos = 2;
@@ -300,5 +302,17 @@ private getUserLocationGeolocation(){
     });
     alert.present();
   }
+
+  audio(){
+    this.nativeAudio.preloadSimple('uniqueId1', 'assets/timbre.mp3').then(this.onSuccess, this.onError);
+    this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+  }
+  onSuccess(){
+    console.log(' success');
+  }
+  onError(){
+    console.log('error');
+  }
+
 }
 

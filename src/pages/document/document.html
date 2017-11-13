@@ -27,6 +27,7 @@
             <ion-list>
               <ion-item>
                 <input type="text" placeholder="" [(ngModel)]="documentFoto" formControlName="documentFoto" name="documentFoto" />
+                <img src="{{documentFoto}}" [hidden]="disDocumentImg" >
               </ion-item>
             </ion-list>
           </ion-col>
@@ -44,6 +45,7 @@
             <ion-list>
               <ion-item>
                 <input type="text" placeholder="" [(ngModel)]="licenciaFoto" formControlName="licenciaFoto" name="licenciaFoto" />
+                <img src="{{licenciaFoto}}" [hidden]="disLicenciaImg" >
               </ion-item>
             </ion-list>
           </ion-col>

@@ -20,7 +20,7 @@ export class BraintreeService{
 CrearCustomer(keyCustomer){
     return new Promise((resolve, reject) => {
         // console.log(apiUrlBase+'/customer/create/'+keyCustomer);
-        let headers = new Headers();
+        // let headers = new Headers();
         let getCrearCustom =this.http.get(apiUrlBase+'/customer/create/'+keyCustomer).subscribe(
         (result) => {
             console.log(result);
@@ -39,7 +39,7 @@ CrearCustomer(keyCustomer){
 
 CrearTokenCustomer(keyCustomer){
     return new Promise((resolve, reject) => {
-    let headers = new Headers();
+    // let headers = new Headers();
     // console.log(apiUrlBase+'/getTokenCustom/'+keyCustomer);
     
         let getCrearCustom =this.http.get(apiUrlBase+'/getTokenCustom/'+keyCustomer).subscribe(
@@ -62,7 +62,7 @@ CrearTokenCustomer(keyCustomer){
 
 CrearSaleCustomer(keyCustomer,sale,provider,offer,subService){
     return new Promise((resolve, reject) => {
-    let headers = new Headers();
+    // let headers = new Headers();
     console.log(apiUrlBase+'/SaleCustomer/'+keyCustomer+'/'+sale+'/'+provider+'/'+offer+'/'+subService);
     let setSaleCustomSubs =this.http.get(apiUrlBase+'/SaleCustomer/'+keyCustomer+'/'+sale+'/'+provider+'/'+offer+'/'+subService).subscribe(
         (result) => {
@@ -84,7 +84,7 @@ CrearSaleCustomer(keyCustomer,sale,provider,offer,subService){
 
 CancelSaleCustomer(keyCustomer,sale){
     return new Promise((resolve, reject) => {
-    let headers = new Headers();
+    // let headers = new Headers();
     console.log(apiUrlBase+'/SaleCancel/'+keyCustomer+'/'+sale);
     let setSaleCustomSubs =this.http.get(apiUrlBase+'/SaleCancel/'+keyCustomer+'/'+sale).subscribe(
         (result) => {

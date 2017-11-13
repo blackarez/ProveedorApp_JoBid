@@ -126,12 +126,15 @@ export class ServiceInfoPage {
   loadDescripcion(){
      let offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(
        (DetailBD) =>{
-        console.log('offerDetailSub-S service-info');
-        console.log(DetailBD);
-        if(DetailBD){
-          console.log('offerDetailSub-US service-info');
-          offerDetailSub.unsubscribe();
-        }
+         if(offerDetailSub != undefined){
+
+           console.log('offerDetailSub-S service-info');
+           console.log(DetailBD);
+           if(DetailBD){
+             console.log('offerDetailSub-US service-info');
+             offerDetailSub.unsubscribe();
+           }
+         }
        }
      );
   }

@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
+
+import { ProfessionalsService } from '../../services/professionals.service';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
+
+import * as firebase from 'firebase/app';
+
 /**
  * Generated class for the DocumentPage page.
  *
@@ -17,9 +24,19 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 export class DocumentPage {
   //-form
   private documentos : FormGroup;
+  //-load
+  UserActual:any;
+  //-view
+  documentFoto:string;
+  licenciaFoto:string;
+  disDocumentImg:boolean=true;
+  disLicenciaImg:boolean=true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder,
+    private camera: Camera, private professionalsService: ProfessionalsService,
   ) {
+    this.loadView();
     this.getForm();
   }
 
@@ -28,7 +45,12 @@ export class DocumentPage {
   }
 
   goTerms(){
+    this.professionalsService.setDocument(this.UserActual,this.documentFoto,this.licenciaFoto);
     this.navCtrl.push('TermsPage');
+  }
+
+  loadView(){
+    this.UserActual = localStorage.getItem('verificacion');
   }
 
   getForm(){
@@ -37,15 +59,64 @@ export class DocumentPage {
       licenciaFoto: ['', Validators.required],
       // documentFoto : [''],
       // licenciaFoto: [''],
-    });
-    
+    });  
   }
 
-  fotoDocumento(){
-
+  async fotoDocumento(){
+    let file =this.UserActual+'/Document';
+    console.log('clickCamara');
+    try{
+      const options: CameraOptions = {
+        quality: 60,
+        // targetHeight: 100,
+        // targetWidth: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      const result = await this.camera.getPicture(options);
+      const image = 'data:image/jpeg;base64,' + result;
+      const picture = storage().ref(file);
+      let UploadTask = picture.putString(image,'data_url');
+      UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) =>  {},
+        (error) => { console.log(error)  },
+        () => { let url = UploadTask.snapshot.downloadURL;
+          console.log(url);
+          this.documentFoto = url;
+          this.disDocumentImg = false;
+        }
+      );
+    } catch(e){ console.error(e);}
   }
-  fotoLicencia(){
 
+
+  async fotoLicencia(){
+    let file =this.UserActual+'/Licencia';
+    console.log('clickCamara');
+    try{
+      const options: CameraOptions = {
+        quality: 60,
+        // targetHeight: 100,
+        // targetWidth: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      const result = await this.camera.getPicture(options);
+      const image = 'data:image/jpeg;base64,' + result;
+      const picture = storage().ref(file);
+      let UploadTask = picture.putString(image,'data_url');
+      UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) =>  {},
+        (error) => { console.log(error)  },
+        () => { let url = UploadTask.snapshot.downloadURL;
+          console.log(url);
+          this.licenciaFoto = url;
+          this.disLicenciaImg = false;
+        }
+      );
+    } catch(e){ console.error(e);}
   }
 
 }

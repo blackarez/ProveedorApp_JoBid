@@ -159,4 +159,9 @@ export class UpdateServicePage {
     this.ListSubServices=this.professionsService.getCategoryByProfession(this.service);
     console.log(this.ListSubServices);
   }
+
+  addPictures(){
+    let Data = {'datos':this.keyService};
+    this.navCtrl.push('GalleryPage',Data);
+  }
 }

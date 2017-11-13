@@ -61,7 +61,9 @@ export class ProfessionalsService{
 		// console.log('getStar');
 		return this.afDB.object('/professionals/'+keyProvider+'/prof_star');
 	}
-
+	public getGalleryService(keyProveedor,keyService){
+		return this.afDB.object('/professionals/'+keyProveedor+'/Service/'+keyService+'/serv_detail/serv_gallery');
+	}
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
 		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
@@ -132,15 +134,58 @@ export class ProfessionalsService{
 		}
 
 		console.log(serviceData);
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/').set(serviceData).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_service').set(serviceData.serv_service).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_subService').set(serviceData.serv_subService).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_certificate').set(serviceData.serv_detail.serv_certificate).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_experiencia').set(serviceData.serv_detail.serv_experiencia).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_insurance').set(serviceData.serv_detail.serv_insurance).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_moreInformation').set(serviceData.serv_detail.serv_moreInformation).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		
 		console.info('professionals info service create or set');
 	}
 	
+	//-set
+	setInfoServiceUserGallery(KeyProveedor,serviceData,KeyService){
+		let keyS;
+		
+		if(KeyService && KeyService != null  && KeyService != undefined){
+			keyS = KeyService;
+		}else{
+			var Key = new Date().getTime();
+			keyS = "Serv_"+(Key);
+		}
+
+		console.log(serviceData);
+		console.log(KeyProveedor);
+		console.log(KeyService);
+
+		if(serviceData.fotoA != undefined){
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryA').set(serviceData.fotoA).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		}
+		if(serviceData.fotoB != undefined){
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryB').set(serviceData.fotoB).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		}
+		if(serviceData.fotoC != undefined){
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryC').set(serviceData.fotoC).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		}
+		if(serviceData.fotoD != undefined){
+		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryD').set(serviceData.fotoD).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		}
+		console.info('professionals info service create or set');
+	}
+
 	setContractStatus(keyProvider,keyOffer,status){
 		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer+'/status').set(status).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('professionals ContractStatus create or set');
 	}
 
+	setDocument(keyProvider,Document,Licencia){
+		console.log(keyProvider);
+		console.log(Document);
+		console.log(Licencia);
+		this.afDB.object('/professionals/'+keyProvider+'/prof_document').set(Document).catch(error => {console.log('error setDocument'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDB.object('/professionals/'+keyProvider+'/prof_licencia').set(Licencia).catch(error => {console.log('error setDocument'); console.log(error);console.log(JSON.stringify(error));});
+	}
 	//-drop
 	public dropService(KeyProveedor,keyService){
 		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyService+'/').remove();

@@ -17,7 +17,7 @@
   <ion-item padding class="statusPage">
     
       <ion-label>{{labelToogle}}</ion-label>
-      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>
+      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()"  (ionChange)="notify();"color="danger"></ion-toggle>
   </ion-item>
   <!-- <div class="mapa">
     <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">
@@ -31,7 +31,7 @@
   <div class="barraRoja" *ngIf="StatusProvider">
       <h4>Select a service and start the bid</h4>
   </div>
-  <button ion-button (click)="clickCamara()">camara</button>
+  <!-- <button ion-button (click)="clickCamara()">camara</button> -->
   <ion-grid class="body" *ngIf="StatusProvider">
     <!-- <ion-row >
       <ion-col col-2>
