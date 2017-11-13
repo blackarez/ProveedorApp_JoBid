@@ -1,14 +1,14 @@
 webpackJsonp([11],{
 
-/***/ 458:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceSalePageModule", function() { return ServiceSalePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_sale__ = __webpack_require__(626);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_sale__ = __webpack_require__(673);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,17 +38,18 @@ ServiceSalePageModule = __decorate([
 
 /***/ }),
 
-/***/ 626:
+/***/ 673:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceSalePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_sale_service__ = __webpack_require__(294);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_offer_service__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_sale_service__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_offer_service__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_audio__ = __webpack_require__(326);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(325);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,6 +100,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 /**
  * Generated class for the ServiceSalePage page.
  *
@@ -106,7 +108,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
  * Ionic pages and navigation.
  */
 var ServiceSalePage = (function () {
-    function ServiceSalePage(navCtrl, navParams, alertCtrl, professionalsService, geo, platform, saleService, offerService) {
+    function ServiceSalePage(navCtrl, navParams, alertCtrl, professionalsService, geo, platform, saleService, offerService, nativeAudio) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
@@ -115,6 +117,7 @@ var ServiceSalePage = (function () {
         this.platform = platform;
         this.saleService = saleService;
         this.offerService = offerService;
+        this.nativeAudio = nativeAudio;
         //-data
         this.DataService = [];
         this.Workers = [];
@@ -202,6 +205,7 @@ var ServiceSalePage = (function () {
             if (this.NumeroContador == 2) {
                 clearInterval(this.objNodeTimer);
                 this.showContador = false;
+                this.audio();
                 this.ganador();
             }
             else {
@@ -370,20 +374,31 @@ var ServiceSalePage = (function () {
         });
         alert.present();
     };
+    ServiceSalePage.prototype.audio = function () {
+        this.nativeAudio.preloadSimple('uniqueId1', 'assets/timbre.mp3').then(this.onSuccess, this.onError);
+        this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+    };
+    ServiceSalePage.prototype.onSuccess = function () {
+        console.log(' success');
+    };
+    ServiceSalePage.prototype.onError = function () {
+        console.log('error');
+    };
     return ServiceSalePage;
 }());
 ServiceSalePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-sale',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-sale\service-sale.html"*/'<!--\n\n  Generated template for the ServiceSalePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  <ion-content>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zom">\n\n      <agm-marker [latitude]="lat" [longitude]="lng">\n\n        <agm-info-window>\n\n          <h3><strong>Howdy!</strong></h3>\n\n          <p>You are here!</p>\n\n        </agm-info-window>\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  <div class="contador" *ngIf="showContador" >\n\n    <div class="contenido" >\n\n      <h3><p>Start</p>{{contador}}</h3>\n\n    </div>\n\n  </div>\n\n  <div class="Offers">\n\n    <p>Initial offer ${{maxOffer}}</p>\n\n    <h2>${{MenosPrecio}}</h2>\n\n  </div>\n\n  <div class="barraRoja">\n\n    <h4>Bid participants</h4>\n\n  </div>\n\n  <ion-grid class="body">\n\n    <ion-row *ngFor="let item of Workers">\n\n      <ion-col col-8>\n\n        <ion-item>\n\n          <ion-avatar item-start>\n\n            <img src="{{item.img}}">\n\n          </ion-avatar>\n\n          <p>{{item.name}}</p>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{item.offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-2 style="text-align:center;">\n\n        <ion-icon name="trophy" *ngIf="item.offer == MenosPrecio"></ion-icon>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>   \n\n<ion-footer>\n\n  <ion-toolbar>\n\n    <ion-grid>\n\n      <ion-row class="newOffer">\n\n        <ion-col col-3>\n\n          <p>Time</p>\n\n          <p><ion-icon name="time"></ion-icon> <span> {{contador}}</span></p>\n\n          </ion-col>\n\n        <ion-col col-6>\n\n          <ion-item>\n\n            <ion-input type="text" [(ngModel)]="newOffer" name="newOffer" [disabled]="offerDisable"></ion-input>\n\n          </ion-item>\n\n        </ion-col>\n\n        <ion-col col-3>\n\n          <button ion-button block color="light"(click)="newOfferProvider()" [disabled]="offerDisable">Offer\n\n          </button>\n\n        </ion-col>\n\n       </ion-row>\n\n       <ion-row>\n\n        <ion-col col-5>\n\n          <div class="btnIconInverse">\n\n          <button id="btnSalir" ion-button block color="light"(click)="goIndex()" [disabled]="exitDisable">\n\n              <ion-icon name="arrow-dropleft"></ion-icon> \n\n              Exit\n\n            </button>\n\n            </div>\n\n          </ion-col>\n\n          <ion-col col-7>\n\n            <div class="btnIcon">\n\n              <button id="btnDetalle" ion-button block color="light" (click)="detailsService()">Details\n\n\n\n                  <ion-icon name="search"></ion-icon> \n\n                </button>\n\n            </div>\n\n          </ion-col>\n\n       </ion-row>\n\n      </ion-grid>  \n\n    </ion-toolbar>\n\n  </ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\service-sale\service-sale.html"*/,
+        selector: 'page-service-sale',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-sale\service-sale.html"*/'<!--\n\n  Generated template for the ServiceSalePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  <ion-content>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zom">\n\n      <agm-marker [latitude]="lat" [longitude]="lng">\n\n        <agm-info-window>\n\n          <h3><strong>Howdy!</strong></h3>\n\n          <p>You are here!</p>\n\n        </agm-info-window>\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  <div class="contador" *ngIf="showContador" >\n\n    <div class="contenido" >\n\n      <h3><p>Start</p>{{contador}}</h3>\n\n    </div>\n\n  </div>\n\n  <div class="Offers">\n\n    <p>Initial offer ${{maxOffer}}</p>\n\n    <h2>${{MenosPrecio}}</h2>\n\n  </div>\n\n  <div class="barraRoja">\n\n    <h4>Bid participants</h4>\n\n  </div>\n\n  <ion-grid class="body">\n\n    <ion-row *ngFor="let item of Workers">\n\n      <ion-col col-8>\n\n        <ion-item>\n\n          <ion-avatar item-start>\n\n            <img src="{{item.img}}">\n\n          </ion-avatar>\n\n          <p>{{item.name}}</p>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{item.offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-2 style="text-align:center;">\n\n        <ion-icon name="trophy" *ngIf="item.offer == MenosPrecio"></ion-icon>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>   \n\n<ion-footer>\n\n  <ion-toolbar>\n\n    <ion-grid>\n\n      <ion-row class="newOffer">\n\n        <ion-col col-3>\n\n          <p>Time</p>\n\n          <p><ion-icon name="time"></ion-icon> <span> {{contador}}</span></p>\n\n          </ion-col>\n\n        <ion-col col-6>\n\n          <ion-item>\n\n            <ion-input type="text" [(ngModel)]="newOffer" name="newOffer" [disabled]="offerDisable"></ion-input>\n\n          </ion-item>\n\n        </ion-col>\n\n        <ion-col col-3>\n\n          <button ion-button block color="light"(click)="newOfferProvider()" [disabled]="offerDisable">Offer\n\n          </button>\n\n        </ion-col>\n\n       </ion-row>\n\n       <ion-row>\n\n        <ion-col col-5>\n\n          <div class="btnIconInverse">\n\n          <button id="btnSalir" ion-button block color="light"(click)="goIndex()" [disabled]="exitDisable">\n\n              <!-- <ion-icon name="arrow-dropleft"></ion-icon>  -->\n\n              Exit\n\n            </button>\n\n            </div>\n\n          </ion-col>\n\n          <ion-col col-7>\n\n            <div class="btnIcon">\n\n              <button id="btnDetalle" ion-button block color="light" (click)="detailsService()">Details\n\n\n\n                  <ion-icon name="search"></ion-icon> \n\n                </button>\n\n            </div>\n\n          </ion-col>\n\n       </ion-row>\n\n      </ion-grid>  \n\n    </ion-toolbar>\n\n  </ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-sale\service-sale.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
         __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */],
-        __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
         __WEBPACK_IMPORTED_MODULE_3__services_sale_service__["a" /* SaleService */],
-        __WEBPACK_IMPORTED_MODULE_4__services_offer_service__["a" /* OfferService */]])
+        __WEBPACK_IMPORTED_MODULE_4__services_offer_service__["a" /* OfferService */],
+        __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_audio__["a" /* NativeAudio */]])
 ], ServiceSalePage);
 
 //# sourceMappingURL=service-sale.js.map

@@ -1,12 +1,12 @@
 webpackJsonp([31],{
 
-/***/ 151:
+/***/ 165:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfessionalsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,6 +68,9 @@ var ProfessionalsService = (function () {
     ProfessionalsService.prototype.getStar = function (keyProvider) {
         // console.log('getStar');
         return this.afDB.object('/professionals/' + keyProvider + '/prof_star');
+    };
+    ProfessionalsService.prototype.getGalleryService = function (keyProveedor, keyService) {
+        return this.afDB.object('/professionals/' + keyProveedor + '/Service/' + keyService + '/serv_detail/serv_gallery');
     };
     //-new
     ProfessionalsService.prototype.newUser = function (userData, keyNew) {
@@ -133,12 +136,51 @@ var ProfessionalsService = (function () {
             keyS = "Serv_" + (Key);
         }
         console.log(serviceData);
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/').set(serviceData).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_service').set(serviceData.serv_service).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_subService').set(serviceData.serv_subService).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_certificate').set(serviceData.serv_detail.serv_certificate).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_experiencia').set(serviceData.serv_detail.serv_experiencia).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_insurance').set(serviceData.serv_detail.serv_insurance).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_moreInformation').set(serviceData.serv_detail.serv_moreInformation).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        console.info('professionals info service create or set');
+    };
+    //-set
+    ProfessionalsService.prototype.setInfoServiceUserGallery = function (KeyProveedor, serviceData, KeyService) {
+        var keyS;
+        if (KeyService && KeyService != null && KeyService != undefined) {
+            keyS = KeyService;
+        }
+        else {
+            var Key = new Date().getTime();
+            keyS = "Serv_" + (Key);
+        }
+        console.log(serviceData);
+        console.log(KeyProveedor);
+        console.log(KeyService);
+        if (serviceData.fotoA != undefined) {
+            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryA').set(serviceData.fotoA).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        }
+        if (serviceData.fotoB != undefined) {
+            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryB').set(serviceData.fotoB).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        }
+        if (serviceData.fotoC != undefined) {
+            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryC').set(serviceData.fotoC).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        }
+        if (serviceData.fotoD != undefined) {
+            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryD').set(serviceData.fotoD).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        }
         console.info('professionals info service create or set');
     };
     ProfessionalsService.prototype.setContractStatus = function (keyProvider, keyOffer, status) {
         this.afDB.object('/Contracts/' + keyProvider + '/' + keyOffer + '/status').set(status).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
         console.info('professionals ContractStatus create or set');
+    };
+    ProfessionalsService.prototype.setDocument = function (keyProvider, Document, Licencia) {
+        console.log(keyProvider);
+        console.log(Document);
+        console.log(Licencia);
+        this.afDB.object('/professionals/' + keyProvider + '/prof_document').set(Document).catch(function (error) { console.log('error setDocument'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDB.object('/professionals/' + keyProvider + '/prof_licencia').set(Licencia).catch(function (error) { console.log('error setDocument'); console.log(error); console.log(JSON.stringify(error)); });
     };
     //-drop
     ProfessionalsService.prototype.dropService = function (KeyProveedor, keyService) {
@@ -155,7 +197,7 @@ ProfessionalsService = __decorate([
 
 /***/ }),
 
-/***/ 160:
+/***/ 175:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -168,136 +210,136 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 160;
+webpackEmptyAsyncContext.id = 175;
 
 /***/ }),
 
-/***/ 202:
+/***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/add-payment-method/add-payment-method.module": [
-		435,
+		482,
 		2
 	],
 	"../pages/add-service/add-service.module": [
-		436,
+		483,
 		30
 	],
 	"../pages/certificates/certificates.module": [
-		437,
+		484,
 		29
 	],
 	"../pages/document/document.module": [
-		438,
+		485,
 		28
 	],
 	"../pages/edit-provider/edit-provider.module": [
-		439,
+		486,
 		4
 	],
 	"../pages/edit-user/edit-user.module": [
-		440,
+		487,
 		27
 	],
 	"../pages/gallery/gallery.module": [
-		441,
+		488,
 		26
 	],
 	"../pages/home/home.module": [
-		442,
+		489,
 		25
 	],
 	"../pages/login/login.module": [
-		443,
+		490,
 		24
 	],
 	"../pages/my-service-info/my-service-info.module": [
-		444,
+		491,
 		23
 	],
 	"../pages/my-services/my-services.module": [
-		445,
+		492,
 		22
 	],
 	"../pages/payment-methods/payment-methods.module": [
-		446,
+		493,
 		1
 	],
 	"../pages/payments/payments.module": [
-		447,
+		494,
 		0
 	],
 	"../pages/policies/policies.module": [
-		448,
+		495,
 		21
 	],
 	"../pages/provider-info-a/provider-info-a.module": [
-		449,
+		496,
 		20
 	],
 	"../pages/provider-info-b/provider-info-b.module": [
-		450,
+		497,
 		19
 	],
 	"../pages/provider-ok/provider-ok.module": [
-		451,
+		498,
 		18
 	],
 	"../pages/service-info-a/service-info-a.module": [
-		453,
+		500,
 		17
 	],
 	"../pages/service-info-b/service-info-b.module": [
-		454,
+		501,
 		16
 	],
 	"../pages/service-info/service-info.module": [
-		452,
+		499,
 		15
 	],
 	"../pages/service-job/service-job.module": [
-		455,
+		502,
 		14
 	],
 	"../pages/service-new/service-new.module": [
-		456,
+		503,
 		13
 	],
 	"../pages/service-ok/service-ok.module": [
-		457,
+		504,
 		12
 	],
 	"../pages/service-sale/service-sale.module": [
-		458,
+		505,
 		11
 	],
 	"../pages/service-vote/service-vote.module": [
-		459,
+		506,
 		10
 	],
 	"../pages/service-win/service-win.module": [
-		460,
+		507,
 		9
 	],
 	"../pages/show/show.module": [
-		434,
+		508,
 		8
 	],
 	"../pages/singup/singup.module": [
-		461,
+		509,
 		3
 	],
 	"../pages/terms/terms.module": [
-		462,
+		510,
 		7
 	],
 	"../pages/update-service/update-service.module": [
-		463,
+		511,
 		6
 	],
 	"../pages/update-user/update-user.module": [
-		464,
+		512,
 		5
 	]
 };
@@ -312,18 +354,103 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 202;
+webpackAsyncContext.id = 217;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 293:
+/***/ 318:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SaleService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(63);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+var SaleService = (function () {
+    function SaleService(afDB) {
+        this.afDB = afDB;
+        this.dataCategoria = [];
+        this.dataService = [];
+    }
+    //---new sale
+    SaleService.prototype.newSale = function (keyUser, keySale, maxOffer) {
+        // let key = undefined;
+        // //default star
+        // let star = '3';
+        // console.log('key:'+key);
+        // console.log('keyNew:'+keyNew);
+        // if(keyNew && keyNew != null  && keyNew != undefined){
+        // 	keySale = keyNew;
+        // }else{
+        // 	var d = new Date();
+        // 	key = d.getTime();
+        // 	var keySale = "sale_"+(key);
+        // }
+        console.log('metodoNewSale');
+        console.log(keyUser);
+        console.log(keySale);
+        console.log(maxOffer);
+        this.afDB.object('/sale/' + keyUser + '/' + keySale).set({ "status": "Published", "sale": maxOffer, "providers": { "prof_1": { "offer": "87" }, "prof_2": { "offer": "65" } } }).catch(function (error) { console.log('errorNewSale'); console.log(error); console.log(JSON.stringify(error)); });
+        //this.afDB.object('/sale/'+keyUser+'/'+keySale).set({"status":"new","sale":maxOffer});
+        console.info('sale create');
+    };
+    SaleService.prototype.getSale = function (keyUser, keySale) {
+        return this.afDB.object('/sale/' + keyUser + '/' + keySale);
+    };
+    SaleService.prototype.getSales = function (keyUser) {
+        return this.afDB.object('/sale/' + keyUser);
+    };
+    SaleService.prototype.setStatus = function (keyUser, keyOffer, status) {
+        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error sale setstatus'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    SaleService.prototype.setSale = function (keyUser, keyOffer, sale) {
+        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    SaleService.prototype.setSaleProvider = function (keyUser, keyOffer, KeyProvider, sale) {
+        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + KeyProvider + '/offer/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    SaleService.prototype.setProvider = function (keyUser, keyOffer, Provider) {
+        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    //-get
+    SaleService.prototype.getStatus = function (keyUser, keyOffer) {
+        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/status/');
+    };
+    SaleService.prototype.setSaleUserLocation = function (keyUser, keyOffer, keyProvider, UserLocation) {
+        console.info('set UserLocation');
+        console.log(UserLocation);
+        this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + keyProvider + '/UserLocacion').set(UserLocation).catch(function (error) { console.log('error sale setSaleUserLocation'); console.log(error); console.log(JSON.stringify(error)); });
+    };
+    return SaleService;
+}());
+SaleService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+], SaleService);
+
+//# sourceMappingURL=sale.service.js.map
+
+/***/ }),
+
+/***/ 319:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OfferService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -423,98 +550,13 @@ OfferService = __decorate([
 
 /***/ }),
 
-/***/ 294:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SaleService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(59);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
-var SaleService = (function () {
-    function SaleService(afDB) {
-        this.afDB = afDB;
-        this.dataCategoria = [];
-        this.dataService = [];
-    }
-    //---new sale
-    SaleService.prototype.newSale = function (keyUser, keySale, maxOffer) {
-        // let key = undefined;
-        // //default star
-        // let star = '3';
-        // console.log('key:'+key);
-        // console.log('keyNew:'+keyNew);
-        // if(keyNew && keyNew != null  && keyNew != undefined){
-        // 	keySale = keyNew;
-        // }else{
-        // 	var d = new Date();
-        // 	key = d.getTime();
-        // 	var keySale = "sale_"+(key);
-        // }
-        console.log('metodoNewSale');
-        console.log(keyUser);
-        console.log(keySale);
-        console.log(maxOffer);
-        this.afDB.object('/sale/' + keyUser + '/' + keySale).set({ "status": "Published", "sale": maxOffer, "providers": { "prof_1": { "offer": "87" }, "prof_2": { "offer": "65" } } }).catch(function (error) { console.log('errorNewSale'); console.log(error); console.log(JSON.stringify(error)); });
-        //this.afDB.object('/sale/'+keyUser+'/'+keySale).set({"status":"new","sale":maxOffer});
-        console.info('sale create');
-    };
-    SaleService.prototype.getSale = function (keyUser, keySale) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keySale);
-    };
-    SaleService.prototype.getSales = function (keyUser) {
-        return this.afDB.object('/sale/' + keyUser);
-    };
-    SaleService.prototype.setStatus = function (keyUser, keyOffer, status) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error sale setstatus'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    SaleService.prototype.setSale = function (keyUser, keyOffer, sale) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    SaleService.prototype.setSaleProvider = function (keyUser, keyOffer, KeyProvider, sale) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + KeyProvider + '/offer/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    SaleService.prototype.setProvider = function (keyUser, keyOffer, Provider) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    //-get
-    SaleService.prototype.getStatus = function (keyUser, keyOffer) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/status/');
-    };
-    SaleService.prototype.setSaleUserLocation = function (keyUser, keyOffer, keyProvider, UserLocation) {
-        console.info('set UserLocation');
-        console.log(UserLocation);
-        this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + keyProvider + '/UserLocacion').set(UserLocation).catch(function (error) { console.log('error sale setSaleUserLocation'); console.log(error); console.log(JSON.stringify(error)); });
-    };
-    return SaleService;
-}());
-SaleService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-], SaleService);
-
-//# sourceMappingURL=sale.service.js.map
-
-/***/ }),
-
-/***/ 295:
+/***/ 320:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -766,7 +808,7 @@ UserService = __decorate([
 
 /***/ }),
 
-/***/ 297:
+/***/ 321:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -845,14 +887,14 @@ ProfessionsService = __decorate([
 
 /***/ }),
 
-/***/ 299:
+/***/ 324:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BraintreeService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(458);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 //import { client} from "braintree-web/client";
 //import { hostedFields} from "braintree-web/hosted-fields";
@@ -878,7 +920,7 @@ var BraintreeService = (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             // console.log(apiUrlBase+'/customer/create/'+keyCustomer);
-            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+            // let headers = new Headers();
             var getCrearCustom = _this.http.get(apiUrlBase + '/customer/create/' + keyCustomer).subscribe(function (result) {
                 console.log(result);
                 console.log(JSON.stringify(result));
@@ -896,7 +938,7 @@ var BraintreeService = (function () {
     BraintreeService.prototype.CrearTokenCustomer = function (keyCustomer) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+            // let headers = new Headers();
             // console.log(apiUrlBase+'/getTokenCustom/'+keyCustomer);
             var getCrearCustom = _this.http.get(apiUrlBase + '/getTokenCustom/' + keyCustomer).subscribe(function (result) {
                 console.log(result);
@@ -917,7 +959,7 @@ var BraintreeService = (function () {
     BraintreeService.prototype.CrearSaleCustomer = function (keyCustomer, sale, provider, offer, subService) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+            // let headers = new Headers();
             console.log(apiUrlBase + '/SaleCustomer/' + keyCustomer + '/' + sale + '/' + provider + '/' + offer + '/' + subService);
             var setSaleCustomSubs = _this.http.get(apiUrlBase + '/SaleCustomer/' + keyCustomer + '/' + sale + '/' + provider + '/' + offer + '/' + subService).subscribe(function (result) {
                 console.log(result);
@@ -938,7 +980,7 @@ var BraintreeService = (function () {
     BraintreeService.prototype.CancelSaleCustomer = function (keyCustomer, sale) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+            // let headers = new Headers();
             console.log(apiUrlBase + '/SaleCancel/' + keyCustomer + '/' + sale);
             var setSaleCustomSubs = _this.http.get(apiUrlBase + '/SaleCancel/' + keyCustomer + '/' + sale).subscribe(function (result) {
                 console.log(result);
@@ -960,20 +1002,20 @@ var BraintreeService = (function () {
 }());
 BraintreeService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
 ], BraintreeService);
 
 //# sourceMappingURL=braintree.service.js.map
 
 /***/ }),
 
-/***/ 300:
+/***/ 327:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(344);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -981,31 +1023,34 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 317:
+/***/ 344:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export firebaseConfig */
 /* unused harmony export googleMapsKey */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(433);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__ = __webpack_require__(298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__agm_core__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_braintree_service__ = __webpack_require__(299);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_user_service__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_professions_service__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_offer_service__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_sale_service__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(480);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__agm_core__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_native_audio__ = __webpack_require__(326);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_braintree_service__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_user_service__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_professionals_service__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_professions_service__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_offer_service__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_sale_service__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_camera_service__ = __webpack_require__(481);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1018,6 +1063,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 //-pages
 
+// import { HomePage } from '../pages/home/home';
+// import { EditUserPage } from '../pages/edit-user/edit-user';
+// import { ShowPage } from '../pages/show/show';
 // import { MyServicesPage } from '../pages/my-services/my-services';
 // import { PaymentsPage } from '../pages/payments/payments';
 // import { PoliciesPage } from '../pages/policies/policies';
@@ -1029,7 +1077,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 //-service
+
 
 
 
@@ -1058,10 +1109,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
                 links: [
-                    { loadChildren: '../pages/show/show.module#ShowPageModule', name: 'ShowPage', segment: 'show', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule', name: 'AddPaymentMethodPage', segment: 'add-payment-method', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/add-service/add-service.module#AddServicePageModule', name: 'AddServicePage', segment: 'add-service', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/certificates/certificates.module#CertificatesPageModule', name: 'CertificatesPage', segment: 'certificates', priority: 'low', defaultHistory: [] },
@@ -1088,6 +1138,7 @@ AppModule = __decorate([
                     { loadChildren: '../pages/service-sale/service-sale.module#ServiceSalePageModule', name: 'ServiceSalePage', segment: 'service-sale', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service-vote/service-vote.module#ServiceVotePageModule', name: 'ServiceVotePage', segment: 'service-vote', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/service-win/service-win.module#ServiceWinPageModule', name: 'ServiceWinPage', segment: 'service-win', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/show/show.module#ShowPageModule', name: 'ShowPage', segment: 'show', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/singup/singup.module#SingupPageModule', name: 'SingupPage', segment: 'singup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/terms/terms.module#TermsPageModule', name: 'TermsPage', segment: 'terms', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/update-service/update-service.module#UpdateServicePageModule', name: 'UpdateServicePage', segment: 'update-service', priority: 'low', defaultHistory: [] },
@@ -1113,12 +1164,15 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["b" /* AngularFireDatabaseModule */],
             __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["b" /* AngularFireAuthModule */],
             __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_13__services_user_service__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_14__services_professionals_service__["a" /* ProfessionalsService */],
-            __WEBPACK_IMPORTED_MODULE_15__services_professions_service__["a" /* ProfessionsService */],
-            __WEBPACK_IMPORTED_MODULE_16__services_offer_service__["a" /* OfferService */],
-            __WEBPACK_IMPORTED_MODULE_17__services_sale_service__["a" /* SaleService */],
-            __WEBPACK_IMPORTED_MODULE_12__services_braintree_service__["a" /* BraintreeService */],
+            __WEBPACK_IMPORTED_MODULE_15__services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_16__services_professionals_service__["a" /* ProfessionalsService */],
+            __WEBPACK_IMPORTED_MODULE_17__services_professions_service__["a" /* ProfessionsService */],
+            __WEBPACK_IMPORTED_MODULE_18__services_offer_service__["a" /* OfferService */],
+            __WEBPACK_IMPORTED_MODULE_19__services_sale_service__["a" /* SaleService */],
+            __WEBPACK_IMPORTED_MODULE_14__services_braintree_service__["a" /* BraintreeService */],
+            __WEBPACK_IMPORTED_MODULE_20__services_camera_service__["a" /* CameraService */],
+            __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_13__ionic_native_native_audio__["a" /* NativeAudio */],
         ]
     })
 ], AppModule);
@@ -1127,17 +1181,17 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 433:
+/***/ 480:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(166);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1249,7 +1303,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>JOBID</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content>\n\n    <ion-list>\n\n        <ion-item class="imgUser">\n\n          <ion-thumbnail item-start>\n\n            <img src="{{srcUser}}" alt="userLogo">\n\n          </ion-thumbnail>\n\n          <p>{{userName}}</p>\n\n          <p><ion-icon name="star" class="nota" item-start></ion-icon> {{star}}</p>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        {{p.title}}\n\n      </button>\n\n      <button ion-item class="loginOut" menuToggle (click)="cerrarSeccion()">\n\n          Login out\n\n        </button> \n\n    </ion-list>\n\n  </ion-content>\n\n  <ion-footer>\n\n      <ion-toolbar>\n\n          <ion-list>\n\n              <button ion-item (click)="goPolicies()" menuToggle>\n\n                Policies <p class="version">V.1</p>\n\n              </button> \n\n               \n\n            </ion-list>\n\n      </ion-toolbar>\n\n    </ion-footer>\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\app\app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>JOBID</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content>\n\n    <ion-list>\n\n        <ion-item class="imgUser">\n\n          <ion-thumbnail item-start>\n\n            <img src="{{srcUser}}" alt="userLogo">\n\n          </ion-thumbnail>\n\n          <p>{{userName}}</p>\n\n          <p><ion-icon name="star" class="nota" item-start></ion-icon> {{star}}</p>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        {{p.title}}\n\n      </button>\n\n      <button ion-item class="loginOut" menuToggle (click)="cerrarSeccion()">\n\n          Login out\n\n        </button> \n\n    </ion-list>\n\n  </ion-content>\n\n  <ion-footer>\n\n      <ion-toolbar>\n\n          <ion-list>\n\n              <button ion-item (click)="goPolicies()" menuToggle>\n\n                Policies <p class="version">V.1</p>\n\n              </button> \n\n               \n\n            </ion-list>\n\n      </ion-toolbar>\n\n    </ion-footer>\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
         __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */],
@@ -1258,7 +1312,137 @@ MyApp = __decorate([
 
 //# sourceMappingURL=app.component.js.map
 
+/***/ }),
+
+/***/ 481:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CameraService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_camera__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase_app__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_firebase_app__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+// import { AngularFireAuth } from 'angularfire2/auth';
+
+var CameraService = (function () {
+    function CameraService(camera) {
+        this.camera = camera;
+        this.uploads = [];
+    }
+    CameraService.prototype.clickCamara = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var options, result, image, picture, UploadTask_1, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log('clickCamara');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        options = {
+                            quality: 60,
+                            //   targetHeight: 100,
+                            //   targetWidth: 100,
+                            destinationType: this.camera.DestinationType.DATA_URL,
+                            encodingType: this.camera.EncodingType.JPEG,
+                            mediaType: this.camera.MediaType.PICTURE
+                        };
+                        return [4 /*yield*/, this.camera.getPicture(options)];
+                    case 2:
+                        result = _a.sent();
+                        image = 'data:image/jpeg;base64,' + result;
+                        picture = Object(__WEBPACK_IMPORTED_MODULE_2_firebase__["storage"])().ref('file');
+                        UploadTask_1 = picture.putString(image, 'data_url');
+                        // alert(UploadTask);
+                        // console.log(JSON.stringify(UploadTask));
+                        UploadTask_1.on(__WEBPACK_IMPORTED_MODULE_3_firebase_app__["storage"].TaskEvent.STATE_CHANGED, function (snapshot) {
+                            // upload in progress
+                        }, function (error) {
+                            // upload failed
+                            console.log(error);
+                        }, function () {
+                            // upload success
+                            // this.uploads.url = UploadTask.snapshot.downloadURL;
+                            // // this.saveFileData(upload)
+                            _this.uploads.url = UploadTask_1.snapshot.downloadURL;
+                            if (_this.uploads.url != undefined) {
+                                console.log(_this.uploads.url);
+                                return _this.uploads.url;
+                            }
+                            // console.log(UploadTask.snapshot.downloadURL);
+                            // return UploadTask.snapshot.downloadURL;
+                        });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.error(e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return CameraService;
+}());
+CameraService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_camera__["a" /* Camera */]])
+], CameraService);
+
+//# sourceMappingURL=camera.service.js.map
+
 /***/ })
 
-},[300]);
+},[327]);
 //# sourceMappingURL=main.js.map

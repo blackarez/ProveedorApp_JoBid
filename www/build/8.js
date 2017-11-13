@@ -1,15 +1,15 @@
 webpackJsonp([8],{
 
-/***/ 434:
+/***/ 508:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowPageModule", function() { return ShowPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__show__ = __webpack_require__(602);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__agm_core__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__show__ = __webpack_require__(676);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__agm_core__ = __webpack_require__(322);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43,17 +43,17 @@ ShowPageModule = __decorate([
 
 /***/ }),
 
-/***/ 602:
+/***/ 676:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShowPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_offer_service__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_user_service__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_offer_service__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_user_service__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(325);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -70,6 +70,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import { AgmCoreModule } from '@agm/core';
 /**
  * Generated class for the ShowPage page.
  *
@@ -108,7 +109,8 @@ var ShowPage = (function () {
         this.labelToogle = 'Offline';
         this.StatusProvider = false;
         this.getUserLocationGeolocation();
-        alert('hola');
+        // alert('hola');
+        this.notify();
     }
     ShowPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ShowPage');
@@ -118,15 +120,22 @@ var ShowPage = (function () {
         console.log('userSubs-US show');
         console.log('serviceSubs-US show');
         console.log('listOffer-US show');
-        this.userSubs.unsubscribe();
-        this.serviceSubs.unsubscribe();
-        this.listOffer.unsubscribe();
+        if (this.userSubs != undefined) {
+            this.userSubs.unsubscribe();
+        }
+        if (this.serviceSubs != undefined) {
+            this.serviceSubs.unsubscribe();
+        }
+        if (this.listOffer != undefined) {
+            this.listOffer.unsubscribe();
+        }
         var Data = { 'datos': item };
         this.navCtrl.push('ServiceInfoPage', Data);
     };
     ShowPage.prototype.notify = function () {
+        // console.log("Toggled: ");
         console.log("Toggled: " + this.StatusProvider);
-        alert("Toggled: " + this.StatusProvider);
+        // alert("Toggled: "+ this.StatusProvider);
         if (this.StatusProvider == false) {
             this.labelToogle = "Offline";
         }
@@ -137,7 +146,7 @@ var ShowPage = (function () {
     };
     ShowPage.prototype.showServices = function () {
         var _this = this;
-        alert('showServices');
+        // alert('showServices');
         this.listOffer = this.offerService.getOfferNew().subscribe(function (list) {
             _this.ListService = [];
             // console.log(list);
@@ -147,7 +156,7 @@ var ShowPage = (function () {
     };
     ShowPage.prototype.getServiceProvider = function (BDListOffer) {
         var _this = this;
-        alert();
+        // alert();
         this.serviceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (BDListServicesProvider) {
             console.log('serviceSubs-S show');
             // console.log(BDListServicesProvider);
@@ -172,7 +181,7 @@ var ShowPage = (function () {
                 // console.log('pro-star: '+ Number(stars));
                 if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
                     console.info('star ok');
-                    alert('star ok');
+                    // alert('star ok');
                     // console.log(BDListOffer[keys]);
                     // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
                     // console.log(BDListOffer[keys].Clasificacion.distancia);
@@ -180,7 +189,7 @@ var ShowPage = (function () {
                         // console.log(BDListOffer[keys].UserLocacion.latitud);
                         // console.log(BDListOffer[keys].UserLocacion.longitud);
                         var distanceKilo = this_1.getDistanceKilometros(Number(this_1.lat), Number(this_1.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
-                        // console.log(distanceKilo);
+                        console.log(distanceKilo);
                         var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
                         // console.log(distanceMillas);
                         // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
@@ -191,7 +200,7 @@ var ShowPage = (function () {
                         // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
                         if (BDListOffer[keys].Clasificacion.categoria == BDListServicesProvider[keySP]['serv_subService'] && true == this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas)) {
                             console.info('categoria y  distancia ok');
-                            alert('categoria y  distancia ok');
+                            // alert('categoria y  distancia ok');
                             var ServiceProviderCertificate = void 0;
                             var ServiceProviderSecurity = void 0;
                             if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null) {
@@ -216,11 +225,11 @@ var ShowPage = (function () {
                             // console.log('off-experien:'+BDListOffer[keys].Clasificacion.experiencia);
                             if (ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro) {
                                 console.info('certificado y seguro ok');
-                                alert('certificado y seguro ok');
+                                // alert('certificado y seguro ok');
                                 // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
                                 if (this_1.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia, BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true) {
                                     console.info('Experience ok');
-                                    alert('Experience ok');
+                                    // alert('Experience ok');
                                     var InfmaxOffer_1 = BDListOffer[keys].Clasificacion.informacion.maxOffer;
                                     var InfmoreInformacion_1 = BDListOffer[keys].Clasificacion.informacion.moreInformation;
                                     var InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
@@ -252,17 +261,17 @@ var ShowPage = (function () {
                                 }
                                 else {
                                     console.info('Experience no');
-                                    alert('star ok');
+                                    // alert('star ok');
                                 }
                             }
                             else {
                                 console.info('certificado y seguro no');
-                                alert('star ok');
+                                // alert('star ok');
                             }
                         }
                         else {
                             console.info('categoria y  distancia no');
-                            alert('star ok');
+                            // alert('categoria y  distancia no');
                         }
                     }
                 }
@@ -438,7 +447,7 @@ var ShowPage = (function () {
 ShowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-show',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/'<!--\n\n  Generated template for the ShowPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-item padding class="statusPage">\n\n    \n\n      <ion-label>{{labelToogle}}</ion-label>\n\n      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()" color="danger"></ion-toggle>\n\n  </ion-item>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">\n\n      <agm-marker style="z-index:9;"\n\n        [latitude]="Userlat"\n\n        [longitude]="Userlng" >\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  <div class="barraRoja" *ngIf="StatusProvider">\n\n      <h4>Select a service and start the bid</h4>\n\n  </div>\n\n  <ion-grid class="body" *ngIf="StatusProvider">\n\n    <!-- <ion-row >\n\n      <ion-col col-2>\n\n       <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="{{imgDefault}}">\n\n        </ion-avatar>\n\n       </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p><strong>{{nameUser}}</strong></p>\n\n        <p>{{Description}}</p>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <button ion-button icon-only round color="light" (click)="goInfo()">\n\n          <ion-icon name="search"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row> -->\n\n    <ion-row *ngFor="let item of ListService">\n\n      <ion-col col-2>\n\n        <ion-item>\n\n         <ion-avatar item-start>\n\n           <img src="{{item.img}}">\n\n         </ion-avatar>\n\n        </ion-item>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <h5>${{item.sale}}</h5>\n\n       </ion-col>\n\n       <ion-col col-6>\n\n         <p><strong>{{item.name}}</strong></p>\n\n         <p>{{item.infoShow}}</p>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <button ion-button icon-only round color="light" (click)="goInfo(item)">\n\n           <ion-icon name="search"></ion-icon>\n\n         </button>\n\n       </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\ProveedorApp_JoBid\src\pages\show\show.html"*/,
+        selector: 'page-show',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\show\show.html"*/'<!--\n\n  Generated template for the ShowPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>joBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-item padding class="statusPage">\n\n    \n\n      <ion-label>{{labelToogle}}</ion-label>\n\n      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()"  (ionChange)="notify();"color="danger"></ion-toggle>\n\n  </ion-item>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">\n\n      <agm-marker style="z-index:9;"\n\n        [latitude]="Userlat"\n\n        [longitude]="Userlng" >\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  \n\n  <div class="barraRoja" *ngIf="StatusProvider">\n\n      <h4>Select a service and start the bid</h4>\n\n  </div>\n\n  <!-- <button ion-button (click)="clickCamara()">camara</button> -->\n\n  <ion-grid class="body" *ngIf="StatusProvider">\n\n    <!-- <ion-row >\n\n      <ion-col col-2>\n\n       <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="{{imgDefault}}">\n\n        </ion-avatar>\n\n       </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p><strong>{{nameUser}}</strong></p>\n\n        <p>{{Description}}</p>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <button ion-button icon-only round color="light" (click)="goInfo()">\n\n          <ion-icon name="search"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row> -->\n\n    <ion-row *ngFor="let item of ListService">\n\n      <ion-col col-2>\n\n        <ion-item>\n\n         <ion-avatar item-start>\n\n           <img src="{{item.img}}">\n\n         </ion-avatar>\n\n        </ion-item>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <h5>${{item.sale}}</h5>\n\n       </ion-col>\n\n       <ion-col col-6>\n\n         <p><strong>{{item.name}}</strong></p>\n\n         <p>{{item.infoShow}}</p>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <button ion-button icon-only round color="light" (click)="goInfo(item)">\n\n           <ion-icon name="search"></ion-icon>\n\n         </button>\n\n       </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\show\show.html"*/,
     })
     // @NgModule({
     //   imports: [
