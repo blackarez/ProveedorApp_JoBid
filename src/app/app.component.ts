@@ -80,8 +80,10 @@ export class MyApp {
             console.log(User);
             if(User['0']){
               this.loadViewUser(User['0']);
+              if(Userexists != undefined){
+                Userexists.unsubscribe();
+              }
             }
-            // Userexists.unsubscribe();
           });
         }
     });

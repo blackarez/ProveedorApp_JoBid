@@ -90,7 +90,7 @@ export class GalleryPage {
       fotoC: [''],
       fotoD: [''],
     });
-    let GalleryServiceSubs = this.professionalsService.getGalleryService(this.UserActual,this.keyService).subscribe(
+    this.professionalsService.getGalleryService(this.UserActual,this.keyService).subscribe(
       (GalleryB)=>{
         console.log(GalleryB);
         this.fotoA = GalleryB.prof_galleryA;

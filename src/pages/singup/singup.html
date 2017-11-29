@@ -71,7 +71,7 @@
               <ion-item>
                 <!-- <ion-icon name="call" item-start></ion-icon>this.codeAreaEstadoSelect -->
                  <ion-select [(ngModel)]="telA" name="telA" placeholder="Area code">
-                  <ion-option *ngFor="let stateCod of codeAreaEstadoSelect" value="{{stateCod.code}}">{{stateCod.code}}</ion-option>
+                  <ion-option *ngFor="let stateCod of codeAreaEstadoSelect | orderBy : ['code']" value="{{stateCod.code}}">{{stateCod.code}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>

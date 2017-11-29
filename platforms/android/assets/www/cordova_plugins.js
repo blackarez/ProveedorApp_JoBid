@@ -55,6 +55,14 @@ module.exports = [
     "runs": true
   },
   {
+    "id": "cordova-plugin-nativeaudio.nativeaudio",
+    "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+    "pluginId": "cordova-plugin-nativeaudio",
+    "clobbers": [
+      "window.plugins.NativeAudio"
+    ]
+  },
+  {
     "id": "cordova-plugin-splashscreen.SplashScreen",
     "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
     "pluginId": "cordova-plugin-splashscreen",
@@ -80,11 +88,30 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-nativeaudio.nativeaudio",
-    "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
-    "pluginId": "cordova-plugin-nativeaudio",
+    "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
+    "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
+    "pluginId": "de.appplant.cordova.plugin.local-notification",
     "clobbers": [
-      "window.plugins.NativeAudio"
+      "cordova.plugins.notification.local",
+      "plugin.notification.local"
+    ]
+  },
+  {
+    "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
+    "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
+    "pluginId": "de.appplant.cordova.plugin.local-notification",
+    "clobbers": [
+      "cordova.plugins.notification.local.core",
+      "plugin.notification.local.core"
+    ]
+  },
+  {
+    "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
+    "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
+    "pluginId": "de.appplant.cordova.plugin.local-notification",
+    "merges": [
+      "cordova.plugins.notification.local.core",
+      "plugin.notification.local.core"
     ]
   }
 ];
@@ -95,11 +122,13 @@ module.exports.metadata =
   "cordova-plugin-console": "1.0.5",
   "cordova-plugin-device": "1.1.4",
   "cordova-plugin-geolocation": "2.4.3",
+  "cordova-plugin-nativeaudio": "3.0.9",
   "cordova-plugin-splashscreen": "4.0.3",
   "cordova-plugin-statusbar": "2.2.2",
   "cordova-plugin-whitelist": "1.3.1",
   "ionic-plugin-keyboard": "2.2.1",
-  "cordova-plugin-nativeaudio": "3.0.9"
+  "cordova-plugin-app-event": "1.2.1",
+  "de.appplant.cordova.plugin.local-notification": "0.8.5"
 };
 // BOTTOM OF METADATA
 });

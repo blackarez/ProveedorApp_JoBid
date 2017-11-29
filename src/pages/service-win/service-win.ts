@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angul
 //-service
 import { SaleService } from '../../services/sale.service';
 import { ProfessionalsService } from '../../services/professionals.service';
+import { NotificacionService } from '../../services/notificacion.service';
 /**
  * Generated class for the ServiceWinPage page.
  *
@@ -32,6 +33,7 @@ export class ServiceWinPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, private saleService :SaleService,
     private professionalsService:ProfessionalsService,
+    private notificacionService : NotificacionService,
   ) {
     this.DataService = this.navParams.get('datos');
     this.user = this.DataService['idUser'];
@@ -57,7 +59,6 @@ getStatusService(){
           this.goServiceNew();
           console.log('statusSub-US service-win');
           this.statusSub.unsubscribe();
-          
         }
         if(status['$value'] == 'Cancelled'){
           this.goIndexService();
@@ -112,4 +113,15 @@ showAlertCancel() {
   });
   alerteMail.present();
 }
+
+//-notification
+notificacionHired(){
+  console.info('Nota: You have been hired');
+  this.notificacionService.mostrar('You have been hired',5);
+}
+notificacionCancel(){
+  console.info('Nota: The service has been canceled');
+  this.notificacionService.mostrar('The service has been canceled',6);
+}
+
 }

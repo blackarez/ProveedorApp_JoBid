@@ -4,9 +4,9 @@ import { IonicPage, NavController, NavParams,AlertController,Platform} from 'ion
 import { ProfessionalsService } from '../../services/professionals.service';
 import { SaleService } from '../../services/sale.service';
 import { OfferService } from '../../services/offer.service';
-
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NotificacionService } from '../../services/notificacion.service';
 
 /**
  * Generated class for the ServiceSalePage page.
@@ -68,6 +68,7 @@ export class ServiceSalePage {
     private saleService: SaleService,  
     private offerService: OfferService,  
     private nativeAudio : NativeAudio,
+    private notificacionService : NotificacionService,
   ) {
     this.DataService = this.navParams.get('datos');
     //-load only
@@ -149,6 +150,7 @@ private timer(){
       this.audio();
       this.ganador();
     }else{
+      this.notificacionBegin();
       this.minutos = 2;
       this.segundos = 0;
       this.NumeroContador = 2;
@@ -205,6 +207,7 @@ async getSale(){
       }
       finRegistro = true;
     }else{
+      this.notificacionCancelSale();
       this.AlertCancelOffer();
       this.navCtrl.setRoot('ShowPage');
       console.log('PromiseUser-US sale');
@@ -312,6 +315,15 @@ private getUserLocationGeolocation(){
   }
   onError(){
     console.log('error');
+  }
+  //-notification
+  notificacionBegin(){
+    console.info('Nota: The bid has begun, start the bids');
+    this.notificacionService.mostrar('The bid has begun, start the bids',3);
+  }
+  notificacionCancelSale(){
+    console.info('Nota: The service has been canceled');
+    this.notificacionService.mostrar('The service has been canceled',4);
   }
 
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+//-services
 import {UserService} from '../../services/user.service';
+import { NotificacionService } from '../../services/notificacion.service';
 /**
  * Generated class for the ServiceVotePage page.
  *
@@ -25,7 +27,8 @@ export class ServiceVotePage {
   vote:any=[];
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    private userService : UserService,
+    private userService : UserService, 
+    private notificacionService : NotificacionService,
   ) {
     this.loadView();
   }
@@ -66,5 +69,11 @@ export class ServiceVotePage {
     console.log(this.userActual);
 
     this.user ="user_1509139021478";
+  }
+
+  //-notification
+  notificacionHired(){
+    console.info('Nota: Do not forget to rate your client');
+    this.notificacionService.mostrar('Do not forget to rate your client',7);
   }
 }

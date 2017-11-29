@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 //-pages
 import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
@@ -30,7 +30,7 @@ import { ProfessionalsService } from '../services/professionals.service';
 import { ProfessionsService } from '../services/professions.service';
 import { OfferService } from '../services/offer.service';
 import { SaleService } from '../services/sale.service';
-import { CameraService } from '../services/camera.service';
+import { NotificacionService } from '../services/notificacion.service';
 
 //- config 
 export const firebaseConfig = {
@@ -77,9 +77,10 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
     OfferService,
     SaleService,
     BraintreeService,
-    CameraService,
+    NotificacionService,
     Camera,
     NativeAudio,
+    LocalNotifications,
   ]
 })
 export class AppModule {}

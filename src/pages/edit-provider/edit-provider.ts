@@ -7,8 +7,8 @@ import STATE_UTILS from 'states-utils';
 import { ProfessionalsService } from '../../services/professionals.service';
 
 //-firebase
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import * as firebase from 'firebase/app';
 
 /**
  * Generated class for the EditProviderPage page.
@@ -84,7 +84,7 @@ export class EditProviderPage {
         // console.log(this.userData);
         this.telA =  this.userData.tel.substring(1,4);
         this.telB =  this.userData.tel.substring(6);
-        let zipcodea = this.userData['zipcode'];
+        // let zipcodea = this.userData['zipcode'];
         // console.log(zipcodea);
         this.ciudades.zipcode= this.userData['zipcode'];
         // console.log(this.telA);

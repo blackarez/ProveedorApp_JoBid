@@ -1,14 +1,14 @@
 webpackJsonp([29],{
 
-/***/ 484:
+/***/ 488:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CertificatesPageModule", function() { return CertificatesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckrWelcomePageModule", function() { return CheckrWelcomePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__certificates__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__checkr_welcome__ = __webpack_require__(659);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CertificatesPageModule = (function () {
-    function CertificatesPageModule() {
+var CheckrWelcomePageModule = (function () {
+    function CheckrWelcomePageModule() {
     }
-    return CertificatesPageModule;
+    return CheckrWelcomePageModule;
 }());
-CertificatesPageModule = __decorate([
+CheckrWelcomePageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__certificates__["a" /* CertificatesPage */],
+            __WEBPACK_IMPORTED_MODULE_2__checkr_welcome__["a" /* CheckrWelcomePage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__certificates__["a" /* CertificatesPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__checkr_welcome__["a" /* CheckrWelcomePage */]),
         ],
     })
-], CertificatesPageModule);
+], CheckrWelcomePageModule);
 
-//# sourceMappingURL=certificates.module.js.map
+//# sourceMappingURL=checkr-welcome.module.js.map
 
 /***/ }),
 
-/***/ 652:
+/***/ 659:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CertificatesPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CheckrWelcomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,64 +56,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 /**
- * Generated class for the CertificatesPage page.
+ * Generated class for the CheckrWelcomePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var CertificatesPage = (function () {
-    function CertificatesPage(navCtrl, navParams, formBuilder) {
+var CheckrWelcomePage = (function () {
+    function CheckrWelcomePage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.getForm();
     }
-    CertificatesPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad CertificatesPage');
+    CheckrWelcomePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad CheckrWelcomePage');
     };
-    CertificatesPage.prototype.goPaymentMethods = function () {
-        this.navCtrl.push('PaymentMethodsPage');
-    };
-    CertificatesPage.prototype.fotoGaleria = function (foto) {
-        switch (foto) {
-            case 'A':
-                console.log('fotoA');
-                break;
-            case 'B':
-                console.log('fotoB');
-                break;
-            case 'C':
-                console.log('fotoC');
-                break;
-            case 'D':
-                console.log('fotoD');
-                break;
-            default:
-                break;
-        }
-    };
-    CertificatesPage.prototype.getForm = function () {
-        this.certificados = this.formBuilder.group({
-            fotoA: [''],
-            fotoB: [''],
-            fotoC: [''],
-            fotoD: [''],
-        });
-    };
-    return CertificatesPage;
+    return CheckrWelcomePage;
 }());
-CertificatesPage = __decorate([
+CheckrWelcomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-certificates',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\certificates\certificates.html"*/'<!--\n\n  Generated template for the CertificatesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    <ion-title>Certificates</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <img src="assets/img/LogoJoBid2.png">\n\n  <form [formGroup]="certificados">\n\n  <ion-list padding>\n\n    <ion-item>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-10>\n\n            <ion-list>\n\n              <ion-item>\n\n                <input type="text" placeholder="Photo 1" [(ngModel)]="fotoA" formControlName="fotoA" name="fotoA" />\n\n              </ion-item>\n\n            </ion-list>\n\n          </ion-col>\n\n          <ion-col col-2 id="btn-camera">\n\n              <button ion-button color="danger" outline (click)="fotoGaleria(\'A\')"><ion-icon name="camera"></ion-icon></button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-10>\n\n            <ion-list>\n\n              <ion-item>\n\n                <input type="text" placeholder="Photo 2" [(ngModel)]="fotoB" formControlName="fotoB" name="fotoB" />\n\n              </ion-item>\n\n            </ion-list>\n\n          </ion-col>\n\n          <ion-col col-2 id="btn-camera">\n\n              <button ion-button color="danger" outline (click)="fotoGaleria(\'B\')"><ion-icon name="camera"></ion-icon></button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-10>\n\n            <ion-list>\n\n              <ion-item>\n\n                <input type="text" placeholder="Photo 3" [(ngModel)]="fotoC" formControlName="fotoC" name="fotoC" />\n\n              </ion-item>\n\n            </ion-list>\n\n          </ion-col>\n\n          <ion-col col-2 id="btn-camera">\n\n              <button ion-button color="danger" outline (click)="fotoGaleria(\'C\')"><ion-icon name="camera"></ion-icon></button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-10>\n\n            <ion-list>\n\n              <ion-item>\n\n                <input type="text" placeholder="Photo 4" [(ngModel)]="fotoD" formControlName="fotoD" name="fotoD" />\n\n              </ion-item>\n\n            </ion-list>\n\n          </ion-col>\n\n          <ion-col col-2 id="btn-camera">\n\n              <button ion-button color="danger" outline (click)="fotoGaleria(\'D\')"><ion-icon name="camera"></ion-icon></button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-item>\n\n  </ion-list>\n\n</form>\n\n</ion-content>\n\n<ion-footer>\n\n  <ion-toolbar>\n\n      <div class="btnBottom">\n\n        <button ion-button color="danger" block (click)="goPaymentMethods()">\n\n            Continue\n\n            <ion-icon name="arrow-dropright"></ion-icon> \n\n        </button> \n\n      </div>\n\n  </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\certificates\certificates.html"*/,
+        selector: 'page-checkr-welcome',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\checkr-welcome\checkr-welcome.html"*/'<!--\n  Generated template for the CheckrWelcomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>checkr Welcome</ion-title>\n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n  <p>JoBid (the “Company”) has engaged Checkr, Inc. to obtain a consumer report and/or investigative consumer report for employment purposes. Checkr Inc. will provide a background investigation as a pre-condition of your engagement with the Company and in compliance with federal and state employment laws.</p>\n  <p>If you have any questions related to the screening process, please contact us at applicant.checkr.com.</p>\n  \n</ion-content>\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\checkr-welcome\checkr-welcome.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-], CertificatesPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+], CheckrWelcomePage);
 
-//# sourceMappingURL=certificates.js.map
+//# sourceMappingURL=checkr-welcome.js.map
 
 /***/ })
 

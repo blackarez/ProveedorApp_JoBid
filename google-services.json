@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "925192219494",
+    "firebase_url": "https://provedorappjobid.firebaseio.com",
+    "project_id": "provedorappjobid",
+    "storage_bucket": "provedorappjobid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925192219494:android:51d704ad771bc06d",
+        "android_client_info": {
+          "package_name": "com.JoBid.provider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925192219494-6ghrbl0avdaarttr5ci25h9q2a5k2ppl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXY6wXNMF__-AKUWMo7EM4Dpq6DZj6GE4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

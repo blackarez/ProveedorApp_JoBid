@@ -2,7 +2,8 @@
 //import { hostedFields} from "braintree-web/hosted-fields";
 
 import { Injectable } from "@angular/core";
-import { Http , Headers} from '@angular/http';
+// import { Http , Headers} from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 let apiUrlBase = "https://us-central1-usuarioappjobid.cloudfunctions.net/api";
@@ -18,7 +19,7 @@ export class CheckrService{
 CrearCustomer(keyCustomer){
     return new Promise((resolve, reject) => {
         // console.log(apiUrlBase+'/customer/create/'+keyCustomer);
-        let headers = new Headers();
+        // let headers = new Headers();
         let getCrearCustom =this.http.get(apiUrlBase+'/customer/create/'+keyCustomer).subscribe(
         (result) => {
             console.log(result);

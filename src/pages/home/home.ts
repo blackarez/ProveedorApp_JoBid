@@ -37,8 +37,6 @@ export class HomePage {
     // private facebook:  Facebook,
     private professionalsService : ProfessionalsService,
     public afAuth: AngularFireAuth,
-    // private camera: Camera,    
-    // private nativeAudio: NativeAudio,
   ) {
     //-identifica y redirecciona usuario logeado.
     this.usuarioLogeado();
@@ -109,7 +107,6 @@ export class HomePage {
     console.log(datos);
     //console.log(datos['$key']);
     this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
-    //console.log(this.userDataUpdate);
     let Data = {'datos':this.userDataUpdate}
     this.navCtrl.setRoot('ShowPage',Data);
     this.navCtrl.setRoot('ShowPage');
@@ -141,86 +138,5 @@ export class HomePage {
         }
     });
   }
-// usuarioLogeado(){
-    // let userDBLoad:any;
-    // let goPagePrehomeLoad = false;
-    // let homeStatus=this.afAuth.authState.subscribe( userAuth => {
-    //   if (userAuth){
-    //         console.info('find user home login');
-    //         let email=  userAuth.providerData["0"].email;
-    //         let Userexists= this.userService.getUserEmailPerfil(email);
-    //         Userexists.then((users) => {
-    //           users.forEach((user) =>{
-    //             if(user != undefined && user != null){
-    //                 userDBLoad = user;
-    //                 goPagePrehomeLoad= true;
-    //                 console.log(goPagePrehomeLoad);
-    //                 if(goPagePrehomeLoad){
-    //                   this.goNextPagePrehomeFace(userDBLoad);
-    //                   // this.goNextPagePrehomeFace();
-    //                 }
-    //             }
-    //           });
-    //         });
-    //   } else {
-    //     console.info('find user home login - no');
-    //   }
-    // });
-    // homeStatus.unsubscribe();
-  // }
-  // goNextPagePrehome(datos){
-  //   this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
-  //  let Data = {'datos':this.userDataUpdate}
-  //   this.navCtrl.setRoot('ShowPage',Data);
-
-  // }
-
-  
-  // async  clickCamara(){
-  //   console.log('clickCamara');
-  //  try{
-
-  
-  //   const options: CameraOptions = {
-  //     quality: 60,
-  //     targetHeight: 100,
-  //     targetWidth: 100,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE
-  //   }
-  //   // console.log(options);
-  //   const result = await this.camera.getPicture(options);
-  //   // alert(result);
-  //   const image = 'data:image/jpeg;base64,' + result;
-  //   const picture = storage().ref('pictures');
-  //   let UploadTask = picture.putString(image,'data_url');
-    
-  //   alert(UploadTask);
-  //   // console.log(JSON.stringify(UploadTask));
-  //   UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-  //     (snapshot) =>  {
-  //       // upload in progress
-    
-  //     },
-  //     (error) => {
-  //       // upload failed
-  //       console.log(error)
-  //     },
-  //     () => {
-  //       // upload success
-  //       this.uploads.url = UploadTask.snapshot.downloadURL;
-  //       // this.saveFileData(upload)
-  //       console.log(this.uploads.url);
-        
-  //     }
-  //   );
-  // } catch(e){
-  //   console.error(e);
-  //   alert('error');
-  //   alert(e);
-  //  }
-  // }
-
 
 }

@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 //-services
 import { OfferService } from '../../services/offer.service';
 import { ProfessionalsService } from '../../services/professionals.service';
 import { UserService } from '../../services/user.service';
+import { NotificacionService } from '../../services/notificacion.service';
 
-import { Geolocation } from '@ionic-native/geolocation';
-
-
-// import { AgmCoreModule } from '@agm/core';
 /**
  * Generated class for the ShowPage page.
  *
@@ -23,15 +21,6 @@ import { Geolocation } from '@ionic-native/geolocation';
   selector: 'page-show',
   templateUrl: 'show.html',
 })
-// @NgModule({
-//   imports: [
-//     AgmCoreModule.forRoot({
-//       // apiKey: 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA'
-//       apiKey: 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg'  
-//     })
-//   ],
-//   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
-// })
 export class ShowPage {
   //-vista data
   imgDefault:string;
@@ -54,17 +43,11 @@ export class ShowPage {
   serviceSubs:any;
   userSubs:any;
 
-  //-map
-  Userlat:any=37.09024;
-  Userlng:any=-95.71289100000001;
-  zom: number = 14;
-  providerLatitud:any=37.09024;
-  providerLongitud:any=-95.71289100000001;
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private offerService: OfferService, private userService: UserService,
     private professionalsService : ProfessionalsService,
     private geo: Geolocation, private platform: Platform,
+    private notificacionService : NotificacionService,
   ) {
     this.UserActual = localStorage.getItem('verificacion');
     console.log(this.UserActual);
@@ -114,13 +97,12 @@ export class ShowPage {
   showServices(){
     // alert('showServices');
    this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
-      this.ListService=[];
-      // console.log(list);
-      console.log('listOffer-S show');
-      this.getServiceProvider(list);
+     // console.log(list);
+     console.log('listOffer-S show');
+     this.getServiceProvider(list);
     });
   }
-
+  
   getServiceProvider(BDListOffer){
     // alert();
     this.serviceSubs=this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
@@ -133,16 +115,17 @@ export class ShowPage {
             // console.log('starP');
             // console.log(starProvider);
             if(starProvider['$value']){
-                this.showListData(BDListOffer,BDListServicesProvider,starProvider['$value']);
-              }
-              console.log('professionalsService-US show');
-              professionalServiceSubs.unsubscribe();
+              this.showListData(BDListOffer,BDListServicesProvider,starProvider['$value']);
             }
+            console.log('professionalsService-US show');
+            professionalServiceSubs.unsubscribe();
+          }
         );
-    });
-  }
-
+      });
+    }
+    
   showListData(BDListOffer,BDListServicesProvider,stars){
+    this.ListService=[];
     let imagen;
     for(let keySP in BDListServicesProvider){
 
@@ -222,6 +205,7 @@ export class ShowPage {
                     // console.log(BDListOffer[key].User);
                     this.userSubs = this.userService.getUser(BDListOffer[keys].User).subscribe( (user)=>{
                       console.log('userSubs-S show');
+                      this.notificacion();
                       // console.log(user);
                       // console.log(user['user_picture']);
                       // console.log('-'+user['user_picture']+'-');
@@ -255,11 +239,8 @@ export class ShowPage {
             console.info('star no');
             
           }
-
         }
       }
-    
-
   }
   
   private getUserLocationGeolocation(){
@@ -409,5 +390,8 @@ export class ShowPage {
     return experienciaMayor;
     // return false;
   }
-
+  //-notification
+  notificacion(){
+    this.notificacionService.mostrar('You have a new job offer',2);
+  }
 }

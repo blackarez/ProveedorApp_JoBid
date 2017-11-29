@@ -1,6 +1,6 @@
 webpackJsonp([10],{
 
-/***/ 506:
+/***/ 510:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceVotePageModule", function() { return ServiceVotePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_vote__ = __webpack_require__(674);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__service_vote__ = __webpack_require__(681);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ ServiceVotePageModule = __decorate([
 
 /***/ }),
 
-/***/ 674:
+/***/ 681:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113,7 +113,7 @@ var ServiceVotePage = (function () {
 ServiceVotePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-vote',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/'<!--\n\n  Generated template for the ServiceVotePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <div class="barraRoja">\n\n    <h4>Service qualification</h4>\n\n  </div>\n\n  <form id="signup-form3" class="list" padding>\n\n  <p>Now you can qualify the client and leave a comment of the service received.</p>\n\n    <ion-list >\n\n      <ion-item>\n\n        <p class="clasificacion">\n\n          <input id="radio1" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="5">\n\n          <label for="radio1">&#9733;</label>\n\n  \n\n          <input id="radio2" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="4">\n\n          <label for="radio2">&#9733;</label>\n\n          \n\n          <input id="radio3" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="3">\n\n          <label for="radio3">&#9733;</label>\n\n          \n\n          <input id="radio4" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="2">\n\n          <label for="radio4">&#9733;</label>\n\n          \n\n          <input id="radio5" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="1">\n\n          <label for="radio5">&#9733;</label>\n\n        </p>\n\n      </ion-item>\n\n      <ion-item>\n\n      <input type="text">\n\n        <ion-textarea placeholder="Comments" name="comment" [(ngModel)]="vote.comment"></ion-textarea>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="btnBottom">\n\n      <button ion-button color="danger" block icon-left (click)="goCleaningOk()">Continue<ion-icon name="arrow-dropright"></ion-icon></button>\n\n    </div>\n\n  </form>\n\n  </ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\2-trabajo\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/,
+        selector: 'page-service-vote',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/'<!--\n\n  Generated template for the ServiceVotePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n  <div class="barraRoja">\n\n    <h4>Service qualification</h4>\n\n  </div>\n\n  <form id="signup-form3" class="list" padding>\n\n  <p>Now you can qualify the client and leave a comment of the service received.</p>\n\n    <ion-list >\n\n      <ion-item>\n\n        <p class="clasificacion">\n\n          <input id="radio1" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="5">\n\n          <label for="radio1">&#9733;</label>\n\n  \n\n          <input id="radio2" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="4">\n\n          <label for="radio2">&#9733;</label>\n\n          \n\n          <input id="radio3" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="3">\n\n          <label for="radio3">&#9733;</label>\n\n          \n\n          <input id="radio4" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="2">\n\n          <label for="radio4">&#9733;</label>\n\n          \n\n          <input id="radio5" type="radio" name="estrellas" [(ngModel)]="vote.estrellas" value="1">\n\n          <label for="radio5">&#9733;</label>\n\n        </p>\n\n      </ion-item>\n\n      <ion-item>\n\n      <input type="text">\n\n        <ion-textarea placeholder="Comments" name="comment" [(ngModel)]="vote.comment"></ion-textarea>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="btnBottom">\n\n      <button ion-button color="danger" block icon-left (click)="goCleaningOk()">Continue<ion-icon name="arrow-dropright"></ion-icon></button>\n\n    </div>\n\n  </form>\n\n  </ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\service-vote\service-vote.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_2__services_user_service__["a" /* UserService */]])

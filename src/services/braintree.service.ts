@@ -2,7 +2,7 @@
 //import { hostedFields} from "braintree-web/hosted-fields";
 
 import { Injectable } from "@angular/core";
-import { Http , Headers} from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 let apiUrlBase = "https://us-central1-usuarioappjobid.cloudfunctions.net/api";
