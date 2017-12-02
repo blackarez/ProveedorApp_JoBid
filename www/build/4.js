@@ -365,7 +365,7 @@ exports.make = make;
 exports.resolve = resolve;
 exports.reject = reject;
 
-var _promise = __webpack_require__(43);
+var _promise = __webpack_require__(42);
 
 function make(resolver) {
   return new _promise.PromiseImpl(resolver);
@@ -2804,7 +2804,7 @@ var _app2 = _interopRequireDefault(_app);
 
 __webpack_require__(153);
 
-__webpack_require__(42);
+__webpack_require__(43);
 
 __webpack_require__(623);
 
@@ -5016,7 +5016,7 @@ var _notificationPermission = __webpack_require__(620);
 
 var _notificationPermission2 = _interopRequireDefault(_notificationPermission);
 
-var _subscribe = __webpack_require__(301);
+var _subscribe = __webpack_require__(302);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6143,12 +6143,12 @@ module.exports = exports['default'];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(302);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(622);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase_app__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase_app__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(622);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase_app__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase_app__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_professionals_service__ = __webpack_require__(151);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6199,6 +6199,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+//-services
 
 /**
  * Generated class for the DocumentPage page.
@@ -6258,9 +6259,9 @@ var DocumentPage = (function () {
                     case 2:
                         result = _a.sent();
                         image = 'data:image/jpeg;base64,' + result;
-                        picture = Object(__WEBPACK_IMPORTED_MODULE_5_firebase__["storage"])().ref(file);
+                        picture = Object(__WEBPACK_IMPORTED_MODULE_4_firebase__["storage"])().ref(file);
                         UploadTask_1 = picture.putString(image, 'data_url');
-                        UploadTask_1.on(__WEBPACK_IMPORTED_MODULE_6_firebase_app__["storage"].TaskEvent.STATE_CHANGED, function (snapshot) { }, function (error) { console.log(error); }, function () {
+                        UploadTask_1.on(__WEBPACK_IMPORTED_MODULE_5_firebase_app__["storage"].TaskEvent.STATE_CHANGED, function (snapshot) { }, function (error) { console.log(error); }, function () {
                             var url = UploadTask_1.snapshot.downloadURL;
                             console.log(url);
                             _this.documentFoto = url;
@@ -6300,9 +6301,9 @@ var DocumentPage = (function () {
                     case 2:
                         result = _a.sent();
                         image = 'data:image/jpeg;base64,' + result;
-                        picture = Object(__WEBPACK_IMPORTED_MODULE_5_firebase__["storage"])().ref(file);
+                        picture = Object(__WEBPACK_IMPORTED_MODULE_4_firebase__["storage"])().ref(file);
                         UploadTask_2 = picture.putString(image, 'data_url');
-                        UploadTask_2.on(__WEBPACK_IMPORTED_MODULE_6_firebase_app__["storage"].TaskEvent.STATE_CHANGED, function (snapshot) { }, function (error) { console.log(error); }, function () {
+                        UploadTask_2.on(__WEBPACK_IMPORTED_MODULE_5_firebase_app__["storage"].TaskEvent.STATE_CHANGED, function (snapshot) { }, function (error) { console.log(error); }, function () {
                             var url = UploadTask_2.snapshot.downloadURL;
                             console.log(url);
                             _this.licenciaFoto = url;
@@ -6327,7 +6328,7 @@ DocumentPage = __decorate([
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__["a" /* ProfessionalsService */]])
+        __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_6__services_professionals_service__["a" /* ProfessionalsService */]])
 ], DocumentPage);
 
 //# sourceMappingURL=document.js.map

@@ -31,6 +31,7 @@ export class ServiceVotePage {
     private notificacionService : NotificacionService,
   ) {
     this.loadView();
+    this.notificacionVote();
   }
 
   ionViewDidLoad() {
@@ -72,7 +73,7 @@ export class ServiceVotePage {
   }
 
   //-notification
-  notificacionHired(){
+  notificacionVote(){
     console.info('Nota: Do not forget to rate your client');
     this.notificacionService.mostrar('Do not forget to rate your client',7);
   }

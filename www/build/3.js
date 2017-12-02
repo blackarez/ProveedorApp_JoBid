@@ -365,7 +365,7 @@ exports.make = make;
 exports.resolve = resolve;
 exports.reject = reject;
 
-var _promise = __webpack_require__(43);
+var _promise = __webpack_require__(42);
 
 function make(resolver) {
   return new _promise.PromiseImpl(resolver);
@@ -2804,7 +2804,7 @@ var _app2 = _interopRequireDefault(_app);
 
 __webpack_require__(153);
 
-__webpack_require__(42);
+__webpack_require__(43);
 
 __webpack_require__(623);
 
@@ -5016,7 +5016,7 @@ var _notificationPermission = __webpack_require__(620);
 
 var _notificationPermission2 = _interopRequireDefault(_notificationPermission);
 
-var _subscribe = __webpack_require__(301);
+var _subscribe = __webpack_require__(302);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6144,7 +6144,7 @@ module.exports = exports['default'];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(622);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase_app__ = __webpack_require__(50);

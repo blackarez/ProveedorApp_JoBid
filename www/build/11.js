@@ -98,11 +98,13 @@ var ServiceWinPage = (function () {
             console.log(status);
             if (status['$value']) {
                 if (status['$value'] == 'Waiting for the professional') {
+                    _this.notificacionHired();
                     _this.goServiceNew();
                     console.log('statusSub-US service-win');
                     _this.statusSub.unsubscribe();
                 }
                 if (status['$value'] == 'Cancelled') {
+                    _this.notificacionCancel();
                     _this.goIndexService();
                     console.log('statusSub-US service-win');
                     _this.statusSub.unsubscribe();

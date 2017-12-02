@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-//-page
-
  //-provider
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -11,31 +9,21 @@ import * as firebase from 'firebase/app';
 //-service
 import { ProfessionalsService } from '../../services/professionals.service';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  //-Data
+  //-Data user
   userData = {"username":"","password":""};
   userDataUpdate: any =[];
   pass:any;
 
-  //-form
+  //-- form validation
   private todo : FormGroup;
-    constructor(public navCtrl: NavController , 
-      public navParams: NavParams, 
-      public alertCtrl: AlertController,
-      private professionalsService : ProfessionalsService,
+    constructor(public navCtrl: NavController , public navParams: NavParams, 
+      public alertCtrl: AlertController, private professionalsService : ProfessionalsService,
       public afAuth: AngularFireAuth,
       private formBuilder: FormBuilder,
     ) {
@@ -149,7 +137,8 @@ goNextPagePrehomeFace(datos:any){
   this.navCtrl.setRoot('ShowPage');
    
 }
-          
+  
+//-- alertas
   showAlertLogin() {
     let alert = this.alertCtrl.create({
       title: 'login failed',

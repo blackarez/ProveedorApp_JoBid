@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-
-
-import { ProfessionalsService } from '../../services/professionals.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { storage } from 'firebase';
-
 import * as firebase from 'firebase/app';
+
+//-services
+import { ProfessionalsService } from '../../services/professionals.service';
 
 /**
  * Generated class for the DocumentPage page.

@@ -1,14 +1,14 @@
 webpackJsonp([22],{
 
-/***/ 496:
+/***/ 455:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyServicesPageModule", function() { return MyServicesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProviderInfoAPageModule", function() { return ProviderInfoAPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__my_services__ = __webpack_require__(667);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__provider_info_a__ = __webpack_require__(671);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MyServicesPageModule = (function () {
-    function MyServicesPageModule() {
+var ProviderInfoAPageModule = (function () {
+    function ProviderInfoAPageModule() {
     }
-    return MyServicesPageModule;
+    return ProviderInfoAPageModule;
 }());
-MyServicesPageModule = __decorate([
+ProviderInfoAPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */],
+            __WEBPACK_IMPORTED_MODULE_2__provider_info_a__["a" /* ProviderInfoAPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__my_services__["a" /* MyServicesPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__provider_info_a__["a" /* ProviderInfoAPage */]),
         ],
     })
-], MyServicesPageModule);
+], ProviderInfoAPageModule);
 
-//# sourceMappingURL=my-services.module.js.map
+//# sourceMappingURL=provider-info-a.module.js.map
 
 /***/ }),
 
-/***/ 667:
+/***/ 671:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyServicesPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProviderInfoAPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_user_service__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_professions_service__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(151);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,105 +61,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the MyServicesPage page.
+ * Generated class for the ProviderInfoAPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MyServicesPage = (function () {
-    function MyServicesPage(navCtrl, navParams, professionalsService, userService, alertCtrl) {
+var ProviderInfoAPage = (function () {
+    function ProviderInfoAPage(navCtrl, navParams, professionsService, professionalsService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.professionsService = professionsService;
         this.professionalsService = professionalsService;
-        this.userService = userService;
-        this.alertCtrl = alertCtrl;
-        this.ListService = [];
-        //-- default
-        this.imgUserDefault = "assets/img/User/UserService.png";
+        //-list
+        this.ListServices = [];
+        this.ListSubServices = [];
+        //-paq
+        this.DataService = [];
+        this.ListServices = this.professionsService.getProfessions();
+        console.log(this.ListServices);
         this.UserActual = localStorage.getItem('verificacion');
-        console.log(this.UserActual);
-        this.loadView();
+        var Key = new Date().getTime();
+        this.keyService = "Serv_" + (Key);
     }
-    MyServicesPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MyServicesPage');
+    ProviderInfoAPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProviderInfoAPage');
     };
-    MyServicesPage.prototype.goInfoService = function (list) {
-        console.log(list);
-        var Data = { 'datos': list };
-        this.navCtrl.push('MyServiceInfoPage', Data);
+    ProviderInfoAPage.prototype.goProviderInfoB = function () {
+        this.DataService = { "serv_service": this.service, "serv_subService": this.subService };
+        // let Data = {'datos':this.DataService};
+        var DataServiceInfo = { "serv_experiencia": this.experiencia, "serv_moreInformation": this.moreInformation, "serv_insurance": this.seguro, "serv_certificate": this.certificacion };
+        this.DataService["serv_detail"] = DataServiceInfo;
+        console.log(this.DataService);
+        this.professionalsService.setInfoServiceUser(this.UserActual, this.DataService, this.keyService);
+        // this.navCtrl.push('ProviderInfoBPage',Data);
+        // this.navCtrl.push('ProviderInfoBPage');
+        // this.navCtrl.push('CertificatesPage');
+        this.navCtrl.push('PaymentMethodsPage');
     };
-    MyServicesPage.prototype.loadView = function () {
-        var _this = this;
-        console.log('loadView');
-        this.contractSubs = this.professionalsService.getContract(this.UserActual).subscribe(function (dataList) {
-            console.log('professionalsService-S my-services');
-            // console.log('datalist');
-            // console.log(dataList);
-            if (dataList['$value']) {
-                _this.showAlertNoServices();
-            }
-            else {
-                var _loop_1 = function (key) {
-                    console.log(dataList[key]);
-                    // console.log(dataList[key]['User']);
-                    console.log(dataList[key]['$key']);
-                    _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
-                        console.log('professionalsService-S my-services');
-                        // console.log(userDB);
-                        if (userDB) {
-                            var nameUser = userDB['user_username'];
-                            var addresU = userDB['user_address'];
-                            var addresUser = void 0;
-                            var imgUser = void 0;
-                            for (var key_1 in addresU) {
-                                addresUser = addresU[key_1]['addr_info'];
-                            }
-                            var phoneUser = userDB['user_tel'];
-                            console.log(userDB['user_picture']);
-                            if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
-                                imgUser = _this.imgUserDefault;
-                            }
-                            else {
-                                imgUser = userDB['user_picture'];
-                            }
-                            var DataUser = { "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
-                            _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser });
-                        }
-                    });
-                };
-                for (var key in dataList) {
-                    _loop_1(key);
-                }
-            }
-            console.log('userSubs-US my-services');
-            _this.userSubs.unsubscribe();
-            console.log('professionalsService-US my-services');
-            _this.contractSubs.unsubscribe();
-        });
-        console.log(this.ListService);
+    ProviderInfoAPage.prototype.setSubServices = function () {
+        console.log(this.service);
+        this.ListSubServices = this.professionsService.getCategoryByProfession(this.service);
+        console.log(this.ListSubServices);
     };
-    MyServicesPage.prototype.showAlertNoServices = function () {
-        var alert = this.alertCtrl.create({
-            title: 'Information',
-            message: 'User does not have services',
-            buttons: ['OK']
-        });
-        alert.present();
+    ProviderInfoAPage.prototype.addPictures = function () {
+        var Data = { 'datos': this.keyService };
+        this.navCtrl.push('GalleryPage', Data);
     };
-    return MyServicesPage;
+    return ProviderInfoAPage;
 }());
-MyServicesPage = __decorate([
+ProviderInfoAPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-my-services',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/'<!--\n\n  Generated template for the MyServicesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>joBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n  <ion-content padding>\n\n  <h3>My services</h3>\n\n  <h4>List:</h4>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">\n\n      <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>\n\n      <p><strong>Status:</strong> {{list.status}}</p>\n\n      <p><strong>Sale:</strong> {{list.sale}}</p>\n\n    </button>\n\n  </ion-list>\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/,
+        selector: 'page-provider-info-a',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\provider-info-a\provider-info-a.html"*/'<!--\n\n  Generated template for the ProviderInfoAPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    <ion-title>General data</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <!-- <ion-grid>\n\n        <ion-row class="steps">\n\n          <ion-col col-4 class="active">\n\n            <div class="numb">1</div>\n\n            <div class="text">\n\n              <p>General</p>\n\n              <p>data</p>\n\n            </div>\n\n          </ion-col>\n\n          <ion-col col-4>\n\n            <div class="numb">2</div>\n\n            <div class="text">\n\n              <p>Upload</p>\n\n              <p>documents</p>\n\n            </div>\n\n          </ion-col>\n\n          <ion-col col-4>\n\n            <div class="numb">3</div>\n\n            <div class="text">\n\n              <p>Photo</p>  \n\n              <p>gallery</p>\n\n            </div>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid> -->\n\n  <ion-list padding>\n\n    <ion-item>\n\n      <p><strong>Select your profession:</strong></p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <!-- <ion-label class="labelHide">Service</ion-label> -->\n\n      <ion-select [(ngModel)]="service" name="service" (ngModelChange)="setSubServices()" placeholder="Service">\n\n        <ion-option *ngFor="let service of ListServices" value="{{service.name}}">{{service.name}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-select [(ngModel)]="subService" name="subService" placeholder="Sub Service">\n\n        <ion-option *ngFor="let subService of ListSubServices" value="{{subService}}">{{subService}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n  \n\n      <ion-list radio-group [(ngModel)]="certificacion" name="certificacio" >\n\n        <ion-item>\n\n          <ion-label>Certificate</ion-label>\n\n          <ion-radio value="true" ></ion-radio>\n\n        </ion-item>\n\n      </ion-list>\n\n      <ion-list radio-group [(ngModel)]="seguro" name="seguro">\n\n         <ion-item>\n\n          <ion-label>Insurance</ion-label>\n\n          <ion-radio value="true"   ></ion-radio>\n\n        </ion-item>\n\n      </ion-list>\n\n  <ion-item>\n\n    <ion-select  [(ngModel)]="experiencia" name="experiencia" placeholder="Experience"> <!--[(ngModel)]="gaming"-->\n\n      <ion-option value="1Y" >1 Year</ion-option>\n\n      <ion-option value="2Y" >2 Year</ion-option>\n\n      <ion-option value="3Y" >3 Year</ion-option>\n\n      <ion-option value="3YM" >&gt; 3 Year</ion-option>\n\n    </ion-select>\n\n  </ion-item>\n\n  <ion-item>\n\n    <ion-textarea type="text" placeholder="Short description of your business" [(ngModel)]="moreInformation" name="moreInformation"></ion-textarea>\n\n  </ion-item>\n\n  <ion-item>\n\n    <div class="btnBottom btnAddPicture">\n\n      <button ion-button (click)="gallery()">\n\n          Add picture\n\n      </button> \n\n    </div>\n\n  </ion-item>\n\n</ion-list>\n\n</ion-content>\n\n<ion-footer>\n\n  <ion-toolbar>\n\n      <div class="btnBottom">\n\n        <button ion-button color="danger" block (click)="goProviderInfoB()">\n\n            Add Service\n\n            <ion-icon name="arrow-dropright"></ion-icon> \n\n        </button> \n\n      </div>\n\n  </ion-toolbar>\n\n</ion-footer>\n\n<!-- <ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    <ion-title>General data</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n<ion-grid>\n\n  <ion-row class="steps">\n\n    <ion-col col-4 class="active">\n\n      <div class="numb">1</div>\n\n      <div class="text">\n\n        <p>General</p>\n\n        <p>data</p>\n\n      </div>\n\n    </ion-col>\n\n    <ion-col col-4>\n\n      <div class="numb">2</div>\n\n      <div class="text">\n\n        <p>Upload</p>\n\n        <p>documents</p>\n\n      </div>\n\n    </ion-col>\n\n    <ion-col col-4>\n\n      <div class="numb">3</div>\n\n      <div class="text">\n\n        <p>Photo</p>  \n\n        <p>gallery</p>\n\n      </div>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-grid>\n\n  <ion-list padding>\n\n    <ion-item>\n\n      <p><strong>Select your profession:</strong></p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label class="labelHide">Service</ion-label>\n\n      <ion-select [(ngModel)]="service" name="service" (ngModelChange)="setSubServices()" placeholder="service">\n\n        <ion-option *ngFor="let service of ListServices" value="{{service.name}}">{{service.name}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-select [(ngModel)]="subService" name="subService" placeholder="Sub Service">\n\n        <ion-option *ngFor="let subService of ListSubServices" value="{{subService}}">{{subService}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    <ion-item>\n\n      <p>Business Type:</p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-select [(ngModel)]="typeBusiness" name="typeBusiness" placeholder="Type Business">\n\n        <ion-option  value="Personal">Personal</ion-option>\n\n        <ion-option  value="Business">Business</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n<ion-footer>\n\n  <ion-toolbar>\n\n      <div class="btnBottom">\n\n        <button ion-button (click)="goProviderInfoB()">\n\n            Continue\n\n            <ion-icon name="arrow-dropright"></ion-icon> \n\n        </button> \n\n      </div>\n\n  </ion-toolbar>\n\n</ion-footer> -->\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\provider-info-a\provider-info-a.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */],
-        __WEBPACK_IMPORTED_MODULE_3__services_user_service__["a" /* UserService */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
-], MyServicesPage);
+        __WEBPACK_IMPORTED_MODULE_2__services_professions_service__["a" /* ProfessionsService */],
+        __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__["a" /* ProfessionalsService */]])
+], ProviderInfoAPage);
 
-//# sourceMappingURL=my-services.js.map
+//# sourceMappingURL=provider-info-a.js.map
 
 /***/ })
 

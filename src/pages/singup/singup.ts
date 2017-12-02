@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
-//import { Http , Response, Headers, RequestOptions} from '@angular/http';
-//import UsaStates from 'usa-states';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import cities from 'cities';
 import STATE_UTILS from 'states-utils';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+//import { Http , Response, Headers, RequestOptions} from '@angular/http';
+//import UsaStates from 'usa-states';
 
+//--services
 import { ProfessionalsService } from '../../services/professionals.service';
 // import { WindowService } from '../../services/window.service';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 /**
  * Generated class for the SingupPage page.
  *
@@ -23,54 +25,48 @@ import * as firebase from 'firebase/app';
   templateUrl: 'singup.html',
 })
 export class SingupPage {
+  //--datos para guardar
   DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
-  private pagesUrl :any;
-  responseData :any;
-  responseDataUser :any;
-  findNameEstado: string;
-
   codeAreaList : any;
   codeAreaEstadoSelect: any = [];
-  country:any;area:any;prefix:any;line:any;
   userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
-  
+  user:any;
   ciudades: any =  [];
   ciudad: string =  undefined;
   stateZipcode: string = undefined;
   estados : any = [];
-
-  windowRef: any;
-  user:any;
-  userB:any;
-
+  
+  //--form validator
+  private singupForm : FormGroup;
   //-correo cuenta
   correoEnviado:boolean=false;
 
-  //-subcribe
+  //-subcribe firebase
   SubcribeUserexists:any;
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public alertCtrl: AlertController,
-    private professionalsService : ProfessionalsService,
-    public afAuth: AngularFireAuth,
-    public loadingCtrl: LoadingController
-    // public win:WindowService 
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public alertCtrl: AlertController, private professionalsService : ProfessionalsService,
+    public afAuth: AngularFireAuth, public loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
   ) {
+    //-carga los estados
     var stateName = STATE_UTILS.getStates();
     var stateNameShort = STATE_UTILS.getUSPSCodes();
-    this.pagesUrl = '../assets/lib/codeAreaUsa.json';
     for (var i = 0; stateName.length > i; i++) {
       this.estados.push({'name':stateName[i],'nameShort':stateNameShort[i]});
     } 
+    //-carga el codigo de area
     this.codeAreaDefi();
+    //-carga y valida el formulario
+    this.getForm();  
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SingupPage');
+    //-- existe usuario de facebook
     let userA:any = firebase.auth().currentUser;
     console.log(userA);
-    this.userB=this.afAuth.auth.currentUser;
+    this.user=this.afAuth.auth.currentUser;
     // console.log(this.userB);
     let aftSbus=this.afAuth.authState.subscribe( user => {
       console.log('aftSbus-S singup');
@@ -101,6 +97,7 @@ goPhoneV(){
   let estoyLogueado:boolean = false;
   // console.log(this.userData["username"]);
   // console.log(this.userData["email"]);
+    //-- verificar si el usuario existe en nuestra base de datos
     let Userexists= this.professionalsService.getProfessionalExists(this.userData["email"]);
     // console.log(JSON.stringify( Userexists));
     // Userexists.forEach((value)=>{ console.log(value);});
@@ -131,7 +128,7 @@ goPhoneV(){
 }
 
 crearUserFirebase(){
-  //-anidar datos
+  //-- agrupar datos
   this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
   this.userData.tel = '('+this.telA+')'+this.telB;
   this.afAuth.auth.createUserWithEmailAndPassword(this.userData['email'],this.userData['password'])
@@ -142,7 +139,7 @@ crearUserFirebase(){
   (error) =>{ 
     console.log('firebase then (error) ');
     console.log(error);
-    //-usuario ya puede tener cuenta usuario
+    //-usuario ya puede tener cuenta usuario en firebase
     this.crearUserBD();
   }
 ).catch(
@@ -173,7 +170,7 @@ enviarCorreo(){
   
   crearUserBD(){
     // console.log(this.userData);
-    
+    //-- crear usuario en la base de datos
     var d = new Date();
     var key = d.getTime();
     var keyUser = "prof_"+(key);
@@ -195,6 +192,7 @@ enviarCorreo(){
   }
 
 setCity(){
+  //-- cargar el zipCode
   this.userData.zipcode = undefined;
   var someArray = undefined;
   this.ciudades =  [];
@@ -208,10 +206,16 @@ setCity(){
 }
 
 setZipCode(){
-  this.DirecD = this.userData.state+' '+this.userData.zipcode;
+  //-- mostrar el zipCode
+  if(this.userData.state != undefined && this.userData.zipcode != undefined){
+    this.DirecD = this.userData.state+' '+this.userData.zipcode;
+  }else{
+    this.DirecD ='';
+  }
 }
 
 findCodeEstado( estado : string){
+  //-- buscar el estado
     var codeAreaList = this.codeAreaList;
     for (let entry of codeAreaList) {
       if (entry['estado'] == estado ) {
@@ -238,7 +242,7 @@ showAlertEmail() {
   });
   alerteMail.present();
 }
-
+//-- cargando
 loading(){
   let loader = this.loadingCtrl.create({
     content: "Please wait...",
@@ -246,6 +250,31 @@ loading(){
   });
   loader.present();
 }
+
+//-- validacion de formulario
+getForm(){
+  this.singupForm = this.formBuilder.group({
+    name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    date : ['', Validators.required],
+    socialSecurity : ['', Validators.required],
+    pais : ['', Validators.required],
+    state : ['', Validators.required],
+    zipcode : ['', Validators.required],
+    DirecA : ['', Validators.required],
+    DirecB : ['', Validators.required],
+    DirecC : ['', Validators.required],
+    DirecD : ['', Validators.required],
+    email : ['', Validators.compose([Validators.pattern('[A-z0-9-_.]+@[A-z0-9]+\.(.{1}[A-z0-9]+){1,2}'), Validators.required])],
+    username : ['', Validators.required],
+    password : ['', Validators.required],
+    passwordB : ['', Validators.required],
+    telA : ['', Validators.required],
+    telB : ['', Validators.required],
+  });  
+}
+
+//-- codigo de area
 codeAreaDefi(){
     this.codeAreaList = [
     { code: "201", estado: "New Jersey"},

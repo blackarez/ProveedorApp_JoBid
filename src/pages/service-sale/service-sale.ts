@@ -147,10 +147,11 @@ private timer(){
     if(this.NumeroContador == 2){
       clearInterval(this.objNodeTimer);
       this.showContador = false;
-      this.audio();
+      this.audioB();
       this.ganador();
     }else{
       this.notificacionBegin();
+      this.audioA();
       this.minutos = 2;
       this.segundos = 0;
       this.NumeroContador = 2;
@@ -306,9 +307,13 @@ private getUserLocationGeolocation(){
     alert.present();
   }
 
-  audio(){
+  audioA(){
     this.nativeAudio.preloadSimple('uniqueId1', 'assets/timbre.mp3').then(this.onSuccess, this.onError);
     this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+  }
+  audioB(){
+    this.nativeAudio.preloadSimple('uniqueId2', 'assets/timbre.mp3').then(this.onSuccess, this.onError);
+    this.nativeAudio.play('uniqueId2').then(this.onSuccess, this.onError);
   }
   onSuccess(){
     console.log(' success');

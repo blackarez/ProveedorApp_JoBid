@@ -56,11 +56,13 @@ getStatusService(){
       console.log(status);
       if(status['$value']){
         if(status['$value'] == 'Waiting for the professional'){
+          this.notificacionHired();
           this.goServiceNew();
           console.log('statusSub-US service-win');
           this.statusSub.unsubscribe();
         }
         if(status['$value'] == 'Cancelled'){
+          this.notificacionCancel();
           this.goIndexService();
           console.log('statusSub-US service-win');
           this.statusSub.unsubscribe();

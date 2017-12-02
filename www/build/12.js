@@ -77,6 +77,7 @@ var ServiceVotePage = (function () {
         //-view
         this.vote = [];
         this.loadView();
+        this.notificacionVote();
     }
     ServiceVotePage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ServiceVotePage');
@@ -113,7 +114,7 @@ var ServiceVotePage = (function () {
         this.user = "user_1509139021478";
     };
     //-notification
-    ServiceVotePage.prototype.notificacionHired = function () {
+    ServiceVotePage.prototype.notificacionVote = function () {
         console.info('Nota: Do not forget to rate your client');
         this.notificacionService.mostrar('Do not forget to rate your client', 7);
     };
