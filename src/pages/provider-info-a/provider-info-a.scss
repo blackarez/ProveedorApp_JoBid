@@ -6,6 +6,7 @@ page-provider-info-a {
         // background:$Red; 
         // padding-left:10px; 
         width:200px;
+        margin: 0;
         button{
             background:$Red; 
             color:white;
@@ -15,6 +16,16 @@ page-provider-info-a {
             //     background: $Red;
             // } 
         }
+    }
+    .textUpload, .BtnUpload ,ion-item.BtnUpload.item-md, ion-item.BtnUpload.item-ios{
+        margin: 0;
+        .label-md, .label-ios{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .textUpload{
+        margin-top: 10px;
     }
 }
 // .alert-md .alert-head,.alert-ios .alert-head{

@@ -25703,7 +25703,6 @@ page-document .grid .row input, page-document .grid .col input {
 page-edit-provider img {
   display: block;
   width: 100%;
-  height: 200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -25887,6 +25886,7 @@ page-provider-info-a p {
 
 page-provider-info-a .btnAddPicture {
   width: 200px;
+  margin: 0;
 }
 
 page-provider-info-a .btnAddPicture button {
@@ -25895,6 +25895,19 @@ page-provider-info-a .btnAddPicture button {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+page-provider-info-a .textUpload, page-provider-info-a .BtnUpload, page-provider-info-a ion-item.BtnUpload.item-md, page-provider-info-a ion-item.BtnUpload.item-ios {
+  margin: 0;
+}
+
+page-provider-info-a .textUpload .label-md, page-provider-info-a .textUpload .label-ios, page-provider-info-a .BtnUpload .label-md, page-provider-info-a .BtnUpload .label-ios, page-provider-info-a ion-item.BtnUpload.item-md .label-md, page-provider-info-a ion-item.BtnUpload.item-md .label-ios, page-provider-info-a ion-item.BtnUpload.item-ios .label-md, page-provider-info-a ion-item.BtnUpload.item-ios .label-ios {
+  margin: 0;
+  padding: 0;
+}
+
+page-provider-info-a .textUpload {
+  margin-top: 10px;
 }
 
 page-provider-info-b p {
@@ -25993,6 +26006,7 @@ page-service-info-a p {
 
 page-service-info-a .btnAddPicture {
   width: 200px;
+  margin: 0;
 }
 
 page-service-info-a .btnAddPicture button {
@@ -26001,6 +26015,19 @@ page-service-info-a .btnAddPicture button {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+page-service-info-a .textUpload, page-service-info-a .BtnUpload, page-service-info-a ion-item.BtnUpload.item-md, page-service-info-a ion-item.BtnUpload.item-ios {
+  margin: 0;
+}
+
+page-service-info-a .textUpload .label-md, page-service-info-a .textUpload .label-ios, page-service-info-a .BtnUpload .label-md, page-service-info-a .BtnUpload .label-ios, page-service-info-a ion-item.BtnUpload.item-md .label-md, page-service-info-a ion-item.BtnUpload.item-md .label-ios, page-service-info-a ion-item.BtnUpload.item-ios .label-md, page-service-info-a ion-item.BtnUpload.item-ios .label-ios {
+  margin: 0;
+  padding: 0;
+}
+
+page-service-info-a .textUpload {
+  margin-top: 10px;
 }
 
 page-service-info-b p {
@@ -26125,7 +26152,7 @@ page-service-new .textoCentrado {
 
 page-service-ok img {
   width: 100%;
-  height: 250px;
+  height: auto;
 }
 
 page-service-ok .centrarIcon {
@@ -26391,6 +26418,12 @@ page-service-win h3 {
   color: #b20000;
 }
 
+page-service-win #ImgWin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 120px;
+}
+
 page-show ion-content ion-grid.body ion-row.row {
   border: 1px solid #aaa;
   margin: 5px 0;
@@ -26451,7 +26484,7 @@ page-show agm-map {
 page-singup img {
   display: block;
   width: 100%;
-  height: 200px;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
 }

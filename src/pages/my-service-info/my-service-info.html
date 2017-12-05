@@ -19,9 +19,13 @@
   </div>
   <h3>Service code: #{{serviceCode}}</h3>
   <p class="textoCentrado">State</p>
-  <h6 id="estadoServicio">{{status}}</h6>
+  <h6>{{status}}</h6>
   <div padding>
+    <p><span class="textRed">*Amount to be paid: </span>${{sale}}</p>
+    <p><span class="textRed">Description:</span></p>
     <p>{{info}}</p>
+    <div class="space"></div>
+    <p><span class="textRed">Customer data:</span></p>
     <ion-grid>
     <ion-row>
       <ion-col col-3>
@@ -37,6 +41,7 @@
         <ion-row>
           <ion-col>
             <h4>{{nameUser}}</h4>
+            <p>{{idUser}}</p>
             <p>{{addresUser}}</p>
             <p>{{phoneUser}}</p>
           </ion-col>

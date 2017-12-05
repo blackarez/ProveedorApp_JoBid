@@ -51,7 +51,7 @@ ShowPageModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_offer_service__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_offer_service__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_user_service__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_notificacion_service__ = __webpack_require__(298);
@@ -243,6 +243,11 @@ var ShowPage = (function () {
                                         // console.log('-'+user['user_picture']+'-');
                                         // console.log('-'+user['prof_star']+'-');
                                         // if(user['user_picture']){
+                                        var serviceImage = '';
+                                        if (BDListOffer[keys].Clasificacion.informacion.foto != undefined) {
+                                            serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
+                                            console.log(serviceImage);
+                                        }
                                         if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']) {
                                             imagen = _this.imgDefault;
                                         }
@@ -250,7 +255,7 @@ var ShowPage = (function () {
                                             imagen = user['user_picture'];
                                         }
                                         // console.log(imagen);
-                                        _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "idUser": user['$key'] });
+                                        _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "imgOffer": serviceImage, "idUser": user['$key'] });
                                         console.log(_this.ListService);
                                         // }
                                     });
@@ -450,13 +455,10 @@ ShowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-show',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\show\show.html"*/'<!--\n\n  Generated template for the ShowPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>JoBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-item padding class="statusPage">\n\n    \n\n      <ion-label>{{labelToogle}}</ion-label>\n\n      <ion-toggle [(ngModel)]="StatusProvider" (click)="notify()"  (ionChange)="notify();"color="danger"></ion-toggle>\n\n  </ion-item>\n\n  <!-- <div class="mapa">\n\n    <agm-map [latitude]="51.678418" [longitude]="7.809007" [zoom]="14">\n\n      <agm-marker style="z-index:9;"\n\n        [latitude]="Userlat"\n\n        [longitude]="Userlng" >\n\n      </agm-marker>\n\n    </agm-map>\n\n  </div> -->\n\n  \n\n  <div class="barraRoja" *ngIf="StatusProvider">\n\n      <h4>Select a service and start the bid</h4>\n\n  </div>\n\n  <!-- <button ion-button (click)="clickCamara()">camara</button> -->\n\n  <ion-grid class="body" *ngIf="StatusProvider">\n\n    <!-- <ion-row >\n\n      <ion-col col-2>\n\n       <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="{{imgDefault}}">\n\n        </ion-avatar>\n\n       </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <h5>${{offer}}</h5>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <p><strong>{{nameUser}}</strong></p>\n\n        <p>{{Description}}</p>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <button ion-button icon-only round color="light" (click)="goInfo()">\n\n          <ion-icon name="search"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row> -->\n\n    <ion-row *ngFor="let item of ListService">\n\n      <ion-col col-2>\n\n        <ion-item>\n\n         <ion-avatar item-start>\n\n           <img src="{{item.img}}">\n\n         </ion-avatar>\n\n        </ion-item>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <h5>${{item.sale}}</h5>\n\n       </ion-col>\n\n       <ion-col col-6>\n\n         <p><strong>{{item.name}}</strong></p>\n\n         <p>{{item.infoShow}}</p>\n\n       </ion-col>\n\n       <ion-col col-2>\n\n         <button ion-button icon-only round color="light" (click)="goInfo(item)">\n\n           <ion-icon name="search"></ion-icon>\n\n         </button>\n\n       </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\show\show.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_3__services_offer_service__["a" /* OfferService */], __WEBPACK_IMPORTED_MODULE_5__services_user_service__["a" /* UserService */],
-        __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__["a" /* ProfessionalsService */],
-        __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
-        __WEBPACK_IMPORTED_MODULE_6__services_notificacion_service__["a" /* NotificacionService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_offer_service__["a" /* OfferService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_offer_service__["a" /* OfferService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_user_service__["a" /* UserService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__["a" /* ProfessionalsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__["a" /* ProfessionalsService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_notificacion_service__["a" /* NotificacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_notificacion_service__["a" /* NotificacionService */]) === "function" && _h || Object])
 ], ShowPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=show.js.map
 
 /***/ })

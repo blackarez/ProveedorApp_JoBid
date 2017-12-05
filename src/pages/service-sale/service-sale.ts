@@ -180,7 +180,6 @@ async getSale(){
   this.saleSub = this.saleService.getSale(this.DataService.idUser,this.DataService.idOff)
   .subscribe((result) =>{
     console.log('saleSub-S sale');
-    this.Workers = [];
     this.MenosPrecio = undefined;
     // console.log(result);
     if(result.status != 'Cancelled'){
@@ -192,6 +191,7 @@ async getSale(){
           this.MenosPrecio = Number(result.sale);
         }
         let trabajadores = result.providers;
+        this.Workers = [];
         for(let trabajador in trabajadores){
           if(this.MenosPrecio > Number(trabajadores[trabajador]['offer']) ) { this.MenosPrecio= Number(trabajadores[trabajador]['offer']);}
           let PromiseUser =this.professionalsService.getProfessional(trabajador).subscribe((user) =>{

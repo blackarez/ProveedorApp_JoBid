@@ -109,7 +109,7 @@ export class HomePage {
     this.userDataUpdate ={ "email":datos['user_email'],"name":datos['user_name'],"pais":datos['user_pais'],"password":datos['user_password'],"picture":datos['user_picture'],"state":datos['user_state'],"tel":datos['user_tel'],"username":datos['user_username'],"verificacion":datos['$key'],"zipcode":datos['user_zipcode']};
     let Data = {'datos':this.userDataUpdate}
     this.navCtrl.setRoot('ShowPage',Data);
-    this.navCtrl.setRoot('ShowPage');
+    // this.navCtrl.setRoot('ShowPage');
   }
 
  	login(){

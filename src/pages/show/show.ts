@@ -211,12 +211,16 @@ export class ShowPage {
                       // console.log('-'+user['user_picture']+'-');
                       // console.log('-'+user['prof_star']+'-');
                       // if(user['user_picture']){
-                        
+                        let serviceImage = ''; 
+                        if(BDListOffer[keys].Clasificacion.informacion.foto != undefined){
+                          serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
+                          console.log(serviceImage);
+                        }
                         if(user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']){
                           imagen = this.imgDefault;
                         }else{ imagen = user['user_picture'];}
                         // console.log(imagen);
-                        this.ListService.push({"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"idOff":key,"idUser":user['$key']});
+                        this.ListService.push({"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"idOff":key,"imgOffer":serviceImage,"idUser":user['$key']});
                         console.log(this.ListService);
                       // }
                     });

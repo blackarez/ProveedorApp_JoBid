@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController  } from 'ionic-ang
 
 import { ProfessionalsService } from '../../services/professionals.service';
 import { UserService } from '../../services/user.service';
+import { OfferService } from '../../services/offer.service';
 /**
  * Generated class for the MyServicesPage page.
  *
@@ -23,6 +24,7 @@ export class MyServicesPage {
   //-subs
   contractSubs:any;
   userSubs:any;
+  offerSubs:any;
 
   //-- default
   imgUserDefault ="assets/img/User/UserService.png";
@@ -30,6 +32,7 @@ export class MyServicesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private professionalsService : ProfessionalsService,
     private userService : UserService,
+    private offerService : OfferService,
     private alertCtrl: AlertController
   ) {
     this.UserActual = localStorage.getItem('verificacion');
@@ -60,35 +63,53 @@ export class MyServicesPage {
         }else{
           for(let key in dataList){
             console.log(dataList[key]);
+            console.log(key);
             // console.log(dataList[key]['User']);
-            console.log(dataList[key]['$key']);
-            this.userSubs = this.userService.getUser(dataList[key]['User']).subscribe(
-              (userDB)=>{
+            // console.log(dataList[key]['$key']);
+            //--buscamos la informacion de la oferta.
+            this.offerSubs = this.offerService.getOffer(key).subscribe(
+              (offerBD)=>{
                 console.log('professionalsService-S my-services');
-                // console.log(userDB);
-                if(userDB){
-                  let nameUser = userDB['user_username'];
-                  let addresU = userDB['user_address'];
-                  let addresUser:any;
-                  let imgUser:string;
-                  for(let key in addresU){
-                    addresUser = addresU[key]['addr_info'];
+                if(offerBD){
+                  console.log(offerBD);
+                  if(offerBD.name != undefined){
+
+                      //--buscamos los datos actualizados del usuario
+                      this.userSubs = this.userService.getUser(dataList[key]['User']).subscribe(
+                        (userDB)=>{
+                          console.log('userSubs-S my-services');
+                          console.log(userDB);
+                          if(userDB){
+                            if(userDB['user_username'] != undefined ){
+                              let nameUser = userDB['user_username'];
+                              let addresU = userDB['user_address'];
+                              let addresUser:any;
+                              let imgUser:string;
+                              for(let key in addresU){
+                                addresUser = addresU[key]['addr_info'];
+                              }
+                              let phoneUser = userDB['user_tel'];
+                              console.log(userDB['user_picture']);
+                              if(userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "" ){
+                                imgUser=this.imgUserDefault;
+                              }else{
+                                imgUser=userDB['user_picture'];
+                              }
+                              let DataUser = {'id':dataList[key]['User'],"nameUser":nameUser,"address":addresUser,"tel":phoneUser,"img":imgUser};
+                              let DataService = {"Service":offerBD.name,"SubService":offerBD.Clasificacion.categoria};
+                              this.ListService.push({'id':key,'info':dataList[key]['info'],'sale':dataList[key]['sale'],'status':dataList[key]['status'],DataUser,DataService});
+                            }
+                            console.log('userSubs-US my-services');
+                            this.userSubs.unsubscribe();
+                          }
+                      });
                   }
-                  let phoneUser = userDB['user_tel'];
-                  console.log(userDB['user_picture']);
-                  if(userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "" ){
-                    imgUser=this.imgUserDefault;
-                  }else{
-                    imgUser=userDB['user_picture'];
-                  }
-                  let DataUser = {"nameUser":nameUser,"address":addresUser,"tel":phoneUser,"img":imgUser};
-                  this.ListService.push({'id':key,'info':dataList[key]['info'],'sale':dataList[key]['sale'],'status':dataList[key]['status'],DataUser});
                 }
-            });
+              });
+            }
           }
-        }
-        console.log('userSubs-US my-services');
-        this.userSubs.unsubscribe();
+        console.log('offerSubs-US my-services');
+        this.offerSubs.unsubscribe();
         console.log('professionalsService-US my-services');
         this.contractSubs.unsubscribe();
       }

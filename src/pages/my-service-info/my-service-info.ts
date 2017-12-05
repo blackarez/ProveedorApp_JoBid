@@ -26,6 +26,8 @@ export class MyServiceInfoPage {
   addresUser:string;
   phoneUser:string;
   info:string;
+  sale:string;
+  idUser:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.DataService = this.navParams.get('datos');
@@ -39,7 +41,9 @@ export class MyServiceInfoPage {
 
   loadView(){
     this.serviceCode=this.DataService.id;
-    this.status=this.DataService.staus;
+    this.sale=this.DataService.sale;
+    this.status=this.DataService.status;
+    this.idUser=this.DataService.DataUser.id;
     this.imgUser=this.DataService.DataUser.img;
     this.nameUser=this.DataService.DataUser.nameUser;
     this.addresUser=this.DataService.DataUser.address;

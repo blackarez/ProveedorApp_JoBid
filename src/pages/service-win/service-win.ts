@@ -32,7 +32,7 @@ export class ServiceWinPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, private saleService :SaleService,
-    private professionalsService:ProfessionalsService,
+    private professionalsService: ProfessionalsService,
     private notificacionService : NotificacionService,
   ) {
     this.DataService = this.navParams.get('datos');

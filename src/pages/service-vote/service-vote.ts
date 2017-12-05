@@ -69,7 +69,7 @@ export class ServiceVotePage {
     this.userActual = localStorage.getItem('verificacion');
     console.log(this.userActual);
 
-    this.user ="user_1509139021478";
+    // this.user ="user_1509139021478";
   }
 
   //-notification
