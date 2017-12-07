@@ -397,11 +397,13 @@ var ServiceSalePage = (function () {
     //-notification
     ServiceSalePage.prototype.notificacionBegin = function () {
         console.info('Nota: The bid has begun, start the bids');
-        this.notificacionService.mostrar('The bid has begun, start the bids', 3);
+        // this.notificacionService.mostrar('The bid has begun, start the bids',3);
+        this.notificacionService.mostrarSale('The bid has begun, start the bids', 3);
     };
     ServiceSalePage.prototype.notificacionCancelSale = function () {
         console.info('Nota: The service has been canceled');
-        this.notificacionService.mostrar('The service has been canceled', 4);
+        // this.notificacionService.mostrar('The service has been canceled',4);
+        this.notificacionService.mostrarSale('The service has been canceled', 4);
     };
     return ServiceSalePage;
 }());

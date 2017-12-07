@@ -102,6 +102,9 @@ var ServiceInfoPage = (function () {
         this.offer = this.DataService.sale;
         this.userName = this.DataService.name;
         this.info = this.DataService.info;
+        if (this.DataService.imgOffer != undefined && this.DataService.imgOffer != '') {
+            this.serviceImage = this.DataService.imgOffer;
+        }
         this.loadDescripcion();
     };
     ServiceInfoPage.prototype.LoadTimmer = function () {
@@ -162,6 +165,10 @@ var ServiceInfoPage = (function () {
                 console.log('offerDetailSub-S service-info');
                 console.log(DetailBD);
                 if (DetailBD) {
+                    //  if(DetailBD.Clasificacion.informacion.foto != undefined){
+                    //    this.serviceImage = DetailBD.Clasificacion.informacion.foto;
+                    //    console.log(this.serviceImage = DetailBD.Clasificacion.informacion.foto);
+                    //  }
                     console.log('offerDetailSub-US service-info');
                     offerDetailSub.unsubscribe();
                 }

@@ -15,7 +15,19 @@ export class NotificacionService{
       id: idNotification,
       text: mesage,
       sound: 'file://assets/notificacion.mp3',
-      // icon : 'file://assets/icon.png',
     });
   }
+
+  mostrarSale(mesage:string,id ?){
+    let idNotification: number =1;
+    if(id ==null || id == undefined){
+      idNotification = new Date().getTime();
+    }
+    this.localNotifications.schedule({
+      id: idNotification,
+      text: mesage,
+      sound: 'file://assets/timbre.mp3',
+    });
+  }
+  // icon : 'file://assets/icon.png',
 }

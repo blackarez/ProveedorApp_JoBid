@@ -148,6 +148,7 @@ private timer(){
       clearInterval(this.objNodeTimer);
       this.showContador = false;
       this.audioB();
+      this.notificacionFinish();
       this.ganador();
     }else{
       this.notificacionBegin();
@@ -324,10 +325,17 @@ private getUserLocationGeolocation(){
   //-notification
   notificacionBegin(){
     console.info('Nota: The bid has begun, start the bids');
-    this.notificacionService.mostrar('The bid has begun, start the bids',3);
+    // this.notificacionService.mostrar('The bid has begun, start the bids',3);
+    this.notificacionService.mostrarSale('The bid has begun, start the bids',3);
+  }
+  //-notification
+  notificacionFinish(){
+    console.info('Nota: The bid has finished');
+    this.notificacionService.mostrarSale('The bid has finished',3);
   }
   notificacionCancelSale(){
     console.info('Nota: The service has been canceled');
+    // this.notificacionService.mostrar('The service has been canceled',4);
     this.notificacionService.mostrar('The service has been canceled',4);
   }
 

@@ -853,6 +853,17 @@ var NotificacionService = (function () {
             sound: 'file://assets/notificacion.mp3',
         });
     };
+    NotificacionService.prototype.mostrarSale = function (mesage, id) {
+        var idNotification = 1;
+        if (id == null || id == undefined) {
+            idNotification = new Date().getTime();
+        }
+        this.localNotifications.schedule({
+            id: idNotification,
+            text: mesage,
+            sound: 'file://assets/timbre.mp3',
+        });
+    };
     return NotificacionService;
 }());
 NotificacionService = __decorate([

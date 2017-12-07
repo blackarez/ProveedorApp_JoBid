@@ -243,6 +243,11 @@ var ShowPage = (function () {
                                         // console.log('-'+user['user_picture']+'-');
                                         // console.log('-'+user['prof_star']+'-');
                                         // if(user['user_picture']){
+                                        var serviceImage = '';
+                                        if (BDListOffer[keys].Clasificacion.informacion.foto != undefined) {
+                                            serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
+                                            console.log(serviceImage);
+                                        }
                                         if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']) {
                                             imagen = _this.imgDefault;
                                         }
@@ -250,7 +255,7 @@ var ShowPage = (function () {
                                             imagen = user['user_picture'];
                                         }
                                         // console.log(imagen);
-                                        _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "idUser": user['$key'] });
+                                        _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "imgOffer": serviceImage, "idUser": user['$key'] });
                                         console.log(_this.ListService);
                                         // }
                                     });

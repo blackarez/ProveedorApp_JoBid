@@ -134,7 +134,7 @@ var MyServicesPage = (function () {
                                             else {
                                                 imgUser = userDB['user_picture'];
                                             }
-                                            var DataUser = { "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
+                                            var DataUser = { 'id': dataList[key]['User'], "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
                                             var DataService = { "Service": offerBD.name, "SubService": offerBD.Clasificacion.categoria };
                                             _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser, DataService: DataService });
                                         }

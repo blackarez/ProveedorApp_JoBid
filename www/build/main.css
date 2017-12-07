@@ -26419,9 +26419,14 @@ page-service-win h3 {
 }
 
 page-service-win #ImgWin {
-  margin-top: 10px;
+  text-align: center;
+}
+
+page-service-win #ImgWin img {
+  margin-top: 25px;
   margin-bottom: 10px;
   height: 120px;
+  width: 120px;
 }
 
 page-show ion-content ion-grid.body ion-row.row {
