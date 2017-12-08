@@ -202,7 +202,8 @@ setCity(){
        this.ciudades.push({'name':entry['city'],'zipcode':entry['zipcode']});
     }
   }
-  this.findCodeEstado(STATE_UTILS.getStateName(this.userData.state));
+  this.findCodeEstado(STATE_UTILS.getStateName(this.userData.state)); 
+  
 }
 
 setZipCode(){
@@ -222,6 +223,7 @@ findCodeEstado( estado : string){
          this.codeAreaEstadoSelect.push({'code':entry['code']});
       }
     }
+    // console.log(this.codeAreaEstadoSelect);
 }
 
 //-alerts

@@ -1137,7 +1137,7 @@ exports.fromResourceString = fromResourceString;
 exports.toResourceString = toResourceString;
 exports.metadataValidator = metadataValidator;
 
-var _json = __webpack_require__(626);
+var _json = __webpack_require__(627);
 
 var json = _interopRequireWildcard(_json);
 
@@ -1631,7 +1631,7 @@ var _type = __webpack_require__(476);
 
 var type = _interopRequireWildcard(_type);
 
-var _task = __webpack_require__(629);
+var _task = __webpack_require__(630);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1955,7 +1955,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.FbsBlob = undefined;
 
-var _fs = __webpack_require__(627);
+var _fs = __webpack_require__(628);
 
 var fs = _interopRequireWildcard(_fs);
 
@@ -2136,7 +2136,7 @@ var _object = __webpack_require__(487);
 
 var object = _interopRequireWildcard(_object);
 
-var _requestinfo = __webpack_require__(628);
+var _requestinfo = __webpack_require__(629);
 
 var _type = __webpack_require__(476);
 
@@ -2485,7 +2485,7 @@ var _errors2 = __webpack_require__(499);
 
 var _errors3 = _interopRequireDefault(_errors2);
 
-var _tokenManager = __webpack_require__(641);
+var _tokenManager = __webpack_require__(642);
 
 var _tokenManager2 = _interopRequireDefault(_tokenManager);
 
@@ -2784,7 +2784,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 622:
+/***/ 623:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2806,9 +2806,9 @@ __webpack_require__(153);
 
 __webpack_require__(43);
 
-__webpack_require__(623);
+__webpack_require__(624);
 
-__webpack_require__(639);
+__webpack_require__(640);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2835,7 +2835,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 623:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2854,11 +2854,11 @@ var _string = __webpack_require__(518);
 
 var _taskenums = __webpack_require__(612);
 
-var _xhriopool = __webpack_require__(624);
+var _xhriopool = __webpack_require__(625);
 
 var _reference = __webpack_require__(614);
 
-var _service = __webpack_require__(633);
+var _service = __webpack_require__(634);
 
 var _app = __webpack_require__(50);
 
@@ -2907,7 +2907,7 @@ registerStorage(_app2.default);
 
 /***/ }),
 
-/***/ 624:
+/***/ 625:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2922,7 +2922,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.XhrIoPool = undefined;
 
-var _xhrio_network = __webpack_require__(625);
+var _xhrio_network = __webpack_require__(626);
 
 /**
  * Factory-like class for creating XhrIo instances.
@@ -2954,7 +2954,7 @@ exports.XhrIoPool = XhrIoPool;
 
 /***/ }),
 
-/***/ 625:
+/***/ 626:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3120,7 +3120,7 @@ exports.NetworkXhrIo = NetworkXhrIo;
 
 /***/ }),
 
-/***/ 626:
+/***/ 627:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3177,7 +3177,7 @@ function jsonObjectOrNull(s) {
 
 /***/ }),
 
-/***/ 627:
+/***/ 628:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3258,7 +3258,7 @@ function sliceBlob(blob, start, end) {
 
 /***/ }),
 
-/***/ 628:
+/***/ 629:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3305,7 +3305,7 @@ exports.RequestInfo = RequestInfo;
 
 /***/ }),
 
-/***/ 629:
+/***/ 630:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3324,9 +3324,9 @@ var _taskenums = __webpack_require__(612);
 
 var fbsTaskEnums = _interopRequireWildcard(_taskenums);
 
-var _observer = __webpack_require__(630);
+var _observer = __webpack_require__(631);
 
-var _tasksnapshot = __webpack_require__(631);
+var _tasksnapshot = __webpack_require__(632);
 
 var _args = __webpack_require__(519);
 
@@ -3336,7 +3336,7 @@ var _array = __webpack_require__(522);
 
 var fbsArray = _interopRequireWildcard(_array);
 
-var _async = __webpack_require__(632);
+var _async = __webpack_require__(633);
 
 var _error = __webpack_require__(480);
 
@@ -3888,7 +3888,7 @@ exports.UploadTask = UploadTask;
 
 /***/ }),
 
-/***/ 630:
+/***/ 631:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3948,7 +3948,7 @@ exports.Observer = Observer;
 
 /***/ }),
 
-/***/ 631:
+/***/ 632:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3994,7 +3994,7 @@ exports.UploadTaskSnapshot = UploadTaskSnapshot;
 
 /***/ }),
 
-/***/ 632:
+/***/ 633:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4053,7 +4053,7 @@ function async(f) {
 
 /***/ }),
 
-/***/ 633:
+/***/ 634:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4072,7 +4072,7 @@ var _args = __webpack_require__(519);
 
 var args = _interopRequireWildcard(_args);
 
-var _authwrapper = __webpack_require__(634);
+var _authwrapper = __webpack_require__(635);
 
 var _location = __webpack_require__(498);
 
@@ -4080,7 +4080,7 @@ var _promise_external = __webpack_require__(484);
 
 var fbsPromiseImpl = _interopRequireWildcard(_promise_external);
 
-var _request = __webpack_require__(637);
+var _request = __webpack_require__(638);
 
 var RequestExports = _interopRequireWildcard(_request);
 
@@ -4229,7 +4229,7 @@ exports.ServiceInternals = ServiceInternals;
 
 /***/ }),
 
-/***/ 634:
+/***/ 635:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4252,7 +4252,7 @@ var _error2 = __webpack_require__(480);
 
 var errorsExports = _interopRequireWildcard(_error2);
 
-var _failrequest = __webpack_require__(635);
+var _failrequest = __webpack_require__(636);
 
 var _location = __webpack_require__(498);
 
@@ -4260,7 +4260,7 @@ var _promise_external = __webpack_require__(484);
 
 var promiseimpl = _interopRequireWildcard(_promise_external);
 
-var _requestmap = __webpack_require__(636);
+var _requestmap = __webpack_require__(637);
 
 var _type = __webpack_require__(476);
 
@@ -4379,7 +4379,7 @@ exports.AuthWrapper = AuthWrapper;
 
 /***/ }),
 
-/***/ 635:
+/***/ 636:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4427,7 +4427,7 @@ exports.FailRequest = FailRequest;
 
 /***/ }),
 
-/***/ 636:
+/***/ 637:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4509,7 +4509,7 @@ exports.RequestMap = RequestMap;
 
 /***/ }),
 
-/***/ 637:
+/***/ 638:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4531,7 +4531,7 @@ var _array = __webpack_require__(522);
 
 var array = _interopRequireWildcard(_array);
 
-var _backoff = __webpack_require__(638);
+var _backoff = __webpack_require__(639);
 
 var backoff = _interopRequireWildcard(_backoff);
 
@@ -4769,7 +4769,7 @@ function makeRequest(requestInfo, authToken, pool) {
 
 /***/ }),
 
-/***/ 638:
+/***/ 639:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4902,7 +4902,7 @@ function stop(id) {
 
 /***/ }),
 
-/***/ 639:
+/***/ 640:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4932,11 +4932,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.registerMessaging = registerMessaging;
 
-var _windowController = __webpack_require__(640);
+var _windowController = __webpack_require__(641);
 
 var _windowController2 = _interopRequireDefault(_windowController);
 
-var _swController = __webpack_require__(644);
+var _swController = __webpack_require__(645);
 
 var _swController2 = _interopRequireDefault(_swController);
 
@@ -4967,7 +4967,7 @@ registerMessaging(_app2.default);
 
 /***/ }),
 
-/***/ 640:
+/***/ 641:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5008,7 +5008,7 @@ var _workerPageMessage = __webpack_require__(621);
 
 var _workerPageMessage2 = _interopRequireDefault(_workerPageMessage);
 
-var _defaultSw = __webpack_require__(643);
+var _defaultSw = __webpack_require__(644);
 
 var _defaultSw2 = _interopRequireDefault(_defaultSw);
 
@@ -5332,7 +5332,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 641:
+/***/ 642:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5367,7 +5367,7 @@ var _errors2 = __webpack_require__(499);
 
 var _errors3 = _interopRequireDefault(_errors2);
 
-var _arrayBufferToBase = __webpack_require__(642);
+var _arrayBufferToBase = __webpack_require__(643);
 
 var _arrayBufferToBase2 = _interopRequireDefault(_arrayBufferToBase);
 
@@ -5710,7 +5710,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 642:
+/***/ 643:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5755,7 +5755,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 643:
+/***/ 644:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5793,7 +5793,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 644:
+/***/ 645:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6145,7 +6145,7 @@ module.exports = exports['default'];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_professionals_service__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(622);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(623);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase_app__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase_app__);

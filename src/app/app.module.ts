@@ -32,6 +32,7 @@ import { OfferService } from '../services/offer.service';
 import { SaleService } from '../services/sale.service';
 import { NotificacionService } from '../services/notificacion.service';
 
+
 //- config 
 export const firebaseConfig = {
   apiKey: "AIzaSyBmrc2CjBbIJD_Pu_kkCcV8qNXJfsEBaxo",
@@ -47,7 +48,7 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
   ],
   imports: [
     BrowserModule, HttpModule,

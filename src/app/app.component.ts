@@ -16,8 +16,10 @@ import { ProfessionalsService } from '../services/professionals.service';
 //-provider
 import { AngularFireAuth } from 'angularfire2/auth';
 
+
+
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
