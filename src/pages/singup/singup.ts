@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
 import cities from 'cities';
 import STATE_UTILS from 'states-utils';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -31,10 +33,14 @@ export class SingupPage {
   codeAreaEstadoSelect: any = [];
   userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
   user:any;
+  foto:any;
+  disImg:any=true;
   ciudades: any =  [];
   ciudad: string =  undefined;
   stateZipcode: string = undefined;
   estados : any = [];
+  passwordB:any;
+  userActual:any;
   
   //--form validator
   private singupForm : FormGroup;
@@ -47,7 +53,7 @@ export class SingupPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public alertCtrl: AlertController, private professionalsService : ProfessionalsService,
     public afAuth: AngularFireAuth, public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder, private camera: Camera,
   ) {
     //-carga los estados
     var stateName = STATE_UTILS.getStates();
@@ -58,7 +64,10 @@ export class SingupPage {
     //-carga el codigo de area
     this.codeAreaDefi();
     //-carga y valida el formulario
-    this.getForm();  
+    this.getForm();
+    var d = new Date();
+    var key = d.getTime();
+    this.userActual = "prof_"+(key);
   }
 
   ionViewDidLoad() {
@@ -79,6 +88,10 @@ export class SingupPage {
             this.userData['name']=this.userData['username']= user.providerData["0"].displayName;
             this.userData['email']=  user.providerData["0"].email;
             this.userData['picture']=  user.providerData["0"].photoURL;
+            if(user.providerData["0"].photoURL != undefined && user.providerData["0"].photoURL != ''){
+              this.foto=  user.providerData["0"].photoURL;
+              this.disImg = false;
+            }
             // console.log(this.userData);
           }
         }
@@ -95,42 +108,49 @@ export class SingupPage {
 
 goPhoneV(){
   let estoyLogueado:boolean = false;
-  // console.log(this.userData["username"]);
-  // console.log(this.userData["email"]);
+  //verificaque las contraseñas son iguales
+  if(this.userData.password == this.passwordB){
+    // console.log(this.userData["username"]);
+    // console.log(this.userData["email"]);
     //-- verificar si el usuario existe en nuestra base de datos
-    let Userexists= this.professionalsService.getProfessionalExists(this.userData["email"]);
-    // console.log(JSON.stringify( Userexists));
-    // Userexists.forEach((value)=>{ console.log(value);});
-    this.SubcribeUserexists = Userexists.subscribe((value) => {
-      console.log('SubcribeUserexists-US singup');
-      console.log('user1');
-      console.log(value);
-      if(value['0']){
-        console.log(value["0"].prof_username);
-        console.log(this.userData["username"]);
-        if(value["0"].prof_username == this.userData["username"]){
-            // console.log(value["0"].prof_username);
-            estoyLogueado = true;
-            console.log(estoyLogueado);
+      let Userexists= this.professionalsService.getProfessionalExists(this.userData["email"]);
+      // console.log(JSON.stringify( Userexists));
+      // Userexists.forEach((value)=>{ console.log(value);});
+      this.SubcribeUserexists = Userexists.subscribe((value) => {
+        console.log('SubcribeUserexists-US singup');
+        console.log('user1');
+        console.log(value);
+        if(value['0']){
+          console.log(value["0"].prof_username);
+          console.log(this.userData["username"]);
+          if(value["0"].prof_username == this.userData["username"]){
+              // console.log(value["0"].prof_username);
+              estoyLogueado = true;
+              console.log(estoyLogueado);
+          }
         }
-      }
-      //-usuario existe
-      if(estoyLogueado == false){
-        console.log('enviar correo');
-        this.crearUserFirebase();
-      }else{
-        console.log('alerta signUp');
-        this.showAlertSignUp();
-      }
-      console.log('SubcribeUserexists-US singup');
-      this.SubcribeUserexists.unsubscribe();
-    });
+        //-usuario existe
+        if(estoyLogueado == false){
+          console.log('enviar correo');
+          this.crearUserFirebase();
+        }else{
+          console.log('alerta signUp');
+          this.showAlertSignUp();
+        }
+        console.log('SubcribeUserexists-US singup');
+        this.SubcribeUserexists.unsubscribe();
+      });
+    }else{
+      this.showAlertPwd();
+    }
+    
 }
 
 crearUserFirebase(){
   //-- agrupar datos
-  this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
+  this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD;
   this.userData.tel = '('+this.telA+')'+this.telB;
+  this.userData.picture = this.foto;
   this.afAuth.auth.createUserWithEmailAndPassword(this.userData['email'],this.userData['password'])
   .then( (value) =>{
     console.log(value);
@@ -171,17 +191,15 @@ enviarCorreo(){
   crearUserBD(){
     // console.log(this.userData);
     //-- crear usuario en la base de datos
-    var d = new Date();
-    var key = d.getTime();
-    var keyUser = "prof_"+(key);
+    
     // console.log(keyUser);
 
-    this.userData['verificacion'] = keyUser;
-    localStorage.setItem('verificacion',keyUser);
+    this.userData['verificacion'] = this.userActual;
+    localStorage.setItem('verificacion',this.userActual);
     localStorage.setItem('username',this.userData['username']);
     console.log(this.userData);
 
-    this.professionalsService.newUser(this.userData,keyUser);
+    this.professionalsService.newUser(this.userData,this.userActual);
     // let Data = {'datos':this.userData};
     // this.navCtrl.push('PaymentMethodsPage',Data);
     if(this.correoEnviado){
@@ -244,6 +262,14 @@ showAlertEmail() {
   });
   alerteMail.present();
 }
+showAlertPwd() {
+  let alerteMail = this.alertCtrl.create({
+    title: 'Information',
+    subTitle: 'The passwords are not the same',
+    buttons: ['OK']
+  });
+  alerteMail.present();
+}
 //-- cargando
 loading(){
   let loader = this.loadingCtrl.create({
@@ -252,6 +278,37 @@ loading(){
   });
   loader.present();
 }
+
+async  camaraFoto(){
+  let file = this.userActual+'/foto';
+  console.log('clickCamara');
+  try{
+    const options: CameraOptions = {
+      quality: 60,
+      // targetHeight: 100,
+      // targetWidth: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    const result = await this.camera.getPicture(options);
+    const image = 'data:image/jpeg;base64,' + result;
+    const picture = storage().ref(file);
+    let UploadTask = picture.putString(image,'data_url');
+    UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) =>  {
+        let url = UploadTask.snapshot.downloadURL;
+        console.log(url);
+        this.foto = url;
+        this.disImg = false;
+      },
+      (error) => { console.log(error)  },
+      // () => { 
+      // }
+    );
+  } catch(e){ console.error(e);}
+}
+
 
 //-- validacion de formulario
 getForm(){
@@ -269,6 +326,7 @@ getForm(){
     DirecD : ['', Validators.required],
     email : ['', Validators.compose([Validators.pattern('[A-z0-9-_.]+@[A-z0-9]+\.(.{1}[A-z0-9]+){1,2}'), Validators.required])],
     username : ['', Validators.required],
+    foto : [''],
     password : ['', Validators.required],
     passwordB : ['', Validators.required],
     telA : ['', Validators.required],

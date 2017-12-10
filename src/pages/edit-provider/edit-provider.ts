@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
+import * as firebase from 'firebase/app';
 //-list
 import cities from 'cities';
 import STATE_UTILS from 'states-utils';
@@ -27,16 +31,19 @@ export class EditProviderPage {
   DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
   //-data user
   userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
-
+  passwordB:any;
   //-data
   userActual:any;
   profSub:any;
+  contadorZipCode:number=0;
 
   //-list select
   ciudades: any =  [];
   ciudad: string =  undefined;
   stateZipcode: string = undefined;
   estados : any = [];
+  foto:any;
+  disImg:any=true;
 
   responseData :any;
   responseDataUser :any;
@@ -49,15 +56,22 @@ export class EditProviderPage {
   windowRef: any;
   user:any;
   userB:any;
+
+    //--form validator
+    private editProviderForm : FormGroup;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
    private professionalsService : ProfessionalsService,
+   public alertCtrl: AlertController, public loadingCtrl: LoadingController,
+   private formBuilder: FormBuilder, private camera: Camera,
   ) {
     this.loadList();
     //-localStorage
     this.userActual = localStorage.getItem('verificacion');
     console.log(this.userActual);
     this.loadUser();
+    //-carga y valida el formulario
+    this.getForm(); 
   }
 
   ionViewDidLoad() {
@@ -82,30 +96,38 @@ export class EditProviderPage {
         console.log(dataUserDB);
         this.userData = {"username":dataUserDB['prof_username'],"password":dataUserDB['prof_password'],"email":dataUserDB['prof_email'],"name":dataUserDB['prof_name'],"lastName":dataUserDB['prof_lastName'],"date":dataUserDB['prof_date'],"socialSecurity":dataUserDB['prof_socialSecurity'],"zipcode":dataUserDB['prof_zipcode'],"state":dataUserDB['prof_state'],"picture":dataUserDB['prof_picture'],"verificacion":dataUserDB['$key'],"pais":dataUserDB['prof_pais'],"direccion":dataUserDB['prof_direccion'],"tel":dataUserDB['prof_tel'],"star":dataUserDB['prof_star']};
         // console.log(this.userData);
-        this.telA =  this.userData.tel.substring(1,4);
-        this.telB =  this.userData.tel.substring(6);
+        if(this.userData.picture != undefined || this.userData.picture != ''){
+          this.disImg = false;
+          this.foto = this.userData.picture;
+        }
+        this.passwordB =dataUserDB['prof_password']; 
+        
         // let zipcodea = this.userData['zipcode'];
         // console.log(zipcodea);
         this.ciudades.zipcode= this.userData['zipcode'];
-        // console.log(this.telA);
-        // console.log(this.telB);
-        this.setCity();
-        this.setZipCode();
+        // this.setCity();
+        // this.setZipCode();
         this.setLoadAddress();
     });
   }
 
   goEditUser(){
-    // console.log(this.userData);
-    this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
-    this.userData.tel = '('+this.telA+')'+this.telB;
-    console.log(this.userData);
-    console.log(this.userActual);
-    this.professionalsService.newUser(this.userData,this.userActual);
-    // this.navCtrl.push('ProviderInfoAPage');
-    this.profSub.unsubscribe();
-    console.log('profSub-US edit-provider');
-    this.navCtrl.pop();
+    //verificaque las contraseñas son iguales
+    if(this.userData.password == this.passwordB){
+      // console.log(this.userData);
+      this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
+      this.userData.tel = '('+this.telA+')'+this.telB;
+      this.userData.picture = this.foto;
+      console.log(this.userData);
+      console.log(this.userActual);
+      this.professionalsService.updateUser(this.userData,this.userActual);
+      // this.navCtrl.push('ProviderInfoAPage');
+      this.profSub.unsubscribe();
+      console.log('profSub-US edit-provider');
+      this.navCtrl.pop();
+    }else{
+      this.showAlertPwd();
+    }
   }
 
   setCity(){
@@ -124,18 +146,30 @@ export class EditProviderPage {
   }
 
   setZipCode(){
-    this.DirecD = this.userData.state+' '+this.userData.zipcode;
+    // console.log('setZipCode');
+    if(this.contadorZipCode == 2){
+      this.DirecD = this.userData.state+' '+this.userData.zipcode;
+    }else{
+      this.contadorZipCode = this.contadorZipCode +1;
+    }
   }
 
   setLoadAddress(){
-    console.log(this.userData['direccion'].split(",", 2));
-    let DireccionSlip = this.userData['direccion'].split(",", 2);
-    console.log(DireccionSlip['0']);
-    console.log(DireccionSlip['1']);
-    let DireccionSlipA = DireccionSlip['0'].split(" ", 2);
-    this.DirecA =DireccionSlipA['0'];
-    this.DirecB =DireccionSlipA['1'];
-    this.DirecC =DireccionSlip['1'];
+    // console.log(this.userData['direccion'].split(",", 3));
+    let DireccionSlip = this.userData['direccion'].split(",", 3);
+    if(DireccionSlip != undefined){
+      let DireccionSlipA = DireccionSlip['0'].split(" ", 2);
+      if(DireccionSlipA != undefined){
+        console.log(DireccionSlip['0']);
+        console.log(DireccionSlip['1']);
+        console.log(DireccionSlip['2']);
+        console.log(DireccionSlip['0'].split(" ", 2));
+        this.DirecA =DireccionSlipA['0'];
+        this.DirecB =DireccionSlipA['1'];
+        this.DirecC =DireccionSlip['1'];
+        this.DirecD =DireccionSlip['2'];
+      }
+    }
   }
 
   findCodeEstado( estado : string){
@@ -150,6 +184,82 @@ export class EditProviderPage {
       }
       
     }
+    this.telA =  this.userData.tel.substring(1,4);
+    this.telB =  this.userData.tel.substring(5);
+    // console.log(this.telA);
+    // console.log(this.telB);
+    // console.log(this.codeAreaEstadoSelect);
+}
+
+showAlertPwd() {
+  let alerteMail = this.alertCtrl.create({
+    title: 'Information',
+    subTitle: 'The passwords are not the same',
+    buttons: ['OK']
+  });
+  alerteMail.present();
+}
+//-- cargando
+loading(){
+  let loader = this.loadingCtrl.create({
+    content: "Please wait...",
+    duration: 3000
+  });
+  loader.present();
+}
+
+//-- validacion de formulario
+getForm(){
+  this.editProviderForm = this.formBuilder.group({
+    name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    date : ['', Validators.required],
+    socialSecurity : ['', Validators.required],
+    pais : ['', Validators.required],
+    state : ['', Validators.required],
+    zipcode : ['', Validators.required],
+    DirecA : ['', Validators.required],
+    DirecB : ['', Validators.required],
+    DirecC : ['', Validators.required],
+    DirecD : ['', Validators.required],
+    email : ['', Validators.compose([Validators.pattern('[A-z0-9-_.]+@[A-z0-9]+\.(.{1}[A-z0-9]+){1,2}'), Validators.required])],
+    username : ['', Validators.required],
+    foto : [''],
+    password : ['', Validators.required],
+    passwordB : ['', Validators.required],
+    telA : ['', Validators.required],
+    telB : ['', Validators.required],
+  });  
+}
+
+async  camaraFoto(){
+  let file = this.userActual+'/foto';
+  console.log('clickCamara');
+  try{
+    const options: CameraOptions = {
+      quality: 60,
+      // targetHeight: 100,
+      // targetWidth: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    const result = await this.camera.getPicture(options);
+    const image = 'data:image/jpeg;base64,' + result;
+    const picture = storage().ref(file);
+    let UploadTask = picture.putString(image,'data_url');
+    UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) =>  {
+        let url = UploadTask.snapshot.downloadURL;
+        console.log(url);
+        this.foto = url;
+        this.disImg = false;
+      },
+      (error) => { console.log(error)  },
+      // () => { 
+      // }
+    );
+  } catch(e){ console.error(e);}
 }
 
   codeAreaDefi(){

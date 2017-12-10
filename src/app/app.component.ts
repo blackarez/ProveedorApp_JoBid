@@ -28,6 +28,7 @@ export class MyApp {
   userName: string = 'hola logeado';
   srcUser: string = 'assets/img/user.png';
   star:any = '3';
+  starUser:any;
 
   //--root
   rootPage:string = 'HomePage';
@@ -101,6 +102,23 @@ export class MyApp {
     // console.log(this.srcUser);
     if(user['prof_star'] && user['prof_star'] != '' && user['prof_star'] != null && user['prof_star'] != undefined){
       this.star= Math.round(user['prof_star']);
+      let contenido='';
+      if(Math.round(this.star) == 5){
+        contenido +='cinco';
+      }
+      if(Math.round(this.star) == 4){
+        contenido +='cuatro';
+      }
+      if(Math.round(this.star) == 3){
+        contenido +='tres';
+      }
+      if(Math.round(this.star) == 2){
+        contenido +='dos';
+      }
+      if(Math.round(this.star) == 1){
+        contenido +='one';
+      }
+      this.starUser= contenido;
     }
     // localStorage.setItem('verificacion',user['$key']);
     // this.nav.setRoot('ShowPage');

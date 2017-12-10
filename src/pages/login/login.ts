@@ -96,8 +96,8 @@ facebookir(){
 // let goPagePrehome:boolean = false;
 // let userDB:any;
 try{
-// firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
-firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider())
+firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+// firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider())
   .then(res => {
     //console.log(res.user.email);
     console.log(res);

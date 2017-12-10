@@ -3970,6 +3970,7 @@ ion-item.item-md .spaceIcons, ion-item.item-ios .spaceIcons {
 
 ion-item.item-md .text-input-ios, ion-item.item-md .text-input-md, ion-item.item-ios .text-input-ios, ion-item.item-ios .text-input-md {
   margin: 7px 8px 11px 0;
+  width: 100%;
 }
 
 /*
@@ -25617,6 +25618,80 @@ ion-item.imgUser.item-ios ion-thumbnail ion-img, ion-item.imgUser.item-ios ion-t
   text-align: center;
 }
 
+.Calificacion {
+  display: inline-block;
+  margin: 0;
+  margin-left: 5px;
+}
+
+.Calificacion label {
+  display: inline-block;
+}
+
+.Calificacion.cinco label:nth-child(5) {
+  color: #b20000;
+}
+
+.Calificacion.cinco label:nth-child(4) {
+  color: #b20000;
+}
+
+.Calificacion.cinco label:nth-child(3) {
+  color: #b20000;
+}
+
+.Calificacion.cinco label:nth-child(2) {
+  color: #b20000;
+}
+
+.Calificacion.cinco label:nth-child(1) {
+  color: #b20000;
+}
+
+.Calificacion.cuatro label:nth-child(4) {
+  color: #b20000;
+}
+
+.Calificacion.cuatro label:nth-child(3) {
+  color: #b20000;
+}
+
+.Calificacion.cuatro label:nth-child(2) {
+  color: #b20000;
+}
+
+.Calificacion.cuatro label:nth-child(1) {
+  color: #b20000;
+}
+
+.Calificacion.tres label:nth-child(3) {
+  color: #b20000;
+}
+
+.Calificacion.tres label:nth-child(2) {
+  color: #b20000;
+}
+
+.Calificacion.tres label:nth-child(1) {
+  color: #b20000;
+}
+
+.Calificacion.dos label:nth-child(2) {
+  color: #b20000;
+}
+
+.Calificacion.dos label:nth-child(1) {
+  color: #b20000;
+}
+
+.Calificacion.uno label:nth-child(1) {
+  color: #b20000;
+}
+
+.Calificacion.Usuario label {
+  font-size: 20px;
+}
+
 page-add-payment-method .barraRoja {
   background: #b20000;
 }
@@ -25702,8 +25777,8 @@ page-document .grid .row input, page-document .grid .col input {
 
 page-edit-provider img {
   display: block;
-  width: 100%;
-  margin-left: auto;
+  width: 100px;
+  height: 100px;
   margin-right: auto;
 }
 
@@ -25726,6 +25801,16 @@ page-edit-provider ion-list ion-grid.grid .col {
 
 page-edit-provider ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
+}
+
+page-edit-provider .button-outline-md-danger {
+  margin: 0;
+  height: 48px;
+  width: 100%;
+}
+
+page-edit-provider .row .list-md, page-edit-provider .row .list-ios {
+  margin: 0;
 }
 
 page-gallery .grid .row, page-gallery .grid .col {
@@ -26513,6 +26598,22 @@ page-singup ion-list ion-grid.grid .col {
 
 page-singup ion-list ion-grid.grid .col:first-child {
   padding-right: 5px;
+}
+
+page-singup .button-outline-md-danger {
+  margin: 0;
+  height: 48px;
+  width: 100%;
+}
+
+page-singup .grid .row .list-md, page-singup .grid .row .list-ios {
+  margin: 0;
+}
+
+page-singup ion-item.item-md ion-label.label img, page-singup ion-item.item-ios ion-label.label img {
+  width: 100px;
+  height: 100px;
+  margin: 0;
 }
 
 page-terms p {

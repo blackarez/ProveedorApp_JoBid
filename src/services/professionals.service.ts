@@ -114,6 +114,69 @@ export class ProfessionalsService{
 			}
 		}
 	}
+	public updateUser(userData : any = [],keyNew?:any ){
+		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
+		let key = undefined;
+		//default star
+		let star = '5';
+		// console.log('key:'+key);
+		// console.log('keyNew:'+keyNew);
+		if(keyNew && keyNew != null  && keyNew != undefined){
+			keyUser = keyNew;
+		}else{
+			var d = new Date();
+			key = d.getTime();
+			var keyUser = "prof_"+(key);
+		}
+		
+		if(userData['star'] != undefined && userData['star'] != null){
+			if(userData['star'] != star){
+				star= userData['star'];
+			}
+		}
+		
+		console.log('userKey'+keyUser);
+		//console.log(newKeyAddres);
+		
+		let username = userData['username'];
+		//let password = this.encriptyService.GenerateEncripty(userData["password"]);
+		let password = userData['password'];
+		let email = userData['email'];
+		let name = userData['name'];
+		let lastName = userData['lastName'];
+		let date = userData['date'];
+		let socialSecurity = userData['socialSecurity'];
+		let zipcode = userData['zipcode'];
+		let state = userData['state'];
+		let picture = userData['picture'];
+		// let verificacion = userData['verificacion'];
+		let pais = userData['pais'];
+		let direccion = userData['direccion'];
+		let tel = userData['tel'];
+
+		console.log(userData);
+
+		if( (userData['username']) && (userData['password']) && (userData['email']) ){
+			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){
+				this.afDB.object('/professionals/'+keyUser+'prof_username').set(username);
+				this.afDB.object('/professionals/'+keyUser+'prof_password').set(password);
+				this.afDB.object('/professionals/'+keyUser+'prof_email').set(email);
+				this.afDB.object('/professionals/'+keyUser+'prof_name').set(name);
+				this.afDB.object('/professionals/'+keyUser+'prof_lastName').set(lastName);
+				this.afDB.object('/professionals/'+keyUser+'prof_date').set(date);
+				this.afDB.object('/professionals/'+keyUser+'prof_socialSecurity').set(socialSecurity);
+				this.afDB.object('/professionals/'+keyUser+'prof_zipcode').set(zipcode);
+				this.afDB.object('/professionals/'+keyUser+'prof_state').set(state);
+				this.afDB.object('/professionals/'+keyUser+'prof_picture').set(picture);
+				this.afDB.object('/professionals/'+keyUser+'prof_pais').set(pais);
+				this.afDB.object('/professionals/'+keyUser+'prof_direccion').set(direccion);
+				this.afDB.object('/professionals/'+keyUser+'prof_tel').set(tel);
+				this.afDB.object('/professionals/'+keyUser+'prof_star').set(star);
+				// this.afDB.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
+				console.info('user update profession');
+			}
+		}
+	}
 
 	public newContract(keyProvider,keyOffer,objContract){
 		console.log(objContract);

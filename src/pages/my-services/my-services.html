@@ -19,6 +19,7 @@
   <h4>List:</h4>
   <ion-list>
     <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">
+      <h3><strong>Services Code: </strong>{{list.id}}</h3>
       <h3><strong>{{list.DataService.Service}}: </strong>{{list.DataService.SubService}}</h3>
       <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>
       <p><strong>Status:</strong> {{list.status}}</p>
