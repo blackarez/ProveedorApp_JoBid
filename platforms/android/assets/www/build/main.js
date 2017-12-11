@@ -160,20 +160,20 @@ var ProfessionalsService = (function () {
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
-                this.afDB.object('/professionals/' + keyUser + 'prof_username').set(username);
-                this.afDB.object('/professionals/' + keyUser + 'prof_password').set(password);
-                this.afDB.object('/professionals/' + keyUser + 'prof_email').set(email);
-                this.afDB.object('/professionals/' + keyUser + 'prof_name').set(name);
-                this.afDB.object('/professionals/' + keyUser + 'prof_lastName').set(lastName);
-                this.afDB.object('/professionals/' + keyUser + 'prof_date').set(date);
-                this.afDB.object('/professionals/' + keyUser + 'prof_socialSecurity').set(socialSecurity);
-                this.afDB.object('/professionals/' + keyUser + 'prof_zipcode').set(zipcode);
-                this.afDB.object('/professionals/' + keyUser + 'prof_state').set(state);
-                this.afDB.object('/professionals/' + keyUser + 'prof_picture').set(picture);
-                this.afDB.object('/professionals/' + keyUser + 'prof_pais').set(pais);
-                this.afDB.object('/professionals/' + keyUser + 'prof_direccion').set(direccion);
-                this.afDB.object('/professionals/' + keyUser + 'prof_tel').set(tel);
-                this.afDB.object('/professionals/' + keyUser + 'prof_star').set(star);
+                this.afDB.object('/professionals/' + keyUser + '/prof_username').set(username);
+                this.afDB.object('/professionals/' + keyUser + '/prof_password').set(password);
+                this.afDB.object('/professionals/' + keyUser + '/prof_email').set(email);
+                this.afDB.object('/professionals/' + keyUser + '/prof_name').set(name);
+                this.afDB.object('/professionals/' + keyUser + '/prof_lastName').set(lastName);
+                this.afDB.object('/professionals/' + keyUser + '/prof_date').set(date);
+                this.afDB.object('/professionals/' + keyUser + '/prof_socialSecurity').set(socialSecurity);
+                this.afDB.object('/professionals/' + keyUser + '/prof_zipcode').set(zipcode);
+                this.afDB.object('/professionals/' + keyUser + '/prof_state').set(state);
+                this.afDB.object('/professionals/' + keyUser + '/prof_picture').set(picture);
+                this.afDB.object('/professionals/' + keyUser + '/prof_pais').set(pais);
+                this.afDB.object('/professionals/' + keyUser + '/prof_direccion').set(direccion);
+                this.afDB.object('/professionals/' + keyUser + '/prof_tel').set(tel);
+                this.afDB.object('/professionals/' + keyUser + '/prof_star').set(star);
                 // this.afDB.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
                 console.info('user update profession');
             }

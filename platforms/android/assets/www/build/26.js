@@ -145,8 +145,7 @@ var LoginPage = (function () {
         // let goPagePrehome:boolean = false;
         // let userDB:any;
         try {
-            // firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
-            __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"]().signInWithRedirect(new __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"].FacebookAuthProvider())
+            __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"]().signInWithPopup(new __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"].FacebookAuthProvider())
                 .then(function (res) {
                 //console.log(res.user.email);
                 console.log(res);

@@ -147,12 +147,12 @@ private timer(){
     if(this.NumeroContador == 2){
       clearInterval(this.objNodeTimer);
       this.showContador = false;
-      this.audioB();
+      // this.audioB();
       this.notificacionFinish();
       this.ganador();
     }else{
       this.notificacionBegin();
-      this.audioA();
+      // this.audioA();
       this.minutos = 2;
       this.segundos = 0;
       this.NumeroContador = 2;

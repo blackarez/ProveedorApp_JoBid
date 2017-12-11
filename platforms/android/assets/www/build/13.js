@@ -208,13 +208,13 @@ var ServiceSalePage = (function () {
             if (this.NumeroContador == 2) {
                 clearInterval(this.objNodeTimer);
                 this.showContador = false;
-                this.audioB();
+                // this.audioB();
                 this.notificacionFinish();
                 this.ganador();
             }
             else {
                 this.notificacionBegin();
-                this.audioA();
+                // this.audioA();
                 this.minutos = 2;
                 this.segundos = 0;
                 this.NumeroContador = 2;
@@ -401,10 +401,9 @@ var ServiceSalePage = (function () {
         // this.notificacionService.mostrar('The bid has begun, start the bids',3);
         this.notificacionService.mostrarSale('The bid has begun, start the bids', 3);
     };
-    //-notification
     ServiceSalePage.prototype.notificacionFinish = function () {
-        console.info('Nota: The bid has finished');
-        this.notificacionService.mostrarSale('The bid has finished', 3);
+        console.info('Nota: The bid is over');
+        this.notificacionService.mostrarSale('The bid is over', 3);
     };
     ServiceSalePage.prototype.notificacionCancelSale = function () {
         console.info('Nota: The service has been canceled');

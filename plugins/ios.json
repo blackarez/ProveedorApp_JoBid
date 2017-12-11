@@ -1,0 +1,52 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-camera": {
+      "CAMERA_USAGE_DESCRIPTION": " ",
+      "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-geolocation": {
+      "GEOLOCATION_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "de.appplant.cordova.plugin.local-notification": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-app-event": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    }
+  }
+}

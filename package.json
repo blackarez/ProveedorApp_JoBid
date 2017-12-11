@@ -54,7 +54,8 @@
     "state-utils": "0.0.6",
     "states-utils": "^1.0.8",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
+    "zone.js": "0.8.12",
+    "cordova-ios": "~4.5.4"
   },
   "devDependencies": {
     "@ionic/app-scripts": "2.1.4",
@@ -79,7 +80,8 @@
       "de.appplant.cordova.plugin.local-notification": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
