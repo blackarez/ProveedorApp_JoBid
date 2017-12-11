@@ -328,10 +328,9 @@ private getUserLocationGeolocation(){
     // this.notificacionService.mostrar('The bid has begun, start the bids',3);
     this.notificacionService.mostrarSale('The bid has begun, start the bids',3);
   }
-  //-notification
   notificacionFinish(){
-    console.info('Nota: The bid has finished');
-    this.notificacionService.mostrarSale('The bid has finished',3);
+    console.info('Nota: The bid is over');
+    this.notificacionService.mostrarSale('The bid is over',3);
   }
   notificacionCancelSale(){
     console.info('Nota: The service has been canceled');

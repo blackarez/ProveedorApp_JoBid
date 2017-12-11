@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { storage } from 'firebase';
 import * as firebase from 'firebase/app';
 //-list
@@ -32,11 +33,12 @@ export class EditProviderPage {
   //-data user
   userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
   passwordB:any;
+  passwordActual:any;
+  emailActual:any;
   //-data
   userActual:any;
-  profSub:any;
   contadorZipCode:number=0;
-
+  
   //-list select
   ciudades: any =  [];
   ciudad: string =  undefined;
@@ -44,26 +46,21 @@ export class EditProviderPage {
   estados : any = [];
   foto:any;
   disImg:any=true;
-
-  responseData :any;
-  responseDataUser :any;
-  findNameEstado: string;
-
+  
   codeAreaList : any;
   codeAreaEstadoSelect: any = [];
-  country:any;area:any;prefix:any;line:any;
   
-  windowRef: any;
-  user:any;
-  userB:any;
+  //sub
+  profSub:any;
 
-    //--form validator
-    private editProviderForm : FormGroup;
+  //--form validator
+  private editProviderForm : FormGroup;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
    private professionalsService : ProfessionalsService,
    public alertCtrl: AlertController, public loadingCtrl: LoadingController,
    private formBuilder: FormBuilder, private camera: Camera,
+   public afAuth: AngularFireAuth,
   ) {
     this.loadList();
     //-localStorage
@@ -72,6 +69,8 @@ export class EditProviderPage {
     this.loadUser();
     //-carga y valida el formulario
     this.getForm(); 
+    // const auth = afAuth.auth;
+    // const user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
@@ -101,30 +100,41 @@ export class EditProviderPage {
           this.foto = this.userData.picture;
         }
         this.passwordB =dataUserDB['prof_password']; 
-        
         // let zipcodea = this.userData['zipcode'];
         // console.log(zipcodea);
         this.ciudades.zipcode= this.userData['zipcode'];
         // this.setCity();
         // this.setZipCode();
         this.setLoadAddress();
-    });
+        this.passwordActual = this.passwordB;
+        console.log(this.passwordActual);
+        this.emailActual = this.userData.email;
+        console.log(this.emailActual);
+      });
   }
 
   goEditUser(){
     //verificaque las contraseñas son iguales
     if(this.userData.password == this.passwordB){
+      if(this.passwordActual != this.userData.password){
+        console.info('password changed');
+        this.afAuth.auth.currentUser.updatePassword(this.userData.password);
+      }
+      if(this.emailActual != this.userData.email){
+        console.info('password changed');
+        this.afAuth.auth.currentUser.updateEmail(this.userData.email);
+      }
       // console.log(this.userData);
-      this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
-      this.userData.tel = '('+this.telA+')'+this.telB;
-      this.userData.picture = this.foto;
-      console.log(this.userData);
-      console.log(this.userActual);
-      this.professionalsService.updateUser(this.userData,this.userActual);
-      // this.navCtrl.push('ProviderInfoAPage');
-      this.profSub.unsubscribe();
-      console.log('profSub-US edit-provider');
-      this.navCtrl.pop();
+        this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
+        this.userData.tel = '('+this.telA+')'+this.telB;
+        this.userData.picture = this.foto;
+        console.log(this.userData);
+        console.log(this.userActual);
+        this.professionalsService.updateUser(this.userData,this.userActual);
+        // this.navCtrl.push('ProviderInfoAPage');
+        this.profSub.unsubscribe();
+        console.log('profSub-US edit-provider');
+        this.navCtrl.pop();
     }else{
       this.showAlertPwd();
     }
