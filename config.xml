@@ -93,7 +93,6 @@
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
     <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
-    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
         <variable name="APP_ID" value="2008465006108651" />
         <variable name="APP_NAME" value="JoBid Proveedor" />
