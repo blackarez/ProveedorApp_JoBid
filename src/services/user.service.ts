@@ -1,27 +1,28 @@
 import { Injectable } from "@angular/core";
 //import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { afDBUser } from "../app/app.module";
 //import { EncriptyService } from './encripty.service';
 
 @Injectable()
 export class UserService{ 
+
 	Users:any = [];
-	constructor( private afDB: AngularFireDatabase, 
-		//private encriptyService: EncriptyService 
-	) {
-		//console.log(this.afDB.list('/user'));
-	}	
+	afDBUser:AngularFireDatabase;
+	constructor() {
+		this.afDBUser = afDBUser;
+	}
 	/*  ----------------user  ----------------------*/
 	public getUsers(){
-		return this.afDB.list('/user');
+		return this.afDBUser.list('/user');
 	}
 
 	public getUser(userId){
-		return this.afDB.object('/user/'+userId);
+		return this.afDBUser.object('/user/'+userId);
 	}
 
 	public getUserLogin(name:string , pwd: any ){
-		return this.afDB.list('/user')
+		return this.afDBUser.list('/user')
 	 	.forEach((users) => {
 			 //console.log(users);
 			 return users.map(user =>{
@@ -61,7 +62,7 @@ export class UserService{
 	}
 
 	public getUserexists(name:string , email: any ){
-		return this.afDB.list('/user')
+		return this.afDBUser.list('/user')
 	 	.forEach((users) => {
 			 //console.log(users);
 			 return users.map(user =>{
@@ -92,13 +93,13 @@ export class UserService{
 	}
 
 	public updateUserPicture(userId:string, picture:string ){
-		console.log(this.afDB.list('/user/'+userId));
-		return this.afDB.object('/user/'+userId).set({'user_picture':picture});
+		console.log(this.afDBUser.list('/user/'+userId));
+		return this.afDBUser.object('/user/'+userId).set({'user_picture':picture});
 	}
 	public getUserEmail(email:string  ){
 		//let listUser:any;
 
-		return this.afDB.list('/user')
+		return this.afDBUser.list('/user')
 	 	.subscribe((users) => {
 			 //console.log(users);
 			 users.forEach((user) =>{
@@ -112,7 +113,7 @@ export class UserService{
 
 
 	public getUserEmailPerfil(email:string  ) {
-		return this.afDB.list('/user')
+		return this.afDBUser.list('/user')
 	 	.forEach((users) => {
 			 //console.log(users);
 			 return users.map(user =>{
@@ -147,7 +148,10 @@ export class UserService{
 		let name = userData["name"];
 		let zipcode = userData["zipcode"];
 		let state = userData["state"];
-		let picture = userData["picture"];
+		let picture = '';
+		if(userData['picture'] != undefined){
+			picture = userData['picture'];
+		}
 		//let verificacion = userData["verificacion"];
 		let pais = userData["pais"];
 		let direccion = userData["direccion"];
@@ -157,7 +161,7 @@ export class UserService{
 		//console.log(userData);
 		if( (userData['username']) && (userData['password']) && (userData['email']) ){
 			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){
-				this.afDB.object('/user/'+keyUser).set({"user_username":username,"user_password":password,"user_email":email,"user_name":name,"user_zipcode":zipcode,"user_state":state,"user_picture":picture,"user_pais":pais,"user_tel":tel,"user_star":star});
+				this.afDBUser.object('/user/'+keyUser).set({"user_username":username,"user_password":password,"user_email":email,"user_name":name,"user_zipcode":zipcode,"user_state":state,"user_picture":picture,"user_pais":pais,"user_tel":tel,"user_star":star});
 				ObjAddress.push({"label":'My Address',"name":direccion});
 				this.newAddress(keyUser,ObjAddress);
 				console.info('user create');
@@ -176,7 +180,10 @@ export class UserService{
 		let name = userData["name"];
 		let zipcode = userData["zipcode"];
 		let state = userData["state"];
-		let picture = userData["picture"];
+		let picture = '';
+		if(userData['picture'] != undefined){
+			picture = userData['picture'];
+		}
 		//let verificacion = userData["verificacion"];
 		let pais = userData["pais"];
 		//let direccion = userData["direccion"];
@@ -186,15 +193,15 @@ export class UserService{
 		//console.log(userData);
 		if( (userData['username']) && (userData['password']) && (userData['email']) ){
 			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){
-				this.afDB.object('/user/'+keyUser+'/user_username').set(username);
-				this.afDB.object('/user/'+keyUser+'/user_password').set(password);
-				this.afDB.object('/user/'+keyUser+'/user_email').set(email);
-				this.afDB.object('/user/'+keyUser+'/user_name').set(name);
-				this.afDB.object('/user/'+keyUser+'/user_zipcode').set(zipcode);
-				this.afDB.object('/user/'+keyUser+'/user_state').set(state);
-				this.afDB.object('/user/'+keyUser+'/user_picture').set(picture);
-				this.afDB.object('/user/'+keyUser+'/user_pais').set(pais);
-				this.afDB.object('/user/'+keyUser+'/user_tel').set(tel);
+				this.afDBUser.object('/user/'+keyUser+'/user_username').set(username);
+				this.afDBUser.object('/user/'+keyUser+'/user_password').set(password);
+				this.afDBUser.object('/user/'+keyUser+'/user_email').set(email);
+				this.afDBUser.object('/user/'+keyUser+'/user_name').set(name);
+				this.afDBUser.object('/user/'+keyUser+'/user_zipcode').set(zipcode);
+				this.afDBUser.object('/user/'+keyUser+'/user_state').set(state);
+				this.afDBUser.object('/user/'+keyUser+'/user_picture').set(picture);
+				this.afDBUser.object('/user/'+keyUser+'/user_pais').set(pais);
+				this.afDBUser.object('/user/'+keyUser+'/user_tel').set(tel);
 				console.log(userData);
 				console.info('user update');
 			}
@@ -214,18 +221,18 @@ export class UserService{
 			}
 			
 			console.log('comment');
-			this.afDB.object('/user/'+keyUser+'/user_comments/'+keyComm).set({'comm_description':Object['comment'],'comm_qualification':Object['estrellas'],'provider_username':Object['providerId']}).catch(()=>console.log('error set commets'));
+			this.afDBUser.object('/user/'+keyUser+'/user_comments/'+keyComm).set({'comm_description':Object['comment'],'comm_qualification':Object['estrellas'],'provider_username':Object['providerId']}).catch(()=>console.log('error set commets'));
 	}
 
 	public setStar(keyUser,userStar){
-		this.afDB.object('/user/'+keyUser+'/user_star').set(userStar);
+		this.afDBUser.object('/user/'+keyUser+'/user_star').set(userStar);
 	}
 
 	/*  ----------------user - address ----------------------*/
 	public getAddress(userId: string =""){
-		//return this.afDB.list('/user/'+userId);
-		//return this.afDB.object('/user/'+userId);
-		return this.afDB.list('/user/'+userId+'/user_address/');
+		//return this.afDBUser.list('/user/'+userId);
+		//return this.afDBUser.object('/user/'+userId);
+		return this.afDBUser.list('/user/'+userId+'/user_address/');
 	}
 
 	public newAddress(userId: string ="",ObjAddress : any = []){
@@ -242,7 +249,7 @@ export class UserService{
 		console.info('user  address create');
 		if( (ObjAddress['0']['label']) && (ObjAddress['0']['name']) ){
 			if( (label != undefined) && (label != null) && (name != undefined) && (name != null) ){
-				return this.afDB.object('/user/'+userId+'/user_address/'+keyAddress).set({"addr_label": label,"addr_info": name});
+				return this.afDBUser.object('/user/'+userId+'/user_address/'+keyAddress).set({"addr_label": label,"addr_info": name});
 			}
 		}
 	}

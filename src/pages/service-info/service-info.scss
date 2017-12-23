@@ -5,7 +5,7 @@ page-service-info {
         position: absolute;
         top:2px;
         width: 100%;
-        .imagenUser{ width: 60px; height: 60px; margin-top:12px;}
+        .imagenUser{ width: 60px; height: 60px; margin-top:12px; border-radius:40px;}
         p,h3{text-align: right;}
         h3{ color: $Red; font-weight: bold; }
     }

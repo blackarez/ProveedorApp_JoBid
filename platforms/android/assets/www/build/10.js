@@ -1,6 +1,6 @@
 webpackJsonp([10],{
 
-/***/ 467:
+/***/ 468:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowPageModule", function() { return ShowPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__show__ = __webpack_require__(684);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__agm_core__ = __webpack_require__(302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__show__ = __webpack_require__(685);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__agm_core__ = __webpack_require__(303);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43,18 +43,18 @@ ShowPageModule = __decorate([
 
 /***/ }),
 
-/***/ 684:
+/***/ 685:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShowPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_offer_service__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_offer_service__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_user_service__ = __webpack_require__(299);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_notificacion_service__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_user_service__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_notificacion_service__ = __webpack_require__(301);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,6 +63,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
 };
 
 
@@ -138,6 +173,8 @@ var ShowPage = (function () {
         else {
             this.labelToogle = "Online";
             this.showServices();
+            // this.showServices();
+            // this.showServices();
         }
     };
     ShowPage.prototype.showServices = function () {
@@ -145,8 +182,11 @@ var ShowPage = (function () {
         // alert('showServices');
         this.listOffer = this.offerService.getOfferNew().subscribe(function (list) {
             // console.log(list);
-            console.log('listOffer-S show');
-            _this.getServiceProvider(list);
+            if (list != undefined) {
+                console.log('listOffer-S show');
+                _this.getServiceProvider(list);
+                _this.listOffer.unsubscribe();
+            }
         });
     };
     ShowPage.prototype.getServiceProvider = function (BDListOffer) {
@@ -168,127 +208,153 @@ var ShowPage = (function () {
         });
     };
     ShowPage.prototype.showListData = function (BDListOffer, BDListServicesProvider, stars) {
-        var _this = this;
-        this.ListService = [];
-        var imagen;
-        for (var keySP in BDListServicesProvider) {
-            var _loop_1 = function (keys) {
-                // console.log('bdoff-star:'+Number(BDListOffer[keys].Star));
-                // console.log('pro-star: '+ Number(stars));
-                if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
-                    console.info('star ok');
-                    // alert('star ok');
-                    // console.log(BDListOffer[keys]);
-                    // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
-                    // console.log(BDListOffer[keys].Clasificacion.distancia);
-                    if (BDListOffer[keys].UserLocacion) {
-                        // console.log(BDListOffer[keys].UserLocacion.latitud);
-                        // console.log(BDListOffer[keys].UserLocacion.longitud);
-                        var distanceKilo = this_1.getDistanceKilometros(Number(this_1.lat), Number(this_1.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
-                        console.log(distanceKilo);
-                        var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
-                        // console.log(distanceMillas);
-                        // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
-                        // console.log('filtros');
-                        // console.log('listOff:'+BDListOffer[keys].Clasificacion.categoria);
-                        // console.log('listPro-sub:'+BDListServicesProvider[keySP]['serv_subService']);
-                        // console.log('pro-star:'+stars);
-                        // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
-                        if (BDListOffer[keys].Clasificacion.categoria == BDListServicesProvider[keySP]['serv_subService'] && true == this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas)) {
-                            console.info('categoria y  distancia ok');
-                            // alert('categoria y  distancia ok');
-                            var ServiceProviderCertificate = void 0;
-                            var ServiceProviderSecurity = void 0;
-                            if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null) {
-                                ServiceProviderCertificate = BDListServicesProvider[keySP]['serv_detail']['serv_certificate'];
-                                // console.log('listPro-cer:'+BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
-                                // console.log('off-certificado:'+BDListOffer[keys].Clasificacion.certificacion);
-                            }
-                            else {
-                                // console.log('listPro-cer = false');
-                                ServiceProviderCertificate = 'false';
-                            }
-                            if (BDListServicesProvider[keySP]['serv_detail']['serv_insurance'] != null) {
-                                ServiceProviderSecurity = BDListServicesProvider[keySP]['serv_detail']['serv_insurance'];
-                                // console.log('listPro-zeg:'+BDListServicesProvider[keySP]['serv_detail']['serv_insurance']);
-                                // console.log('off-seguro:'+BDListOffer[keys].Clasificacion.seguro);
-                            }
-                            else {
-                                // console.log('listPro-zeg = false');
-                                ServiceProviderSecurity = 'false';
-                            }
-                            // console.log('listPro-exp:'+BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']);
-                            // console.log('off-experien:'+BDListOffer[keys].Clasificacion.experiencia);
-                            if (ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro) {
-                                console.info('certificado y seguro ok');
-                                // alert('certificado y seguro ok');
-                                // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
-                                if (this_1.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia, BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true) {
-                                    console.info('Experience ok');
-                                    // alert('Experience ok');
-                                    var InfmaxOffer_1 = BDListOffer[keys].Clasificacion.informacion.maxOffer;
-                                    var InfmoreInformacion_1 = BDListOffer[keys].Clasificacion.informacion.moreInformation;
-                                    var InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
-                                    var key_1 = BDListOffer[keys]['$key'];
-                                    var InfshortMoreInformacion_1 = InfmoreInformacion_1.substr(0, 10) + '...';
-                                    if (InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto) {
-                                        InfFoto = this_1.imgDescripcionDefault;
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var imagen, keySP, _loop_1, this_1, keys;
+            return __generator(this, function (_a) {
+                this.ListService = [];
+                for (keySP in BDListServicesProvider) {
+                    _loop_1 = function (keys) {
+                        // console.log('bdoff-star:'+Number(BDListOffer[keys].Star));
+                        // console.log('pro-star: '+ Number(stars));
+                        if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
+                            console.info('star ok');
+                            // alert('star ok');
+                            // console.log(BDListOffer[keys]);
+                            // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
+                            // console.log(BDListOffer[keys].Clasificacion.distancia);
+                            if (BDListOffer[keys].UserLocacion) {
+                                // console.log(BDListOffer[keys].UserLocacion.latitud);
+                                // console.log(BDListOffer[keys].UserLocacion.longitud);
+                                var distanceKilo = this_1.getDistanceKilometros(Number(this_1.lat), Number(this_1.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
+                                console.log(distanceKilo);
+                                var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
+                                // console.log(distanceMillas);
+                                // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
+                                // console.log('filtros');
+                                // console.log('listOff:'+BDListOffer[keys].Clasificacion.categoria);
+                                // console.log('listPro-sub:'+BDListServicesProvider[keySP]['serv_subService']);
+                                // console.log('pro-star:'+stars);
+                                // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
+                                if (BDListOffer[keys].Clasificacion.categoria == BDListServicesProvider[keySP]['serv_subService'] && true == this_1.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia, distanceMillas)) {
+                                    console.info('categoria y  distancia ok');
+                                    // alert('categoria y  distancia ok');
+                                    var ServiceProviderCertificate = void 0;
+                                    var ServiceProviderSecurity = void 0;
+                                    if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null) {
+                                        ServiceProviderCertificate = BDListServicesProvider[keySP]['serv_detail']['serv_certificate'];
+                                        // console.log('listPro-cer:'+BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
+                                        // console.log('off-certificado:'+BDListOffer[keys].Clasificacion.certificacion);
                                     }
-                                    // console.log(BDListOffer[key].User);
-                                    this_1.userSubs = this_1.userService.getUser(BDListOffer[keys].User).subscribe(function (user) {
-                                        console.log('userSubs-S show');
-                                        _this.notificacion();
-                                        // console.log(user);
-                                        // console.log(user['user_picture']);
-                                        // console.log('-'+user['user_picture']+'-');
-                                        // console.log('-'+user['prof_star']+'-');
-                                        // if(user['user_picture']){
-                                        var serviceImage = '';
-                                        if (BDListOffer[keys].Clasificacion.informacion.foto != undefined) {
-                                            serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
-                                            console.log(serviceImage);
-                                        }
-                                        if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']) {
-                                            imagen = _this.imgDefault;
+                                    else {
+                                        // console.log('listPro-cer = false');
+                                        ServiceProviderCertificate = 'false';
+                                    }
+                                    if (BDListServicesProvider[keySP]['serv_detail']['serv_insurance'] != null) {
+                                        ServiceProviderSecurity = BDListServicesProvider[keySP]['serv_detail']['serv_insurance'];
+                                        // console.log('listPro-zeg:'+BDListServicesProvider[keySP]['serv_detail']['serv_insurance']);
+                                        // console.log('off-seguro:'+BDListOffer[keys].Clasificacion.seguro);
+                                    }
+                                    else {
+                                        // console.log('listPro-zeg = false');
+                                        ServiceProviderSecurity = 'false';
+                                    }
+                                    // console.log('listPro-exp:'+BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']);
+                                    // console.log('off-experien:'+BDListOffer[keys].Clasificacion.experiencia);
+                                    if (ServiceProviderCertificate == BDListOffer[keys].Clasificacion.certificacion && ServiceProviderSecurity == BDListOffer[keys].Clasificacion.seguro) {
+                                        console.info('certificado y seguro ok');
+                                        // alert('certificado y seguro ok');
+                                        // console.log(this.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia,BDListOffer[keys].Clasificacion.experiencia));
+                                        if (this_1.getNumeroExperienciOffer(BDListOffer[keys].Clasificacion.experiencia, BDListServicesProvider[keySP]['serv_detail']['serv_experiencia']) == true) {
+                                            console.info('Experience ok');
+                                            // alert('Experience ok');
+                                            var InfmaxOffer_1 = BDListOffer[keys].Clasificacion.informacion.maxOffer;
+                                            var InfmoreInformacion_1 = BDListOffer[keys].Clasificacion.informacion.moreInformation;
+                                            var InfFoto = BDListOffer[keys].Clasificacion.informacion.foto;
+                                            var key_1 = BDListOffer[keys]['$key'];
+                                            var InfshortMoreInformacion_1 = InfmoreInformacion_1.substr(0, 10) + '...';
+                                            if (InfFoto = "" || InfFoto == undefined || InfFoto == null || InfFoto) {
+                                                InfFoto = this_1.imgDescripcionDefault;
+                                            }
+                                            // console.log(BDListOffer[key].User);
+                                            this_1.userSubs = this_1.userService.getUser(BDListOffer[keys].User).subscribe(function (user) {
+                                                console.log('userSubs-S show');
+                                                _this.notificacion();
+                                                // console.log(user);
+                                                // console.log(user['user_picture']);
+                                                // console.log('-'+user['user_picture']+'-');
+                                                // console.log('-'+user['prof_star']+'-');
+                                                // if(user['user_picture']){
+                                                var serviceImage = '';
+                                                if (BDListOffer[keys].Clasificacion.informacion.foto != undefined && BDListOffer[keys].Clasificacion.informacion.foto != '') {
+                                                    serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
+                                                    console.log(serviceImage);
+                                                }
+                                                if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null) {
+                                                    imagen = _this.imgDefault;
+                                                }
+                                                else {
+                                                    imagen = user['user_picture'];
+                                                }
+                                                // console.log(imagen);
+                                                // console.log(this.ListService.findIndex( keysOffer => { keysOffer.idOff == key;}));
+                                                console.log(_this.ListService);
+                                                var ListaServicios = _this.ListService;
+                                                console.log(ListaServicios);
+                                                // let idKeyOffer = ListaServicios.findIndex( keysOffer => { 
+                                                //   keysOffer.idOff == key; 
+                                                //   console.log(keysOffer); 
+                                                //   console.log(keysOffer.idOff); 
+                                                //   console.log(key); 
+                                                // });
+                                                var idKeyOffer = ListaServicios.findIndex(function (keysOffer) {
+                                                    return keysOffer.idOff == key_1;
+                                                });
+                                                console.log(idKeyOffer);
+                                                if (idKeyOffer >= 0) {
+                                                    console.log('if 1');
+                                                    _this.ListService[idKeyOffer] = { "idOff": key_1, "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "imgOffer": serviceImage, "idUser": user['$key'] };
+                                                }
+                                                else {
+                                                    console.log('if -1');
+                                                    _this.ListService.push({ "idOff": key_1, "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "imgOffer": serviceImage, "idUser": user['$key'] });
+                                                }
+                                                console.log(_this.ListService);
+                                                // }
+                                            });
+                                            // this.ListService=list;
                                         }
                                         else {
-                                            imagen = user['user_picture'];
+                                            console.info('Experience no');
+                                            // alert('star ok');
                                         }
-                                        // console.log(imagen);
-                                        _this.ListService.push({ "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "idOff": key_1, "imgOffer": serviceImage, "idUser": user['$key'] });
-                                        console.log(_this.ListService);
-                                        // }
-                                    });
-                                    // this.ListService=list;
+                                    }
+                                    else {
+                                        console.info('certificado y seguro no');
+                                        // alert('star ok');
+                                    }
                                 }
                                 else {
-                                    console.info('Experience no');
-                                    // alert('star ok');
+                                    console.info('categoria y  distancia no');
+                                    // alert('categoria y  distancia no');
                                 }
-                            }
-                            else {
-                                console.info('certificado y seguro no');
-                                // alert('star ok');
                             }
                         }
                         else {
-                            console.info('categoria y  distancia no');
-                            // alert('categoria y  distancia no');
+                            console.info('star no');
                         }
+                    };
+                    this_1 = this;
+                    // console.log(BDListServicesProvider[keySP]);
+                    // console.log('BDListServicesProvider[keySP]serv_service:'+BDListServicesProvider[keySP]['serv_service']);
+                    // console.log('p-BDList.serv_subService: '+BDListServicesProvider[keySP]['serv_subService']);
+                    for (keys in BDListOffer) {
+                        _loop_1(keys);
                     }
                 }
-                else {
-                    console.info('star no');
-                }
-            };
-            var this_1 = this;
-            // console.log(BDListServicesProvider[keySP]);
-            // console.log('BDListServicesProvider[keySP]serv_service:'+BDListServicesProvider[keySP]['serv_service']);
-            // console.log('p-BDList.serv_subService: '+BDListServicesProvider[keySP]['serv_subService']);
-            for (var keys in BDListOffer) {
-                _loop_1(keys);
-            }
-        }
+                return [2 /*return*/];
+            });
+        });
     };
     ShowPage.prototype.getUserLocationGeolocation = function () {
         var _this = this;

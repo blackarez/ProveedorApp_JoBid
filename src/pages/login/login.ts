@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-
- //-provider
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { Facebook } from '@ionic-native/facebook';
 
 //-service
 import { ProfessionalsService } from '../../services/professionals.service';
@@ -25,6 +24,7 @@ export class LoginPage {
     constructor(public navCtrl: NavController , public navParams: NavParams, 
       public alertCtrl: AlertController, private professionalsService : ProfessionalsService,
       public afAuth: AngularFireAuth,
+      private fb:  Facebook,
       private formBuilder: FormBuilder,
     ) {
       // this.pass ="mi clave";
@@ -74,13 +74,8 @@ loginFirebaseUserMail(datos:any){
 
   console.log(this.userDataUpdate);
   try{
-    const result = this.afAuth.auth.signInWithEmailAndPassword(datos['prof_email'],datos['prof_password']);
+    const result = this.afAuth.auth.signInWithEmailAndPassword(datos['prof_email'],datos['prof_password']).then( ()=>{
     console.log(result);
-
-    result.catch( (error) =>{
-      this.showAlertLogin();
-    });
-    if(result){
       this.userDataUpdate['verificacion'] = datos['$key'];
       localStorage.setItem('verificacion',datos['$key']);
       console.log(this.userDataUpdate);
@@ -88,42 +83,69 @@ loginFirebaseUserMail(datos:any){
       // let Data = {'datos':this.userDataUpdate}
       // this.navCtrl.setRoot(ShowPage,Data);
         this.navCtrl.setRoot('ShowPage');
-    }
+    }).catch(
+      (error) =>{
+        this.showAlertLogin();
+      });
   }catch(e){ console.error(e); console.error('error ')}
 }
 
 facebookir(){
 // let goPagePrehome:boolean = false;
 // let userDB:any;
-try{
-firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
-// firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider())
-  .then(res => {
-    //console.log(res.user.email);
-    console.log(res);
-    console.info(JSON.stringify(res));
-    if(res.user.providerData["0"].email){
-      let userBD =this.professionalsService.getProfessionalExists(res.user.providerData["0"].email).subscribe(
-        (value)=>{
-          console.log('professionalsService-S login');
-          for(let key in value){
-            // console.log(value[key]);
-            if(value[key]){
-              console.log(value[key]);
-              this.goNextPagePrehomeFace(value[key]);
-            }
+  try{
+  // firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+  // // firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider())
+  //   .then(
+    this.fb.login(['email'])
+    .then((res) => {
+      console.log('Logged into Facebook!', res);
+      alert(JSON.stringify(res));
+      let credencial = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+      firebase.auth().signInWithCredential(credencial).then(
+      (info) => {
+      //console.log(res.user.email);
+      alert(res.authResponse.accessToken);
+      alert(credencial);
+      alert(JSON.stringify(info));
+      alert(JSON.stringify(info.providerData['0']['email']));
+      alert(JSON.stringify(info.providerData));
+      console.log(info);
+      console.info(JSON.stringify(info));
+      if(info.providerData["0"].email){
+        let userBD =this.professionalsService.getProfessionalExists(info.providerData["0"].email).subscribe(
+              (value)=>{
+                console.info(JSON.stringify(value));
+                console.log('professionalsService-S login');
+                for(let key in value){
+                  // console.log(value[key]);
+                  if(value[key]){
+                    console.log(value[key]);
+                    console.info(JSON.stringify(value[key]));
+                    this.goNextPagePrehomeFace(value[key]);
+                  }
+                }
+                console.log('professionalsService-US login');
+                userBD.unsubscribe();
+              }
+            );
           }
-          console.log('professionalsService-US login');
-          userBD.unsubscribe();
-        }
-      );
-    }
-  });
-  }catch(e){ console.error(e);}
+      }
+      ).catch(e => {
+        console.log('Error signInWithCredential', e);
+        alert(JSON.stringify(e));
+        alert('Error signInWithCredential');
+      });
+    }).catch(e => {
+    console.log('Error zing into Facebook', e)
+    alert(JSON.stringify(e));
+    });
+  }catch(e){console.error(e); alert('try c info')}
 }
-        
+ 
 goNextPagePrehomeFace(datos:any){
 //   console.log(datos);
+alert('gonexpagePre');
   console.log(datos['$key']);
   console.log (datos['prof_email']);
  console.log ( datos['prof_password']);

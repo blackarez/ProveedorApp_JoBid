@@ -72,6 +72,8 @@ export class SingupPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SingupPage');
+    this.foto = "assets/img/professions/cleaning.png";
+    this.disImg = false;
     //-- existe usuario de facebook
     let userA:any = firebase.auth().currentUser;
     console.log(userA);
@@ -285,8 +287,8 @@ async  camaraFoto(){
   try{
     const options: CameraOptions = {
       quality: 60,
-      // targetHeight: 100,
-      // targetWidth: 100,
+      targetHeight: 100,
+      targetWidth: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -297,14 +299,17 @@ async  camaraFoto(){
     let UploadTask = picture.putString(image,'data_url');
     UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) =>  {
-        let url = UploadTask.snapshot.downloadURL;
-        console.log(url);
-        this.foto = url;
-        this.disImg = false;
       },
-      (error) => { console.log(error)  },
-      // () => { 
-      // }
+      (error) => { console.log(error) 
+        // alert(error);
+      },
+        () => { 
+          let url = UploadTask.snapshot.downloadURL;
+          console.log(url);
+          // alert(url);
+          this.foto = url;
+          this.disImg = false;
+        }
     );
   } catch(e){ console.error(e);}
 }

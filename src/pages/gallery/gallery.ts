@@ -107,8 +107,8 @@ export class GalleryPage {
     try{
       const options: CameraOptions = {
         quality: 60,
-        // targetHeight: 100,
-        // targetWidth: 100,
+        targetHeight: 100,
+        targetWidth: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
@@ -138,8 +138,8 @@ export class GalleryPage {
     try{
       const options: CameraOptions = {
         quality: 60,
-        // targetHeight: 100,
-        // targetWidth: 100,
+        targetHeight: 100,
+        targetWidth: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
@@ -164,8 +164,8 @@ export class GalleryPage {
     try{
       const options: CameraOptions = {
         quality: 60,
-        // targetHeight: 100,
-        // targetWidth: 100,
+        targetHeight: 100,
+        targetWidth: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
@@ -190,8 +190,8 @@ export class GalleryPage {
     try{
       const options: CameraOptions = {
         quality: 60,
-        // targetHeight: 100,
-        // targetWidth: 100,
+        targetHeight: 100,
+        targetWidth: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE

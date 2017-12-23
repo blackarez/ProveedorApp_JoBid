@@ -11,10 +11,6 @@ import STATE_UTILS from 'states-utils';
 //-service
 import { ProfessionalsService } from '../../services/professionals.service';
 
-//-firebase
-// import { AngularFireAuth } from 'angularfire2/auth';
-// import * as firebase from 'firebase/app';
-
 /**
  * Generated class for the EditProviderPage page.
  *
@@ -98,6 +94,9 @@ export class EditProviderPage {
         if(this.userData.picture != undefined || this.userData.picture != ''){
           this.disImg = false;
           this.foto = this.userData.picture;
+        }else{
+          this.foto = "assets/img/professions/cleaning.png";
+          this.disImg = false;
         }
         this.passwordB =dataUserDB['prof_password']; 
         // let zipcodea = this.userData['zipcode'];
@@ -133,8 +132,8 @@ export class EditProviderPage {
         this.professionalsService.updateUser(this.userData,this.userActual);
         // this.navCtrl.push('ProviderInfoAPage');
         this.profSub.unsubscribe();
-        console.log('profSub-US edit-provider');
-        this.navCtrl.pop();
+          console.log('profSub-US edit-provider');
+          this.navCtrl.pop();
     }else{
       this.showAlertPwd();
     }
@@ -170,12 +169,15 @@ export class EditProviderPage {
     if(DireccionSlip != undefined){
       let DireccionSlipA = DireccionSlip['0'].split(" ", 2);
       if(DireccionSlipA != undefined){
-        console.log(DireccionSlip['0']);
-        console.log(DireccionSlip['1']);
-        console.log(DireccionSlip['2']);
-        console.log(DireccionSlip['0'].split(" ", 2));
-        this.DirecA =DireccionSlipA['0'];
+        // console.log(DireccionSlip['0']);
+        // console.log(DireccionSlip['1']);
+        // console.log(DireccionSlip['2']);
+        // console.log(DireccionSlip['0'].split(" ", 2));
+        // console.log(DireccionSlipA);
+        // console.log(DireccionSlipA['0']);
+        console.log(DireccionSlipA['1']);
         this.DirecB =DireccionSlipA['1'];
+        this.DirecA =DireccionSlipA['0'];
         this.DirecC =DireccionSlip['1'];
         this.DirecD =DireccionSlip['2'];
       }

@@ -3,6 +3,10 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Facebook } from '@ionic-native/facebook';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+
 //-pages
 import { MyApp } from './app.component';
 // import { HomePage } from '../pages/home/home';
@@ -34,7 +38,8 @@ import { NotificacionService } from '../services/notificacion.service';
 
 
 //- config 
-export const firebaseConfig = {
+// authDomain: "provedorappjobid.firebaseapp.com",
+export const firebaseConfigDataBase = {
   apiKey: "AIzaSyBmrc2CjBbIJD_Pu_kkCcV8qNXJfsEBaxo",
   authDomain: "usuarioappjobid.firebaseapp.com",
   databaseURL: "https://usuarioappjobid.firebaseio.com",
@@ -42,8 +47,19 @@ export const firebaseConfig = {
   storageBucket: "usuarioappjobid.appspot.com",
   messagingSenderId: "679089691484"
 };
+export const firebaseConfigSecond = {
+  apiKey: "AIzaSyDgDTYKXyykNHSqL48KOFiTiuHurW5IDko",
+  authDomain: "provedorappjobid.firebaseapp.com",
+  databaseURL: "https://provedorappjobid.firebaseio.com",
+  projectId: "provedorappjobid",
+  storageBucket: "provedorappjobid.appspot.com",
+  messagingSenderId: "925192219494"
+};
+
+export const afDBUser = new AngularFireDatabase(firebase.initializeApp(firebaseConfigDataBase,'second'));
 
 // export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
+// export const googleMapsKey = 'AIzaSyDdKCYx63FmAQzlRu0dnZMGVOZnFM65JWM';
 export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
 
 @NgModule({
@@ -53,7 +69,7 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
   imports: [
     BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfigSecond),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
@@ -82,6 +98,7 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
     Camera,
     NativeAudio,
     LocalNotifications,
+    Facebook,
   ]
 })
 export class AppModule {}

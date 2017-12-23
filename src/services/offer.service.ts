@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 // import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { afDBUser } from "../app/app.module";
 
 @Injectable()
 
 export class OfferService{
-	dataCategoria: any = [];
-	dataService:any = [];
-	constructor(private afDB: AngularFireDatabase) {
+
+	afDBUser:AngularFireDatabase;
+	constructor() {
+		this.afDBUser = afDBUser;
 	}
 	
 	//---new offer 
@@ -30,45 +32,45 @@ export class OfferService{
 		console.log(serviceData);
 		// console.log(JSON.stringify(serviceData));
 		// console.log(subCategory);
-		this.afDB.object('/offer/'+keyOffer).set(serviceData).catch(error => {console.log('error offer setNOff'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/offer/'+keyOffer).set(serviceData).catch(error => {console.log('error offer setNOff'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('offer create');
 	}
 	//sets
 	public setStatus(keyOffer,status){
-		return this.afDB.object('/offer/'+keyOffer+'/status/').set(status).catch(error => {console.log('error offer setstatus'); console.log(error);console.log(JSON.stringify(error));});
+		return this.afDBUser.object('/offer/'+keyOffer+'/status/').set(status).catch(error => {console.log('error offer setstatus'); console.log(error);console.log(JSON.stringify(error));});
 	}
 	public setSale(keyOffer,sale){
-		return this.afDB.object('/offer/'+keyOffer+'/sale/').set(sale).catch(error => {console.log('error offer setSale'); console.log(error);console.log(JSON.stringify(error));});
+		return this.afDBUser.object('/offer/'+keyOffer+'/sale/').set(sale).catch(error => {console.log('error offer setSale'); console.log(error);console.log(JSON.stringify(error));});
 	}
 	public setUser(keyOffer,User){
-		return this.afDB.object('/offer/'+keyOffer+'/User/').set(User).catch(error => {console.log('error offer setUser'); console.log(error);console.log(JSON.stringify(error));});
+		return this.afDBUser.object('/offer/'+keyOffer+'/User/').set(User).catch(error => {console.log('error offer setUser'); console.log(error);console.log(JSON.stringify(error));});
 	}
 	public setProvider(keyOffer,Provider){
-		return this.afDB.object('/offer/'+keyOffer+'/Profession/').set(Provider).catch(error => {console.log('error offer setUser'); console.log(error);console.log(JSON.stringify(error));});
+		return this.afDBUser.object('/offer/'+keyOffer+'/Profession/').set(Provider).catch(error => {console.log('error offer setUser'); console.log(error);console.log(JSON.stringify(error));});
 	}
 	public setOfferProviderLocation(keyOffer,ProviderLocation){
 		console.info('set ProviderLocation');
-		this.afDB.object('/offer/'+keyOffer+'/ProviderLocacion').set(ProviderLocation).catch(error => {console.log('error offer setOfferProviderLocation'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/offer/'+keyOffer+'/ProviderLocacion').set(ProviderLocation).catch(error => {console.log('error offer setOfferProviderLocation'); console.log(error);console.log(JSON.stringify(error));});
 	}
 
 	//-gets
 	public getStatus(keyOffer){
-		return this.afDB.object('/offer/'+keyOffer+'/status/');
+		return this.afDBUser.object('/offer/'+keyOffer+'/status/');
 	}
 	public getOffer(keyOffer){
-		return this.afDB.object('/offer/'+keyOffer);
+		return this.afDBUser.object('/offer/'+keyOffer);
 	}
 	public getOfferUserLocation(keyOffer){
 		console.info('get UserLocation');
-		return this.afDB.object('/offer/'+keyOffer+'/UserLocacion');
+		return this.afDBUser.object('/offer/'+keyOffer+'/UserLocacion');
 	}
 	public getOfferProviderLocation(keyOffer){
 		console.info('get ProviderLocation');
-		return this.afDB.object('/offer/'+keyOffer+'/ProviderLocacion');
+		return this.afDBUser.object('/offer/'+keyOffer+'/ProviderLocacion');
 	}
 	
 	public getOfferNew(){
-		return this.afDB.list('/offer/',{
+		return this.afDBUser.list('/offer/',{
 			query: {
 				orderByChild: 'status',
 				equalTo: 'Published'
@@ -77,9 +79,9 @@ export class OfferService{
 	}
 
 	public getTimmer(keyOffer){
-		return	this.afDB.object('/time/'+keyOffer+'/Timer');
+		return	this.afDBUser.object('/time/'+keyOffer+'/Timer');
 	}
 	public getAddressOffer(keyOffer){
-		return this.afDB.object('/offer/'+keyOffer+'/Address');
+		return this.afDBUser.object('/offer/'+keyOffer+'/Address');
 	}
 }

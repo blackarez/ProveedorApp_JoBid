@@ -91,6 +91,8 @@ export class ShowPage {
     }else{
       this.labelToogle ="Online";
       this.showServices();
+      // this.showServices();
+      // this.showServices();
     }
   }
 
@@ -98,8 +100,11 @@ export class ShowPage {
     // alert('showServices');
    this.listOffer = this.offerService.getOfferNew().subscribe( (list)=>{
      // console.log(list);
-     console.log('listOffer-S show');
-     this.getServiceProvider(list);
+     if(list != undefined){
+       console.log('listOffer-S show');
+       this.getServiceProvider(list);
+      this.listOffer.unsubscribe();
+     }
     });
   }
   
@@ -124,7 +129,7 @@ export class ShowPage {
       });
     }
     
-  showListData(BDListOffer,BDListServicesProvider,stars){
+    async  showListData(BDListOffer,BDListServicesProvider,stars){
     this.ListService=[];
     let imagen;
     for(let keySP in BDListServicesProvider){
@@ -212,15 +217,34 @@ export class ShowPage {
                       // console.log('-'+user['prof_star']+'-');
                       // if(user['user_picture']){
                         let serviceImage = ''; 
-                        if(BDListOffer[keys].Clasificacion.informacion.foto != undefined){
+                        if(BDListOffer[keys].Clasificacion.informacion.foto != undefined && BDListOffer[keys].Clasificacion.informacion.foto != ''){
                           serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
                           console.log(serviceImage);
                         }
-                        if(user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null || user['user_picture']){
+                        if(user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null){
                           imagen = this.imgDefault;
                         }else{ imagen = user['user_picture'];}
                         // console.log(imagen);
-                        this.ListService.push({"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"idOff":key,"imgOffer":serviceImage,"idUser":user['$key']});
+                        // console.log(this.ListService.findIndex( keysOffer => { keysOffer.idOff == key;}));
+                        console.log(this.ListService);
+                        let ListaServicios = this.ListService;
+                        console.log(ListaServicios);
+                        // let idKeyOffer = ListaServicios.findIndex( keysOffer => { 
+                        //   keysOffer.idOff == key; 
+                        //   console.log(keysOffer); 
+                        //   console.log(keysOffer.idOff); 
+                        //   console.log(key); 
+                        // });
+                        let idKeyOffer = ListaServicios.findIndex( keysOffer =>
+                          keysOffer.idOff == key);
+                        console.log(idKeyOffer);
+                        if(idKeyOffer >=  0){
+                          console.log('if 1');
+                          this.ListService[idKeyOffer]= {"idOff":key,"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"imgOffer":serviceImage,"idUser":user['$key']};
+                        }else{
+                          console.log('if -1');
+                          this.ListService.push({"idOff":key,"name":user['user_username'],"img":imagen,"sale":InfmaxOffer,"infoShow":InfshortMoreInformacion,"info":InfmoreInformacion,"imgOffer":serviceImage,"idUser":user['$key']});
+                        }
                         console.log(this.ListService);
                       // }
                     });

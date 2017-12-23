@@ -1,28 +1,37 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from 'angularfire2/database';
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-//import { EncriptyService } from './encripty.service';
+import { afDBUser } from "../app/app.module";
 
 @Injectable()
 
 export class ProfessionalsService{
 
-	constructor( private afDB: AngularFireDatabase) {
+	afDBUser:AngularFireDatabase;
+	constructor() {
+		this.afDBUser = afDBUser;
+	}
+
+	getIni(){
+		this.afDBUser.list('/professionals/').subscribe(
+			(data)=>{
+				console.log(data);
+			}
+		);
 	}
 	//-get
 	public getProfessionals(){
-		// console.log(this.afDB.list('/professionals/'));
-		return this.afDB.list('/professionals/');
+		// console.log(this.afDBUser.list('/professionals/'));
+		return this.afDBUser.list('/professionals/');
 	}
 
 	public getProfessional(id){
 		console.log('getProfessionalId');
 		// console.log(id);
-		return this.afDB.object('/professionals/'+id);
+		return this.afDBUser.object('/professionals/'+id);
 	}
 
 	public getProfessionalExists( email: any ){
-		return this.afDB.list('/professionals',{
+		return this.afDBUser.list('/professionals',{
 			query: {
 			  orderByChild: 'prof_email',
 			  equalTo: email
@@ -33,7 +42,7 @@ export class ProfessionalsService{
 	public getUserLoginPwd(pwd: any ){
 		// let password = this.encriptyService.GenerateEncripty(pwd);
 		let password = pwd;
-		let listBD =this.afDB.list('/professionals',{
+		let listBD =this.afDBUser.list('/professionals',{
 			query: {
 				orderByChild: 'prof_password',
 				equalTo: password
@@ -46,23 +55,23 @@ export class ProfessionalsService{
 
 	getContract(keyProvider){
 		console.info('get contracts');
-		return this.afDB.object('/Contracts/'+keyProvider);
+		return this.afDBUser.object('/Contracts/'+keyProvider);
 	}
 
 	public getServicesProfessional(keyProvider){
-		return this.afDB.object('/professionals/'+keyProvider+'/Service/');
+		return this.afDBUser.object('/professionals/'+keyProvider+'/Service/');
 	}
 
 	public getServiceProfessional(keyProvider,KeyService){
-		return this.afDB.object('/professionals/'+keyProvider+'/Service/'+KeyService);
+		return this.afDBUser.object('/professionals/'+keyProvider+'/Service/'+KeyService);
 	}
 
 	public getStar(keyProvider){
 		// console.log('getStar');
-		return this.afDB.object('/professionals/'+keyProvider+'/prof_star');
+		return this.afDBUser.object('/professionals/'+keyProvider+'/prof_star');
 	}
 	public getGalleryService(keyProveedor,keyService){
-		return this.afDB.object('/professionals/'+keyProveedor+'/Service/'+keyService+'/serv_detail/serv_gallery');
+		return this.afDBUser.object('/professionals/'+keyProveedor+'/Service/'+keyService+'/serv_detail/serv_gallery');
 	}
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
@@ -99,7 +108,10 @@ export class ProfessionalsService{
 		let socialSecurity = userData['socialSecurity'];
 		let zipcode = userData['zipcode'];
 		let state = userData['state'];
-		let picture = userData['picture'];
+		let picture = '';
+		if(userData['picture'] != undefined){
+			picture = userData['picture'];
+		}
 		// let verificacion = userData['verificacion'];
 		let pais = userData['pais'];
 		let direccion = userData['direccion'];
@@ -109,7 +121,7 @@ export class ProfessionalsService{
 
 		if( (userData['username']) && (userData['password']) && (userData['email']) ){
 			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){
-				this.afDB.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
+				this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
 				console.info('user create profession');
 			}
 		}
@@ -148,7 +160,10 @@ export class ProfessionalsService{
 		let socialSecurity = userData['socialSecurity'];
 		let zipcode = userData['zipcode'];
 		let state = userData['state'];
-		let picture = userData['picture'];
+		let picture = '';
+		if(userData['picture'] != undefined){
+			picture = userData['picture'];
+		}
 		// let verificacion = userData['verificacion'];
 		let pais = userData['pais'];
 		let direccion = userData['direccion'];
@@ -158,21 +173,21 @@ export class ProfessionalsService{
 
 		if( (userData['username']) && (userData['password']) && (userData['email']) ){
 			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){
-				this.afDB.object('/professionals/'+keyUser+'/prof_username').set(username);
-				this.afDB.object('/professionals/'+keyUser+'/prof_password').set(password);
-				this.afDB.object('/professionals/'+keyUser+'/prof_email').set(email);
-				this.afDB.object('/professionals/'+keyUser+'/prof_name').set(name);
-				this.afDB.object('/professionals/'+keyUser+'/prof_lastName').set(lastName);
-				this.afDB.object('/professionals/'+keyUser+'/prof_date').set(date);
-				this.afDB.object('/professionals/'+keyUser+'/prof_socialSecurity').set(socialSecurity);
-				this.afDB.object('/professionals/'+keyUser+'/prof_zipcode').set(zipcode);
-				this.afDB.object('/professionals/'+keyUser+'/prof_state').set(state);
-				this.afDB.object('/professionals/'+keyUser+'/prof_picture').set(picture);
-				this.afDB.object('/professionals/'+keyUser+'/prof_pais').set(pais);
-				this.afDB.object('/professionals/'+keyUser+'/prof_direccion').set(direccion);
-				this.afDB.object('/professionals/'+keyUser+'/prof_tel').set(tel);
-				this.afDB.object('/professionals/'+keyUser+'/prof_star').set(star);
-				// this.afDB.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_username').set(username);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_password').set(password);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_email').set(email);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_name').set(name);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_lastName').set(lastName);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_date').set(date);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_socialSecurity').set(socialSecurity);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_zipcode').set(zipcode);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_state').set(state);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_picture').set(picture);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_pais').set(pais);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_direccion').set(direccion);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_tel').set(tel);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_star').set(star);
+				// this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
 				console.info('user update profession');
 			}
 		}
@@ -180,8 +195,8 @@ export class ProfessionalsService{
 
 	public newContract(keyProvider,keyOffer,objContract){
 		console.log(objContract);
-		// this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		// this.afDBUser.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/Contracts/'+keyProvider+'/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('professionals new contract');
 	}
 
@@ -197,12 +212,12 @@ export class ProfessionalsService{
 		}
 
 		console.log(serviceData);
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_service').set(serviceData.serv_service).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_subService').set(serviceData.serv_subService).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_certificate').set(serviceData.serv_detail.serv_certificate).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_experiencia').set(serviceData.serv_detail.serv_experiencia).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_insurance').set(serviceData.serv_detail.serv_insurance).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_moreInformation').set(serviceData.serv_detail.serv_moreInformation).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_service').set(serviceData.serv_service).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_subService').set(serviceData.serv_subService).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_certificate').set(serviceData.serv_detail.serv_certificate).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_experiencia').set(serviceData.serv_detail.serv_experiencia).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_insurance').set(serviceData.serv_detail.serv_insurance).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_moreInformation').set(serviceData.serv_detail.serv_moreInformation).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		
 		console.info('professionals info service create or set');
 	}
@@ -223,22 +238,22 @@ export class ProfessionalsService{
 		console.log(KeyService);
 
 		if(serviceData.fotoA != undefined){
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryA').set(serviceData.fotoA).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryA').set(serviceData.fotoA).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		}
 		if(serviceData.fotoB != undefined){
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryB').set(serviceData.fotoB).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryB').set(serviceData.fotoB).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		}
 		if(serviceData.fotoC != undefined){
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryC').set(serviceData.fotoC).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryC').set(serviceData.fotoC).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		}
 		if(serviceData.fotoD != undefined){
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryD').set(serviceData.fotoD).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyS+'/serv_detail/serv_gallery/prof_galleryD').set(serviceData.fotoD).catch(error => {console.log('error professionals setInf'); console.log(error);console.log(JSON.stringify(error));});
 		}
 		console.info('professionals info service create or set');
 	}
 
 	setContractStatus(keyProvider,keyOffer,status){
-		this.afDB.object('/Contracts/'+keyProvider+'/'+keyOffer+'/status').set(status).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/Contracts/'+keyProvider+'/'+keyOffer+'/status').set(status).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
 		console.info('professionals ContractStatus create or set');
 	}
 
@@ -246,11 +261,11 @@ export class ProfessionalsService{
 		console.log(keyProvider);
 		console.log(Document);
 		console.log(Licencia);
-		this.afDB.object('/professionals/'+keyProvider+'/prof_document').set(Document).catch(error => {console.log('error setDocument'); console.log(error);console.log(JSON.stringify(error));});
-		this.afDB.object('/professionals/'+keyProvider+'/prof_licencia').set(Licencia).catch(error => {console.log('error setDocument'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+keyProvider+'/prof_document').set(Document).catch(error => {console.log('error setDocument'); console.log(error);console.log(JSON.stringify(error));});
+		this.afDBUser.object('/professionals/'+keyProvider+'/prof_licencia').set(Licencia).catch(error => {console.log('error setDocument'); console.log(error);console.log(JSON.stringify(error));});
 	}
 	//-drop
 	public dropService(KeyProveedor,keyService){
-		this.afDB.object('/professionals/'+KeyProveedor+'/Service/'+keyService+'/').remove();
+		this.afDBUser.object('/professionals/'+KeyProveedor+'/Service/'+keyService+'/').remove();
 	}
 }

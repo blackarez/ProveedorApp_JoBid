@@ -25779,7 +25779,6 @@ page-edit-provider img {
   display: block;
   width: 100px;
   height: 100px;
-  margin-right: auto;
 }
 
 page-edit-provider #signup-heading2 {
@@ -25789,6 +25788,14 @@ page-edit-provider #signup-heading2 {
 
 page-edit-provider .force-back-button .back-button {
   display: inline-block;
+}
+
+page-edit-provider .back-button.show-back-button {
+  display: none;
+}
+
+page-edit-provider ion-navbar .toolbar-content {
+  margin: 0;
 }
 
 page-edit-provider ion-list ion-grid.grid {
@@ -26050,6 +26057,7 @@ page-service-info .contenedor .imagenUser {
   width: 60px;
   height: 60px;
   margin-top: 12px;
+  border-radius: 40px;
 }
 
 page-service-info .contenedor p, page-service-info .contenedor h3 {

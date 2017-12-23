@@ -3,11 +3,18 @@ page-edit-provider {
 			width: 100px;
 			height: 100px;
 			// width: 100%;
-				// margin-left: auto; 
-				margin-right: auto;}
+			// margin-left: auto; 
+			// margin-right: auto;
+			}
 	#signup-heading2{color:#000000;text-align:center;}
 	.force-back-button .back-button {
 	  display: inline-block;
+	}
+	.back-button.show-back-button{
+		display: none;
+	}
+	ion-navbar .toolbar-content{
+		margin: 0;
 	}
 	ion-list ion-grid.grid{ padding:0; 
 		.col{padding:0;

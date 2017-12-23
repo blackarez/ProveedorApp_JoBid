@@ -21,6 +21,11 @@
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.JoBid.provider"
     },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "2008465006108651",
+      "APP_NAME": "JoBid Proveedor",
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
     "cordova-plugin-geolocation": {
       "GEOLOCATION_USAGE_DESCRIPTION": " ",
       "PACKAGE_NAME": "com.JoBid.provider"

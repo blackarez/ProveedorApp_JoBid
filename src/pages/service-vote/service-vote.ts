@@ -60,11 +60,11 @@ export class ServiceVotePage {
   }
 
   loadView(){
-    // this.DataService =  this.navParams.get('service');
-    // this.DataUser = this.navParams.get('user');
-    // console.log(this.DataService);
-    // console.log(this.DataUser);
-    // this.user = this.DataService['idUser'];
+    this.DataService =  this.navParams.get('service');
+    this.DataUser = this.navParams.get('user');
+    console.log(this.DataService);
+    console.log(this.DataUser);
+    this.user = this.DataService['idUser'];
     //-localStorage
     this.userActual = localStorage.getItem('verificacion');
     console.log(this.userActual);

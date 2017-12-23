@@ -6,7 +6,7 @@ webpackJsonp([34],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfessionalsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_app_module__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,24 +18,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-//import { EncriptyService } from './encripty.service';
 var ProfessionalsService = (function () {
-    function ProfessionalsService(afDB) {
-        this.afDB = afDB;
+    function ProfessionalsService() {
+        this.afDBUser = __WEBPACK_IMPORTED_MODULE_1__app_app_module__["b" /* afDBUser */];
     }
+    ProfessionalsService.prototype.getIni = function () {
+        this.afDBUser.list('/professionals/').subscribe(function (data) {
+            console.log(data);
+        });
+    };
     //-get
     ProfessionalsService.prototype.getProfessionals = function () {
-        // console.log(this.afDB.list('/professionals/'));
-        return this.afDB.list('/professionals/');
+        // console.log(this.afDBUser.list('/professionals/'));
+        return this.afDBUser.list('/professionals/');
     };
     ProfessionalsService.prototype.getProfessional = function (id) {
         console.log('getProfessionalId');
         // console.log(id);
-        return this.afDB.object('/professionals/' + id);
+        return this.afDBUser.object('/professionals/' + id);
     };
     ProfessionalsService.prototype.getProfessionalExists = function (email) {
-        return this.afDB.list('/professionals', {
+        return this.afDBUser.list('/professionals', {
             query: {
                 orderByChild: 'prof_email',
                 equalTo: email
@@ -45,7 +48,7 @@ var ProfessionalsService = (function () {
     ProfessionalsService.prototype.getUserLoginPwd = function (pwd) {
         // let password = this.encriptyService.GenerateEncripty(pwd);
         var password = pwd;
-        var listBD = this.afDB.list('/professionals', {
+        var listBD = this.afDBUser.list('/professionals', {
             query: {
                 orderByChild: 'prof_password',
                 equalTo: password
@@ -57,20 +60,20 @@ var ProfessionalsService = (function () {
     };
     ProfessionalsService.prototype.getContract = function (keyProvider) {
         console.info('get contracts');
-        return this.afDB.object('/Contracts/' + keyProvider);
+        return this.afDBUser.object('/Contracts/' + keyProvider);
     };
     ProfessionalsService.prototype.getServicesProfessional = function (keyProvider) {
-        return this.afDB.object('/professionals/' + keyProvider + '/Service/');
+        return this.afDBUser.object('/professionals/' + keyProvider + '/Service/');
     };
     ProfessionalsService.prototype.getServiceProfessional = function (keyProvider, KeyService) {
-        return this.afDB.object('/professionals/' + keyProvider + '/Service/' + KeyService);
+        return this.afDBUser.object('/professionals/' + keyProvider + '/Service/' + KeyService);
     };
     ProfessionalsService.prototype.getStar = function (keyProvider) {
         // console.log('getStar');
-        return this.afDB.object('/professionals/' + keyProvider + '/prof_star');
+        return this.afDBUser.object('/professionals/' + keyProvider + '/prof_star');
     };
     ProfessionalsService.prototype.getGalleryService = function (keyProveedor, keyService) {
-        return this.afDB.object('/professionals/' + keyProveedor + '/Service/' + keyService + '/serv_detail/serv_gallery');
+        return this.afDBUser.object('/professionals/' + keyProveedor + '/Service/' + keyService + '/serv_detail/serv_gallery');
     };
     //-new
     ProfessionalsService.prototype.newUser = function (userData, keyNew) {
@@ -106,7 +109,10 @@ var ProfessionalsService = (function () {
         var socialSecurity = userData['socialSecurity'];
         var zipcode = userData['zipcode'];
         var state = userData['state'];
-        var picture = userData['picture'];
+        var picture = '';
+        if (userData['picture'] != undefined) {
+            picture = userData['picture'];
+        }
         // let verificacion = userData['verificacion'];
         var pais = userData['pais'];
         var direccion = userData['direccion'];
@@ -114,7 +120,7 @@ var ProfessionalsService = (function () {
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
-                this.afDB.object('/professionals/' + keyUser).set({ "prof_username": username, "prof_password": password, "prof_email": email, "prof_name": name, "prof_lastName": lastName, "prof_date": date, "prof_socialSecurity": socialSecurity, "prof_zipcode": zipcode, "prof_state": state, "prof_picture": picture, "prof_pais": pais, "prof_direccion": direccion, "prof_tel": tel, "prof_star": star });
+                this.afDBUser.object('/professionals/' + keyUser).set({ "prof_username": username, "prof_password": password, "prof_email": email, "prof_name": name, "prof_lastName": lastName, "prof_date": date, "prof_socialSecurity": socialSecurity, "prof_zipcode": zipcode, "prof_state": state, "prof_picture": picture, "prof_pais": pais, "prof_direccion": direccion, "prof_tel": tel, "prof_star": star });
                 console.info('user create profession');
             }
         }
@@ -152,7 +158,10 @@ var ProfessionalsService = (function () {
         var socialSecurity = userData['socialSecurity'];
         var zipcode = userData['zipcode'];
         var state = userData['state'];
-        var picture = userData['picture'];
+        var picture = '';
+        if (userData['picture'] != undefined) {
+            picture = userData['picture'];
+        }
         // let verificacion = userData['verificacion'];
         var pais = userData['pais'];
         var direccion = userData['direccion'];
@@ -160,29 +169,29 @@ var ProfessionalsService = (function () {
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
-                this.afDB.object('/professionals/' + keyUser + '/prof_username').set(username);
-                this.afDB.object('/professionals/' + keyUser + '/prof_password').set(password);
-                this.afDB.object('/professionals/' + keyUser + '/prof_email').set(email);
-                this.afDB.object('/professionals/' + keyUser + '/prof_name').set(name);
-                this.afDB.object('/professionals/' + keyUser + '/prof_lastName').set(lastName);
-                this.afDB.object('/professionals/' + keyUser + '/prof_date').set(date);
-                this.afDB.object('/professionals/' + keyUser + '/prof_socialSecurity').set(socialSecurity);
-                this.afDB.object('/professionals/' + keyUser + '/prof_zipcode').set(zipcode);
-                this.afDB.object('/professionals/' + keyUser + '/prof_state').set(state);
-                this.afDB.object('/professionals/' + keyUser + '/prof_picture').set(picture);
-                this.afDB.object('/professionals/' + keyUser + '/prof_pais').set(pais);
-                this.afDB.object('/professionals/' + keyUser + '/prof_direccion').set(direccion);
-                this.afDB.object('/professionals/' + keyUser + '/prof_tel').set(tel);
-                this.afDB.object('/professionals/' + keyUser + '/prof_star').set(star);
-                // this.afDB.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_username').set(username);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_password').set(password);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_email').set(email);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_name').set(name);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_lastName').set(lastName);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_date').set(date);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_socialSecurity').set(socialSecurity);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_zipcode').set(zipcode);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_state').set(state);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_picture').set(picture);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_pais').set(pais);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_direccion').set(direccion);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_tel').set(tel);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_star').set(star);
+                // this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
                 console.info('user update profession');
             }
         }
     };
     ProfessionalsService.prototype.newContract = function (keyProvider, keyOffer, objContract) {
         console.log(objContract);
-        // this.afDB.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
-        this.afDB.object('/Contracts/' + keyProvider + '/' + keyOffer).set(objContract).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
+        // this.afDBUser.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});
+        this.afDBUser.object('/Contracts/' + keyProvider + '/' + keyOffer).set(objContract).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
         console.info('professionals new contract');
     };
     //-set
@@ -196,12 +205,12 @@ var ProfessionalsService = (function () {
             keyS = "Serv_" + (Key);
         }
         console.log(serviceData);
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_service').set(serviceData.serv_service).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_subService').set(serviceData.serv_subService).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_certificate').set(serviceData.serv_detail.serv_certificate).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_experiencia').set(serviceData.serv_detail.serv_experiencia).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_insurance').set(serviceData.serv_detail.serv_insurance).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_moreInformation').set(serviceData.serv_detail.serv_moreInformation).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_service').set(serviceData.serv_service).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_subService').set(serviceData.serv_subService).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_certificate').set(serviceData.serv_detail.serv_certificate).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_experiencia').set(serviceData.serv_detail.serv_experiencia).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_insurance').set(serviceData.serv_detail.serv_insurance).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_moreInformation').set(serviceData.serv_detail.serv_moreInformation).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
         console.info('professionals info service create or set');
     };
     //-set
@@ -218,39 +227,39 @@ var ProfessionalsService = (function () {
         console.log(KeyProveedor);
         console.log(KeyService);
         if (serviceData.fotoA != undefined) {
-            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryA').set(serviceData.fotoA).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+            this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryA').set(serviceData.fotoA).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
         }
         if (serviceData.fotoB != undefined) {
-            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryB').set(serviceData.fotoB).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+            this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryB').set(serviceData.fotoB).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
         }
         if (serviceData.fotoC != undefined) {
-            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryC').set(serviceData.fotoC).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+            this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryC').set(serviceData.fotoC).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
         }
         if (serviceData.fotoD != undefined) {
-            this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryD').set(serviceData.fotoD).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
+            this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyS + '/serv_detail/serv_gallery/prof_galleryD').set(serviceData.fotoD).catch(function (error) { console.log('error professionals setInf'); console.log(error); console.log(JSON.stringify(error)); });
         }
         console.info('professionals info service create or set');
     };
     ProfessionalsService.prototype.setContractStatus = function (keyProvider, keyOffer, status) {
-        this.afDB.object('/Contracts/' + keyProvider + '/' + keyOffer + '/status').set(status).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/Contracts/' + keyProvider + '/' + keyOffer + '/status').set(status).catch(function (error) { console.log('error professionals NewCont'); console.log(error); console.log(JSON.stringify(error)); });
         console.info('professionals ContractStatus create or set');
     };
     ProfessionalsService.prototype.setDocument = function (keyProvider, Document, Licencia) {
         console.log(keyProvider);
         console.log(Document);
         console.log(Licencia);
-        this.afDB.object('/professionals/' + keyProvider + '/prof_document').set(Document).catch(function (error) { console.log('error setDocument'); console.log(error); console.log(JSON.stringify(error)); });
-        this.afDB.object('/professionals/' + keyProvider + '/prof_licencia').set(Licencia).catch(function (error) { console.log('error setDocument'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + keyProvider + '/prof_document').set(Document).catch(function (error) { console.log('error setDocument'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/professionals/' + keyProvider + '/prof_licencia').set(Licencia).catch(function (error) { console.log('error setDocument'); console.log(error); console.log(JSON.stringify(error)); });
     };
     //-drop
     ProfessionalsService.prototype.dropService = function (KeyProveedor, keyService) {
-        this.afDB.object('/professionals/' + KeyProveedor + '/Service/' + keyService + '/').remove();
+        this.afDBUser.object('/professionals/' + KeyProveedor + '/Service/' + keyService + '/').remove();
     };
     return ProfessionalsService;
 }());
 ProfessionalsService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    __metadata("design:paramtypes", [])
 ], ProfessionalsService);
 
 //# sourceMappingURL=professionals.service.js.map
@@ -279,139 +288,139 @@ webpackEmptyAsyncContext.id = 161;
 
 var map = {
 	"../pages/add-payment-method/add-payment-method.module": [
-		438,
+		439,
 		2
 	],
 	"../pages/add-service/add-service.module": [
-		439,
+		440,
 		33
 	],
 	"../pages/certificates/certificates.module": [
-		440,
+		441,
 		32
 	],
 	"../pages/checkr-authorization/checkr-authorization.module": [
-		441,
+		442,
 		31
 	],
 	"../pages/checkr-disclosure/checkr-disclosure.module": [
-		442,
+		443,
 		30
 	],
 	"../pages/checkr-welcome/checkr-welcome.module": [
-		443,
+		444,
 		29
 	],
 	"../pages/document/document.module": [
-		444,
+		445,
 		6
 	],
 	"../pages/edit-provider/edit-provider.module": [
-		445,
+		446,
 		4
 	],
 	"../pages/edit-user/edit-user.module": [
-		446,
+		447,
 		28
 	],
 	"../pages/gallery/gallery.module": [
-		447,
+		448,
 		5
 	],
 	"../pages/home/home.module": [
-		448,
+		449,
 		27
 	],
 	"../pages/login/login.module": [
-		449,
+		450,
 		26
 	],
 	"../pages/my-service-info/my-service-info.module": [
-		450,
+		451,
 		25
 	],
 	"../pages/my-services/my-services.module": [
-		451,
+		452,
 		24
 	],
 	"../pages/payment-methods/payment-methods.module": [
-		452,
+		453,
 		1
 	],
 	"../pages/payments/payments.module": [
-		453,
+		454,
 		0
 	],
 	"../pages/policies/policies.module": [
-		454,
+		455,
 		23
 	],
 	"../pages/provider-info-a/provider-info-a.module": [
-		455,
+		456,
 		22
 	],
 	"../pages/provider-info-b/provider-info-b.module": [
-		456,
+		457,
 		21
 	],
 	"../pages/provider-ok/provider-ok.module": [
-		457,
+		458,
 		20
 	],
 	"../pages/service-info-a/service-info-a.module": [
-		459,
+		460,
 		19
 	],
 	"../pages/service-info-b/service-info-b.module": [
-		460,
+		461,
 		18
 	],
 	"../pages/service-info/service-info.module": [
-		458,
+		459,
 		17
 	],
 	"../pages/service-job/service-job.module": [
-		461,
+		462,
 		16
 	],
 	"../pages/service-new/service-new.module": [
-		462,
+		463,
 		15
 	],
 	"../pages/service-ok/service-ok.module": [
-		463,
+		464,
 		14
 	],
 	"../pages/service-sale/service-sale.module": [
-		464,
+		465,
 		13
 	],
 	"../pages/service-vote/service-vote.module": [
-		465,
+		466,
 		12
 	],
 	"../pages/service-win/service-win.module": [
-		466,
+		467,
 		11
 	],
 	"../pages/show/show.module": [
-		467,
+		468,
 		10
 	],
 	"../pages/singup/singup.module": [
-		468,
+		469,
 		3
 	],
 	"../pages/terms/terms.module": [
-		469,
+		470,
 		9
 	],
 	"../pages/update-service/update-service.module": [
-		470,
+		471,
 		8
 	],
 	"../pages/update-user/update-user.module": [
-		471,
+		472,
 		7
 	]
 };
@@ -431,13 +440,13 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 295:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OfferService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_app_module__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -448,13 +457,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 var OfferService = (function () {
-    function OfferService(afDB) {
-        this.afDB = afDB;
-        this.dataCategoria = [];
-        this.dataService = [];
+    function OfferService() {
+        this.afDBUser = __WEBPACK_IMPORTED_MODULE_1__app_app_module__["b" /* afDBUser */];
     }
     //---new offer 
     OfferService.prototype.newOffer = function (serviceData, keyNew) {
@@ -477,43 +483,43 @@ var OfferService = (function () {
         console.log(serviceData);
         // console.log(JSON.stringify(serviceData));
         // console.log(subCategory);
-        this.afDB.object('/offer/' + keyOffer).set(serviceData).catch(function (error) { console.log('error offer setNOff'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/offer/' + keyOffer).set(serviceData).catch(function (error) { console.log('error offer setNOff'); console.log(error); console.log(JSON.stringify(error)); });
         console.info('offer create');
     };
     //sets
     OfferService.prototype.setStatus = function (keyOffer, status) {
-        return this.afDB.object('/offer/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error offer setstatus'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/offer/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error offer setstatus'); console.log(error); console.log(JSON.stringify(error)); });
     };
     OfferService.prototype.setSale = function (keyOffer, sale) {
-        return this.afDB.object('/offer/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error offer setSale'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/offer/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error offer setSale'); console.log(error); console.log(JSON.stringify(error)); });
     };
     OfferService.prototype.setUser = function (keyOffer, User) {
-        return this.afDB.object('/offer/' + keyOffer + '/User/').set(User).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/offer/' + keyOffer + '/User/').set(User).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
     };
     OfferService.prototype.setProvider = function (keyOffer, Provider) {
-        return this.afDB.object('/offer/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/offer/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
     };
     OfferService.prototype.setOfferProviderLocation = function (keyOffer, ProviderLocation) {
         console.info('set ProviderLocation');
-        this.afDB.object('/offer/' + keyOffer + '/ProviderLocacion').set(ProviderLocation).catch(function (error) { console.log('error offer setOfferProviderLocation'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/offer/' + keyOffer + '/ProviderLocacion').set(ProviderLocation).catch(function (error) { console.log('error offer setOfferProviderLocation'); console.log(error); console.log(JSON.stringify(error)); });
     };
     //-gets
     OfferService.prototype.getStatus = function (keyOffer) {
-        return this.afDB.object('/offer/' + keyOffer + '/status/');
+        return this.afDBUser.object('/offer/' + keyOffer + '/status/');
     };
     OfferService.prototype.getOffer = function (keyOffer) {
-        return this.afDB.object('/offer/' + keyOffer);
+        return this.afDBUser.object('/offer/' + keyOffer);
     };
     OfferService.prototype.getOfferUserLocation = function (keyOffer) {
         console.info('get UserLocation');
-        return this.afDB.object('/offer/' + keyOffer + '/UserLocacion');
+        return this.afDBUser.object('/offer/' + keyOffer + '/UserLocacion');
     };
     OfferService.prototype.getOfferProviderLocation = function (keyOffer) {
         console.info('get ProviderLocation');
-        return this.afDB.object('/offer/' + keyOffer + '/ProviderLocacion');
+        return this.afDBUser.object('/offer/' + keyOffer + '/ProviderLocacion');
     };
     OfferService.prototype.getOfferNew = function () {
-        return this.afDB.list('/offer/', {
+        return this.afDBUser.list('/offer/', {
             query: {
                 orderByChild: 'status',
                 equalTo: 'Published'
@@ -521,29 +527,29 @@ var OfferService = (function () {
         });
     };
     OfferService.prototype.getTimmer = function (keyOffer) {
-        return this.afDB.object('/time/' + keyOffer + '/Timer');
+        return this.afDBUser.object('/time/' + keyOffer + '/Timer');
     };
     OfferService.prototype.getAddressOffer = function (keyOffer) {
-        return this.afDB.object('/offer/' + keyOffer + '/Address');
+        return this.afDBUser.object('/offer/' + keyOffer + '/Address');
     };
     return OfferService;
 }());
 OfferService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    __metadata("design:paramtypes", [])
 ], OfferService);
 
 //# sourceMappingURL=offer.service.js.map
 
 /***/ }),
 
-/***/ 296:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SaleService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_app_module__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -554,13 +560,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 var SaleService = (function () {
-    function SaleService(afDB) {
-        this.afDB = afDB;
-        this.dataCategoria = [];
-        this.dataService = [];
+    function SaleService() {
+        this.afDBUser = __WEBPACK_IMPORTED_MODULE_1__app_app_module__["b" /* afDBUser */];
     }
     //---new sale
     SaleService.prototype.newSale = function (keyUser, keySale, maxOffer) {
@@ -580,55 +583,55 @@ var SaleService = (function () {
         console.log(keyUser);
         console.log(keySale);
         console.log(maxOffer);
-        this.afDB.object('/sale/' + keyUser + '/' + keySale).set({ "status": "Published", "sale": maxOffer, "providers": { "prof_1": { "offer": "87" }, "prof_2": { "offer": "65" } } }).catch(function (error) { console.log('errorNewSale'); console.log(error); console.log(JSON.stringify(error)); });
-        //this.afDB.object('/sale/'+keyUser+'/'+keySale).set({"status":"new","sale":maxOffer});
+        this.afDBUser.object('/sale/' + keyUser + '/' + keySale).set({ "status": "Published", "sale": maxOffer, "providers": { "prof_1": { "offer": "87" }, "prof_2": { "offer": "65" } } }).catch(function (error) { console.log('errorNewSale'); console.log(error); console.log(JSON.stringify(error)); });
+        //this.afDBUser.object('/sale/'+keyUser+'/'+keySale).set({"status":"new","sale":maxOffer});
         console.info('sale create');
     };
     SaleService.prototype.getSale = function (keyUser, keySale) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keySale);
+        return this.afDBUser.object('/sale/' + keyUser + '/' + keySale);
     };
     SaleService.prototype.getSales = function (keyUser) {
-        return this.afDB.object('/sale/' + keyUser);
+        return this.afDBUser.object('/sale/' + keyUser);
     };
     SaleService.prototype.setStatus = function (keyUser, keyOffer, status) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error sale setstatus'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/sale/' + keyUser + '/' + keyOffer + '/status/').set(status).catch(function (error) { console.log('error sale setstatus'); console.log(error); console.log(JSON.stringify(error)); });
     };
     SaleService.prototype.setSale = function (keyUser, keyOffer, sale) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/sale/' + keyUser + '/' + keyOffer + '/sale/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
     };
     SaleService.prototype.setSaleProvider = function (keyUser, keyOffer, KeyProvider, sale) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + KeyProvider + '/offer/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + KeyProvider + '/offer/').set(sale).catch(function (error) { console.log('error sale setSale'); console.log(error); console.log(JSON.stringify(error)); });
     };
     SaleService.prototype.setProvider = function (keyUser, keyOffer, Provider) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
+        return this.afDBUser.object('/sale/' + keyUser + '/' + keyOffer + '/Profession/').set(Provider).catch(function (error) { console.log('error offer setUser'); console.log(error); console.log(JSON.stringify(error)); });
     };
     //-get
     SaleService.prototype.getStatus = function (keyUser, keyOffer) {
-        return this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/status/');
+        return this.afDBUser.object('/sale/' + keyUser + '/' + keyOffer + '/status/');
     };
     SaleService.prototype.setSaleUserLocation = function (keyUser, keyOffer, keyProvider, UserLocation) {
         console.info('set UserLocation');
         console.log(UserLocation);
-        this.afDB.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + keyProvider + '/UserLocacion').set(UserLocation).catch(function (error) { console.log('error sale setSaleUserLocation'); console.log(error); console.log(JSON.stringify(error)); });
+        this.afDBUser.object('/sale/' + keyUser + '/' + keyOffer + '/providers/' + keyProvider + '/UserLocacion').set(UserLocation).catch(function (error) { console.log('error sale setSaleUserLocation'); console.log(error); console.log(JSON.stringify(error)); });
     };
     return SaleService;
 }());
 SaleService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    __metadata("design:paramtypes", [])
 ], SaleService);
 
 //# sourceMappingURL=sale.service.js.map
 
 /***/ }),
 
-/***/ 299:
+/***/ 300:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_app_module__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -639,24 +642,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-//import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 //import { EncriptyService } from './encripty.service';
 var UserService = (function () {
-    function UserService(afDB) {
-        this.afDB = afDB;
+    function UserService() {
         this.Users = [];
-        //console.log(this.afDB.list('/user'));
+        this.afDBUser = __WEBPACK_IMPORTED_MODULE_1__app_app_module__["b" /* afDBUser */];
     }
     /*  ----------------user  ----------------------*/
     UserService.prototype.getUsers = function () {
-        return this.afDB.list('/user');
+        return this.afDBUser.list('/user');
     };
     UserService.prototype.getUser = function (userId) {
-        return this.afDB.object('/user/' + userId);
+        return this.afDBUser.object('/user/' + userId);
     };
     UserService.prototype.getUserLogin = function (name, pwd) {
-        return this.afDB.list('/user')
+        return this.afDBUser.list('/user')
             .forEach(function (users) {
             //console.log(users);
             return users.map(function (user) {
@@ -693,7 +694,7 @@ var UserService = (function () {
         }); */
     };
     UserService.prototype.getUserexists = function (name, email) {
-        return this.afDB.list('/user')
+        return this.afDBUser.list('/user')
             .forEach(function (users) {
             //console.log(users);
             return users.map(function (user) {
@@ -723,12 +724,12 @@ var UserService = (function () {
         }); */
     };
     UserService.prototype.updateUserPicture = function (userId, picture) {
-        console.log(this.afDB.list('/user/' + userId));
-        return this.afDB.object('/user/' + userId).set({ 'user_picture': picture });
+        console.log(this.afDBUser.list('/user/' + userId));
+        return this.afDBUser.object('/user/' + userId).set({ 'user_picture': picture });
     };
     UserService.prototype.getUserEmail = function (email) {
         //let listUser:any;
-        return this.afDB.list('/user')
+        return this.afDBUser.list('/user')
             .subscribe(function (users) {
             //console.log(users);
             users.forEach(function (user) {
@@ -740,7 +741,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.getUserEmailPerfil = function (email) {
-        return this.afDB.list('/user')
+        return this.afDBUser.list('/user')
             .forEach(function (users) {
             //console.log(users);
             return users.map(function (user) {
@@ -775,7 +776,10 @@ var UserService = (function () {
         var name = userData["name"];
         var zipcode = userData["zipcode"];
         var state = userData["state"];
-        var picture = userData["picture"];
+        var picture = '';
+        if (userData['picture'] != undefined) {
+            picture = userData['picture'];
+        }
         //let verificacion = userData["verificacion"];
         var pais = userData["pais"];
         var direccion = userData["direccion"];
@@ -783,7 +787,7 @@ var UserService = (function () {
         //console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
-                this.afDB.object('/user/' + keyUser).set({ "user_username": username, "user_password": password, "user_email": email, "user_name": name, "user_zipcode": zipcode, "user_state": state, "user_picture": picture, "user_pais": pais, "user_tel": tel, "user_star": star });
+                this.afDBUser.object('/user/' + keyUser).set({ "user_username": username, "user_password": password, "user_email": email, "user_name": name, "user_zipcode": zipcode, "user_state": state, "user_picture": picture, "user_pais": pais, "user_tel": tel, "user_star": star });
                 ObjAddress.push({ "label": 'My Address', "name": direccion });
                 this.newAddress(keyUser, ObjAddress);
                 console.info('user create');
@@ -802,7 +806,10 @@ var UserService = (function () {
         var name = userData["name"];
         var zipcode = userData["zipcode"];
         var state = userData["state"];
-        var picture = userData["picture"];
+        var picture = '';
+        if (userData['picture'] != undefined) {
+            picture = userData['picture'];
+        }
         //let verificacion = userData["verificacion"];
         var pais = userData["pais"];
         //let direccion = userData["direccion"];
@@ -810,15 +817,15 @@ var UserService = (function () {
         //console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
-                this.afDB.object('/user/' + keyUser + '/user_username').set(username);
-                this.afDB.object('/user/' + keyUser + '/user_password').set(password);
-                this.afDB.object('/user/' + keyUser + '/user_email').set(email);
-                this.afDB.object('/user/' + keyUser + '/user_name').set(name);
-                this.afDB.object('/user/' + keyUser + '/user_zipcode').set(zipcode);
-                this.afDB.object('/user/' + keyUser + '/user_state').set(state);
-                this.afDB.object('/user/' + keyUser + '/user_picture').set(picture);
-                this.afDB.object('/user/' + keyUser + '/user_pais').set(pais);
-                this.afDB.object('/user/' + keyUser + '/user_tel').set(tel);
+                this.afDBUser.object('/user/' + keyUser + '/user_username').set(username);
+                this.afDBUser.object('/user/' + keyUser + '/user_password').set(password);
+                this.afDBUser.object('/user/' + keyUser + '/user_email').set(email);
+                this.afDBUser.object('/user/' + keyUser + '/user_name').set(name);
+                this.afDBUser.object('/user/' + keyUser + '/user_zipcode').set(zipcode);
+                this.afDBUser.object('/user/' + keyUser + '/user_state').set(state);
+                this.afDBUser.object('/user/' + keyUser + '/user_picture').set(picture);
+                this.afDBUser.object('/user/' + keyUser + '/user_pais').set(pais);
+                this.afDBUser.object('/user/' + keyUser + '/user_tel').set(tel);
                 console.log(userData);
                 console.info('user update');
             }
@@ -837,17 +844,17 @@ var UserService = (function () {
             var keyComm = "comm_" + (key);
         }
         console.log('comment');
-        this.afDB.object('/user/' + keyUser + '/user_comments/' + keyComm).set({ 'comm_description': Object['comment'], 'comm_qualification': Object['estrellas'], 'provider_username': Object['providerId'] }).catch(function () { return console.log('error set commets'); });
+        this.afDBUser.object('/user/' + keyUser + '/user_comments/' + keyComm).set({ 'comm_description': Object['comment'], 'comm_qualification': Object['estrellas'], 'provider_username': Object['providerId'] }).catch(function () { return console.log('error set commets'); });
     };
     UserService.prototype.setStar = function (keyUser, userStar) {
-        this.afDB.object('/user/' + keyUser + '/user_star').set(userStar);
+        this.afDBUser.object('/user/' + keyUser + '/user_star').set(userStar);
     };
     /*  ----------------user - address ----------------------*/
     UserService.prototype.getAddress = function (userId) {
         if (userId === void 0) { userId = ""; }
-        //return this.afDB.list('/user/'+userId);
-        //return this.afDB.object('/user/'+userId);
-        return this.afDB.list('/user/' + userId + '/user_address/');
+        //return this.afDBUser.list('/user/'+userId);
+        //return this.afDBUser.object('/user/'+userId);
+        return this.afDBUser.list('/user/' + userId + '/user_address/');
     };
     UserService.prototype.newAddress = function (userId, ObjAddress) {
         if (userId === void 0) { userId = ""; }
@@ -865,7 +872,7 @@ var UserService = (function () {
         console.info('user  address create');
         if ((ObjAddress['0']['label']) && (ObjAddress['0']['name'])) {
             if ((label != undefined) && (label != null) && (name != undefined) && (name != null)) {
-                return this.afDB.object('/user/' + userId + '/user_address/' + keyAddress).set({ "addr_label": label, "addr_info": name });
+                return this.afDBUser.object('/user/' + userId + '/user_address/' + keyAddress).set({ "addr_label": label, "addr_info": name });
             }
         }
     };
@@ -873,20 +880,20 @@ var UserService = (function () {
 }());
 UserService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    __metadata("design:paramtypes", [])
 ], UserService);
 
 //# sourceMappingURL=user.service.js.map
 
 /***/ }),
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificacionService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_local_notifications__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_local_notifications__ = __webpack_require__(245);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -935,7 +942,7 @@ NotificacionService = __decorate([
 
 /***/ }),
 
-/***/ 301:
+/***/ 302:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1014,14 +1021,14 @@ ProfessionsService = __decorate([
 
 /***/ }),
 
-/***/ 303:
+/***/ 305:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BraintreeService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(408);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 //import { client} from "braintree-web/client";
 //import { hostedFields} from "braintree-web/hosted-fields";
@@ -1136,13 +1143,13 @@ BraintreeService = __decorate([
 
 /***/ }),
 
-/***/ 306:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(54);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1150,179 +1157,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 323:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export firebaseConfig */
-/* unused harmony export googleMapsKey */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_local_notifications__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(437);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__agm_core__ = __webpack_require__(302);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_native_audio__ = __webpack_require__(305);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_braintree_service__ = __webpack_require__(303);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_user_service__ = __webpack_require__(299);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_professionals_service__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_professions_service__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_offer_service__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_sale_service__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_notificacion_service__ = __webpack_require__(300);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-//-pages
-
-// import { HomePage } from '../pages/home/home';
-// import { EditUserPage } from '../pages/edit-user/edit-user';
-// import { ShowPage } from '../pages/show/show';
-// import { MyServicesPage } from '../pages/my-services/my-services';
-// import { PaymentsPage } from '../pages/payments/payments';
-// import { PoliciesPage } from '../pages/policies/policies';
-//-providers
-
-
-
-
-
-
-
-
-
-//-service
-
-
-
-
-
-
-
-//- config 
-var firebaseConfig = {
-    apiKey: "AIzaSyBmrc2CjBbIJD_Pu_kkCcV8qNXJfsEBaxo",
-    authDomain: "usuarioappjobid.firebaseapp.com",
-    databaseURL: "https://usuarioappjobid.firebaseio.com",
-    projectId: "usuarioappjobid",
-    storageBucket: "usuarioappjobid.appspot.com",
-    messagingSenderId: "679089691484"
-};
-// export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
-var googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
-var AppModule = (function () {
-    function AppModule() {
-    }
-    return AppModule;
-}());
-AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */],
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
-                links: [
-                    { loadChildren: '../pages/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule', name: 'AddPaymentMethodPage', segment: 'add-payment-method', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/add-service/add-service.module#AddServicePageModule', name: 'AddServicePage', segment: 'add-service', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/certificates/certificates.module#CertificatesPageModule', name: 'CertificatesPage', segment: 'certificates', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/checkr-authorization/checkr-authorization.module#CheckrAuthorizationPageModule', name: 'CheckrAuthorizationPage', segment: 'checkr-authorization', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/checkr-disclosure/checkr-disclosure.module#CheckrDisclosurePageModule', name: 'CheckrDisclosurePage', segment: 'checkr-disclosure', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/checkr-welcome/checkr-welcome.module#CheckrWelcomePageModule', name: 'CheckrWelcomePage', segment: 'checkr-welcome', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/document/document.module#DocumentPageModule', name: 'DocumentPage', segment: 'document', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/edit-provider/edit-provider.module#EditProviderPageModule', name: 'EditProviderPage', segment: 'edit-provider', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/edit-user/edit-user.module#EditUserPageModule', name: 'EditUserPage', segment: 'edit-user', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/gallery/gallery.module#GalleryPageModule', name: 'GalleryPage', segment: 'gallery', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/my-service-info/my-service-info.module#MyServiceInfoPageModule', name: 'MyServiceInfoPage', segment: 'my-service-info', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/my-services/my-services.module#MyServicesPageModule', name: 'MyServicesPage', segment: 'my-services', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/payment-methods/payment-methods.module#PaymentMethodsPageModule', name: 'PaymentMethodsPage', segment: 'payment-methods', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/payments/payments.module#PaymentsPageModule', name: 'PaymentsPage', segment: 'payments', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/policies/policies.module#PoliciesPageModule', name: 'PoliciesPage', segment: 'policies', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/provider-info-a/provider-info-a.module#ProviderInfoAPageModule', name: 'ProviderInfoAPage', segment: 'provider-info-a', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/provider-info-b/provider-info-b.module#ProviderInfoBPageModule', name: 'ProviderInfoBPage', segment: 'provider-info-b', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/provider-ok/provider-ok.module#ProviderOkPageModule', name: 'ProviderOkPage', segment: 'provider-ok', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-info/service-info.module#ServiceInfoPageModule', name: 'ServiceInfoPage', segment: 'service-info', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-info-a/service-info-a.module#ServiceInfoAPageModule', name: 'ServiceInfoAPage', segment: 'service-info-a', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-info-b/service-info-b.module#ServiceInfoBPageModule', name: 'ServiceInfoBPage', segment: 'service-info-b', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-job/service-job.module#ServiceJobPageModule', name: 'ServiceJobPage', segment: 'service-job', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-new/service-new.module#ServiceNewPageModule', name: 'ServiceNewPage', segment: 'service-new', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-ok/service-ok.module#ServiceOkPageModule', name: 'ServiceOkPage', segment: 'service-ok', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-sale/service-sale.module#ServiceSalePageModule', name: 'ServiceSalePage', segment: 'service-sale', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-vote/service-vote.module#ServiceVotePageModule', name: 'ServiceVotePage', segment: 'service-vote', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/service-win/service-win.module#ServiceWinPageModule', name: 'ServiceWinPage', segment: 'service-win', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/show/show.module#ShowPageModule', name: 'ShowPage', segment: 'show', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/singup/singup.module#SingupPageModule', name: 'SingupPage', segment: 'singup', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/terms/terms.module#TermsPageModule', name: 'TermsPage', segment: 'terms', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/update-service/update-service.module#UpdateServicePageModule', name: 'UpdateServicePage', segment: 'update-service', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/update-user/update-user.module#UpdateUserPageModule', name: 'UpdateUserPage', segment: 'update-user', priority: 'low', defaultHistory: [] }
-                ]
-            }),
-            __WEBPACK_IMPORTED_MODULE_8_angularfire2__["a" /* AngularFireModule */].initializeApp(firebaseConfig),
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__["b" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__["b" /* AngularFireAuthModule */],
-            __WEBPACK_IMPORTED_MODULE_12__agm_core__["a" /* AgmCoreModule */].forRoot({
-                apiKey: googleMapsKey
-            })
-        ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* IonicApp */]],
-        entryComponents: [
-            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */]
-        ],
-        providers: [
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__["a" /* SplashScreen */],
-            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["c" /* IonicErrorHandler */] },
-            __WEBPACK_IMPORTED_MODULE_8_angularfire2__["a" /* AngularFireModule */],
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__["b" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__["b" /* AngularFireAuthModule */],
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_16__services_user_service__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_17__services_professionals_service__["a" /* ProfessionalsService */],
-            __WEBPACK_IMPORTED_MODULE_18__services_professions_service__["a" /* ProfessionsService */],
-            __WEBPACK_IMPORTED_MODULE_19__services_offer_service__["a" /* OfferService */],
-            __WEBPACK_IMPORTED_MODULE_20__services_sale_service__["a" /* SaleService */],
-            __WEBPACK_IMPORTED_MODULE_15__services_braintree_service__["a" /* BraintreeService */],
-            __WEBPACK_IMPORTED_MODULE_21__services_notificacion_service__["a" /* NotificacionService */],
-            __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_14__ionic_native_native_audio__["a" /* NativeAudio */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_local_notifications__["a" /* LocalNotifications */],
-        ]
-    })
-], AppModule);
-
-//# sourceMappingURL=app.module.js.map
-
-/***/ }),
-
-/***/ 437:
+/***/ 438:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(293);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_professionals_service__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(153);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1464,7 +1307,191 @@ MyApp = __decorate([
 
 //# sourceMappingURL=app.component.js.map
 
+/***/ }),
+
+/***/ 54:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export firebaseConfigDataBase */
+/* unused harmony export firebaseConfigSecond */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return afDBUser; });
+/* unused harmony export googleMapsKey */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_local_notifications__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_facebook__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase_app__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(438);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_angularfire2__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2_auth__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_geolocation__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__agm_core__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_native_audio__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_braintree_service__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_user_service__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_professionals_service__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_professions_service__ = __webpack_require__(302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_offer_service__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_sale_service__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_notificacion_service__ = __webpack_require__(301);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+//-pages
+
+// import { HomePage } from '../pages/home/home';
+// import { EditUserPage } from '../pages/edit-user/edit-user';
+// import { ShowPage } from '../pages/show/show';
+// import { MyServicesPage } from '../pages/my-services/my-services';
+// import { PaymentsPage } from '../pages/payments/payments';
+// import { PoliciesPage } from '../pages/policies/policies';
+//-providers
+
+
+
+
+
+
+
+
+
+//-service
+
+
+
+
+
+
+
+//- config 
+// authDomain: "provedorappjobid.firebaseapp.com",
+var firebaseConfigDataBase = {
+    apiKey: "AIzaSyBmrc2CjBbIJD_Pu_kkCcV8qNXJfsEBaxo",
+    authDomain: "usuarioappjobid.firebaseapp.com",
+    databaseURL: "https://usuarioappjobid.firebaseio.com",
+    projectId: "usuarioappjobid",
+    storageBucket: "usuarioappjobid.appspot.com",
+    messagingSenderId: "679089691484"
+};
+var firebaseConfigSecond = {
+    apiKey: "AIzaSyDgDTYKXyykNHSqL48KOFiTiuHurW5IDko",
+    authDomain: "provedorappjobid.firebaseapp.com",
+    databaseURL: "https://provedorappjobid.firebaseio.com",
+    projectId: "provedorappjobid",
+    storageBucket: "provedorappjobid.appspot.com",
+    messagingSenderId: "925192219494"
+};
+var afDBUser = new __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */](__WEBPACK_IMPORTED_MODULE_7_firebase_app__["initializeApp"](firebaseConfigDataBase, 'second'));
+// export const googleMapsKey = 'AIzaSyB8zF6lhZegDjsV_mrqxd9Fb3YFTw2__AA';
+// export const googleMapsKey = 'AIzaSyDdKCYx63FmAQzlRu0dnZMGVOZnFM65JWM';
+var googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
+AppModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */], {}, {
+                links: [
+                    { loadChildren: '../pages/add-payment-method/add-payment-method.module#AddPaymentMethodPageModule', name: 'AddPaymentMethodPage', segment: 'add-payment-method', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/add-service/add-service.module#AddServicePageModule', name: 'AddServicePage', segment: 'add-service', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/certificates/certificates.module#CertificatesPageModule', name: 'CertificatesPage', segment: 'certificates', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/checkr-authorization/checkr-authorization.module#CheckrAuthorizationPageModule', name: 'CheckrAuthorizationPage', segment: 'checkr-authorization', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/checkr-disclosure/checkr-disclosure.module#CheckrDisclosurePageModule', name: 'CheckrDisclosurePage', segment: 'checkr-disclosure', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/checkr-welcome/checkr-welcome.module#CheckrWelcomePageModule', name: 'CheckrWelcomePage', segment: 'checkr-welcome', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/document/document.module#DocumentPageModule', name: 'DocumentPage', segment: 'document', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/edit-provider/edit-provider.module#EditProviderPageModule', name: 'EditProviderPage', segment: 'edit-provider', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/edit-user/edit-user.module#EditUserPageModule', name: 'EditUserPage', segment: 'edit-user', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/gallery/gallery.module#GalleryPageModule', name: 'GalleryPage', segment: 'gallery', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/my-service-info/my-service-info.module#MyServiceInfoPageModule', name: 'MyServiceInfoPage', segment: 'my-service-info', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/my-services/my-services.module#MyServicesPageModule', name: 'MyServicesPage', segment: 'my-services', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/payment-methods/payment-methods.module#PaymentMethodsPageModule', name: 'PaymentMethodsPage', segment: 'payment-methods', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/payments/payments.module#PaymentsPageModule', name: 'PaymentsPage', segment: 'payments', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/policies/policies.module#PoliciesPageModule', name: 'PoliciesPage', segment: 'policies', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/provider-info-a/provider-info-a.module#ProviderInfoAPageModule', name: 'ProviderInfoAPage', segment: 'provider-info-a', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/provider-info-b/provider-info-b.module#ProviderInfoBPageModule', name: 'ProviderInfoBPage', segment: 'provider-info-b', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/provider-ok/provider-ok.module#ProviderOkPageModule', name: 'ProviderOkPage', segment: 'provider-ok', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-info/service-info.module#ServiceInfoPageModule', name: 'ServiceInfoPage', segment: 'service-info', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-info-a/service-info-a.module#ServiceInfoAPageModule', name: 'ServiceInfoAPage', segment: 'service-info-a', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-info-b/service-info-b.module#ServiceInfoBPageModule', name: 'ServiceInfoBPage', segment: 'service-info-b', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-job/service-job.module#ServiceJobPageModule', name: 'ServiceJobPage', segment: 'service-job', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-new/service-new.module#ServiceNewPageModule', name: 'ServiceNewPage', segment: 'service-new', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-ok/service-ok.module#ServiceOkPageModule', name: 'ServiceOkPage', segment: 'service-ok', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-sale/service-sale.module#ServiceSalePageModule', name: 'ServiceSalePage', segment: 'service-sale', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-vote/service-vote.module#ServiceVotePageModule', name: 'ServiceVotePage', segment: 'service-vote', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/service-win/service-win.module#ServiceWinPageModule', name: 'ServiceWinPage', segment: 'service-win', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/show/show.module#ShowPageModule', name: 'ShowPage', segment: 'show', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/singup/singup.module#SingupPageModule', name: 'SingupPage', segment: 'singup', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/terms/terms.module#TermsPageModule', name: 'TermsPage', segment: 'terms', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/update-service/update-service.module#UpdateServicePageModule', name: 'UpdateServicePage', segment: 'update-service', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/update-user/update-user.module#UpdateUserPageModule', name: 'UpdateUserPage', segment: 'update-user', priority: 'low', defaultHistory: [] }
+                ]
+            }),
+            __WEBPACK_IMPORTED_MODULE_11_angularfire2__["a" /* AngularFireModule */].initializeApp(firebaseConfigSecond),
+            __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["b" /* AngularFireDatabaseModule */],
+            __WEBPACK_IMPORTED_MODULE_12_angularfire2_auth__["b" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_14__agm_core__["a" /* AgmCoreModule */].forRoot({
+                apiKey: googleMapsKey
+            })
+        ],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* IonicApp */]],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */]
+        ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__["a" /* SplashScreen */],
+            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["c" /* IonicErrorHandler */] },
+            __WEBPACK_IMPORTED_MODULE_11_angularfire2__["a" /* AngularFireModule */],
+            __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["b" /* AngularFireDatabaseModule */],
+            __WEBPACK_IMPORTED_MODULE_12_angularfire2_auth__["b" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_13__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_18__services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_19__services_professionals_service__["a" /* ProfessionalsService */],
+            __WEBPACK_IMPORTED_MODULE_20__services_professions_service__["a" /* ProfessionsService */],
+            __WEBPACK_IMPORTED_MODULE_21__services_offer_service__["a" /* OfferService */],
+            __WEBPACK_IMPORTED_MODULE_22__services_sale_service__["a" /* SaleService */],
+            __WEBPACK_IMPORTED_MODULE_17__services_braintree_service__["a" /* BraintreeService */],
+            __WEBPACK_IMPORTED_MODULE_23__services_notificacion_service__["a" /* NotificacionService */],
+            __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_16__ionic_native_native_audio__["a" /* NativeAudio */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_local_notifications__["a" /* LocalNotifications */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_native_facebook__["a" /* Facebook */],
+        ]
+    })
+], AppModule);
+
+//# sourceMappingURL=app.module.js.map
+
 /***/ })
 
-},[306]);
+},[308]);
 //# sourceMappingURL=main.js.map
