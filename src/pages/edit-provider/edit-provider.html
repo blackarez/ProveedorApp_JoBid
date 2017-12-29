@@ -22,18 +22,21 @@
           <p color="danger" style="text-align: center;" ion-text *ngIf="editProviderForm.get('name').hasError('required')">Field is required</p>
           <p color="danger" style="text-align: center;" ion-text *ngIf="editProviderForm.get('name').hasError('pattern')">Name is not valid</p>
         </ion-item>
-        <ion-item>
-          <!-- <ion-icon name="person" item-start></ion-icon> -->
+        <!-- <ion-icon name="person" item-start></ion-icon> -->
+        <!-- <ion-item>
           <ion-input type="text" placeholder="Last name" [(ngModel)]="userData.lastName"  name="lastName" formControlName="lastName"></ion-input>
         </ion-item>
         <ion-item *ngIf="editProviderForm.get('lastName').errors && editProviderForm.get('lastName').dirty">
           <p color="danger" ion-text *ngIf="editProviderForm.get('lastName').hasError('required')">Field is required</p>
           <p color="danger" ion-text *ngIf="editProviderForm.get('lastName').hasError('pattern')">Last name is not valid</p>
-        </ion-item>
-        <ion-item>    
+        </ion-item>-->
+        <ion-item>     
           <!-- <ion-icon name="person" item-start></ion-icon> -->
-          <ion-input type="date" class="mitad" placeholder="Date" [(ngModel)]="userData.date"  name="date" formControlName="date"></ion-input>
-          <ion-input type="text" class="mitad" placeholder="Social security" [(ngModel)]="userData.socialSecurity"  name="socialSecurity" formControlName="socialSecurity"></ion-input>
+          <ion-input type="date" class="mitad" placeholder="Date" class="dateclass placeholderclass" placeholder="D/M/Y" [(ngModel)]="userData.date"  name="date" formControlName="date"></ion-input>
+        </ion-item>
+        <ion-item>     
+          <ion-input type="text"  placeholder="Social security" [(ngModel)]="userData.socialSecurity"  name="socialSecurity" formControlName="socialSecurity"></ion-input>
+          <!-- <ion-input type="text" class="mitad" placeholder="Social security" [(ngModel)]="userData.socialSecurity"  name="socialSecurity" formControlName="socialSecurity"></ion-input> -->
         </ion-item>
         <ion-item>
           <!-- <ion-icon name="pin" item-start></ion-icon> -->
@@ -51,17 +54,20 @@
             <ion-option *ngFor="let city of ciudades | ordenarProveedor: 'ciudades' " value="{{city.zipcode}}">{{city.name}} - {{city.zipcode}}</ion-option>
           </ion-select>
         </ion-item>
-        <ion-item>
+        <ion-item  class="mitad mitadEspacio">
           <!-- <ion-icon name="home" item-start></ion-icon> -->
-          <ion-input type="number" placeholder="1234" class="mitad" [(ngModel)]="DirecA" name="DirecA" formControlName="DirecA"></ion-input>
-          <ion-input type="text" placeholder="Avenue" value="" class="mitad" [(ngModel)]="DirecB" name="DirecB" formControlName="DirecB"></ion-input>
+          <ion-input type="number" placeholder="1234" [(ngModel)]="DirecA" name="DirecA" formControlName="DirecA"></ion-input>
         </ion-item>
-        <ion-item>
-            <!-- <ion-icon name="home" item-start style="background:transparent; color:transparent;"></ion-icon> -->
-          <ion-input type="text" placeholder="City" class="mitad" [(ngModel)]="DirecC" name="DirecC" formControlName="DirecC"></ion-input>
+        <ion-item  class="mitad">
+          <ion-input type="text" placeholder="Avenue" value="" [(ngModel)]="DirecB" name="DirecB" formControlName="DirecB"></ion-input>
+        </ion-item>
+        <ion-item  class="mitad mitadEspacio">
+          <!-- <ion-icon name="home" item-start style="background:transparent; color:transparent;"></ion-icon> -->
+          <ion-input type="text" placeholder="City" [(ngModel)]="DirecC" name="DirecC" formControlName="DirecC"></ion-input>
           <!-- <ion-input type="text" placeholder="NJ 0000" value="{{DirecD}}" class="mitad" [(ngModel)]="DirecD" name="DirecD" formControlName="DirecD"></ion-input> -->
-          <ion-input type="text" placeholder="NJ 0000" class="mitad" [(ngModel)]="DirecD" name="DirecD" formControlName="DirecD"></ion-input>
         </ion-item>
+        <ion-item  class="mitad">
+          <ion-input type="text" placeholder="NJ 0000" [(ngModel)]="DirecD" name="DirecD" formControlName="DirecD"></ion-input>
         <ion-item>
           <!-- <ion-icon name="mail" item-start></ion-icon> -->
           <ion-input type="email" placeholder="Mail" [(ngModel)]="userData.email" name="email" formControlName="email"></ion-input>

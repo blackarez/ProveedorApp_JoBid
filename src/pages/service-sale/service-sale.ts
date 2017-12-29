@@ -78,6 +78,9 @@ export class ServiceSalePage {
     console.log(this.DataService);
     console.log(JSON.stringify(this.DataService));
     this.userActual= localStorage.getItem('verificacion');
+    if(this.DataService.imgOffer != undefined && this.DataService.imgOffer != ''){
+      this.imgServiceDefault = this.DataService.imgOffer;
+    }
     this.getUserLocationGeolocation();
     this.loadView();
     this.getSale();
@@ -202,7 +205,21 @@ async getSale(){
           if(user.prof_picture && user.prof_picture != undefined && user.prof_picture != ''){
             img = user.prof_picture;
           }
-          this.Workers.push({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
+
+          console.log(this.Workers);
+          let ListaWorkers = this.Workers;
+          console.log(ListaWorkers);
+          let idKeyWorker = ListaWorkers.findIndex( keysWorkers =>
+            keysWorkers.id == trabajador);
+          console.log(idKeyWorker);
+          if(idKeyWorker >=  0){
+            console.log('if 1');
+            this.Workers[idKeyWorker]= ({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
+          }else{
+            console.log('if -1');
+            this.Workers.push({"id":trabajador,"offer":trabajadores[trabajador]['offer'],"img":img,"name":user.prof_name});
+          }
+          console.log(this.Workers);
           console.log('PromiseUser-US sale');
           PromiseUser.unsubscribe();
         });

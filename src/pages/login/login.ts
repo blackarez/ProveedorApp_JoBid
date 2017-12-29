@@ -100,16 +100,16 @@ facebookir(){
     this.fb.login(['email'])
     .then((res) => {
       console.log('Logged into Facebook!', res);
-      alert(JSON.stringify(res));
+      // alert(JSON.stringify(res));
       let credencial = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
       firebase.auth().signInWithCredential(credencial).then(
       (info) => {
       //console.log(res.user.email);
-      alert(res.authResponse.accessToken);
-      alert(credencial);
-      alert(JSON.stringify(info));
-      alert(JSON.stringify(info.providerData['0']['email']));
-      alert(JSON.stringify(info.providerData));
+      // alert(res.authResponse.accessToken);
+      // alert(credencial);
+      // alert(JSON.stringify(info));
+      // alert(JSON.stringify(info.providerData['0']['email']));
+      // alert(JSON.stringify(info.providerData));
       console.log(info);
       console.info(JSON.stringify(info));
       if(info.providerData["0"].email){
@@ -133,19 +133,21 @@ facebookir(){
       }
       ).catch(e => {
         console.log('Error signInWithCredential', e);
-        alert(JSON.stringify(e));
-        alert('Error signInWithCredential');
+        // alert(JSON.stringify(e));
+        // alert('Error signInWithCredential');
       });
     }).catch(e => {
     console.log('Error zing into Facebook', e)
-    alert(JSON.stringify(e));
+    // alert(JSON.stringify(e));
     });
-  }catch(e){console.error(e); alert('try c info')}
+  }catch(e){console.error(e); 
+    // alert('try c info');
+}
 }
  
 goNextPagePrehomeFace(datos:any){
 //   console.log(datos);
-alert('gonexpagePre');
+// alert('gonexpagePre');
   console.log(datos['$key']);
   console.log (datos['prof_email']);
  console.log ( datos['prof_password']);

@@ -224,7 +224,8 @@ loading(){
 getForm(){
   this.editProviderForm = this.formBuilder.group({
     name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
-    lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    lastName : [''],
+    // lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
     date : ['', Validators.required],
     socialSecurity : ['', Validators.required],
     pais : ['', Validators.required],
@@ -250,8 +251,8 @@ async  camaraFoto(){
   try{
     const options: CameraOptions = {
       quality: 60,
-      // targetHeight: 100,
-      // targetWidth: 100,
+      targetHeight: 100,
+      targetWidth: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE

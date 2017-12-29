@@ -54,9 +54,13 @@
       <ion-item>
         <ion-input type="text" [(ngModel)]="address" name="address" placeholder="Address"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-input type="text" placeholder="Phone" class="mitad" [(ngModel)]="Phone" name="Phone"></ion-input>
-        <ion-input type="text" placeholder="Mobile" class="mitad" [(ngModel)]="Mobile" name="Mobile"></ion-input>
+      <ion-item  class="mitad mitadEspacio">
+        <!-- <ion-input type="text" placeholder="Phone" class="mitad" [(ngModel)]="Phone" name="Phone"></ion-input> -->
+        <ion-input type="text" placeholder="Phone" [(ngModel)]="Phone" name="Phone"></ion-input>
+      </ion-item>
+      <ion-item  class="mitad">
+        <!-- <ion-input type="text" placeholder="Mobile" class="mitad" [(ngModel)]="Mobile" name="Mobile"></ion-input> -->
+        <ion-input type="text" placeholder="Mobile" [(ngModel)]="Mobile" name="Mobile"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label class="mitad">Experience time</ion-label>

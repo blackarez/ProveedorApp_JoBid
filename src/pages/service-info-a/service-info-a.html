@@ -33,13 +33,13 @@
         <ion-list radio-group [(ngModel)]="certificacion" name="certificacio" >
           <ion-item>
             <ion-label>Certificate</ion-label>
-            <ion-radio value="true" ></ion-radio>
+            <ion-radio value="true" (click)="changeCertification()"></ion-radio>
           </ion-item>
         </ion-list>
         <ion-list radio-group [(ngModel)]="seguro" name="seguro">
            <ion-item>
             <ion-label>Insurance</ion-label>
-            <ion-radio value="true"   ></ion-radio>
+            <ion-radio value="true"  (click)="changeSeguro()" ></ion-radio>
           </ion-item>
         </ion-list>
     <ion-item>

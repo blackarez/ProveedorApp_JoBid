@@ -84,9 +84,9 @@ isBigEnough(element) {
   }
 
   facebookir(){
-    let goPagePrehome:boolean = true;
-    let userDB:any;
-    this.fb.login(['email'])
+    // let goPagePrehome:boolean = true;
+    // let userDB:any;
+    this.fb.login(['public_profile','email'])
     .then((res) => {
       console.log('Logged into Facebook!', res);
       alert(JSON.stringify(res));
@@ -95,7 +95,9 @@ isBigEnough(element) {
         (info)=>{
           alert(JSON.stringify(info));
           alert(JSON.stringify(info.providerData['0']['email']));
-          alert(JSON.stringify(info.providerData));
+          alert(JSON.stringify(info['email']));
+          // alert(JSON.stringify(info.providerData['0']['email']));
+          // alert(JSON.stringify(info.providerData));
           console.log(info);
           console.log(info.providerData.email);
           console.log(info.providerData);
@@ -106,40 +108,41 @@ isBigEnough(element) {
             //     if(emailBD == info.providerData.email){
             //     }
             //   });
-            let getProfesionals=this.professionalsService.getProfessionals().subscribe((Jobers) => {
-              // alert(JSON.stringify(Jobers));
-              console.log(Jobers);
-              Jobers.forEach((Job) =>{
-              console.log('getProfesionals-S home');
-                //console.log(user);
-                // if(user['user_email'] == res.user.email){
-                //     // console.log('res.user.email');
-                //     // console.log(user);
-                //     userDB = user;
-                //     goPagePrehome= true;
-                // }
-                //dentro de res.user -> hay otros datos de usuario -> email?
-                //if(user.providerData["0"].providerId == "facebook.com"){
-                    if(Job['prof_email'] == info.providerData['0']['email']){
-                      // console.log('res.additionalUserInfo.profile.email');
-                      // console.log(user);
-                      console.log(Job);
-                      userDB = Job;
-                      goPagePrehome= false;
-                    }
-                //}
-              });
-              console.log(userDB);
-              console.log(goPagePrehome);
-              if(goPagePrehome != false){
-                // this.goNextPagePrehome(userDB);
-              }else{
-                this.singup();
-              }
+            this.singup();
+            // let getProfesionals=this.professionalsService.getProfessionals().subscribe((Jobers) => {
+            //   // alert(JSON.stringify(Jobers));
+            //   console.log(Jobers);
+            //   Jobers.forEach((Job) =>{
+            //   console.log('getProfesionals-S home');
+            //     //console.log(user);
+            //     // if(user['user_email'] == res.user.email){
+            //     //     // console.log('res.user.email');
+            //     //     // console.log(user);
+            //     //     userDB = user;
+            //     //     goPagePrehome= true;
+            //     // }
+            //     //dentro de res.user -> hay otros datos de usuario -> email?
+            //     //if(user.providerData["0"].providerId == "facebook.com"){
+            //         // if(Job['prof_email'] == info.providerData['0']['email']){
+            //         //   // console.log('res.additionalUserInfo.profile.email');
+            //         //   // console.log(user);
+            //         //   console.log(Job);
+            //         //   userDB = Job;
+            //         //   goPagePrehome= false;
+            //         // }
+            //     //}
+            //   });
+            //   // console.log(userDB);
+            //   // console.log(goPagePrehome);
+            //   // if(goPagePrehome == false){
+            //   //   // this.goNextPagePrehome(userDB);
+            //   // }else{
+            //   //   this.singup();
+            //   // }
     
-              getProfesionals.unsubscribe();
-              console.log('getProfesionals-US home');
-            });
+            //   getProfesionals.unsubscribe();
+            //   console.log('getProfesionals-US home');
+            // });
           }
         }
       ).catch(e => {
@@ -150,7 +153,7 @@ isBigEnough(element) {
     })
     .catch(e => {
       console.log('Error zing into Facebook', e)
-      alert(JSON.stringify(e));
+      // alert(JSON.stringify(e));
     });
   }
 

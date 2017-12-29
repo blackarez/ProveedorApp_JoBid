@@ -319,7 +319,8 @@ async  camaraFoto(){
 getForm(){
   this.singupForm = this.formBuilder.group({
     name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
-    lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    // lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    lastName : [''],
     date : ['', Validators.required],
     socialSecurity : ['', Validators.required],
     pais : ['', Validators.required],
