@@ -31,3 +31,13 @@
     <button ion-button color="danger" block (click)="goServiceNew()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>
   </div> -->
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <div class="btnBottom">
+        <button ion-button color="danger" block (click)="goResetProvider()" [disabled]="disableGoHome">
+            Go to home
+            <ion-icon name="arrow-dropright"></ion-icon> 
+        </button> 
+      </div>
+  </ion-toolbar>
+</ion-footer>

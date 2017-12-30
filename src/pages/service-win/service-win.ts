@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angul
 
 //-service
 import { SaleService } from '../../services/sale.service';
+import { OfferService } from '../../services/offer.service';
 import { ProfessionalsService } from '../../services/professionals.service';
 import { NotificacionService } from '../../services/notificacion.service';
 /**
@@ -29,9 +30,16 @@ export class ServiceWinPage {
 
   //-subcrip
   statusSub:any;
+  //timer
+  segundos:number= 0;
+  minutos:number= 3;
+  objNodeTimer:any;
+  //button go to home
+  disableGoHome:boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController, private saleService :SaleService,
+    public alertCtrl: AlertController, 
+    private saleService :SaleService, private offerService : OfferService,
     private professionalsService: ProfessionalsService,
     private notificacionService : NotificacionService,
   ) {
@@ -42,6 +50,7 @@ export class ServiceWinPage {
     console.log(this.DataService);
     this.userActual = localStorage.getItem('verificacion');
     // console.log(this.userActual);
+    this.startTimer();
     this.getStatusService();
   }
 
@@ -67,6 +76,10 @@ getStatusService(){
           console.log('statusSub-US service-win');
           this.statusSub.unsubscribe();
         }
+        if(status['$value'] == 'CancelledProvider'){
+          this.navCtrl.setRoot('ShowPage');
+          this.statusSub.unsubscribe();
+        }
       }
     });
 }
@@ -76,7 +89,7 @@ goServiceNew(){
   this.showAlertService();
   //-contarct
   console.log(this.DataService);
-  let objContract = {"status":'Waiting for the professional','User':this.user,'info':this.DataService['info'],'sale':this.DataService['sale']};
+  let objContract = {"status":'Waiting for the professional','User':this.user,'info':this.DataService['info'],'sale':this.DataService['sale'],'service':this.DataService};
   // console.log(objContract);
   this.professionalsService.newContract(this.userActual,this.offer,objContract);
 
@@ -94,8 +107,14 @@ goIndexService(){
   this.navCtrl.setRoot('ShowPage');
   // this.statusSub.unsubscribe();
   // console.log(this.statusSub);
-
+  
 }
+
+goResetProvider(){
+  this.saleService.setStatus(this.user,this.offer,'CancelledProvider');
+  this.offerService.setStatus(this.offer,'CancelledProvider');
+}
+
   //-alert
   
 showAlertService() {
@@ -114,6 +133,24 @@ showAlertCancel() {
     buttons: ['OK']
   });
   alerteMail.present();
+}
+
+//--- timer
+startTimer(){
+  this.objNodeTimer=setInterval( () => this.timer(),1000);
+}
+
+private timer(){
+  if(this.minutos == 0 && this.segundos == 1){ 
+    this.disableGoHome=false;
+  }else{
+    if(--this.segundos< 0){
+      this.segundos = 59;
+      if(--this.minutos< 0){
+      }
+    }
+    console.log('contador: ',this.minutos, ':',this.segundos);
+  }
 }
 
 //-notification
