@@ -39,6 +39,15 @@ export class ProfessionalsService{
 		});
 	}
 
+	public getProfessionalUidFace( uid: any ){
+		return this.afDBUser.list('/professionals',{
+			query: {
+			  orderByChild: 'prof_uidFace',
+			  equalTo: uid
+			}
+		});
+	}
+
 	public getUserLoginPwd(pwd: any ){
 		// let password = this.encriptyService.GenerateEncripty(pwd);
 		let password = pwd;
@@ -75,7 +84,7 @@ export class ProfessionalsService{
 	}
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
-		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
+		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
 		
 		let key = undefined;
 		//default star
@@ -116,18 +125,19 @@ export class ProfessionalsService{
 		let pais = userData['pais'];
 		let direccion = userData['direccion'];
 		let tel = userData['tel'];
+		let uidFace = userData['uidFace'];
 
 		console.log(userData);
 
 		if( (userData['username']) && (userData['password']) && (userData['email']) ){
 			if( (userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null) ){
-				this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
+				this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_uidFace":uidFace,"prof_star":star});
 				console.info('user create profession');
 			}
 		}
 	}
 	public updateUser(userData : any = [],keyNew?:any ){
-		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
+		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
 		let key = undefined;
 		//default star
 		let star = '5';
@@ -168,6 +178,7 @@ export class ProfessionalsService{
 		let pais = userData['pais'];
 		let direccion = userData['direccion'];
 		let tel = userData['tel'];
+		let uidFace = userData['uidFace'];
 
 		console.log(userData);
 
@@ -186,6 +197,7 @@ export class ProfessionalsService{
 				this.afDBUser.object('/professionals/'+keyUser+'/prof_pais').set(pais);
 				this.afDBUser.object('/professionals/'+keyUser+'/prof_direccion').set(direccion);
 				this.afDBUser.object('/professionals/'+keyUser+'/prof_tel').set(tel);
+				this.afDBUser.object('/professionals/'+keyUser+'/prof_uidFace').set(uidFace);
 				this.afDBUser.object('/professionals/'+keyUser+'/prof_star').set(star);
 				// this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
 				console.info('user update profession');

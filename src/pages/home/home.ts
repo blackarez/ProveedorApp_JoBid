@@ -89,19 +89,19 @@ isBigEnough(element) {
     this.fb.login(['public_profile','email'])
     .then((res) => {
       console.log('Logged into Facebook!', res);
-      alert(JSON.stringify(res));
+      // alert(JSON.stringify(res));
       let credencial = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
       firebase.auth().signInWithCredential(credencial).then(
         (info)=>{
-          alert(JSON.stringify(info));
-          alert(JSON.stringify(info.providerData['0']['email']));
-          alert(JSON.stringify(info['email']));
+          // alert(JSON.stringify(info));
           // alert(JSON.stringify(info.providerData['0']['email']));
-          // alert(JSON.stringify(info.providerData));
-          console.log(info);
-          console.log(info.providerData.email);
-          console.log(info.providerData);
-          if(info.providerData['0']['email'] != undefined){
+          // alert(JSON.stringify(info['email']));
+          // // alert(JSON.stringify(info.providerData['0']['email']));
+          // // alert(JSON.stringify(info.providerData));
+          // console.log(info);
+          // console.log(info.providerData.email);
+          // console.log(info.providerData);
+          // if(info.providerData['0']['email'] != undefined){
             // this.userService.getUserEmailPerfil(info.providerData['0']['email']).subscribe(
             //   (emailBD)=>{
             //     alert(JSON.stringify(emailBD));
@@ -143,7 +143,7 @@ isBigEnough(element) {
             //   getProfesionals.unsubscribe();
             //   console.log('getProfesionals-US home');
             // });
-          }
+          // }
         }
       ).catch(e => {
         console.log('Error signInWithCredential', e);
@@ -225,16 +225,34 @@ isBigEnough(element) {
         console.log('find user menu');
         console.log(userAuth);
         if(userAuth){
-          let email=  userAuth.providerData["0"].email;
-          console.log(email);
-          let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
-            console.log('User Logueado');
-            console.log(User);
-            if(User['0']){
-              this.goNextPagePrehome(User['0']);
-            }
-            Userexists.unsubscribe();
-          });
+          if(userAuth.providerData["0"].providerId == 'password'){
+            let email =  userAuth.providerData["0"].email;
+            console.log(email);
+            let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
+              console.log('User Logueado');
+              console.log(User);
+              if(User['0']){
+                this.goNextPagePrehome(User['0']);
+                if(Userexists != undefined){
+                  // Userexists.unsubscribe();
+                }
+              }
+            });
+          }else{
+            let faceUid =  userAuth.uid;
+            console.log(faceUid);
+            let Userexists= this.professionalsService.getProfessionalUidFace(faceUid).subscribe( (User) => {
+              console.log('User Logueado');
+              console.log(User);
+              if(User['0']){
+                this.goNextPagePrehome(User['0']);
+                if(Userexists != undefined){
+                  // Userexists.unsubscribe();
+                }
+              }
+            });
+          }
+
         }
     });
   }

@@ -75,19 +75,38 @@ export class MyApp {
     this.afAuth.authState.subscribe( userAuth => {
         console.log('find user menu');
         console.log(userAuth);
+        // alert(JSON.stringify(userAuth));
         if(userAuth){
-          let email=  userAuth.providerData["0"].email;
-          console.log(email);
-          let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
-            console.log('User Logueado');
-            console.log(User);
-            if(User['0']){
-              this.loadViewUser(User['0']);
-              if(Userexists != undefined){
-                Userexists.unsubscribe();
+          // let email=  userAuth.providerData["0"].email;
+          if(userAuth.providerData["0"].providerId == 'password'){
+            let email =  userAuth.providerData["0"].email;
+            console.log(email);
+
+            let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
+              console.log('User Logueado');
+              console.log(User);
+              if(User['0']){
+                this.loadViewUser(User['0']);
+                if(Userexists != undefined){
+                  // Userexists.unsubscribe();
+                }
               }
-            }
-          });
+            });
+          }else{
+            let faceUid =  userAuth.uid;
+            console.log(faceUid);
+            let Userexists= this.professionalsService.getProfessionalUidFace(faceUid).subscribe( (User) => {
+              console.log('User Logueado');
+              console.log(User);
+              if(User['0']){
+                this.loadViewUser(User['0']);
+                if(Userexists != undefined){
+                  // Userexists.unsubscribe();
+                }
+              }
+            });
+          }
+          
         }
     });
   }

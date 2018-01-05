@@ -161,10 +161,30 @@ var LoginPage = (function () {
                     // alert(JSON.stringify(info.providerData['0']['email']));
                     // alert(JSON.stringify(info.providerData));
                     console.log(info);
+                    // alert(JSON.stringify(info));
                     console.info(JSON.stringify(info));
-                    if (info.providerData["0"].email) {
-                        var userBD_1 = _this.professionalsService.getProfessionalExists(info.providerData["0"].email).subscribe(function (value) {
+                    // if(info.providerData["0"].email){
+                    //   let userBD =this.professionalsService.getProfessionalExists(info.providerData["0"].email).subscribe(
+                    //         (value)=>{
+                    //           console.info(JSON.stringify(value));
+                    //           console.log('professionalsService-S login');
+                    //           for(let key in value){
+                    //             // console.log(value[key]);
+                    //             if(value[key]){
+                    //               console.log(value[key]);
+                    //               console.info(JSON.stringify(value[key]));
+                    //               this.goNextPagePrehomeFace(value[key]);
+                    //             }
+                    //           }
+                    //           console.log('professionalsService-US login');
+                    //           userBD.unsubscribe();
+                    //         }
+                    //       );
+                    //     }
+                    if (info.uid) {
+                        var userBD_1 = _this.professionalsService.getProfessionalUidFace(info.uid).subscribe(function (value) {
                             console.info(JSON.stringify(value));
+                            // alert(JSON.stringify(value));
                             console.log('professionalsService-S login');
                             for (var key in value) {
                                 // console.log(value[key]);

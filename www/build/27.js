@@ -133,59 +133,59 @@ var HomePage = (function () {
         this.fb.login(['public_profile', 'email'])
             .then(function (res) {
             console.log('Logged into Facebook!', res);
-            alert(JSON.stringify(res));
+            // alert(JSON.stringify(res));
             var credencial = __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"].FacebookAuthProvider.credential(res.authResponse.accessToken);
             __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"]().signInWithCredential(credencial).then(function (info) {
-                alert(JSON.stringify(info));
-                alert(JSON.stringify(info.providerData['0']['email']));
-                alert(JSON.stringify(info['email']));
+                // alert(JSON.stringify(info));
                 // alert(JSON.stringify(info.providerData['0']['email']));
-                // alert(JSON.stringify(info.providerData));
-                console.log(info);
-                console.log(info.providerData.email);
-                console.log(info.providerData);
-                if (info.providerData['0']['email'] != undefined) {
-                    // this.userService.getUserEmailPerfil(info.providerData['0']['email']).subscribe(
-                    //   (emailBD)=>{
-                    //     alert(JSON.stringify(emailBD));
-                    //     if(emailBD == info.providerData.email){
-                    //     }
-                    //   });
-                    _this.singup();
-                    // let getProfesionals=this.professionalsService.getProfessionals().subscribe((Jobers) => {
-                    //   // alert(JSON.stringify(Jobers));
-                    //   console.log(Jobers);
-                    //   Jobers.forEach((Job) =>{
-                    //   console.log('getProfesionals-S home');
-                    //     //console.log(user);
-                    //     // if(user['user_email'] == res.user.email){
-                    //     //     // console.log('res.user.email');
-                    //     //     // console.log(user);
-                    //     //     userDB = user;
-                    //     //     goPagePrehome= true;
-                    //     // }
-                    //     //dentro de res.user -> hay otros datos de usuario -> email?
-                    //     //if(user.providerData["0"].providerId == "facebook.com"){
-                    //         // if(Job['prof_email'] == info.providerData['0']['email']){
-                    //         //   // console.log('res.additionalUserInfo.profile.email');
-                    //         //   // console.log(user);
-                    //         //   console.log(Job);
-                    //         //   userDB = Job;
-                    //         //   goPagePrehome= false;
-                    //         // }
-                    //     //}
-                    //   });
-                    //   // console.log(userDB);
-                    //   // console.log(goPagePrehome);
-                    //   // if(goPagePrehome == false){
-                    //   //   // this.goNextPagePrehome(userDB);
-                    //   // }else{
-                    //   //   this.singup();
-                    //   // }
-                    //   getProfesionals.unsubscribe();
-                    //   console.log('getProfesionals-US home');
-                    // });
-                }
+                // alert(JSON.stringify(info['email']));
+                // // alert(JSON.stringify(info.providerData['0']['email']));
+                // // alert(JSON.stringify(info.providerData));
+                // console.log(info);
+                // console.log(info.providerData.email);
+                // console.log(info.providerData);
+                // if(info.providerData['0']['email'] != undefined){
+                // this.userService.getUserEmailPerfil(info.providerData['0']['email']).subscribe(
+                //   (emailBD)=>{
+                //     alert(JSON.stringify(emailBD));
+                //     if(emailBD == info.providerData.email){
+                //     }
+                //   });
+                _this.singup();
+                // let getProfesionals=this.professionalsService.getProfessionals().subscribe((Jobers) => {
+                //   // alert(JSON.stringify(Jobers));
+                //   console.log(Jobers);
+                //   Jobers.forEach((Job) =>{
+                //   console.log('getProfesionals-S home');
+                //     //console.log(user);
+                //     // if(user['user_email'] == res.user.email){
+                //     //     // console.log('res.user.email');
+                //     //     // console.log(user);
+                //     //     userDB = user;
+                //     //     goPagePrehome= true;
+                //     // }
+                //     //dentro de res.user -> hay otros datos de usuario -> email?
+                //     //if(user.providerData["0"].providerId == "facebook.com"){
+                //         // if(Job['prof_email'] == info.providerData['0']['email']){
+                //         //   // console.log('res.additionalUserInfo.profile.email');
+                //         //   // console.log(user);
+                //         //   console.log(Job);
+                //         //   userDB = Job;
+                //         //   goPagePrehome= false;
+                //         // }
+                //     //}
+                //   });
+                //   // console.log(userDB);
+                //   // console.log(goPagePrehome);
+                //   // if(goPagePrehome == false){
+                //   //   // this.goNextPagePrehome(userDB);
+                //   // }else{
+                //   //   this.singup();
+                //   // }
+                //   getProfesionals.unsubscribe();
+                //   console.log('getProfesionals-US home');
+                // });
+                // }
             }).catch(function (e) {
                 console.log('Error signInWithCredential', e);
                 // alert(JSON.stringify(e));
@@ -261,16 +261,34 @@ var HomePage = (function () {
             console.log('find user menu');
             console.log(userAuth);
             if (userAuth) {
-                var email = userAuth.providerData["0"].email;
-                console.log(email);
-                var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
-                    console.log('User Logueado');
-                    console.log(User);
-                    if (User['0']) {
-                        _this.goNextPagePrehome(User['0']);
-                    }
-                    Userexists_1.unsubscribe();
-                });
+                if (userAuth.providerData["0"].providerId == 'password') {
+                    var email = userAuth.providerData["0"].email;
+                    console.log(email);
+                    var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                        console.log('User Logueado');
+                        console.log(User);
+                        if (User['0']) {
+                            _this.goNextPagePrehome(User['0']);
+                            if (Userexists_1 != undefined) {
+                                // Userexists.unsubscribe();
+                            }
+                        }
+                    });
+                }
+                else {
+                    var faceUid = userAuth.uid;
+                    console.log(faceUid);
+                    var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
+                        console.log('User Logueado');
+                        console.log(User);
+                        if (User['0']) {
+                            _this.goNextPagePrehome(User['0']);
+                            if (Userexists_2 != undefined) {
+                                // Userexists.unsubscribe();
+                            }
+                        }
+                    });
+                }
             }
         });
     };

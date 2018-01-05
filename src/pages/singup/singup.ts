@@ -31,7 +31,7 @@ export class SingupPage {
   DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
   codeAreaList : any;
   codeAreaEstadoSelect: any = [];
-  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":""};
+  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":""};
   user:any;
   foto:any;
   disImg:any=true;
@@ -41,6 +41,7 @@ export class SingupPage {
   estados : any = [];
   passwordB:any;
   userActual:any;
+  userA:firebase.User;
   
   //--form validator
   private singupForm : FormGroup;
@@ -75,8 +76,8 @@ export class SingupPage {
     this.foto = "assets/img/professions/cleaning.png";
     this.disImg = false;
     //-- existe usuario de facebook
-    let userA:any = firebase.auth().currentUser;
-    console.log(userA);
+    this.userA = firebase.auth().currentUser;
+    console.log(this.userA);
     this.user=this.afAuth.auth.currentUser;
     // console.log(this.userB);
     let aftSbus=this.afAuth.authState.subscribe( user => {
@@ -89,6 +90,7 @@ export class SingupPage {
             console.info('find user facebook 2 - si');
             this.userData['name']=this.userData['username']= user.providerData["0"].displayName;
             this.userData['email']=  user.providerData["0"].email;
+            this.userData['uidFace']=  user.uid;
             this.userData['picture']=  user.providerData["0"].photoURL;
             if(user.providerData["0"].photoURL != undefined && user.providerData["0"].photoURL != ''){
               this.foto=  user.providerData["0"].photoURL;
@@ -110,42 +112,42 @@ export class SingupPage {
 
 goPhoneV(){
   let estoyLogueado:boolean = false;
-  //verificaque las contraseñas son iguales
   if(this.userData.password == this.passwordB){
-    // console.log(this.userData["username"]);
-    // console.log(this.userData["email"]);
-    //-- verificar si el usuario existe en nuestra base de datos
-      let Userexists= this.professionalsService.getProfessionalExists(this.userData["email"]);
-      // console.log(JSON.stringify( Userexists));
-      // Userexists.forEach((value)=>{ console.log(value);});
-      this.SubcribeUserexists = Userexists.subscribe((value) => {
-        console.log('SubcribeUserexists-US singup');
-        console.log('user1');
-        console.log(value);
-        if(value['0']){
-          console.log(value["0"].prof_username);
-          console.log(this.userData["username"]);
-          if(value["0"].prof_username == this.userData["username"]){
-              // console.log(value["0"].prof_username);
-              estoyLogueado = true;
-              console.log(estoyLogueado);
+  
+  //verificaque las contraseñas son iguales
+      // console.log(this.userData["username"]);
+      // console.log(this.userData["email"]);
+      //-- verificar si el usuario existe en nuestra base de datos
+        let Userexists= this.professionalsService.getProfessionalExists(this.userData["email"]);
+        // console.log(JSON.stringify( Userexists));
+        // Userexists.forEach((value)=>{ console.log(value);});
+        this.SubcribeUserexists = Userexists.subscribe((value) => {
+          console.log('SubcribeUserexists-US singup');
+          console.log('user1');
+          console.log(value);
+          if(value['0']){
+            console.log(value["0"].prof_username);
+            console.log(this.userData["username"]);
+            if(value["0"].prof_username == this.userData["username"]){
+                // console.log(value["0"].prof_username);
+                estoyLogueado = true;
+                console.log(estoyLogueado);
+            }
           }
-        }
-        //-usuario existe
-        if(estoyLogueado == false){
-          console.log('enviar correo');
-          this.crearUserFirebase();
-        }else{
-          console.log('alerta signUp');
-          this.showAlertSignUp();
-        }
-        console.log('SubcribeUserexists-US singup');
-        this.SubcribeUserexists.unsubscribe();
-      });
-    }else{
-      this.showAlertPwd();
-    }
-    
+          //-usuario existe
+          if(estoyLogueado == false){
+            console.log('enviar correo');
+            this.crearUserFirebase();
+          }else{
+            console.log('alerta signUp');
+            this.showAlertSignUp();
+          }
+          console.log('SubcribeUserexists-US singup');
+          this.SubcribeUserexists.unsubscribe();
+        });
+  }else{
+    this.showAlertPwd();
+  }
 }
 
 crearUserFirebase(){
@@ -156,17 +158,23 @@ crearUserFirebase(){
   this.afAuth.auth.createUserWithEmailAndPassword(this.userData['email'],this.userData['password'])
   .then( (value) =>{
     console.log(value);
+    // alert(value);
+    // alert('cuenta correo creada');
+    console.log(value);
     this.enviarCorreo();
   },
   (error) =>{ 
     console.log('firebase then (error) ');
+    // alert('firebase then (error) ');
     console.log(error);
+    // alert(JSON.stringify(error));
     //-usuario ya puede tener cuenta usuario en firebase
     this.crearUserBD();
   }
 ).catch(
   (err) => {
     console.info('error user ya creado en firebase auth - ya se encuentra creado');
+    // alert('error user ya creado en firebase auth - ya se encuentra creado');
     // console.error(err);
     //-usuario ya puede tener cuenta usuario
     this.crearUserBD();
@@ -181,12 +189,16 @@ enviarCorreo(){
     user.sendEmailVerification()
     .then((success) => {
         console.info("please verify your email - account correo");
+        // alert("please verify your email - account correo");
         console.log(success);
+        // alert(JSON.stringify(success));
         this.crearUserBD();
         this.correoEnviado = true;
     }).catch((err) => {
         console.error('error envio correo - account correo');
+        // alert('error envio correo - account correo');
         console.error(err);
+        // alert(JSON.stringify(err));
     });
   }
   
@@ -195,11 +207,18 @@ enviarCorreo(){
     //-- crear usuario en la base de datos
     
     // console.log(keyUser);
-
+    this.userA.updateEmail('facebook-'+this.userData.email).then( (userUpdateEmailFirebase)=>{
+      // alert('correo ligado a cuenta de facebook');
+    }
+  ).catch( (infoC)=>{
+    // alert(JSON.stringify(infoC));
+    // alert('infoC update email');
+  });
     this.userData['verificacion'] = this.userActual;
     localStorage.setItem('verificacion',this.userActual);
     localStorage.setItem('username',this.userData['username']);
     console.log(this.userData);
+    // alert(JSON.stringify(this.userData));
 
     this.professionalsService.newUser(this.userData,this.userActual);
     // let Data = {'datos':this.userData};
@@ -318,7 +337,7 @@ async  camaraFoto(){
 //-- validacion de formulario
 getForm(){
   this.singupForm = this.formBuilder.group({
-    name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,3}'), Validators.required])],
     // lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
     lastName : [''],
     date : ['', Validators.required],

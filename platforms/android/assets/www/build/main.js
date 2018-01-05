@@ -45,6 +45,14 @@ var ProfessionalsService = (function () {
             }
         });
     };
+    ProfessionalsService.prototype.getProfessionalUidFace = function (uid) {
+        return this.afDBUser.list('/professionals', {
+            query: {
+                orderByChild: 'prof_uidFace',
+                equalTo: uid
+            }
+        });
+    };
     ProfessionalsService.prototype.getUserLoginPwd = function (pwd) {
         // let password = this.encriptyService.GenerateEncripty(pwd);
         var password = pwd;
@@ -77,7 +85,7 @@ var ProfessionalsService = (function () {
     };
     //-new
     ProfessionalsService.prototype.newUser = function (userData, keyNew) {
-        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
+        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
         if (userData === void 0) { userData = []; }
         var key = undefined;
         //default star
@@ -117,17 +125,18 @@ var ProfessionalsService = (function () {
         var pais = userData['pais'];
         var direccion = userData['direccion'];
         var tel = userData['tel'];
+        var uidFace = userData['uidFace'];
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
-                this.afDBUser.object('/professionals/' + keyUser).set({ "prof_username": username, "prof_password": password, "prof_email": email, "prof_name": name, "prof_lastName": lastName, "prof_date": date, "prof_socialSecurity": socialSecurity, "prof_zipcode": zipcode, "prof_state": state, "prof_picture": picture, "prof_pais": pais, "prof_direccion": direccion, "prof_tel": tel, "prof_star": star });
+                this.afDBUser.object('/professionals/' + keyUser).set({ "prof_username": username, "prof_password": password, "prof_email": email, "prof_name": name, "prof_lastName": lastName, "prof_date": date, "prof_socialSecurity": socialSecurity, "prof_zipcode": zipcode, "prof_state": state, "prof_picture": picture, "prof_pais": pais, "prof_direccion": direccion, "prof_tel": tel, "prof_uidFace": uidFace, "prof_star": star });
                 console.info('user create profession');
             }
         }
     };
     ProfessionalsService.prototype.updateUser = function (userData, keyNew) {
         if (userData === void 0) { userData = []; }
-        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
+        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
         var key = undefined;
         //default star
         var star = '5';
@@ -166,6 +175,7 @@ var ProfessionalsService = (function () {
         var pais = userData['pais'];
         var direccion = userData['direccion'];
         var tel = userData['tel'];
+        var uidFace = userData['uidFace'];
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
@@ -182,6 +192,7 @@ var ProfessionalsService = (function () {
                 this.afDBUser.object('/professionals/' + keyUser + '/prof_pais').set(pais);
                 this.afDBUser.object('/professionals/' + keyUser + '/prof_direccion').set(direccion);
                 this.afDBUser.object('/professionals/' + keyUser + '/prof_tel').set(tel);
+                this.afDBUser.object('/professionals/' + keyUser + '/prof_uidFace').set(uidFace);
                 this.afDBUser.object('/professionals/' + keyUser + '/prof_star').set(star);
                 // this.afDBUser.object('/professionals/'+keyUser).set({"prof_username":username,"prof_password":password,"prof_email":email,"prof_name":name,"prof_lastName":lastName,"prof_date":date,"prof_socialSecurity":socialSecurity,"prof_zipcode":zipcode,"prof_state":state,"prof_picture":picture,"prof_pais":pais,"prof_direccion":direccion,"prof_tel":tel,"prof_star":star});
                 console.info('user update profession');
@@ -1234,19 +1245,37 @@ var MyApp = (function () {
         this.afAuth.authState.subscribe(function (userAuth) {
             console.log('find user menu');
             console.log(userAuth);
+            // alert(JSON.stringify(userAuth));
             if (userAuth) {
-                var email = userAuth.providerData["0"].email;
-                console.log(email);
-                var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
-                    console.log('User Logueado');
-                    console.log(User);
-                    if (User['0']) {
-                        _this.loadViewUser(User['0']);
-                        if (Userexists_1 != undefined) {
-                            Userexists_1.unsubscribe();
+                // let email=  userAuth.providerData["0"].email;
+                if (userAuth.providerData["0"].providerId == 'password') {
+                    var email = userAuth.providerData["0"].email;
+                    console.log(email);
+                    var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                        console.log('User Logueado');
+                        console.log(User);
+                        if (User['0']) {
+                            _this.loadViewUser(User['0']);
+                            if (Userexists_1 != undefined) {
+                                // Userexists.unsubscribe();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                else {
+                    var faceUid = userAuth.uid;
+                    console.log(faceUid);
+                    var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
+                        console.log('User Logueado');
+                        console.log(User);
+                        if (User['0']) {
+                            _this.loadViewUser(User['0']);
+                            if (Userexists_2 != undefined) {
+                                // Userexists.unsubscribe();
+                            }
+                        }
+                    });
+                }
             }
         });
     };

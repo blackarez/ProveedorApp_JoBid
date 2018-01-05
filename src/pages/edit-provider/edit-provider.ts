@@ -27,7 +27,7 @@ export class EditProviderPage {
   //-direccion
   DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
   //-data user
-  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","star":""};
+  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
   passwordB:any;
   passwordActual:any;
   emailActual:any;
@@ -89,7 +89,7 @@ export class EditProviderPage {
        (dataUserDB)=>{
         console.log('profSub-S edit-provider');
         console.log(dataUserDB);
-        this.userData = {"username":dataUserDB['prof_username'],"password":dataUserDB['prof_password'],"email":dataUserDB['prof_email'],"name":dataUserDB['prof_name'],"lastName":dataUserDB['prof_lastName'],"date":dataUserDB['prof_date'],"socialSecurity":dataUserDB['prof_socialSecurity'],"zipcode":dataUserDB['prof_zipcode'],"state":dataUserDB['prof_state'],"picture":dataUserDB['prof_picture'],"verificacion":dataUserDB['$key'],"pais":dataUserDB['prof_pais'],"direccion":dataUserDB['prof_direccion'],"tel":dataUserDB['prof_tel'],"star":dataUserDB['prof_star']};
+        this.userData = {"username":dataUserDB['prof_username'],"password":dataUserDB['prof_password'],"email":dataUserDB['prof_email'],"name":dataUserDB['prof_name'],"lastName":dataUserDB['prof_lastName'],"date":dataUserDB['prof_date'],"socialSecurity":dataUserDB['prof_socialSecurity'],"zipcode":dataUserDB['prof_zipcode'],"state":dataUserDB['prof_state'],"picture":dataUserDB['prof_picture'],"verificacion":dataUserDB['$key'],"pais":dataUserDB['prof_pais'],"direccion":dataUserDB['prof_direccion'],"tel":dataUserDB['prof_tel'],"uidFace":dataUserDB['prof_uidFace'],"star":dataUserDB['prof_star']};
         // console.log(this.userData);
         if(this.userData.picture != undefined || this.userData.picture != ''){
           this.disImg = false;
@@ -223,7 +223,7 @@ loading(){
 //-- validacion de formulario
 getForm(){
   this.editProviderForm = this.formBuilder.group({
-    name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
+    name : ['', Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,3}'), Validators.required])],
     lastName : [''],
     // lastName : ['',  Validators.compose([Validators.pattern('[A-z]+(\ [A-z]+){0,1}'), Validators.required])],
     date : ['', Validators.required],
