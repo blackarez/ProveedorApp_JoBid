@@ -41,6 +41,14 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
+    "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
+    "pluginId": "cordova-plugin-facebook4",
+    "clobbers": [
+      "facebookConnectPlugin"
+    ]
+  },
+  {
     "id": "cordova-plugin-geolocation.geolocation",
     "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
     "pluginId": "cordova-plugin-geolocation",
@@ -86,41 +94,6 @@ module.exports = [
       "cordova.plugins.Keyboard"
     ],
     "runs": true
-  },
-  {
-    "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
-    "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
-    "pluginId": "de.appplant.cordova.plugin.local-notification",
-    "clobbers": [
-      "cordova.plugins.notification.local",
-      "plugin.notification.local"
-    ]
-  },
-  {
-    "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
-    "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
-    "pluginId": "de.appplant.cordova.plugin.local-notification",
-    "clobbers": [
-      "cordova.plugins.notification.local.core",
-      "plugin.notification.local.core"
-    ]
-  },
-  {
-    "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
-    "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
-    "pluginId": "de.appplant.cordova.plugin.local-notification",
-    "merges": [
-      "cordova.plugins.notification.local.core",
-      "plugin.notification.local.core"
-    ]
-  },
-  {
-    "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
-    "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
-    "pluginId": "cordova-plugin-facebook4",
-    "clobbers": [
-      "facebookConnectPlugin"
-    ]
   }
 ];
 module.exports.metadata = 
@@ -129,15 +102,13 @@ module.exports.metadata =
   "cordova-plugin-camera": "2.4.1",
   "cordova-plugin-console": "1.0.5",
   "cordova-plugin-device": "1.1.4",
+  "cordova-plugin-facebook4": "1.9.1",
   "cordova-plugin-geolocation": "2.4.3",
   "cordova-plugin-nativeaudio": "3.0.9",
   "cordova-plugin-splashscreen": "4.0.3",
   "cordova-plugin-statusbar": "2.2.2",
   "cordova-plugin-whitelist": "1.3.1",
-  "ionic-plugin-keyboard": "2.2.1",
-  "cordova-plugin-app-event": "1.2.1",
-  "de.appplant.cordova.plugin.local-notification": "0.8.5",
-  "cordova-plugin-facebook4": "1.9.1"
+  "ionic-plugin-keyboard": "2.2.1"
 };
 // BOTTOM OF METADATA
 });

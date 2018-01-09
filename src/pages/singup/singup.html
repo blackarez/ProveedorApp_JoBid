@@ -57,8 +57,8 @@
           <ion-select class="mitad" [(ngModel)]="userData.state" name="state" (ngModelChange)="setCity()" placeholder="State" formControlName="state">
             <ion-option *ngFor="let state of estados | ordenar: 'estados' " value="{{state.nameShort}}">{{state.name}}</ion-option>
           </ion-select>
-          <ion-select  class="mitad" [(ngModel)]="userData.zipcode" name="zipcode" (ngModelChange)="setZipCode()" (click)="loading()" placeholder="City" formControlName="zipcode"> 
-            <ion-option selected>....</ion-option>
+          <!-- <ion-select  class="mitad" [(ngModel)]="userData.zipcode" name="zipcode" (ngModelChange)="setZipCode()" (click)="loading()" placeholder="City" formControlName="zipcode">  -->
+          <ion-select  class="mitad" [(ngModel)]="userData.zipcode" name="zipcode" (ngModelChange)="setZipCode()" placeholder="City" formControlName="zipcode"> 
             <ion-option *ngFor="let city of ciudades | ordenar: 'ciudades' " value="{{city.zipcode}}">{{city.name}} - {{city.zipcode}}</ion-option>
           </ion-select>
         </ion-item>

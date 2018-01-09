@@ -31,6 +31,7 @@ export class ProfessionalsService{
 	}
 
 	public getProfessionalExists( email: any ){
+		// alert("consulta proveedor");
 		return this.afDBUser.list('/professionals',{
 			query: {
 			  orderByChild: 'prof_email',
@@ -85,7 +86,7 @@ export class ProfessionalsService{
 	//-new
 	public newUser(userData : any = [],keyNew?:any ){
 		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
-		
+		// alert("new proveedor");
 		let key = undefined;
 		//default star
 		let star = '5';

@@ -117,20 +117,24 @@ goPhoneV(){
   //verificaque las contraseñas son iguales
       // console.log(this.userData["username"]);
       // console.log(this.userData["email"]);
+      // alert("goPhoneV");
       //-- verificar si el usuario existe en nuestra base de datos
         let Userexists= this.professionalsService.getProfessionalExists(this.userData["email"]);
         // console.log(JSON.stringify( Userexists));
+        // alert(JSON.stringify(Userexists));
         // Userexists.forEach((value)=>{ console.log(value);});
         this.SubcribeUserexists = Userexists.subscribe((value) => {
           console.log('SubcribeUserexists-US singup');
           console.log('user1');
           console.log(value);
+          // alert(JSON.stringify(value));
           if(value['0']){
             console.log(value["0"].prof_username);
             console.log(this.userData["username"]);
             if(value["0"].prof_username == this.userData["username"]){
                 // console.log(value["0"].prof_username);
                 estoyLogueado = true;
+                
                 console.log(estoyLogueado);
             }
           }
@@ -138,9 +142,11 @@ goPhoneV(){
           if(estoyLogueado == false){
             console.log('enviar correo');
             this.crearUserFirebase();
+            // alert("no esta registrado");
           }else{
             console.log('alerta signUp');
             this.showAlertSignUp();
+            // alert("esta registrado");
           }
           console.log('SubcribeUserexists-US singup');
           this.SubcribeUserexists.unsubscribe();
@@ -152,16 +158,21 @@ goPhoneV(){
 
 crearUserFirebase(){
   //-- agrupar datos
+  // alert("crearUserFirebase");
+  // alert(this.userData.email);
+  // alert(this.userData['email']);
   this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD;
   this.userData.tel = '('+this.telA+')'+this.telB;
   this.userData.picture = this.foto;
   this.afAuth.auth.createUserWithEmailAndPassword(this.userData['email'],this.userData['password'])
   .then( (value) =>{
-    console.log(value);
-    // alert(value);
-    // alert('cuenta correo creada');
-    console.log(value);
-    this.enviarCorreo();
+    if(value != undefined){
+      console.log(value);
+      // alert(JSON.stringify(value));
+      // alert('cuenta correo creada');
+      console.log(value);
+      this.enviarCorreo(value);
+    }
   },
   (error) =>{ 
     console.log('firebase then (error) ');
@@ -184,21 +195,26 @@ crearUserFirebase(){
   });
 }
 
-enviarCorreo(){
-  let user:any = firebase.auth().currentUser;
-    user.sendEmailVerification()
-    .then((success) => {
+enviarCorreo(value){
+  // let user:any = firebase.auth().currentUser.sendEmailVerification()
+  value.currentUser.sendEmailVerification()
+  // user.sendEmailVerification()
+  .then((success) => {
+      console.log(firebase.auth());
+      console.log(success);
+      if(success != undefined){
         console.info("please verify your email - account correo");
+        this.crearUserBD();
         // alert("please verify your email - account correo");
         console.log(success);
         // alert(JSON.stringify(success));
-        this.crearUserBD();
         this.correoEnviado = true;
+      }
     }).catch((err) => {
-        console.error('error envio correo - account correo');
-        // alert('error envio correo - account correo');
-        console.error(err);
-        // alert(JSON.stringify(err));
+      console.error('error envio correo - account correo');
+      // alert('error envio correo - account correo');
+      console.error(err);
+      // alert(JSON.stringify(err));
     });
   }
   
@@ -207,13 +223,17 @@ enviarCorreo(){
     //-- crear usuario en la base de datos
     
     // console.log(keyUser);
-    this.userA.updateEmail('facebook-'+this.userData.email).then( (userUpdateEmailFirebase)=>{
-      // alert('correo ligado a cuenta de facebook');
+    // alert("crearUserBD");
+    if(this.userA != null){
+      this.userA.updateEmail('facebook-'+this.userData['email']).then( (userUpdateEmailFirebase)=>{
+        // alert('correo ligado a cuenta de facebook');
+      }
+      ).catch( (infoC)=>{
+      // alert(JSON.stringify(infoC));
+      console.log(infoC);
+      // alert('infoC update email');
+     });
     }
-  ).catch( (infoC)=>{
-    // alert(JSON.stringify(infoC));
-    // alert('infoC update email');
-  });
     this.userData['verificacion'] = this.userActual;
     localStorage.setItem('verificacion',this.userActual);
     localStorage.setItem('username',this.userData['username']);
@@ -292,14 +312,15 @@ showAlertPwd() {
   alerteMail.present();
 }
 //-- cargando
-loading(){
-  let loader = this.loadingCtrl.create({
-    content: "Please wait...",
-    duration: 3000
-  });
-  loader.present();
-}
+// loading(){
+//   let loader = this.loadingCtrl.create({
+//     content: "Please wait...",
+//     duration: 3000
+//   });
+//   loader.present();
+// }
 
+//camera
 async  camaraFoto(){
   let file = this.userActual+'/foto';
   console.log('clickCamara');

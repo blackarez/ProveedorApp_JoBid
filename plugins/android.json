@@ -8,36 +8,37 @@
   },
   "installed_plugins": {
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.JoBit.com"
+      "PACKAGE_NAME": "com.JoBid.provider"
     },
     "cordova-plugin-console": {
-      "PACKAGE_NAME": "com.JoBit.com"
+      "PACKAGE_NAME": "com.JoBid.provider"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-nativeaudio": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.JoBit.com"
-    },
-    "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.JoBit.com"
+      "PACKAGE_NAME": "com.JoBid.provider"
     },
     "cordova-plugin-facebook4": {
       "APP_ID": "2008465006108651",
       "APP_NAME": "JoBid Proveedor",
       "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.JoBid.provider"
     }
-  }
+  },
+  "dependent_plugins": {}
 }

@@ -34,6 +34,9 @@ export class HomePage {
   x:any=[];
   //camera
   uploads: any=[];
+  //contador
+  consultaFirebaseLogin:number = 1;
+
   constructor(
     public navCtrl: NavController, 
     private fb:  Facebook,
@@ -221,40 +224,55 @@ isBigEnough(element) {
 
    
    usuarioLogeado(){
-    this.afAuth.authState.subscribe( userAuth => {
+    if(this.consultaFirebaseLogin == 1){
+    this.consultaFirebaseLogin =2;
+    console.log('contadorLoging'+this.consultaFirebaseLogin);
+    let userLogeadoSub = this.afAuth.authState.subscribe( userAuth => {
         console.log('find user menu');
         console.log(userAuth);
         if(userAuth){
-          if(userAuth.providerData["0"].providerId == 'password'){
-            let email =  userAuth.providerData["0"].email;
-            console.log(email);
-            let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
-              console.log('User Logueado');
-              console.log(User);
-              if(User['0']){
-                this.goNextPagePrehome(User['0']);
-                if(Userexists != undefined){
-                  // Userexists.unsubscribe();
+          if(userAuth != null){
+            if(userAuth.providerData["0"].providerId == 'password'){
+              let email =  userAuth.providerData["0"].email;
+              console.log(email);
+              let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
+                console.log('User Logueado');
+                console.log(User);
+                if(User['0']){
+                  this.goNextPagePrehome(User['0']);
+                  // if(Userexists != undefined){
+                    userLogeadoSub.unsubscribe();
+                    Userexists.unsubscribe();
+                    console.log('unsubscribe');
+                    // }
                 }
+              });
+            }else{
+              let faceUid =  userAuth.uid;
+              console.log(faceUid);
+              let Userexists= this.professionalsService.getProfessionalUidFace(faceUid).subscribe( (User) => {
+                console.log('User Logueado');
+                console.log(User);
+                if(User['0']){
+                  this.goNextPagePrehome(User['0']);
+                  // if(Userexists != undefined){
+                    userLogeadoSub.unsubscribe();
+                    Userexists.unsubscribe();
+                    console.log('unsubscribe');
+                    // }
+                  }
+                });
               }
-            });
-          }else{
-            let faceUid =  userAuth.uid;
-            console.log(faceUid);
-            let Userexists= this.professionalsService.getProfessionalUidFace(faceUid).subscribe( (User) => {
-              console.log('User Logueado');
-              console.log(User);
-              if(User['0']){
-                this.goNextPagePrehome(User['0']);
-                if(Userexists != undefined){
-                  // Userexists.unsubscribe();
-                }
-              }
-            });
+            }else{
+              userLogeadoSub.unsubscribe();
+              console.log('unsubscribe');  
           }
-
-        }
+        }else{
+          userLogeadoSub.unsubscribe();
+          console.log('unsubscribe');  
+      }
     });
+  }
   }
 
 }

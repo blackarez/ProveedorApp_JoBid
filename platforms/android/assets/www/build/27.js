@@ -87,6 +87,8 @@ var HomePage = (function () {
         this.x = [];
         //camera
         this.uploads = [];
+        //contador
+        this.consultaFirebaseLogin = 1;
         //-identifica y redirecciona usuario logeado.
         this.usuarioLogeado();
         this.professionalsService.getIni();
@@ -257,40 +259,58 @@ var HomePage = (function () {
     };
     HomePage.prototype.usuarioLogeado = function () {
         var _this = this;
-        this.afAuth.authState.subscribe(function (userAuth) {
-            console.log('find user menu');
-            console.log(userAuth);
-            if (userAuth) {
-                if (userAuth.providerData["0"].providerId == 'password') {
-                    var email = userAuth.providerData["0"].email;
-                    console.log(email);
-                    var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
-                        console.log('User Logueado');
-                        console.log(User);
-                        if (User['0']) {
-                            _this.goNextPagePrehome(User['0']);
-                            if (Userexists_1 != undefined) {
-                                // Userexists.unsubscribe();
-                            }
+        if (this.consultaFirebaseLogin == 1) {
+            this.consultaFirebaseLogin = 2;
+            console.log('contadorLoging' + this.consultaFirebaseLogin);
+            var userLogeadoSub_1 = this.afAuth.authState.subscribe(function (userAuth) {
+                console.log('find user menu');
+                console.log(userAuth);
+                if (userAuth) {
+                    if (userAuth != null) {
+                        if (userAuth.providerData["0"].providerId == 'password') {
+                            var email = userAuth.providerData["0"].email;
+                            console.log(email);
+                            var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                                console.log('User Logueado');
+                                console.log(User);
+                                if (User['0']) {
+                                    _this.goNextPagePrehome(User['0']);
+                                    // if(Userexists != undefined){
+                                    userLogeadoSub_1.unsubscribe();
+                                    Userexists_1.unsubscribe();
+                                    console.log('unsubscribe');
+                                    // }
+                                }
+                            });
                         }
-                    });
+                        else {
+                            var faceUid = userAuth.uid;
+                            console.log(faceUid);
+                            var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
+                                console.log('User Logueado');
+                                console.log(User);
+                                if (User['0']) {
+                                    _this.goNextPagePrehome(User['0']);
+                                    // if(Userexists != undefined){
+                                    userLogeadoSub_1.unsubscribe();
+                                    Userexists_2.unsubscribe();
+                                    console.log('unsubscribe');
+                                    // }
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        userLogeadoSub_1.unsubscribe();
+                        console.log('unsubscribe');
+                    }
                 }
                 else {
-                    var faceUid = userAuth.uid;
-                    console.log(faceUid);
-                    var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
-                        console.log('User Logueado');
-                        console.log(User);
-                        if (User['0']) {
-                            _this.goNextPagePrehome(User['0']);
-                            if (Userexists_2 != undefined) {
-                                // Userexists.unsubscribe();
-                            }
-                        }
-                    });
+                    userLogeadoSub_1.unsubscribe();
+                    console.log('unsubscribe');
                 }
-            }
-        });
+            });
+        }
     };
     return HomePage;
 }());

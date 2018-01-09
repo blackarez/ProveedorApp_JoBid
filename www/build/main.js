@@ -38,6 +38,7 @@ var ProfessionalsService = (function () {
         return this.afDBUser.object('/professionals/' + id);
     };
     ProfessionalsService.prototype.getProfessionalExists = function (email) {
+        // alert("consulta proveedor");
         return this.afDBUser.list('/professionals', {
             query: {
                 orderByChild: 'prof_email',
@@ -85,8 +86,9 @@ var ProfessionalsService = (function () {
     };
     //-new
     ProfessionalsService.prototype.newUser = function (userData, keyNew) {
-        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
         if (userData === void 0) { userData = []; }
+        //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
+        // alert("new proveedor");
         var key = undefined;
         //default star
         var star = '5';

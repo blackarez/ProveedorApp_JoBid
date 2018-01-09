@@ -26653,26 +26653,6 @@ page-singup ion-item.item-md ion-label.label img, page-singup ion-item.item-ios 
   margin: 0;
 }
 
-page-singup .dateclass {
-  width: 100%;
-  padding-top: 15px;
-}
-
-page-singup .dateclass.placeholderclass {
-  padding-top: 15px;
-}
-
-page-singup .dateclass.placeholderclass::before {
-  width: 100%;
-  margin-top: 15px;
-  content: attr(placeholder);
-}
-
-page-singup .dateclass.placeholderclass:hover::before {
-  width: 0%;
-  content: "";
-}
-
 page-terms p {
   text-align: center;
 }
