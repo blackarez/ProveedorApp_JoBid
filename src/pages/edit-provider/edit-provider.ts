@@ -45,7 +45,7 @@ export class EditProviderPage {
   
   codeAreaList : any;
   codeAreaEstadoSelect: any = [];
-  
+  showLabel:boolean = false;
   //sub
   profSub:any;
 
@@ -58,7 +58,7 @@ export class EditProviderPage {
    private formBuilder: FormBuilder, private camera: Camera,
    public afAuth: AngularFireAuth,
   ) {
-    this.loadList();
+    // this.loadList();
     //-localStorage
     this.userActual = localStorage.getItem('verificacion');
     console.log(this.userActual);
@@ -90,7 +90,8 @@ export class EditProviderPage {
         console.log('profSub-S edit-provider');
         console.log(dataUserDB);
         this.userData = {"username":dataUserDB['prof_username'],"password":dataUserDB['prof_password'],"email":dataUserDB['prof_email'],"name":dataUserDB['prof_name'],"lastName":dataUserDB['prof_lastName'],"date":dataUserDB['prof_date'],"socialSecurity":dataUserDB['prof_socialSecurity'],"zipcode":dataUserDB['prof_zipcode'],"state":dataUserDB['prof_state'],"picture":dataUserDB['prof_picture'],"verificacion":dataUserDB['$key'],"pais":dataUserDB['prof_pais'],"direccion":dataUserDB['prof_direccion'],"tel":dataUserDB['prof_tel'],"uidFace":dataUserDB['prof_uidFace'],"star":dataUserDB['prof_star']};
-        // console.log(this.userData);
+        this.setLoadAddress();
+        console.log(this.userData);
         if(this.userData.picture != undefined || this.userData.picture != ''){
           this.disImg = false;
           this.foto = this.userData.picture;
@@ -101,13 +102,14 @@ export class EditProviderPage {
         this.passwordB =dataUserDB['prof_password']; 
         // let zipcodea = this.userData['zipcode'];
         // console.log(zipcodea);
-        this.ciudades.zipcode= this.userData['zipcode'];
+        // this.ciudades.zipcode= this.userData['zipcode'];
         // this.setCity();
         // this.setZipCode();
-        this.setLoadAddress();
         this.passwordActual = this.passwordB;
         console.log(this.passwordActual);
         this.emailActual = this.userData.email;
+        this.telA =  this.userData.tel.substring(1,4);
+        this.telB =  this.userData.tel.substring(5);
         console.log(this.emailActual);
       });
   }
@@ -125,6 +127,7 @@ export class EditProviderPage {
       }
       // console.log(this.userData);
         this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
+        this.userData.zipcode = this.DirecD;
         this.userData.tel = '('+this.telA+')'+this.telB;
         this.userData.picture = this.foto;
         console.log(this.userData);
@@ -164,24 +167,10 @@ export class EditProviderPage {
   }
 
   setLoadAddress(){
-    // console.log(this.userData['direccion'].split(",", 3));
-    let DireccionSlip = this.userData['direccion'].split(",", 3);
-    if(DireccionSlip != undefined){
-      let DireccionSlipA = DireccionSlip['0'].split(" ", 2);
-      if(DireccionSlipA != undefined){
-        // console.log(DireccionSlip['0']);
-        // console.log(DireccionSlip['1']);
-        // console.log(DireccionSlip['2']);
-        // console.log(DireccionSlip['0'].split(" ", 2));
-        // console.log(DireccionSlipA);
-        // console.log(DireccionSlipA['0']);
-        console.log(DireccionSlipA['1']);
-        this.DirecB =DireccionSlipA['1'];
-        this.DirecA =DireccionSlipA['0'];
-        this.DirecC =DireccionSlip['1'];
-        this.DirecD =DireccionSlip['2'];
-      }
-    }
+    this.DirecD = this.userData.zipcode;
+    this.DirecA =this.userData['direccion'].split(",", 3)['0'].split(" ", 2)['0'];
+    this.DirecB =this.userData['direccion'].split(",", 3)['0'].split(" ", 2)['1'];
+    this.DirecC =this.userData['direccion'].split(",", 3)['1'];
   }
 
   findCodeEstado( estado : string){
@@ -196,8 +185,7 @@ export class EditProviderPage {
       }
       
     }
-    this.telA =  this.userData.tel.substring(1,4);
-    this.telB =  this.userData.tel.substring(5);
+    
     // console.log(this.telA);
     // console.log(this.telB);
     // console.log(this.codeAreaEstadoSelect);
@@ -230,7 +218,7 @@ getForm(){
     socialSecurity : ['', Validators.required],
     pais : ['', Validators.required],
     state : ['', Validators.required],
-    zipcode : ['', Validators.required],
+    // zipcode : ['', Validators.required],
     DirecA : ['', Validators.required],
     DirecB : ['', Validators.required],
     DirecC : ['', Validators.required],
@@ -244,7 +232,18 @@ getForm(){
     telB : ['', Validators.required],
   });  
 }
+//show label
+setLabel(){
+  console.log(this.userData.date);
+  console.log(this.showLabel);
+  if(this.userData.date != undefined && this.userData.date != null  && this.userData.date !=""){
+    this.showLabel = false;
+  }else{
+    this.showLabel = true;
+  }
+}
 
+//camera
 async  camaraFoto(){
   let file = this.userActual+'/foto';
   console.log('clickCamara');

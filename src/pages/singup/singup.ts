@@ -31,7 +31,7 @@ export class SingupPage {
   DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
   codeAreaList : any;
   codeAreaEstadoSelect: any = [];
-  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":""};
+  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","avenue":"","tel":"","uidFace":"","star":""};
   user:any;
   foto:any;
   disImg:any=true;
@@ -42,6 +42,7 @@ export class SingupPage {
   passwordB:any;
   userActual:any;
   userA:firebase.User;
+  showLabel:boolean = true;
   
   //--form validator
   private singupForm : FormGroup;
@@ -57,13 +58,13 @@ export class SingupPage {
     private formBuilder: FormBuilder, private camera: Camera,
   ) {
     //-carga los estados
-    var stateName = STATE_UTILS.getStates();
-    var stateNameShort = STATE_UTILS.getUSPSCodes();
-    for (var i = 0; stateName.length > i; i++) {
-      this.estados.push({'name':stateName[i],'nameShort':stateNameShort[i]});
-    } 
+    // var stateName = STATE_UTILS.getStates();
+    // var stateNameShort = STATE_UTILS.getUSPSCodes();
+    // for (var i = 0; stateName.length > i; i++) {
+    //   this.estados.push({'name':stateName[i],'nameShort':stateNameShort[i]});
+    // } 
     //-carga el codigo de area
-    this.codeAreaDefi();
+    // this.codeAreaDefi();
     //-carga y valida el formulario
     this.getForm();
     var d = new Date();
@@ -134,7 +135,6 @@ goPhoneV(){
             if(value["0"].prof_username == this.userData["username"]){
                 // console.log(value["0"].prof_username);
                 estoyLogueado = true;
-                
                 console.log(estoyLogueado);
             }
           }
@@ -161,7 +161,8 @@ crearUserFirebase(){
   // alert("crearUserFirebase");
   // alert(this.userData.email);
   // alert(this.userData['email']);
-  this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD;
+  this.userData.direccion = this.DirecA+' '+this.DirecB+','+this.DirecC+','+this.DirecD ;
+  this.userData.zipcode = this.DirecD;
   this.userData.tel = '('+this.telA+')'+this.telB;
   this.userData.picture = this.foto;
   this.afAuth.auth.createUserWithEmailAndPassword(this.userData['email'],this.userData['password'])
@@ -273,6 +274,16 @@ setZipCode(){
     this.DirecD ='';
   }
 }
+//show or hidden placeholder birthdate
+setLabel(){
+  console.log(this.userData.date);
+  console.log(this.showLabel);
+  if(this.userData.date != undefined && this.userData.date != null  && this.userData.date !=""){
+    this.showLabel = false;
+  }else{
+    this.showLabel = true;
+  }
+}
 
 findCodeEstado( estado : string){
   //-- buscar el estado
@@ -365,7 +376,7 @@ getForm(){
     socialSecurity : ['', Validators.required],
     pais : ['', Validators.required],
     state : ['', Validators.required],
-    zipcode : ['', Validators.required],
+    // zipcode : ['', Validators.required],
     DirecA : ['', Validators.required],
     DirecB : ['', Validators.required],
     DirecC : ['', Validators.required],

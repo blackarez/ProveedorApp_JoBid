@@ -126,7 +126,11 @@ export class ProfessionalsService{
 		let pais = userData['pais'];
 		let direccion = userData['direccion'];
 		let tel = userData['tel'];
-		let uidFace = userData['uidFace'];
+		let uidFace = '';
+		if(userData["uidFace"] != undefined){
+			uidFace = userData["uidFace"];
+		}
+		// let uidFace = userData['uidFace'];
 
 		console.log(userData);
 
@@ -179,7 +183,11 @@ export class ProfessionalsService{
 		let pais = userData['pais'];
 		let direccion = userData['direccion'];
 		let tel = userData['tel'];
-		let uidFace = userData['uidFace'];
+		let uidFace = '';
+		if(userData["uidFace"] != undefined){
+			uidFace = userData["uidFace"];
+		}
+		// let uidFace = userData['uidFace'];
 
 		console.log(userData);
 

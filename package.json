@@ -65,6 +65,10 @@
   },
   "description": "An Ionic project",
   "cordova": {
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "plugins": {
       "cordova-plugin-geolocation": {},
       "cordova-plugin-console": {},
@@ -83,10 +87,6 @@
         "APP_ID": "2008465006108651",
         "APP_NAME": "JoBid Proveedor"
       }
-    },
-    "platforms": [
-      "ios",
-      "android"
-    ]
+    }
   }
 }

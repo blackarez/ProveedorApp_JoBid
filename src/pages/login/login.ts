@@ -48,17 +48,20 @@ export class LoginPage {
         // console.log('success');
         console.log('userPromesa-S login');
         console.log(value);
-        if(value['0']){
+        for(let key in value){
+          // console.log(value[key]);
+          if(value[key]){
           // console.log(value['0']['prof_username']);
           // console.log(value['0']['prof_email']);
-          if( (this.userData["username"] == value['0']['prof_username']) || (this.userData["username"] == value['0']['prof_email'])){
+          if( (this.userData["username"] == value[key]['prof_username']) || (this.userData["username"] == value[key]['prof_email'])){
             console.info('existeUserPwd');
-            this.loginFirebaseUserMail(value['0']);
+            this.loginFirebaseUserMail(value[key]);
           }
         }else{
           this.showAlertLogin();
           console.error('-usuario no se encuentra en base de datos');
         }
+      }
         console.log('userPromesa-US login');
       userPromesa.unsubscribe();  
     });

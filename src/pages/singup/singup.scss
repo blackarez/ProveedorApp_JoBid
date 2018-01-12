@@ -29,23 +29,24 @@ page-singup {
 				margin:0;
 			}
 	}
-	// .dateclass{
-	// 	width:100%;
-	// 	padding-top: 15px;
-	// }
+	.dateclass{
+		width:100%;
+		padding-top: 15px;
+	}
 	
-	// .dateclass.placeholderclass{
-	// 	padding-top: 15px;
-	// }
-	// .dateclass.placeholderclass::before{
-	// 	width:100%;
-	// 	margin-top: 15px;
-	// 	// background: red;
-	// 	content:attr(placeholder);
-	// }
+	.dateclass.placeholderclass{
+		padding-top: 15px;
+	}
+	.dateclass.placeholderclass::before{
+		// width:100%;
+		margin-top: 15px;
+		color: gray;
+		// background: red;
+		content:attr(placeholder);
+	}
 	
-	// .dateclass.placeholderclass:hover::before{
-	// 	width:0%;
-	// 	content:"";
-	// }
+	.dateclass.placeholderclass:hover::before{
+		width:0%;
+		content:"";
+	}
 }
