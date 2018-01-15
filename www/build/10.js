@@ -128,6 +128,7 @@ var ShowPage = (function () {
         this.ListContracts = [];
         this.lat = 51.678418;
         this.lng = 7.809007;
+        this.segundos = 5;
         this.UserActual = localStorage.getItem('verificacion');
         console.log(this.UserActual);
         //-default value
@@ -151,6 +152,7 @@ var ShowPage = (function () {
         console.log('userSubs-US show');
         console.log('serviceSubs-US show');
         console.log('listOffer-US show');
+        clearInterval(this.objNodeTimer);
         if (this.userSubs != undefined) {
             this.userSubs.unsubscribe();
         }
@@ -169,13 +171,59 @@ var ShowPage = (function () {
         // alert("Toggled: "+ this.StatusProvider);
         if (this.StatusProvider == false) {
             this.labelToogle = "Offline";
+            clearInterval(this.objNodeTimer);
+            // console.log(this.objNodeTimer);
+            // if (this.objNodeTimer != undefined) {
+            //   clearInterval(this.objNodeTimer.data.handleId);
+            //   console.log(this.objNodeTimer.data.handleId);
+            // }
         }
         else {
             this.labelToogle = "Online";
             this.showServices();
+            // this.startTimer();
             // this.showServices();
             // this.showServices();
         }
+    };
+    //--- timer
+    ShowPage.prototype.startTimer = function () {
+        var _this = this;
+        this.objNodeTimer = setInterval(function () { _this.timer(); }, 1000);
+    };
+    //cada 5 segundos reiniamos la consulta de offertas
+    ShowPage.prototype.timer = function () {
+        // console.log(this.segundos);
+        if (this.segundos == 1) {
+            console.log(this.objNodeTimer);
+            this.reiniciarBusquedaOffer();
+            this.segundos = 5;
+        }
+        else {
+            if (--this.segundos < 0) {
+            }
+            ;
+        }
+    };
+    ShowPage.prototype.reiniciarBusquedaOffer = function () {
+        console.log(this.objNodeTimer);
+        // console.log(this.listOffer);
+        // console.log(this.serviceSubs);
+        // console.log(this.userSubs);
+        if (this.listOffer != undefined) {
+            // console.log('listOffer-US show');
+            this.listOffer.unsubscribe();
+        }
+        if (this.serviceSubs != undefined) {
+            // console.log('serviceSubs-US show');
+            this.serviceSubs.unsubscribe();
+        }
+        if (this.userSubs != undefined) {
+            // console.log('userSubs-US show');
+            this.userSubs.unsubscribe();
+        }
+        console.info('busqueda de ofertas');
+        this.showServices();
     };
     ShowPage.prototype.showServices = function () {
         var _this = this;
@@ -183,7 +231,7 @@ var ShowPage = (function () {
         this.listOffer = this.offerService.getOfferNew().subscribe(function (list) {
             // console.log(list);
             if (list != undefined) {
-                console.log('listOffer-S show');
+                // console.log('listOffer-S show');
                 _this.getServiceProvider(list);
                 _this.listOffer.unsubscribe();
             }
@@ -192,6 +240,7 @@ var ShowPage = (function () {
     ShowPage.prototype.getServiceProvider = function (BDListOffer) {
         var _this = this;
         // alert();
+        console.log(this.UserActual);
         this.serviceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (BDListServicesProvider) {
             console.log('serviceSubs-S show');
             // console.log(BDListServicesProvider);
@@ -288,7 +337,7 @@ var ShowPage = (function () {
                                                 var serviceImage = '';
                                                 if (BDListOffer[keys].Clasificacion.informacion.foto != undefined && BDListOffer[keys].Clasificacion.informacion.foto != '') {
                                                     serviceImage = BDListOffer[keys].Clasificacion.informacion.foto;
-                                                    console.log(serviceImage);
+                                                    // console.log(serviceImage);
                                                 }
                                                 if (user['user_picture'] == "" || user['user_picture'] == undefined || user['user_picture'] == null) {
                                                     imagen = _this.imgDefault;
@@ -298,9 +347,9 @@ var ShowPage = (function () {
                                                 }
                                                 // console.log(imagen);
                                                 // console.log(this.ListService.findIndex( keysOffer => { keysOffer.idOff == key;}));
-                                                console.log(_this.ListService);
+                                                // console.log(this.ListService);
                                                 var ListaServicios = _this.ListService;
-                                                console.log(ListaServicios);
+                                                // console.log(ListaServicios);
                                                 // let idKeyOffer = ListaServicios.findIndex( keysOffer => { 
                                                 //   keysOffer.idOff == key; 
                                                 //   console.log(keysOffer); 
@@ -310,16 +359,16 @@ var ShowPage = (function () {
                                                 var idKeyOffer = ListaServicios.findIndex(function (keysOffer) {
                                                     return keysOffer.idOff == key_1;
                                                 });
-                                                console.log(idKeyOffer);
+                                                // console.log(idKeyOffer);
                                                 if (idKeyOffer >= 0) {
-                                                    console.log('if 1');
+                                                    // console.log('if 1');
                                                     _this.ListService[idKeyOffer] = { "idOff": key_1, "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "imgOffer": serviceImage, "idUser": user['$key'] };
                                                 }
                                                 else {
-                                                    console.log('if -1');
+                                                    // console.log('if -1');
                                                     _this.ListService.push({ "idOff": key_1, "name": user['user_username'], "img": imagen, "sale": InfmaxOffer_1, "infoShow": InfshortMoreInformacion_1, "info": InfmoreInformacion_1, "imgOffer": serviceImage, "idUser": user['$key'] });
                                                 }
-                                                console.log(_this.ListService);
+                                                // console.log(this.ListService);
                                                 // }
                                             });
                                             // this.ListService=list;

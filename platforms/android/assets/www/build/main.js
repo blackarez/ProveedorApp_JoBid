@@ -91,7 +91,7 @@ var ProfessionalsService = (function () {
         // alert("new proveedor");
         var key = undefined;
         //default star
-        var star = '5';
+        var star = 5;
         // console.log('key:'+key);
         // console.log('keyNew:'+keyNew);
         if (keyNew && keyNew != null && keyNew != undefined) {
@@ -102,7 +102,7 @@ var ProfessionalsService = (function () {
             key = d.getTime();
             var keyUser = "prof_" + (key);
         }
-        if (userData['star'] != undefined && userData['star'] != null) {
+        if (userData['star'] != undefined && userData['star'] != null && userData['star'] != " ") {
             if (userData['star'] != star) {
                 star = userData['star'];
             }
@@ -127,7 +127,11 @@ var ProfessionalsService = (function () {
         var pais = userData['pais'];
         var direccion = userData['direccion'];
         var tel = userData['tel'];
-        var uidFace = userData['uidFace'];
+        var uidFace = '';
+        if (userData["uidFace"] != undefined) {
+            uidFace = userData["uidFace"];
+        }
+        // let uidFace = userData['uidFace'];
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
@@ -141,7 +145,7 @@ var ProfessionalsService = (function () {
         //userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
         var key = undefined;
         //default star
-        var star = '5';
+        var star = 5;
         // console.log('key:'+key);
         // console.log('keyNew:'+keyNew);
         if (keyNew && keyNew != null && keyNew != undefined) {
@@ -152,7 +156,7 @@ var ProfessionalsService = (function () {
             key = d.getTime();
             var keyUser = "prof_" + (key);
         }
-        if (userData['star'] != undefined && userData['star'] != null) {
+        if (userData['star'] != undefined && userData['star'] != null && userData['star'] != " ") {
             if (userData['star'] != star) {
                 star = userData['star'];
             }
@@ -177,7 +181,11 @@ var ProfessionalsService = (function () {
         var pais = userData['pais'];
         var direccion = userData['direccion'];
         var tel = userData['tel'];
-        var uidFace = userData['uidFace'];
+        var uidFace = '';
+        if (userData["uidFace"] != undefined) {
+            uidFace = userData["uidFace"];
+        }
+        // let uidFace = userData['uidFace'];
         console.log(userData);
         if ((userData['username']) && (userData['password']) && (userData['email'])) {
             if ((userData['username'] != undefined) && (userData['username'] != null) && (userData['password'] != undefined) && (userData['password'] != null) && (userData['email'] != undefined) && (userData['email'] != null)) {
@@ -1289,7 +1297,8 @@ var MyApp = (function () {
         }
         // console.log(user['prof_picture']);
         // console.log(this.srcUser);
-        if (user['prof_star'] && user['prof_star'] != '' && user['prof_star'] != null && user['prof_star'] != undefined) {
+        console.log(user['prof_star']);
+        if (user['prof_star'] && user['prof_star'] != ' ' && user['prof_star'] != null && user['prof_star'] != undefined) {
             this.star = Math.round(user['prof_star']);
             var contenido = '';
             if (Math.round(this.star) == 5) {

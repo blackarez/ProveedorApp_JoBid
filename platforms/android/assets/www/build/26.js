@@ -98,17 +98,20 @@ var LoginPage = (function () {
             // console.log('success');
             console.log('userPromesa-S login');
             console.log(value);
-            if (value['0']) {
-                // console.log(value['0']['prof_username']);
-                // console.log(value['0']['prof_email']);
-                if ((_this.userData["username"] == value['0']['prof_username']) || (_this.userData["username"] == value['0']['prof_email'])) {
-                    console.info('existeUserPwd');
-                    _this.loginFirebaseUserMail(value['0']);
+            for (var key in value) {
+                // console.log(value[key]);
+                if (value[key]) {
+                    // console.log(value['0']['prof_username']);
+                    // console.log(value['0']['prof_email']);
+                    if ((_this.userData["username"] == value[key]['prof_username']) || (_this.userData["username"] == value[key]['prof_email'])) {
+                        console.info('existeUserPwd');
+                        _this.loginFirebaseUserMail(value[key]);
+                    }
                 }
-            }
-            else {
-                _this.showAlertLogin();
-                console.error('-usuario no se encuentra en base de datos');
+                else {
+                    _this.showAlertLogin();
+                    console.error('-usuario no se encuentra en base de datos');
+                }
             }
             console.log('userPromesa-US login');
             userPromesa.unsubscribe();

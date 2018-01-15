@@ -84,7 +84,7 @@ var ServiceWinPage = (function () {
         this.DataService = [];
         //timer
         this.segundos = 0;
-        this.minutos = 3;
+        this.minutos = 2;
         //button go to home
         this.disableGoHome = true;
         this.DataService = this.navParams.get('datos');

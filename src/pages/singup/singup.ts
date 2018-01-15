@@ -31,7 +31,7 @@ export class SingupPage {
   DirecA: any;DirecB: any;DirecC: any;DirecD: any;telA: any;telB: any;
   codeAreaList : any;
   codeAreaEstadoSelect: any = [];
-  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","avenue":"","tel":"","uidFace":"","star":""};
+  userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","avenue":"","tel":"","uidFace":""};
   user:any;
   foto:any;
   disImg:any=true;

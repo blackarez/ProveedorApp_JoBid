@@ -26608,6 +26608,10 @@ page-show agm-map {
   height: 300px;
 }
 
+page-show .item-md ion-avatar[item-start], page-show .item-ios ion-avatar[item-start] {
+  margin-left: 5px;
+}
+
 page-singup img {
   display: block;
   width: 100%;

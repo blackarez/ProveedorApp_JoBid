@@ -32,7 +32,7 @@ export class ServiceWinPage {
   statusSub:any;
   //timer
   segundos:number= 0;
-  minutos:number= 3;
+  minutos:number= 2;
   objNodeTimer:any;
   //button go to home
   disableGoHome:boolean = true;

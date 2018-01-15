@@ -49,4 +49,7 @@ page-show {
 	agm-map {
 		height: 300px;
 	  }
+	.item-md ion-avatar[item-start], .item-ios ion-avatar[item-start]{
+		margin-left: 5px;
+	}
 }

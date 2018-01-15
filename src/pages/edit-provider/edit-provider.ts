@@ -108,8 +108,10 @@ export class EditProviderPage {
         this.passwordActual = this.passwordB;
         console.log(this.passwordActual);
         this.emailActual = this.userData.email;
-        this.telA =  this.userData.tel.substring(1,4);
-        this.telB =  this.userData.tel.substring(5);
+        if(this.userData.tel != undefined){
+          this.telA =  this.userData.tel.substring(1,4);
+          this.telB =  this.userData.tel.substring(5);
+        }
         console.log(this.emailActual);
       });
   }
@@ -168,9 +170,11 @@ export class EditProviderPage {
 
   setLoadAddress(){
     this.DirecD = this.userData.zipcode;
-    this.DirecA =this.userData['direccion'].split(",", 3)['0'].split(" ", 2)['0'];
-    this.DirecB =this.userData['direccion'].split(",", 3)['0'].split(" ", 2)['1'];
-    this.DirecC =this.userData['direccion'].split(",", 3)['1'];
+    if(this.userData.direccion != undefined){
+      this.DirecA =this.userData['direccion'].split(",", 3)['0'].split(" ", 2)['0'];
+      this.DirecB =this.userData['direccion'].split(",", 3)['0'].split(" ", 2)['1'];
+      this.DirecC =this.userData['direccion'].split(",", 3)['1'];
+    }
   }
 
   findCodeEstado( estado : string){

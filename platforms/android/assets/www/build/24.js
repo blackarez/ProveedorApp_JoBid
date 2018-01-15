@@ -97,61 +97,89 @@ var MyServicesPage = (function () {
         this.contractSubs = this.professionalsService.getContract(this.UserActual).subscribe(function (dataList) {
             console.log('professionalsService-S my-services');
             // console.log('datalist');
-            // console.log(dataList);
-            if (dataList['$value']) {
+            console.log(dataList);
+            console.log(dataList['$value']);
+            if (dataList['$value'] == null) {
                 _this.showAlertNoServices();
+                console.log('professionalsService-US my-services');
+                _this.contractSubs.unsubscribe();
             }
             else {
                 var _loop_1 = function (key) {
-                    console.log(dataList[key]);
-                    console.log(key);
-                    // console.log(dataList[key]['User']);
-                    // console.log(dataList[key]['$key']);
-                    //--buscamos la informacion de la oferta.
-                    _this.offerSubs = _this.offerService.getOffer(key).subscribe(function (offerBD) {
-                        console.log('professionalsService-S my-services');
-                        if (offerBD) {
-                            console.log(offerBD);
-                            if (offerBD.name != undefined) {
-                                //--buscamos los datos actualizados del usuario
-                                _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
-                                    console.log('userSubs-S my-services');
-                                    console.log(userDB);
-                                    if (userDB) {
-                                        if (userDB['user_username'] != undefined) {
-                                            var nameUser = userDB['user_username'];
-                                            var addresU = userDB['user_address'];
-                                            var addresUser = void 0;
-                                            var imgUser = void 0;
-                                            for (var key_1 in addresU) {
-                                                addresUser = addresU[key_1]['addr_info'];
-                                            }
-                                            var phoneUser = userDB['user_tel'];
-                                            console.log(userDB['user_picture']);
-                                            if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
-                                                imgUser = _this.imgUserDefault;
+                    // console.log(dataList[key]);
+                    // console.log(key);
+                    if ('$value' == key) {
+                        _this.showAlertNoServices();
+                        console.log('professionalsService-US my-services');
+                        _this.contractSubs.unsubscribe();
+                    }
+                    else {
+                        // console.log(dataList[key]['User']);
+                        // console.log(dataList[key]['$key']);
+                        //--buscamos la informacion de la oferta.
+                        _this.offerSubs = _this.offerService.getOffer(key).subscribe(function (offerBD) {
+                            console.log('professionalsService-S my-services');
+                            if (offerBD) {
+                                if (offerBD != undefined) {
+                                    // console.log(offerBD);
+                                    if (offerBD.name != undefined) {
+                                        //--buscamos los datos actualizados del usuario
+                                        _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
+                                            console.log('userSubs-S my-services');
+                                            // console.log(userDB);
+                                            if (userDB) {
+                                                if (userDB != undefined) {
+                                                    if (userDB['user_username'] != undefined) {
+                                                        var nameUser = userDB['user_username'];
+                                                        var addresU = userDB['user_address'];
+                                                        var addresUser = void 0;
+                                                        var imgUser = void 0;
+                                                        for (var key_1 in addresU) {
+                                                            addresUser = addresU[key_1]['addr_info'];
+                                                        }
+                                                        var phoneUser = userDB['user_tel'];
+                                                        console.log(userDB['user_picture']);
+                                                        if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
+                                                            imgUser = _this.imgUserDefault;
+                                                        }
+                                                        else {
+                                                            imgUser = userDB['user_picture'];
+                                                        }
+                                                        var DataUser = { 'id': dataList[key]['User'], "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
+                                                        var DataService = { "Service": offerBD.name, "SubService": offerBD.Clasificacion.categoria };
+                                                        _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser, DataService: DataService });
+                                                    }
+                                                    console.log('userSubs-US my-services');
+                                                    _this.userSubs.unsubscribe();
+                                                }
+                                                else {
+                                                    console.log('offerSubs-US my-services');
+                                                    _this.offerSubs.unsubscribe();
+                                                }
                                             }
                                             else {
-                                                imgUser = userDB['user_picture'];
+                                                console.log('offerSubs-US my-services');
+                                                _this.offerSubs.unsubscribe();
                                             }
-                                            var DataUser = { 'id': dataList[key]['User'], "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
-                                            var DataService = { "Service": offerBD.name, "SubService": offerBD.Clasificacion.categoria };
-                                            _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser, DataService: DataService });
-                                        }
-                                        console.log('userSubs-US my-services');
-                                        _this.userSubs.unsubscribe();
+                                        });
                                     }
-                                });
+                                }
+                                else {
+                                    console.log('professionalsService-US my-services');
+                                    _this.contractSubs.unsubscribe();
+                                }
                             }
-                        }
-                    });
+                            else {
+                                console.log('professionalsService-US my-services');
+                                _this.contractSubs.unsubscribe();
+                            }
+                        });
+                    }
                 };
                 for (var key in dataList) {
                     _loop_1(key);
                 }
             }
-            console.log('offerSubs-US my-services');
-            _this.offerSubs.unsubscribe();
             console.log('professionalsService-US my-services');
             _this.contractSubs.unsubscribe();
         });

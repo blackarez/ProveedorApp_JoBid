@@ -119,7 +119,8 @@ export class MyApp {
     }
     // console.log(user['prof_picture']);
     // console.log(this.srcUser);
-    if(user['prof_star'] && user['prof_star'] != '' && user['prof_star'] != null && user['prof_star'] != undefined){
+    console.log(user['prof_star']);
+    if(user['prof_star'] && user['prof_star'] != ' ' && user['prof_star'] != null && user['prof_star'] != undefined){
       this.star= Math.round(user['prof_star']);
       let contenido='';
       if(Math.round(this.star) == 5){

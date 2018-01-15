@@ -6,61 +6,61 @@
 -->
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-      </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>JoBid</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-<form id="signup-form3" class="list" padding>
-  <ion-list id="signup-list3">
-    <ion-item>
-      <ion-input type="text" placeholder="Name" [(ngModel)]="userData.name"  name="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Last name" [(ngModel)]="userData.lastName"  name="lastName"></ion-input>
-    </ion-item>
-    <ion-item>    
+  <form id="signup-form3" class="list" padding>
+    <ion-list id="signup-list3">
+      <ion-item>
+        <ion-input type="text" placeholder="Name" [(ngModel)]="userData.name" name="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Last name" [(ngModel)]="userData.lastName" name="lastName"></ion-input>
+      </ion-item>
+      <ion-item>
         <!-- <input type="date" ng-model="user.birthdate"> -->
         <!-- <ion-input type="date" class="mitad" placeholder="Date" [(ngModel)]="userData.date"  name="date" formControlName="date"></ion-input> -->
-        <ion-input type="date" class="dateclass placeholderclass" placeholder="D/M/Y" [(ngModel)]="userData.date"  name="date" formControlName="date"></ion-input>
-      </ion-item>    
-      <ion-item>    
+        <ion-input type="date" class="dateclass placeholderclass" placeholder="D/M/Y" [(ngModel)]="userData.date" name="date" formControlName="date"></ion-input>
+      </ion-item>
+      <ion-item>
         <!-- <ion-icon name="person" item-start></ion-icon> -->
-        <ion-input type="text" placeholder="Social security" [(ngModel)]="userData.socialSecurity"  name="socialSecurity" formControlName="socialSecurity"></ion-input>
+        <ion-input type="text" placeholder="Social security" [(ngModel)]="userData.socialSecurity" name="socialSecurity" formControlName="socialSecurity"></ion-input>
         <!-- <ion-input type="text" class="mitad" placeholder="Social security" [(ngModel)]="userData.socialSecurity"  name="socialSecurity" formControlName="socialSecurity"></ion-input> -->
       </ion-item>
-    <ion-item>
-      <ion-select [(ngModel)]="userData.pais" name="pais" placeholder="Country">
-        <ion-option value="USA" selected>U.S.A</ion-option>
-      </ion-select>
-     </ion-item>
-    <ion-item>
-      <ion-select class="mitad" [(ngModel)]="userData.state" name="state" (ngModelChange)="setCity()" placeholder="State">
-        <ion-option *ngFor="let state of estados" value="{{state.nameShort}}">{{state.name}}</ion-option>
-      </ion-select>
-      <ion-select  class="mitad" [(ngModel)]="userData.zipcode" name="zipcode" (ngModelChange)="setZipCode()" placeholder="City"> [(ngModel)]="gaming"
-        <ion-option selected>....</ion-option>
-        <ion-option *ngFor="let city of ciudades" value="{{city.zipcode}}">{{city.name}} - {{city.zipcode}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item  class="mitad mitadEspacio">
+      <ion-item>
+        <ion-select [(ngModel)]="userData.pais" name="pais" placeholder="Country">
+          <ion-option value="USA" selected>U.S.A</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select class="mitad" [(ngModel)]="userData.state" name="state" (ngModelChange)="setCity()" placeholder="State">
+          <ion-option *ngFor="let state of estados" value="{{state.nameShort}}">{{state.name}}</ion-option>
+        </ion-select>
+        <ion-select class="mitad" [(ngModel)]="userData.zipcode" name="zipcode" (ngModelChange)="setZipCode()" placeholder="City">
+          <ion-option selected>....</ion-option>
+          <ion-option *ngFor="let city of ciudades" value="{{city.zipcode}}">{{city.name}} - {{city.zipcode}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="mitad mitadEspacio">
         <!-- <ion-icon name="home" item-start></ion-icon> -->
         <ion-input type="number" placeholder="1234" [(ngModel)]="DirecA" name="DirecA" formControlName="DirecA"></ion-input>
       </ion-item>
-      <ion-item  class="mitad">
+      <ion-item class="mitad">
         <ion-input type="text" placeholder="Avenue" value="" [(ngModel)]="DirecB" name="DirecB" formControlName="DirecB"></ion-input>
       </ion-item>
-      <ion-item  class="mitad mitadEspacio">
+      <ion-item class="mitad mitadEspacio">
         <!-- <ion-icon name="home" item-start style="background:transparent; color:transparent;"></ion-icon> -->
         <ion-input type="text" placeholder="City" [(ngModel)]="DirecC" name="DirecC" formControlName="DirecC"></ion-input>
         <!-- <ion-input type="text" placeholder="NJ 0000" value="{{DirecD}}" class="mitad" [(ngModel)]="DirecD" name="DirecD" formControlName="DirecD"></ion-input> -->
       </ion-item>
-      <ion-item  class="mitad">
+      <ion-item class="mitad">
         <ion-input type="text" placeholder="NJ 0000" [(ngModel)]="DirecD" name="DirecD" formControlName="DirecD"></ion-input>
-      <ion-item>
-    <!-- <ion-item>
+      </ion-item>
+      <!-- <ion-item>
       <ion-input type="number" placeholder="1234" class="mitad" [(ngModel)]="DirecA" name="DirecA"></ion-input>
       <ion-input type="text" placeholder="Avenue" value="" class="mitad" [(ngModel)]="DirecB" name="DirecB"></ion-input>
     </ion-item>
@@ -68,43 +68,43 @@
       <ion-input type="text" placeholder="City" class="mitad" [(ngModel)]="DirecC" name="DirecC" ></ion-input>
       <ion-input type="text" placeholder="NJ 0000" value="{{DirecD}}" class="mitad" [(ngModel)]="DirecD" name="DirecD"></ion-input>
     </ion-item> -->
-    <ion-item>
-      <ion-input type="email" placeholder="Mail" [(ngModel)]="userData.email" name="email" ></ion-input>
-     </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="User" [(ngModel)]="userData.username"  name="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" placeholder="Password" [(ngModel)]="userData.password" name="password"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input type="email" placeholder="Mail" [(ngModel)]="userData.email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="User" [(ngModel)]="userData.username" name="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" placeholder="Password" [(ngModel)]="userData.password" name="password"></ion-input>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <ion-item>
+              <ion-select [(ngModel)]="telA" name="telA" placeholder="Area code">
+                <ion-option *ngFor="let stateCod of codeAreaEstadoSelect" value="{{stateCod.code}}">{{stateCod.code}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col col-8>
+            <ion-item>
+              <ion-input type="tel" placeholder="Phone #" [(ngModel)]="telB" name="telB"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
     <ion-grid>
       <ion-row>
-        <ion-col col-4>
-          <ion-item>
-             <ion-select [(ngModel)]="telA" name="telA" placeholder="Area code">
-              <ion-option *ngFor="let stateCod of codeAreaEstadoSelect" value="{{stateCod.code}}">{{stateCod.code}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col col-8>
-          <ion-item>
-            <ion-input type="tel" placeholder="Phone #" [(ngModel)]="telB" name="telB"></ion-input>
-          </ion-item>
+        <ion-col class="btnBottom">
+          <button ion-button block color="light" (click)="goEditUser()">Save
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-list>
-</form>
-</ion-content>
-<ion-footer>
-    <ion-toolbar>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="btnBottom">
-            <button  ion-button block color="light" (click)="goEditUser()">Save
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>  
-    </ion-toolbar>
-  </ion-footer>
+  </ion-toolbar>
+</ion-footer>

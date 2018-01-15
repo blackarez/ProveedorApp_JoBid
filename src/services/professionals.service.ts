@@ -89,7 +89,7 @@ export class ProfessionalsService{
 		// alert("new proveedor");
 		let key = undefined;
 		//default star
-		let star = '5';
+		let star = 5;
 		// console.log('key:'+key);
 		// console.log('keyNew:'+keyNew);
 		if(keyNew && keyNew != null  && keyNew != undefined){
@@ -99,7 +99,7 @@ export class ProfessionalsService{
 			key = d.getTime();
 			var keyUser = "prof_"+(key);
 		}
-		if(userData['star'] != undefined && userData['star'] != null){
+		if(userData['star'] != undefined && userData['star'] != null && userData['star'] != " "){
 			if(userData['star'] != star){
 				star= userData['star'];
 			}
@@ -145,7 +145,7 @@ export class ProfessionalsService{
 		//userData = {"username":"","password":"","email":"","name":"","lastName":"","date":"","socialSecurity":"","zipcode":"","state":"","picture":"","verificacion":"","pais":"","direccion":"","tel":"","uidFace":"","star":""};
 		let key = undefined;
 		//default star
-		let star = '5';
+		let star = 5;
 		// console.log('key:'+key);
 		// console.log('keyNew:'+keyNew);
 		if(keyNew && keyNew != null  && keyNew != undefined){
@@ -156,7 +156,7 @@ export class ProfessionalsService{
 			var keyUser = "prof_"+(key);
 		}
 		
-		if(userData['star'] != undefined && userData['star'] != null){
+		if(userData['star'] != undefined && userData['star'] != null && userData['star'] != " "){
 			if(userData['star'] != star){
 				star= userData['star'];
 			}

@@ -160,15 +160,19 @@ var ServiceInfoPage = (function () {
         // }
     };
     ServiceInfoPage.prototype.loadDescripcion = function () {
+        var _this = this;
         var offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(function (DetailBD) {
             if (offerDetailSub != undefined) {
                 console.log('offerDetailSub-S service-info');
                 console.log(DetailBD);
                 if (DetailBD) {
-                    //  if(DetailBD.Clasificacion.informacion.foto != undefined){
-                    //    this.serviceImage = DetailBD.Clasificacion.informacion.foto;
-                    //    console.log(this.serviceImage = DetailBD.Clasificacion.informacion.foto);
-                    //  }
+                    if (_this.serviceImage == 'assets/img/User/FotoServiceInfo.JPG' || _this.serviceImage == null || _this.serviceImage == undefined) {
+                        if (DetailBD.Clasificacion.informacion.foto != undefined) {
+                            _this.serviceImage = DetailBD.Clasificacion.informacion.foto;
+                            console.log(_this.serviceImage = DetailBD.Clasificacion.informacion.foto);
+                            _this.DataService.imgOffer = _this.serviceImage;
+                        }
+                    }
                     console.log('offerDetailSub-US service-info');
                     offerDetailSub.unsubscribe();
                 }

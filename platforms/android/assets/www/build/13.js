@@ -155,8 +155,8 @@ var ServiceSalePage = (function () {
         this.loadView();
         this.getSale();
         this.getTimer();
-        this.startTimer();
-        this.contador = '0' + this.minutos + ':' + '0' + this.segundos;
+        // this.startTimer();
+        // this.contador = '0' + this.minutos + ':' + '0' + this.segundos;
     }
     ServiceSalePage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ServiceSalePage');
@@ -272,22 +272,22 @@ var ServiceSalePage = (function () {
                                 if (user.prof_picture && user.prof_picture != undefined && user.prof_picture != '') {
                                     img = user.prof_picture;
                                 }
-                                console.log(_this.Workers);
+                                // console.log(this.Workers);
                                 var ListaWorkers = _this.Workers;
-                                console.log(ListaWorkers);
+                                // console.log(ListaWorkers);
                                 var idKeyWorker = ListaWorkers.findIndex(function (keysWorkers) {
                                     return keysWorkers.id == trabajador;
                                 });
-                                console.log(idKeyWorker);
+                                // console.log(idKeyWorker);
                                 if (idKeyWorker >= 0) {
-                                    console.log('if 1');
+                                    // console.log('if 1');
                                     _this.Workers[idKeyWorker] = ({ "id": trabajador, "offer": trabajadores_1[trabajador]['offer'], "img": img, "name": user.prof_name });
                                 }
                                 else {
-                                    console.log('if -1');
+                                    // console.log('if -1');
                                     _this.Workers.push({ "id": trabajador, "offer": trabajadores_1[trabajador]['offer'], "img": img, "name": user.prof_name });
                                 }
-                                console.log(_this.Workers);
+                                // console.log(this.Workers);
                                 console.log('PromiseUser-US sale');
                                 PromiseUser.unsubscribe();
                             });
@@ -314,11 +314,15 @@ var ServiceSalePage = (function () {
             this.goServiceWin();
             console.log('saleSub-US sale');
             this.saleSub.unsubscribe();
+            console.log('timerSubs-US sale');
+            this.timerSubs.unsubscribe();
         }
         else {
             this.navCtrl.setRoot('ShowPage');
             console.log('saleSub-US sale');
             this.saleSub.unsubscribe();
+            console.log('timerSubs-US sale');
+            this.timerSubs.unsubscribe();
         }
     };
     ServiceSalePage.prototype.dobleCifra = function (num) {
@@ -349,29 +353,60 @@ var ServiceSalePage = (function () {
             });
         });
     };
+    //trae los cronometros
     ServiceSalePage.prototype.getTimer = function () {
         var _this = this;
+        console.log(this.DataService.idOff);
         this.timerSubs = this.offerService.getTimmer(this.DataService.idOff).subscribe(function (timer) {
             console.log('timerSubs-S sale');
             // console.log(timer);
             if (timer['$value']) {
-                // console.log(timer['$value']);
-                // console.log(timer['$value'].split(":", 2));
-                var ArrayContador = timer['$value'].split(":", 2);
-                console.log(ArrayContador['0']);
-                console.log(ArrayContador['1']);
-                if (ArrayContador['1'] == '00') {
-                    _this.minutos = Number(ArrayContador['0']) - 1;
-                    _this.segundos = Number(59);
+                if (timer['$value'] != null) {
+                    _this.contador = timer['$value'];
+                    console.log(_this.contador);
+                    if (_this.contador == '00:01') {
+                        // console.log(timer['$value']);
+                        // console.log(timer['$value'].split(":", 2));
+                        // let ArrayContador = timer['$value'].split(":", 2);
+                        // console.log(ArrayContador['0']);
+                        // console.log(ArrayContador['1']);
+                        // if (ArrayContador['1'] == '00') {
+                        //   this.minutos = Number(ArrayContador['0']) - 1;
+                        //   this.segundos = Number(59);
+                        // } else {
+                        //   this.minutos = Number(ArrayContador['0']);
+                        //   this.segundos = Number(ArrayContador['1']) - 1;
+                        // }
+                        if (_this.NumeroContador == 2) {
+                            // clearInterval(this.objNodeTimer);
+                            _this.showContador = false;
+                            // this.audioB();
+                            _this.notificacionFinish();
+                            _this.ganador();
+                        }
+                        else {
+                            _this.notificacionBegin();
+                            // // this.audioA();
+                            // this.minutos = 2;
+                            // this.segundos = 0;
+                            _this.NumeroContador = 2;
+                            _this.offerDisable = false;
+                            _this.showContador = false;
+                        }
+                    }
                 }
                 else {
-                    _this.minutos = Number(ArrayContador['0']);
-                    _this.segundos = Number(ArrayContador['1']) - 1;
+                    console.log('timerSubs-US sale');
+                    _this.timerSubs.unsubscribe();
                 }
             }
-            console.log('timerSubs-US sale');
-            _this.timerSubs.unsubscribe();
+            else {
+                console.log('timerSubs-US sale');
+                _this.timerSubs.unsubscribe();
+            }
         });
+        // console.log('timerSubs-US service-info');
+        // this.timerSubs.unsubscribe();
     };
     //--alert
     ServiceSalePage.prototype.detailsService = function () {
@@ -395,7 +430,8 @@ var ServiceSalePage = (function () {
         var alert = this.alertCtrl.create({
             title: 'Information',
             message: 'The auction was canceled by the Client',
-            buttons: ['OK']
+            buttons: ['OK'],
+            enableBackdropDismiss: false
         });
         alert.present();
     };
