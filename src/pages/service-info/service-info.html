@@ -6,9 +6,14 @@
 -->
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+    <!-- <button ion-button (click)="goShowPage()">
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <!-- <ion-buttons left>
+      <button ion-button icon-only (click)="goShowPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons> -->
     <ion-title>JoBid</ion-title>
   </ion-navbar>
 
@@ -17,39 +22,39 @@
 
 <ion-content>
 
-    <img src="assets/img/fondoLineas.jpg"  class="imageFull imagenContent">
-    <div class="contenedor">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6>
-            <img src="{{imagenUser}}"  class="imagenUser"/>
-          </ion-col>
-          <ion-col col-6>
-            <h3>${{offer}}</h3>
-            <p>{{userName}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-    <div class="barraRoja">
-      <h4>Service Information</h4>
-    </div>
-    <img src="{{serviceImage}}"  class="imageFull"/>
-    <div padding>
-      <p>{{info}}</p>
-      <h4 class="tituloCondator">
-          Time to start the sale.
-      </h4>
-      <h4 class="contador">{{contador}}</h4>
-    </div>
+  <img src="assets/img/fondoLineas.jpg" class="imageFull imagenContent">
+  <div class="contenedor">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <img src="{{imagenUser}}" class="imagenUser" />
+        </ion-col>
+        <ion-col col-6>
+          <h3>${{offer}}</h3>
+          <p>{{userName}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="barraRoja">
+    <h4>Service Information</h4>
+  </div>
+  <img src="{{serviceImage}}" class="imageFull" />
+  <div padding>
+    <p>{{info}}</p>
+    <h4 class="tituloCondator">
+      Time to start the sale.
+    </h4>
+    <h4 class="contador">{{contador}}</h4>
+  </div>
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
-        <div class="btnBottom">
-          <button  ion-button color="danger" block (click)="goSale()" [disabled]="NoGoSale">
-              Enter the sale
-              <ion-icon name="arrow-dropright"></ion-icon> 
-          </button> 
-        </div>
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar>
+    <div class="btnBottom">
+      <button ion-button color="danger" block (click)="goSale()" [disabled]="NoGoSale">
+        Enter the sale
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

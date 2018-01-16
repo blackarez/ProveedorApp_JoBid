@@ -185,7 +185,8 @@ export class ServiceSalePage {
       .subscribe((result) => {
         console.log('saleSub-S sale');
         this.MenosPrecio = undefined;
-        // console.log(result);
+        console.log(result);
+        // alert(JSON.stringify);  
         if (result.status != 'Cancelled') {
           // if(result.status == 'Start'){
           //   this.offerDisable = false;

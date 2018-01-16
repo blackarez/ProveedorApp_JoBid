@@ -149,9 +149,9 @@ var ShowPage = (function () {
         // console.log(localStorage);
     };
     ShowPage.prototype.goInfo = function (item) {
-        console.log('userSubs-US show');
-        console.log('serviceSubs-US show');
-        console.log('listOffer-US show');
+        // console.log('userSubs-US show');
+        // console.log('serviceSubs-US show');
+        // console.log('listOffer-US show');
         clearInterval(this.objNodeTimer);
         this.StatusProvider = false;
         if (this.userSubs != undefined) {
@@ -208,9 +208,9 @@ var ShowPage = (function () {
             }
         }
         else {
-            console.log('userSubs-US show');
-            console.log('serviceSubs-US show');
-            console.log('listOffer-US show');
+            // console.log('userSubs-US show');
+            // console.log('serviceSubs-US show');
+            // console.log('listOffer-US show');
             clearInterval(this.objNodeTimer);
             if (this.userSubs != undefined) {
                 this.userSubs.unsubscribe();

@@ -58,6 +58,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import { Component, ViewChild } from '@angular/core';
+// import { IonicPage, NavController, NavParams, Navbar, AlertController} from 'ionic-angular';
 
 
 /**
@@ -73,6 +75,7 @@ var ServiceInfoPage = (function () {
         this.saleService = saleService;
         this.offerService = offerService;
         this.alertCtrl = alertCtrl;
+        // @ViewChild(Navbar) navBar: Navbar;
         //-data
         this.DataService = [];
         this.NoGoSale = false;
@@ -83,6 +86,12 @@ var ServiceInfoPage = (function () {
         this.callInfo();
         this.userActual = localStorage.getItem('verificacion');
         this.LoadTimmer();
+        // this.navBar.setBackButtonText('hola');
+        // this.navBar.backButtonClick = this.goShowPage;
+        // this.navBar.backButtonClick = (e:UIEvent)=>{
+        //   // todo something
+        //   this.navCtrl.pop();
+        //  }
     }
     ServiceInfoPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ServiceInfoPage');
@@ -91,6 +100,7 @@ var ServiceInfoPage = (function () {
     ServiceInfoPage.prototype.goSale = function () {
         console.log('statusSubs-US service-info');
         console.log('timerSubs-US service-info');
+        this.offerDetailSub.unsubscribe();
         this.statusSubs.unsubscribe();
         this.timerSubs.unsubscribe();
         this.saleService.setSaleProvider(this.DataService.idUser, this.DataService.idOff, this.userActual, '-');
@@ -148,6 +158,7 @@ var ServiceInfoPage = (function () {
                 console.log('statusSubs-US service-info');
                 console.log('timerSubs-US service-info');
                 _this.statusSubs.unsubscribe();
+                _this.offerDetailSub.unsubscribe();
                 _this.timerSubs.unsubscribe();
                 if (status['$value'] == 'Cancelled') {
                     _this.AlertCancelOffer();
@@ -161,8 +172,8 @@ var ServiceInfoPage = (function () {
     };
     ServiceInfoPage.prototype.loadDescripcion = function () {
         var _this = this;
-        var offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(function (DetailBD) {
-            if (offerDetailSub != undefined) {
+        this.offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(function (DetailBD) {
+            if (_this.offerDetailSub != undefined) {
                 console.log('offerDetailSub-S service-info');
                 console.log(DetailBD);
                 if (DetailBD) {
@@ -173,8 +184,8 @@ var ServiceInfoPage = (function () {
                             _this.DataService.imgOffer = _this.serviceImage;
                         }
                     }
-                    console.log('offerDetailSub-US service-info');
-                    offerDetailSub.unsubscribe();
+                    // console.log('offerDetailSub-US service-info');
+                    // this.offerDetailSub.unsubscribe();
                 }
             }
         });
@@ -183,6 +194,7 @@ var ServiceInfoPage = (function () {
         this.navCtrl.setRoot('ShowPage');
         console.log('statusSubs-US service-info');
         console.log('timerSubs-US service-info');
+        this.offerDetailSub.unsubscribe();
         this.statusSubs.unsubscribe();
         this.timerSubs.unsubscribe();
     };
@@ -200,7 +212,7 @@ var ServiceInfoPage = (function () {
 ServiceInfoPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-info',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\service-info\service-info.html"*/'<!--\n\n  Generated template for the ServiceInfoPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n    <ion-title>JoBid</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n\n\n    <img src="assets/img/fondoLineas.jpg"  class="imageFull imagenContent">\n\n    <div class="contenedor">\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-6>\n\n            <img src="{{imagenUser}}"  class="imagenUser"/>\n\n          </ion-col>\n\n          <ion-col col-6>\n\n            <h3>${{offer}}</h3>\n\n            <p>{{userName}}</p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </div>\n\n    <div class="barraRoja">\n\n      <h4>Service Information</h4>\n\n    </div>\n\n    <img src="{{serviceImage}}"  class="imageFull"/>\n\n    <div padding>\n\n      <p>{{info}}</p>\n\n      <h4 class="tituloCondator">\n\n          Time to start the sale.\n\n      </h4>\n\n      <h4 class="contador">{{contador}}</h4>\n\n    </div>\n\n</ion-content>\n\n<ion-footer>\n\n    <ion-toolbar>\n\n        <div class="btnBottom">\n\n          <button  ion-button color="danger" block (click)="goSale()" [disabled]="NoGoSale">\n\n              Enter the sale\n\n              <ion-icon name="arrow-dropright"></ion-icon> \n\n          </button> \n\n        </div>\n\n    </ion-toolbar>\n\n  </ion-footer>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\service-info\service-info.html"*/,
+        selector: 'page-service-info',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\service-info\service-info.html"*/'<!--\n\n  Generated template for the ServiceInfoPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <!-- <button ion-button (click)="goShowPage()">\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button> -->\n\n    <!-- <ion-buttons left>\n\n      <button ion-button icon-only (click)="goShowPage()">\n\n        <ion-icon name="arrow-back"></ion-icon>\n\n      </button>\n\n    </ion-buttons> -->\n\n    <ion-title>JoBid</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n\n\n  <img src="assets/img/fondoLineas.jpg" class="imageFull imagenContent">\n\n  <div class="contenedor">\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-6>\n\n          <img src="{{imagenUser}}" class="imagenUser" />\n\n        </ion-col>\n\n        <ion-col col-6>\n\n          <h3>${{offer}}</h3>\n\n          <p>{{userName}}</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n  <div class="barraRoja">\n\n    <h4>Service Information</h4>\n\n  </div>\n\n  <img src="{{serviceImage}}" class="imageFull" />\n\n  <div padding>\n\n    <p>{{info}}</p>\n\n    <h4 class="tituloCondator">\n\n      Time to start the sale.\n\n    </h4>\n\n    <h4 class="contador">{{contador}}</h4>\n\n  </div>\n\n</ion-content>\n\n<ion-footer>\n\n  <ion-toolbar>\n\n    <div class="btnBottom">\n\n      <button ion-button color="danger" block (click)="goSale()" [disabled]="NoGoSale">\n\n        Enter the sale\n\n        <ion-icon name="arrow-dropright"></ion-icon>\n\n      </button>\n\n    </div>\n\n  </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\service-info\service-info.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_2__services_sale_service__["a" /* SaleService */], __WEBPACK_IMPORTED_MODULE_3__services_offer_service__["a" /* OfferService */],

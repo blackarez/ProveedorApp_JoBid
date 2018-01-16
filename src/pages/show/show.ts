@@ -74,9 +74,9 @@ export class ShowPage {
   }
 
   goInfo(item) {
-    console.log('userSubs-US show');
-    console.log('serviceSubs-US show');
-    console.log('listOffer-US show');
+    // console.log('userSubs-US show');
+    // console.log('serviceSubs-US show');
+    // console.log('listOffer-US show');
     clearInterval(this.objNodeTimer);
     this.StatusProvider  = false;
     if (this.userSubs != undefined) { this.userSubs.unsubscribe(); }
@@ -125,9 +125,9 @@ export class ShowPage {
         };
       }
     } else {
-      console.log('userSubs-US show');
-      console.log('serviceSubs-US show');
-      console.log('listOffer-US show');
+      // console.log('userSubs-US show');
+      // console.log('serviceSubs-US show');
+      // console.log('listOffer-US show');
       clearInterval(this.objNodeTimer);
       if (this.userSubs != undefined) { this.userSubs.unsubscribe(); }
       if (this.serviceSubs != undefined) { this.serviceSubs.unsubscribe(); }

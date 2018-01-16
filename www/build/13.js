@@ -250,7 +250,8 @@ var ServiceSalePage = (function () {
                     .subscribe(function (result) {
                     console.log('saleSub-S sale');
                     _this.MenosPrecio = undefined;
-                    // console.log(result);
+                    console.log(result);
+                    // alert(JSON.stringify);  
                     if (result.status != 'Cancelled') {
                         // if(result.status == 'Start'){
                         //   this.offerDisable = false;

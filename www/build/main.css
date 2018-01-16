@@ -25987,6 +25987,11 @@ page-payment-methods .spacer {
   height: 10px;
 }
 
+page-payment-methods .InfoAlert {
+  color: red;
+  text-align: center;
+}
+
 page-payments h3 {
   text-align: center;
   font-weight: bold;

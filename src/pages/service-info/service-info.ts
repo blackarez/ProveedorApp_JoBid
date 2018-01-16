@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+// import { Component, ViewChild } from '@angular/core';
+// import { IonicPage, NavController, NavParams, Navbar, AlertController} from 'ionic-angular';
 
 import { SaleService } from '../../services/sale.service';
 import { OfferService } from '../../services/offer.service';
@@ -17,6 +19,7 @@ import { OfferService } from '../../services/offer.service';
   templateUrl: 'service-info.html',
 })
 export class ServiceInfoPage {
+  // @ViewChild(Navbar) navBar: Navbar;
   //-data
   DataService: any = [];
   userActual: any;
@@ -30,9 +33,11 @@ export class ServiceInfoPage {
   //-sub
   timerSubs: any;
   statusSubs: any;
+  offerDetailSub:any;
 
   //-default
   serviceImage = 'assets/img/User/FotoServiceInfo.JPG';
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private saleService: SaleService, private offerService: OfferService,
@@ -43,6 +48,12 @@ export class ServiceInfoPage {
     this.callInfo();
     this.userActual = localStorage.getItem('verificacion');
     this.LoadTimmer();
+    // this.navBar.setBackButtonText('hola');
+    // this.navBar.backButtonClick = this.goShowPage;
+    // this.navBar.backButtonClick = (e:UIEvent)=>{
+    //   // todo something
+    //   this.navCtrl.pop();
+    //  }
   }
 
   ionViewDidLoad() {
@@ -52,6 +63,7 @@ export class ServiceInfoPage {
   goSale() {
     console.log('statusSubs-US service-info');
     console.log('timerSubs-US service-info');
+    this.offerDetailSub.unsubscribe();
     this.statusSubs.unsubscribe();
     this.timerSubs.unsubscribe();
     this.saleService.setSaleProvider(this.DataService.idUser, this.DataService.idOff, this.userActual, '-');
@@ -113,6 +125,7 @@ export class ServiceInfoPage {
           console.log('statusSubs-US service-info');
           console.log('timerSubs-US service-info');
           this.statusSubs.unsubscribe();
+          this.offerDetailSub.unsubscribe();
           this.timerSubs.unsubscribe();
           if (status['$value'] == 'Cancelled') {
             this.AlertCancelOffer();
@@ -125,11 +138,11 @@ export class ServiceInfoPage {
     // this.timerSubs.unsubscribe();
     // }
   }
-
+ 
   loadDescripcion() {
-    let offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(
+    this.offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(
       (DetailBD) => {
-        if (offerDetailSub != undefined) {
+        if (this.offerDetailSub != undefined) {
           console.log('offerDetailSub-S service-info');
           console.log(DetailBD);
           if (DetailBD) {
@@ -140,8 +153,8 @@ export class ServiceInfoPage {
                 this.DataService.imgOffer = this.serviceImage;
               }
             }
-            console.log('offerDetailSub-US service-info');
-            offerDetailSub.unsubscribe();
+            // console.log('offerDetailSub-US service-info');
+            // this.offerDetailSub.unsubscribe();
           }
         }
       }
@@ -152,6 +165,7 @@ export class ServiceInfoPage {
     this.navCtrl.setRoot('ShowPage');
     console.log('statusSubs-US service-info');
     console.log('timerSubs-US service-info');
+    this.offerDetailSub.unsubscribe();
     this.statusSubs.unsubscribe();
     this.timerSubs.unsubscribe();
   }
