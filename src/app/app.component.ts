@@ -27,21 +27,21 @@ export class MyApp {
   //-Default
   userName: string = 'hola logeado';
   srcUser: string = 'assets/img/user.png';
-  star:any = '3';
-  starUser:any;
+  star: any = '3';
+  starUser: any;
 
   //--root
-  rootPage:string = 'HomePage';
+  rootPage: string = 'HomePage';
 
   //--data
-  userMenu:any;
+  userMenu: any;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(
-    public platform: Platform, public statusBar: StatusBar, 
-    public splashScreen: SplashScreen,public afAuth: AngularFireAuth,
-    private professionalsService : ProfessionalsService
+    public platform: Platform, public statusBar: StatusBar,
+    public splashScreen: SplashScreen, public afAuth: AngularFireAuth,
+    private professionalsService: ProfessionalsService
   ) {
     this.initializeApp();
 
@@ -50,7 +50,7 @@ export class MyApp {
       { title: 'Edit', component: 'EditUserPage' },
       { title: 'Menu', component: 'ShowPage' },
       { title: 'My services', component: 'MyServicesPage' },
-     { title: 'Payments', component: 'PaymentsPage' },
+      { title: 'Payments', component: 'PaymentsPage' },
     ];
 
   }
@@ -71,88 +71,98 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  usuarioLogeado(){
-    this.afAuth.authState.subscribe( userAuth => {
-        console.log('find user menu');
-        console.log(userAuth);
-        // alert(JSON.stringify(userAuth));
-        if(userAuth){
-          // let email=  userAuth.providerData["0"].email;
-          if(userAuth.providerData["0"].providerId == 'password'){
-            let email =  userAuth.providerData["0"].email;
-            console.log(email);
+  usuarioLogeado() {
+    this.afAuth.authState.subscribe(userAuth => {
+      console.log('find user menu');
+      console.log(userAuth);
+      // alert(JSON.stringify(userAuth));
+      if (userAuth) {
+        // let email=  userAuth.providerData["0"].email;
+        if (userAuth.providerData["0"].providerId == 'password') {
+          let email = userAuth.providerData["0"].email;
+          console.log(email);
 
-            let Userexists= this.professionalsService.getProfessionalExists(email).subscribe( (User) => {
-              console.log('User Logueado');
-              console.log(User);
-              if(User['0']){
-                this.loadViewUser(User['0']);
-                if(Userexists != undefined){
-                  // Userexists.unsubscribe();
-                }
+          let Userexists = this.professionalsService.getProfessionalExists(email).subscribe((User) => {
+            console.log('User Logueado');
+            console.log(User);
+            if (User['0']) {
+              this.loadViewUser(User['0']);
+              if (Userexists != undefined) {
+                // Userexists.unsubscribe();
               }
-            });
-          }else{
-            let faceUid =  userAuth.uid;
-            console.log(faceUid);
-            let Userexists= this.professionalsService.getProfessionalUidFace(faceUid).subscribe( (User) => {
-              console.log('User Logueado');
-              console.log(User);
-              if(User['0']){
-                this.loadViewUser(User['0']);
-                if(Userexists != undefined){
-                  // Userexists.unsubscribe();
-                }
+            }
+          });
+        } else {
+          let faceUid = userAuth.uid;
+          console.log(faceUid);
+          let Userexists = this.professionalsService.getProfessionalUidFace(faceUid).subscribe((User) => {
+            console.log('User Logueado');
+            console.log(User);
+            if (User['0']) {
+              this.loadViewUser(User['0']);
+              if (Userexists != undefined) {
+                // Userexists.unsubscribe();
               }
-            });
-          }
-          
+            }
+          });
         }
+
+      }
     });
   }
 
-  loadViewUser(user){
+  loadViewUser(user) {
     console.log(user);
-    this.userName= user['prof_username'];
-    if(user['prof_picture'] && user['prof_picture'] != '' && user['prof_picture'] != null && user['prof_picture'] != undefined){
-      this.srcUser= user['prof_picture'];
-    }
-    // console.log(user['prof_picture']);
-    // console.log(this.srcUser);
-    console.log(user['prof_star']);
-    if(user['prof_star'] && user['prof_star'] != ' ' && user['prof_star'] != null && user['prof_star'] != undefined){
-      this.star= Math.round(user['prof_star']);
-      let contenido='';
-      if(Math.round(this.star) == 5){
-        contenido +='cinco';
+    if (user != undefined) {
+      this.userName = user['prof_username'];
+      if (user['prof_picture'] && user['prof_picture'] != '' && user['prof_picture'] != null && user['prof_picture'] != undefined) {
+        this.srcUser = user['prof_picture'];
       }
-      if(Math.round(this.star) == 4){
-        contenido +='cuatro';
+      // console.log(user['prof_picture']);
+      // console.log(this.srcUser);
+      console.log(user['prof_star']);
+      if (user['prof_star'] && user['prof_star'] != ' ' && user['prof_star'] != null && user['prof_star'] != undefined) {
+        this.star = Math.round(user['prof_star']);
+        let contenido = '';
+        if (Math.round(this.star) == 5) {
+          contenido += 'cinco';
+        }
+        if (Math.round(this.star) == 4) {
+          contenido += 'cuatro';
+        }
+        if (Math.round(this.star) == 3) {
+          contenido += 'tres';
+        }
+        if (Math.round(this.star) == 2) {
+          contenido += 'dos';
+        }
+        if (Math.round(this.star) == 1) {
+          contenido += 'one';
+        }
+        this.starUser = contenido;
       }
-      if(Math.round(this.star) == 3){
-        contenido +='tres';
-      }
-      if(Math.round(this.star) == 2){
-        contenido +='dos';
-      }
-      if(Math.round(this.star) == 1){
-        contenido +='one';
-      }
-      this.starUser= contenido;
+
+    } else {
+      this.userName = 'hola logeado';
+      this.srcUser = 'assets/img/user.png';
+      this.star = '1';
+      this.starUser =  'one';
     }
     // localStorage.setItem('verificacion',user['$key']);
     // this.nav.setRoot('ShowPage');
   }
 
-  
-  cerrarSeccion(){
-    this.afAuth.auth.signOut().then((value)=>{
+
+  cerrarSeccion() {
+    this.afAuth.auth.signOut().then((value) => {
       console.log(value);
       this.nav.setRoot('HomePage');
     }).catch((error) => console.info(error));
+    localStorage.removeItem('verificacion');
+    this.loadViewUser(undefined);
   }
 
-  goPolicies(){
+  goPolicies() {
     this.nav.push('PoliciesPage');
   }
 

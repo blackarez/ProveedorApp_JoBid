@@ -6,9 +6,9 @@
 -->
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-      </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>JoBid</ion-title>
   </ion-navbar>
 </ion-header>
@@ -18,18 +18,20 @@
       <ion-grid>
         <ion-row>
           <ion-col col-8>
-            <h3><strong> Business: </strong>{{p.TypeBusiness}}</h3>
-            <p><strong>{{p.Service}}</strong> > {{p.SubService}}</p>
+            <h3>
+              <strong> Business: </strong>{{p.TypeBusiness}}</h3>
+            <p>
+              <strong>{{p.Service}}</strong> > {{p.SubService}}</p>
           </ion-col>
           <ion-col col-2>
-              <button  ion-button block (click)="EditService(p.id)" icon-only round color="danger">
-                  <ion-icon name='sync'></ion-icon>
-              </button>
+            <button ion-button block (click)="EditService(p.id)" icon-only round color="danger">
+              <ion-icon name='sync'></ion-icon>
+            </button>
           </ion-col>
           <ion-col col-2>
-              <button  ion-button block (click)="DropService(p.id)" icon-only round color="danger">
-                  <ion-icon name='close'></ion-icon>
-              </button>
+            <button ion-button block (click)="DropService(p.id)" icon-only round color="danger">
+              <ion-icon name='close'></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -37,18 +39,18 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="btnBottom">
-            <button  ion-button block color="light" (click)="goEdit()">Edit User
-            </button>
-          </ion-col>
-          <ion-col class="btnBottom">
-            <button  ion-button block color="light"(click)="goNew()">New service
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>  
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="btnBottom">
+          <button ion-button block color="light" (click)="goEdit()">Edit User
+          </button>
+        </ion-col>
+        <ion-col class="btnBottom">
+          <button ion-button block color="light" (click)="goNew()">New service
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

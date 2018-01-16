@@ -23,8 +23,8 @@ export class ServiceInfoAPage {
   typeBusiness:any;
   experiencia:any;
   moreInformation:any;
-  certificacion:any;
-  seguro:any;
+  certificacion:any=false;
+  seguro:any=false;
   booelanSeguro:boolean= false;
   booelanCertificacion:boolean= false;
 

@@ -98,87 +98,85 @@ var MyServicesPage = (function () {
             console.log('professionalsService-S my-services');
             // console.log('datalist');
             console.log(dataList);
-            console.log(dataList['$value']);
-            if (dataList['$value'] == null) {
-                _this.showAlertNoServices();
-                console.log('professionalsService-US my-services');
-                _this.contractSubs.unsubscribe();
-            }
-            else {
-                var _loop_1 = function (key) {
-                    // console.log(dataList[key]);
-                    // console.log(key);
-                    if ('$value' == key) {
-                        _this.showAlertNoServices();
-                        console.log('professionalsService-US my-services');
-                        _this.contractSubs.unsubscribe();
-                    }
-                    else {
-                        // console.log(dataList[key]['User']);
-                        // console.log(dataList[key]['$key']);
-                        //--buscamos la informacion de la oferta.
-                        _this.offerSubs = _this.offerService.getOffer(key).subscribe(function (offerBD) {
-                            console.log('professionalsService-S my-services');
-                            if (offerBD) {
-                                if (offerBD != undefined) {
-                                    // console.log(offerBD);
-                                    if (offerBD.name != undefined) {
-                                        //--buscamos los datos actualizados del usuario
-                                        _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
-                                            console.log('userSubs-S my-services');
-                                            // console.log(userDB);
-                                            if (userDB) {
-                                                if (userDB != undefined) {
-                                                    if (userDB['user_username'] != undefined) {
-                                                        var nameUser = userDB['user_username'];
-                                                        var addresU = userDB['user_address'];
-                                                        var addresUser = void 0;
-                                                        var imgUser = void 0;
-                                                        for (var key_1 in addresU) {
-                                                            addresUser = addresU[key_1]['addr_info'];
-                                                        }
-                                                        var phoneUser = userDB['user_tel'];
-                                                        console.log(userDB['user_picture']);
-                                                        if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
-                                                            imgUser = _this.imgUserDefault;
-                                                        }
-                                                        else {
-                                                            imgUser = userDB['user_picture'];
-                                                        }
-                                                        var DataUser = { 'id': dataList[key]['User'], "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
-                                                        var DataService = { "Service": offerBD.name, "SubService": offerBD.Clasificacion.categoria };
-                                                        _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser, DataService: DataService });
+            var _loop_1 = function (key) {
+                // console.log(dataList[key]);
+                // console.log(key);
+                if ('$value' == key) {
+                    _this.showAlertNoServices();
+                    console.log('professionalsService-US my-services');
+                    _this.contractSubs.unsubscribe();
+                }
+                else {
+                    // console.log(dataList[key]['User']);
+                    // console.log(dataList[key]['$key']);
+                    //--buscamos la informacion de la oferta.
+                    _this.offerSubs = _this.offerService.getOffer(key).subscribe(function (offerBD) {
+                        console.log('professionalsService-S my-services');
+                        if (offerBD) {
+                            if (offerBD != undefined) {
+                                // console.log(offerBD);
+                                if (offerBD.name != undefined) {
+                                    //--buscamos los datos actualizados del usuario
+                                    _this.userSubs = _this.userService.getUser(dataList[key]['User']).subscribe(function (userDB) {
+                                        console.log('userSubs-S my-services');
+                                        // console.log(userDB);
+                                        if (userDB) {
+                                            if (userDB != undefined) {
+                                                if (userDB['user_username'] != undefined) {
+                                                    var nameUser = userDB['user_username'];
+                                                    var addresU = userDB['user_address'];
+                                                    var addresUser = void 0;
+                                                    var imgUser = void 0;
+                                                    for (var key_1 in addresU) {
+                                                        addresUser = addresU[key_1]['addr_info'];
                                                     }
-                                                    console.log('userSubs-US my-services');
-                                                    _this.userSubs.unsubscribe();
-                                                }
-                                                else {
-                                                    console.log('offerSubs-US my-services');
-                                                    _this.offerSubs.unsubscribe();
+                                                    var phoneUser = userDB['user_tel'];
+                                                    // console.log(userDB['user_picture']);
+                                                    if (userDB['user_picture'] == undefined || userDB['user_picture'] == null || userDB['user_picture'] == "") {
+                                                        imgUser = _this.imgUserDefault;
+                                                    }
+                                                    else {
+                                                        imgUser = userDB['user_picture'];
+                                                    }
+                                                    var DataUser = { 'id': dataList[key]['User'], "nameUser": nameUser, "address": addresUser, "tel": phoneUser, "img": imgUser };
+                                                    var DataService = { "Service": offerBD.name, "SubService": offerBD.Clasificacion.categoria };
+                                                    _this.ListService.push({ 'id': key, 'info': dataList[key]['info'], 'sale': dataList[key]['sale'], 'status': dataList[key]['status'], DataUser: DataUser, DataService: DataService });
                                                 }
                                             }
                                             else {
+                                                console.log('userSubs-US my-services');
+                                                _this.userSubs.unsubscribe();
                                                 console.log('offerSubs-US my-services');
                                                 _this.offerSubs.unsubscribe();
                                             }
-                                        });
-                                    }
-                                }
-                                else {
-                                    console.log('professionalsService-US my-services');
-                                    _this.contractSubs.unsubscribe();
+                                        }
+                                        else {
+                                            console.log('userSubs-US my-services');
+                                            _this.userSubs.unsubscribe();
+                                            console.log('offerSubs-US my-services');
+                                            _this.offerSubs.unsubscribe();
+                                        }
+                                    });
                                 }
                             }
                             else {
+                                console.log('offerSubs-US my-services');
+                                _this.offerSubs.unsubscribe();
                                 console.log('professionalsService-US my-services');
                                 _this.contractSubs.unsubscribe();
                             }
-                        });
-                    }
-                };
-                for (var key in dataList) {
-                    _loop_1(key);
+                        }
+                        else {
+                            console.log('offerSubs-US my-services');
+                            _this.offerSubs.unsubscribe();
+                            console.log('professionalsService-US my-services');
+                            _this.contractSubs.unsubscribe();
+                        }
+                    });
                 }
+            };
+            for (var key in dataList) {
+                _loop_1(key);
             }
             console.log('professionalsService-US my-services');
             _this.contractSubs.unsubscribe();
@@ -198,7 +196,7 @@ var MyServicesPage = (function () {
 MyServicesPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-my-services',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/'<!--\n\n  Generated template for the MyServicesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>JoBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n\n\n  <ion-content padding>\n\n  <h3>My services</h3>\n\n  <h4>List:</h4>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">\n\n      <h3><strong>Services Code: </strong>{{list.id}}</h3>\n\n      <h3><strong>{{list.DataService.Service}}: </strong>{{list.DataService.SubService}}</h3>\n\n      <h3><strong>Customer: </strong>{{list.DataUser.nameUser}}</h3>\n\n      <p><strong>Status:</strong> {{list.status}}</p>\n\n      <p><strong>Sale:</strong> {{list.sale}}</p>\n\n    </button>\n\n  </ion-list>\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/,
+        selector: 'page-my-services',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/'<!--\n\n  Generated template for the MyServicesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>JoBid</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>My services</h3>\n\n  <h4>List:</h4>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let list of ListService" (click)="goInfoService(list)" class="btnItem">\n\n      <h4>\n\n        <strong>Services: </strong>{{list.id}}</h4>\n\n      <h4>\n\n        <strong>{{list.DataService.Service}}: </strong>{{list.DataService.SubService}}</h4>\n\n      <h4>\n\n        <strong>Customer: </strong>{{list.DataUser.nameUser}}</h4>\n\n      <p>\n\n        <strong>Status:</strong> {{list.status}}</p>\n\n      <p>\n\n        <strong>Sale:</strong> {{list.sale}}</p>\n\n    </button>\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\my-services\my-services.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_2__services_professionals_service__["a" /* ProfessionalsService */],

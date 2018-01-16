@@ -49,6 +49,12 @@
 		0D5842E314A14C94B2876B1E /* UILocalNotification+APPLocalNotification.ios9.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D231CB9C3A541FA8AE430A3 /* UILocalNotification+APPLocalNotification.ios9.m */; };
 		320462A4A51448C286D2DA30 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A89536FD1B4D039A818842 /* UserNotifications.framework */; };
 		7964E401B7E24F99BD23EF6B /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DFEAB034A44D888A13A02 /* IonicKeyboard.m */; };
+		9DEAAB687CDD48928BEEA0FE /* APPBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = F866CDA86D424508AD576D88 /* APPBadge.m */; };
+		37CD828E24934CAB94C24923 /* APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F07B55D30B4891AFB38380 /* APPLocalNotification.m */; };
+		F794E3076FAE4C24BB4ACF05 /* APPNotificationContent.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AC4D697E274CA9ADBB94D8 /* APPNotificationContent.m */; };
+		750B6847555F457B8A99F688 /* APPNotificationOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE474EEEBDBB4DD49A1D47A8 /* APPNotificationOptions.m */; };
+		5B493D56B42C48F7B55DB49E /* UNUserNotificationCenter+APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = A798875495FD41899FE33F6F /* UNUserNotificationCenter+APPLocalNotification.m */; };
+		9EB6942F2DCC473B84A97E3A /* UNNotificationRequest+APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = F752904C326F4DD68A35DD64 /* UNNotificationRequest+APPLocalNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +153,18 @@
 		E2A89536FD1B4D039A818842 /* UserNotifications.framework */ = {isa = PBXFileReference; name = "UserNotifications.framework"; path = "System/Library/Frameworks/UserNotifications.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		B84DFEAB034A44D888A13A02 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		D6102565E9914957B8F7A70E /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		F866CDA86D424508AD576D88 /* APPBadge.m */ = {isa = PBXFileReference; name = "APPBadge.m"; path = "cordova-plugin-badge/APPBadge.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		34019C6CB98846ECAF3E50D2 /* APPBadge.h */ = {isa = PBXFileReference; name = "APPBadge.h"; path = "cordova-plugin-badge/APPBadge.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		21F07B55D30B4891AFB38380 /* APPLocalNotification.m */ = {isa = PBXFileReference; name = "APPLocalNotification.m"; path = "cordova-plugin-local-notification/APPLocalNotification.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		C9AC4D697E274CA9ADBB94D8 /* APPNotificationContent.m */ = {isa = PBXFileReference; name = "APPNotificationContent.m"; path = "cordova-plugin-local-notification/APPNotificationContent.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		BE474EEEBDBB4DD49A1D47A8 /* APPNotificationOptions.m */ = {isa = PBXFileReference; name = "APPNotificationOptions.m"; path = "cordova-plugin-local-notification/APPNotificationOptions.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		A798875495FD41899FE33F6F /* UNUserNotificationCenter+APPLocalNotification.m */ = {isa = PBXFileReference; name = "UNUserNotificationCenter+APPLocalNotification.m"; path = "cordova-plugin-local-notification/UNUserNotificationCenter+APPLocalNotification.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		F752904C326F4DD68A35DD64 /* UNNotificationRequest+APPLocalNotification.m */ = {isa = PBXFileReference; name = "UNNotificationRequest+APPLocalNotification.m"; path = "cordova-plugin-local-notification/UNNotificationRequest+APPLocalNotification.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		723DBB480EEE4576877F6060 /* APPLocalNotification.h */ = {isa = PBXFileReference; name = "APPLocalNotification.h"; path = "cordova-plugin-local-notification/APPLocalNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7EE61EF629AF4C0EABF49F26 /* APPNotificationContent.h */ = {isa = PBXFileReference; name = "APPNotificationContent.h"; path = "cordova-plugin-local-notification/APPNotificationContent.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		87C88AEEEE8B499AB8E77143 /* APPNotificationOptions.h */ = {isa = PBXFileReference; name = "APPNotificationOptions.h"; path = "cordova-plugin-local-notification/APPNotificationOptions.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		206B87B7D5544AE6A96B04BC /* UNUserNotificationCenter+APPLocalNotification.h */ = {isa = PBXFileReference; name = "UNUserNotificationCenter+APPLocalNotification.h"; path = "cordova-plugin-local-notification/UNUserNotificationCenter+APPLocalNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		0C837ECEC1F9408D803FCC4D /* UNNotificationRequest+APPLocalNotification.h */ = {isa = PBXFileReference; name = "UNNotificationRequest+APPLocalNotification.h"; path = "cordova-plugin-local-notification/UNNotificationRequest+APPLocalNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +336,18 @@
 				CC663F4CC9E34426BB371FAD /* UILocalNotification+APPLocalNotification.ios9.h */,
 				B84DFEAB034A44D888A13A02 /* IonicKeyboard.m */,
 				D6102565E9914957B8F7A70E /* IonicKeyboard.h */,
+				F866CDA86D424508AD576D88 /* APPBadge.m */,
+				34019C6CB98846ECAF3E50D2 /* APPBadge.h */,
+				21F07B55D30B4891AFB38380 /* APPLocalNotification.m */,
+				C9AC4D697E274CA9ADBB94D8 /* APPNotificationContent.m */,
+				BE474EEEBDBB4DD49A1D47A8 /* APPNotificationOptions.m */,
+				A798875495FD41899FE33F6F /* UNUserNotificationCenter+APPLocalNotification.m */,
+				F752904C326F4DD68A35DD64 /* UNNotificationRequest+APPLocalNotification.m */,
+				723DBB480EEE4576877F6060 /* APPLocalNotification.h */,
+				7EE61EF629AF4C0EABF49F26 /* APPNotificationContent.h */,
+				87C88AEEEE8B499AB8E77143 /* APPNotificationOptions.h */,
+				206B87B7D5544AE6A96B04BC /* UNUserNotificationCenter+APPLocalNotification.h */,
+				0C837ECEC1F9408D803FCC4D /* UNNotificationRequest+APPLocalNotification.h */,
 			);
 			name = Plugins;
 			path = "JoBid/Plugins";
@@ -453,6 +483,12 @@
 				4472EDF14DA04577AF275A74 /* UIApplication+APPLocalNotification.ios9.m in Sources */,
 				0D5842E314A14C94B2876B1E /* UILocalNotification+APPLocalNotification.ios9.m in Sources */,
 				7964E401B7E24F99BD23EF6B /* IonicKeyboard.m in Sources */,
+				9DEAAB687CDD48928BEEA0FE /* APPBadge.m in Sources */,
+				37CD828E24934CAB94C24923 /* APPLocalNotification.m in Sources */,
+				F794E3076FAE4C24BB4ACF05 /* APPNotificationContent.m in Sources */,
+				750B6847555F457B8A99F688 /* APPNotificationOptions.m in Sources */,
+				5B493D56B42C48F7B55DB49E /* UNUserNotificationCenter+APPLocalNotification.m in Sources */,
+				9EB6942F2DCC473B84A97E3A /* UNNotificationRequest+APPLocalNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

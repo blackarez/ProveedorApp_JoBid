@@ -78,6 +78,7 @@ export class ShowPage {
     console.log('serviceSubs-US show');
     console.log('listOffer-US show');
     clearInterval(this.objNodeTimer);
+    this.StatusProvider  = false;
     if (this.userSubs != undefined) { this.userSubs.unsubscribe(); }
     if (this.serviceSubs != undefined) { this.serviceSubs.unsubscribe(); }
     if (this.listOffer != undefined) { this.listOffer.unsubscribe(); }
@@ -100,7 +101,7 @@ export class ShowPage {
     } else {
       this.labelToogle = "Online";
       this.showServices();
-      // this.startTimer();
+      this.startTimer();
       // this.showServices();
       // this.showServices();
     }
@@ -114,19 +115,28 @@ export class ShowPage {
   //cada 5 segundos reiniamos la consulta de offertas
   private timer() {
     // console.log(this.segundos);
-
-    if (this.segundos == 1) {
-      console.log(this.objNodeTimer);
-      this.reiniciarBusquedaOffer();
-      this.segundos = 5;
+    if (this.StatusProvider == true) {
+      if (this.segundos == 1) {
+        // console.log(this.objNodeTimer);
+        this.reiniciarBusquedaOffer();
+        this.segundos = 5;
+      } else {
+        if (--this.segundos < 0) {
+        };
+      }
     } else {
-      if (--this.segundos < 0) {
-      };
+      console.log('userSubs-US show');
+      console.log('serviceSubs-US show');
+      console.log('listOffer-US show');
+      clearInterval(this.objNodeTimer);
+      if (this.userSubs != undefined) { this.userSubs.unsubscribe(); }
+      if (this.serviceSubs != undefined) { this.serviceSubs.unsubscribe(); }
+      if (this.listOffer != undefined) { this.listOffer.unsubscribe(); }
     }
   }
 
   reiniciarBusquedaOffer() {
-    console.log(this.objNodeTimer);
+    // console.log(this.objNodeTimer);
     // console.log(this.listOffer);
     // console.log(this.serviceSubs);
     // console.log(this.userSubs);
@@ -196,17 +206,19 @@ export class ShowPage {
         if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
           console.info('star ok');
           // alert('star ok');
-          // console.log(BDListOffer[keys]);
+          console.log(BDListOffer[keys]);
           // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
-          // console.log(BDListOffer[keys].Clasificacion.distancia);
+          console.log(BDListOffer[keys].Clasificacion.distancia);
           if (BDListOffer[keys].UserLocacion) {
-            // console.log(BDListOffer[keys].UserLocacion.latitud);
-            // console.log(BDListOffer[keys].UserLocacion.longitud);
+            console.log('User-Coordenadas:latitud' + BDListOffer[keys].UserLocacion.latitud);
+            console.log('User-Coordenadas:longitud' + BDListOffer[keys].UserLocacion.longitud);
+            console.log('Proveedor-Coordenadas:latitud' + this.lat);
+            console.log('Proveedor-Coordenadas:longitud' + this.lng);
             let distanceKilo = this.getDistanceKilometros(Number(this.lat), Number(this.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
-            console.log(distanceKilo);
+            console.log('distanciaKilometros: ' + distanceKilo);
 
             let distanceMillas = this.getConvertKilometrosMillas(distanceKilo);
-            // console.log(distanceMillas);
+            console.log('distanciaMillas: ' + distanceMillas);
             // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
             // console.log('filtros');
             // console.log('listOff:'+BDListOffer[keys].Clasificacion.categoria);
@@ -219,7 +231,8 @@ export class ShowPage {
               // alert('categoria y  distancia ok');
               let ServiceProviderCertificate: any;
               let ServiceProviderSecurity: any;
-              if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null) {
+              console.log(BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
+              if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null && BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != undefined) {
                 ServiceProviderCertificate = BDListServicesProvider[keySP]['serv_detail']['serv_certificate'];
                 // console.log('listPro-cer:'+BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
                 // console.log('off-certificado:'+BDListOffer[keys].Clasificacion.certificacion);
@@ -348,19 +361,23 @@ export class ShowPage {
     var dLat = rad(lat2 - lat1);
     // var dLat = rad( 0);
     var dLong = rad(lon2 - lon1);
+    console.log(dLat);
+    console.log(dLong);
     // var dLong = rad( 0);
     // console.log('lat2 - lat1'+( lat2 - lat1 ));
     // console.log('lon2 - lon1'+(lon2 - lon1));
-    // console.log(dLat);
-    // console.log(dLong);
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    //a = sin^2((lat2-lat1)/2)+cos(lat1)*cos(lat2)* sin^2((long2-long2)/2)
+    //c 2 . atan2(raiz a, raiz (1-a) )
+    //d= R *c;
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
+    console.log(d);
     return d.toFixed(3); //Retorna tres decimales
   }
 
   getConvertKilometrosMillas(kilo) {
-    return kilo * 0.62137;
+    return kilo * 0.621371192237334;
   }
 
   getNumeroDistanceOffer(distanceOffer, distanciaMilla) {
@@ -370,35 +387,41 @@ export class ShowPage {
     switch (distanceOffer) {
       case "1M": {
         if (1 >= distanciaMilla) {
+          console.log('Distancia de 1 milla de la offerta');
           dentroDeDistancia = true; console.log('distanciaOK');
         }
         break;
       }
       case "2M": {
         if (2 >= distanciaMilla) {
+          console.log('Distancia de 2 millas de la offerta');
           dentroDeDistancia = true; console.info('distanciaOK');
         }
         break;
       }
       case "3M": {
         if (3 >= distanciaMilla) {
+          console.log('Distancia de 3 millas de la offerta');
           dentroDeDistancia = true; console.info('distanciaOK');
         }
         break;
       }
       case "4M": {
         if (4 >= distanciaMilla) {
+          console.log('Distancia de 4 millas de la offerta');
           dentroDeDistancia = true; console.info('distanciaOK');
         }
         break;
       }
       case "5M": {
         if (5 >= distanciaMilla) {
+          console.log('Distancia de 5 millas de la offerta');
           dentroDeDistancia = true; console.info('distanciaOK');
         }
         break;
       }
       case "5MM": {
+        console.log('Distancia de mas de 5 millas de la offerta');
         dentroDeDistancia = true; console.info('distanciaOK');
         break;
       }

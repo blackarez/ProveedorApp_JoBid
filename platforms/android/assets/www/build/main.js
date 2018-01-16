@@ -1291,32 +1291,40 @@ var MyApp = (function () {
     };
     MyApp.prototype.loadViewUser = function (user) {
         console.log(user);
-        this.userName = user['prof_username'];
-        if (user['prof_picture'] && user['prof_picture'] != '' && user['prof_picture'] != null && user['prof_picture'] != undefined) {
-            this.srcUser = user['prof_picture'];
+        if (user != undefined) {
+            this.userName = user['prof_username'];
+            if (user['prof_picture'] && user['prof_picture'] != '' && user['prof_picture'] != null && user['prof_picture'] != undefined) {
+                this.srcUser = user['prof_picture'];
+            }
+            // console.log(user['prof_picture']);
+            // console.log(this.srcUser);
+            console.log(user['prof_star']);
+            if (user['prof_star'] && user['prof_star'] != ' ' && user['prof_star'] != null && user['prof_star'] != undefined) {
+                this.star = Math.round(user['prof_star']);
+                var contenido = '';
+                if (Math.round(this.star) == 5) {
+                    contenido += 'cinco';
+                }
+                if (Math.round(this.star) == 4) {
+                    contenido += 'cuatro';
+                }
+                if (Math.round(this.star) == 3) {
+                    contenido += 'tres';
+                }
+                if (Math.round(this.star) == 2) {
+                    contenido += 'dos';
+                }
+                if (Math.round(this.star) == 1) {
+                    contenido += 'one';
+                }
+                this.starUser = contenido;
+            }
         }
-        // console.log(user['prof_picture']);
-        // console.log(this.srcUser);
-        console.log(user['prof_star']);
-        if (user['prof_star'] && user['prof_star'] != ' ' && user['prof_star'] != null && user['prof_star'] != undefined) {
-            this.star = Math.round(user['prof_star']);
-            var contenido = '';
-            if (Math.round(this.star) == 5) {
-                contenido += 'cinco';
-            }
-            if (Math.round(this.star) == 4) {
-                contenido += 'cuatro';
-            }
-            if (Math.round(this.star) == 3) {
-                contenido += 'tres';
-            }
-            if (Math.round(this.star) == 2) {
-                contenido += 'dos';
-            }
-            if (Math.round(this.star) == 1) {
-                contenido += 'one';
-            }
-            this.starUser = contenido;
+        else {
+            this.userName = 'hola logeado';
+            this.srcUser = 'assets/img/user.png';
+            this.star = '1';
+            this.starUser = 'one';
         }
         // localStorage.setItem('verificacion',user['$key']);
         // this.nav.setRoot('ShowPage');
@@ -1327,6 +1335,8 @@ var MyApp = (function () {
             console.log(value);
             _this.nav.setRoot('HomePage');
         }).catch(function (error) { return console.info(error); });
+        localStorage.removeItem('verificacion');
+        this.loadViewUser(undefined);
     };
     MyApp.prototype.goPolicies = function () {
         this.nav.push('PoliciesPage');

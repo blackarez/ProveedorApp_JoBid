@@ -44,6 +44,14 @@
     },
     "ionic-plugin-keyboard": {
       "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "com.JoBid.provider"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "com.JoBid.provider"
     }
   }
 }

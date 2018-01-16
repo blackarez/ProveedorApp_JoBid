@@ -25944,6 +25944,15 @@ page-my-services strong {
 
 page-my-services .btnItem {
   border-bottom: 1px solid #666666;
+  padding: 0;
+}
+
+page-my-services .list-md .item-block .item-inner, page-my-services .list-ios .item-block .item-inner {
+  padding: 0;
+}
+
+page-my-services .label.label-md, page-my-services .label.label-ios {
+  padding: 5px 0;
 }
 
 page-payment-methods img {
