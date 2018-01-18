@@ -251,19 +251,22 @@ var HomePage = (function () {
         var Data = { 'datos': this.userDataUpdate };
         this.navCtrl.setRoot('ShowPage', Data);
         // this.navCtrl.setRoot('ShowPage');
+        this.desSubcribir();
     };
     HomePage.prototype.login = function () {
         this.navCtrl.push('LoginPage');
+        this.desSubcribir();
     };
     HomePage.prototype.singup = function () {
         this.navCtrl.push('SingupPage');
+        this.desSubcribir();
     };
     HomePage.prototype.usuarioLogeado = function () {
         var _this = this;
         if (this.consultaFirebaseLogin == 1) {
             this.consultaFirebaseLogin = 2;
             console.log('contadorLoging' + this.consultaFirebaseLogin);
-            var userLogeadoSub_1 = this.afAuth.authState.subscribe(function (userAuth) {
+            this.userLogeadoSub = this.afAuth.authState.subscribe(function (userAuth) {
                 console.log('find user menu');
                 console.log(userAuth);
                 if (userAuth) {
@@ -271,14 +274,14 @@ var HomePage = (function () {
                         if (userAuth.providerData["0"].providerId == 'password') {
                             var email = userAuth.providerData["0"].email;
                             console.log(email);
-                            var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                            _this.Userexists = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
                                     _this.goNextPagePrehome(User['0']);
-                                    // if(Userexists != undefined){
-                                    userLogeadoSub_1.unsubscribe();
-                                    Userexists_1.unsubscribe();
+                                    // if(this.Userexists != undefined){
+                                    _this.userLogeadoSub.unsubscribe();
+                                    _this.Userexists.unsubscribe();
                                     console.log('unsubscribe');
                                     // }
                                 }
@@ -287,14 +290,14 @@ var HomePage = (function () {
                         else {
                             var faceUid = userAuth.uid;
                             console.log(faceUid);
-                            var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
+                            _this.Userexists = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
                                     _this.goNextPagePrehome(User['0']);
-                                    // if(Userexists != undefined){
-                                    userLogeadoSub_1.unsubscribe();
-                                    Userexists_2.unsubscribe();
+                                    // if(this.Userexists != undefined){
+                                    _this.userLogeadoSub.unsubscribe();
+                                    _this.Userexists.unsubscribe();
                                     console.log('unsubscribe');
                                     // }
                                 }
@@ -302,15 +305,23 @@ var HomePage = (function () {
                         }
                     }
                     else {
-                        userLogeadoSub_1.unsubscribe();
+                        _this.userLogeadoSub.unsubscribe();
                         console.log('unsubscribe');
                     }
                 }
                 else {
-                    userLogeadoSub_1.unsubscribe();
+                    _this.userLogeadoSub.unsubscribe();
                     console.log('unsubscribe');
                 }
             });
+        }
+    };
+    HomePage.prototype.desSubcribir = function () {
+        if (this.userLogeadoSub != undefined) {
+            this.userLogeadoSub.unsubscribe();
+        }
+        if (this.Userexists != undefined) {
+            this.Userexists.unsubscribe();
         }
     };
     return HomePage;
@@ -320,12 +331,10 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-content>\n\n  <!--  <h3>Ionic Menu Starter</h3>\n\n \n\n   <p>\n\n     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.\n\n   </p>\n\n   <button ion-button secondary menuToggle>Toggle Menu</button> -->\n\n\n\n  <ion-card *ngIf="userData">\n\n    <ion-card-header> {{userData.username}} </ion-card-header>\n\n    <img [src]="userData.picture">\n\n    <ion-card-content>\n\n      <p>Email: {{ userData.email}}</p>\n\n      <p>Name: {{ userData.name}}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n  <img src="assets/img/JoBidProveedor.jpg">\n\n  <h5 id="home-heading1" style="">Sing up or Log in</h5>\n\n  <div padding>\n\n    <!-- <button ion-button block color="danger" (click)="googleir()">Log in with Google</button> -->\n\n    <button ion-button block (click)="facebookir()">Sing in with Facebook</button>\n\n  </div>\n\n  <ion-grid class="tabMenu">\n\n    <ion-row>\n\n      <ion-col>\n\n        <button ion-button block color="light" (click)="singup()">\n\n          <ion-grid>\n\n            <ion-row>\n\n              <ion-icon name="contact"></ion-icon>\n\n            </ion-row>\n\n            <ion-row>\n\n              <p>sing up</p>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </button>\n\n      </ion-col>\n\n      <ion-col>\n\n        <button ion-button block color="light" (click)="login()">\n\n          <ion-grid>\n\n            <ion-row>\n\n              <ion-icon name="lock"></ion-icon>\n\n            </ion-row>\n\n            <ion-row>\n\n              <p>login</p>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */],
-        __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */],
-        __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _d || Object])
 ], HomePage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=home.js.map
 
 /***/ })

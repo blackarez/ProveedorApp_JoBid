@@ -122,7 +122,7 @@ export class ShowPage {
         this.segundos = 5;
       } else {
         if (--this.segundos < 0) {
-        };
+        }
       }
     } else {
       // console.log('userSubs-US show');

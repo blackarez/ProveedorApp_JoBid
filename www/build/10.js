@@ -204,7 +204,6 @@ var ShowPage = (function () {
             else {
                 if (--this.segundos < 0) {
                 }
-                ;
             }
         }
         else {

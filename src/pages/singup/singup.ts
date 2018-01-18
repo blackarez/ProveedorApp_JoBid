@@ -110,50 +110,41 @@ export class SingupPage {
     });
   }
 
-
   goPhoneV() {
-    let estoyLogueado: boolean = false;
     if (this.userData.password == this.passwordB) {
+      //-usuario existe
+      this.verificarUsuario().then(
+        (estoyLogueado: boolean) => {
+          console.log(estoyLogueado);
+          console.log('SubcribeUserexists-US singup');
+          this.SubcribeUserexists.unsubscribe();
+          if (estoyLogueado == false) {
+            console.log('creando usuario');
+            this.crearUserFirebase();
+          } else {
+            console.log('alerta signUp');
+            this.showAlertSignUp();
+          }
+        }).catch(() => { console.log('info verificar usuario') });
+    } else {
+      this.showAlertPwd();
+    }
+  }
 
-      //verificaque las contraseñas son iguales
-      // console.log(this.userData["username"]);
-      // console.log(this.userData["email"]);
-      // alert("goPhoneV");
-      //-- verificar si el usuario existe en nuestra base de datos
-      // let Userexists = this.professionalsService.getProfessionalExists(this.userData["email"]);
-      // console.log(JSON.stringify( Userexists));
-      // alert(JSON.stringify(Userexists));
-      // Userexists.forEach((value)=>{ console.log(value);});
+  //-usuario existe
+  verificarUsuario() {
+    return new Promise((resolve, reject) => {
       this.SubcribeUserexists = this.professionalsService.getProfessionalExists(this.userData["email"]).subscribe((value) => {
         console.log('SubcribeUserexists-US singup');
         console.log('user1');
         console.log(value);
-        // alert(JSON.stringify(value));
         if (value['0']) {
-          console.log(value["0"].prof_username);
-          console.log(this.userData["username"]);
-          if (value["0"].prof_username == this.userData["username"]) {
-            // console.log(value["0"].prof_username);
-            estoyLogueado = true;
-            console.log(estoyLogueado);
-          }
-        }
-        //-usuario existe
-        if (estoyLogueado == false) {
-          console.log('enviar correo');
-          this.crearUserFirebase();
-          // alert("no esta registrado");
+          resolve(true);
         } else {
-          console.log('alerta signUp');
-          this.showAlertSignUp();
-          // alert("esta registrado");
+          resolve(false);
         }
-        console.log('SubcribeUserexists-US singup');
-        this.SubcribeUserexists.unsubscribe();
       });
-    } else {
-      this.showAlertPwd();
-    }
+    });
   }
 
   crearUserFirebase() {
@@ -172,7 +163,7 @@ export class SingupPage {
           // alert(JSON.stringify(value));
           // alert('cuenta correo creada');
           console.log(value);
-          this.enviarCorreo(value);
+          this.enviarCorreo();
         }
       },
       (error) => {
@@ -196,22 +187,29 @@ export class SingupPage {
       });
   }
 
-  enviarCorreo(value) {
-    // let user:any = firebase.auth().currentUser.sendEmailVerification()
-    value.currentUser.sendEmailVerification()
-      // user.sendEmailVerification()
-      .then((success) => {
-        console.log(firebase.auth());
+  enviarCorreo() {
+    // console.log(this.afAuth.auth.currentUser);
+
+    this.afAuth.auth.currentUser.sendEmailVerification()
+      .then(
+      (success) => {
+        // console.log(firebase.auth());
         console.log(success);
-        if (success != undefined) {
-          console.info("please verify your email - account correo");
-          this.crearUserBD();
-          // alert("please verify your email - account correo");
-          console.log(success);
-          // alert(JSON.stringify(success));
-          this.correoEnviado = true;
-        }
-      }).catch((err) => {
+        // if (success != undefined) {
+        console.info("please verify your email - account correo");
+        this.crearUserBD();
+        // alert("please verify your email - account correo");
+        console.log(success);
+        // alert(JSON.stringify(success));
+        this.correoEnviado = true;
+        // }
+      }, (err) => {
+        console.error('error envio correo - account correo');
+        // alert('error envio correo - account correo');
+        console.error(err);
+        // alert(JSON.stringify(err));
+      }
+      ).catch((err) => {
         console.error('error envio correo - account correo');
         // alert('error envio correo - account correo');
         console.error(err);
