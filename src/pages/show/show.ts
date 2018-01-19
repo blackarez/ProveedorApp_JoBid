@@ -152,7 +152,7 @@ export class ShowPage {
       // console.log('userSubs-US show');
       this.userSubs.unsubscribe();
     }
-    console.info('busqueda de ofertas');
+    // console.info('busqueda de ofertas');
     this.showServices();
   }
 
@@ -170,20 +170,20 @@ export class ShowPage {
 
   getServiceProvider(BDListOffer) {
     // alert();
-    console.log(this.UserActual);
+    // console.log(this.UserActual);
     this.serviceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(
       (BDListServicesProvider) => {
-        console.log('serviceSubs-S show');
+        // console.log('serviceSubs-S show');
         // console.log(BDListServicesProvider);
         let professionalServiceSubs = this.professionalsService.getStar(this.UserActual).subscribe(
           (starProvider) => {
-            console.log('professionalsService-S show');
+            // console.log('professionalsService-S show');
             // console.log('starP');
             // console.log(starProvider);
             if (starProvider['$value']) {
               this.showListData(BDListOffer, BDListServicesProvider, starProvider['$value']);
             }
-            console.log('professionalsService-US show');
+            // console.log('professionalsService-US show');
             professionalServiceSubs.unsubscribe();
           }
         );
@@ -206,19 +206,19 @@ export class ShowPage {
         if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
           console.info('star ok');
           // alert('star ok');
-          console.log(BDListOffer[keys]);
+          // console.log(BDListOffer[keys]);
           // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
-          console.log(BDListOffer[keys].Clasificacion.distancia);
+          // console.log(BDListOffer[keys].Clasificacion.distancia);
           if (BDListOffer[keys].UserLocacion) {
-            console.log('User-Coordenadas:latitud' + BDListOffer[keys].UserLocacion.latitud);
-            console.log('User-Coordenadas:longitud' + BDListOffer[keys].UserLocacion.longitud);
-            console.log('Proveedor-Coordenadas:latitud' + this.lat);
-            console.log('Proveedor-Coordenadas:longitud' + this.lng);
+            // console.log('User-Coordenadas:latitud' + BDListOffer[keys].UserLocacion.latitud);
+            // console.log('User-Coordenadas:longitud' + BDListOffer[keys].UserLocacion.longitud);
+            // console.log('Proveedor-Coordenadas:latitud' + this.lat);
+            // console.log('Proveedor-Coordenadas:longitud' + this.lng);
             let distanceKilo = this.getDistanceKilometros(Number(this.lat), Number(this.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
-            console.log('distanciaKilometros: ' + distanceKilo);
+            // console.log('distanciaKilometros: ' + distanceKilo);
 
             let distanceMillas = this.getConvertKilometrosMillas(distanceKilo);
-            console.log('distanciaMillas: ' + distanceMillas);
+            // console.log('distanciaMillas: ' + distanceMillas);
             // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
             // console.log('filtros');
             // console.log('listOff:'+BDListOffer[keys].Clasificacion.categoria);
@@ -231,7 +231,7 @@ export class ShowPage {
               // alert('categoria y  distancia ok');
               let ServiceProviderCertificate: any;
               let ServiceProviderSecurity: any;
-              console.log(BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
+              // console.log(BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
               if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null && BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != undefined) {
                 ServiceProviderCertificate = BDListServicesProvider[keySP]['serv_detail']['serv_certificate'];
                 // console.log('listPro-cer:'+BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
@@ -271,7 +271,7 @@ export class ShowPage {
                   }
                   // console.log(BDListOffer[key].User);
                   this.userSubs = this.userService.getUser(BDListOffer[keys].User).subscribe((user) => {
-                    console.log('userSubs-S show');
+                    // console.log('userSubs-S show');
                     this.notificacion();
                     // console.log(user);
                     // console.log(user['user_picture']);
@@ -361,8 +361,8 @@ export class ShowPage {
     var dLat = rad(lat2 - lat1);
     // var dLat = rad( 0);
     var dLong = rad(lon2 - lon1);
-    console.log(dLat);
-    console.log(dLong);
+    // console.log(dLat);
+    // console.log(dLong);
     // var dLong = rad( 0);
     // console.log('lat2 - lat1'+( lat2 - lat1 ));
     // console.log('lon2 - lon1'+(lon2 - lon1));
@@ -372,7 +372,7 @@ export class ShowPage {
     //d= R *c;
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    console.log(d);
+    // console.log(d);
     return d.toFixed(3); //Retorna tres decimales
   }
 

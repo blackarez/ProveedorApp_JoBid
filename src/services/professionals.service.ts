@@ -214,6 +214,12 @@ export class ProfessionalsService{
 		}
 	}
 
+	public setLogin(keyUser,valor :boolean){
+		// console.log(keyUser);
+		// console.log(valor);
+		this.afDBUser.object('/professionals/'+keyUser+'/login').set(valor);
+	}
+
 	public newContract(keyProvider,keyOffer,objContract){
 		console.log(objContract);
 		// this.afDBUser.object('/professionals/'+keyProvider+'/Contracts/'+keyOffer).set(objContract).catch(error => {console.log('error professionals NewCont'); console.log(error);console.log(JSON.stringify(error));});

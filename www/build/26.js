@@ -99,12 +99,19 @@ var LoginPage = (function () {
             console.log('userPromesa-S login');
             console.log(value);
             for (var key in value) {
-                // console.log(value[key]);
+                console.log(value[key]);
                 if (value[key]) {
                     // console.log(value['0']['prof_username']);
                     // console.log(value['0']['prof_email']);
                     if ((_this.userData["username"] == value[key]['prof_username']) || (_this.userData["username"] == value[key]['prof_email'])) {
                         console.info('existeUserPwd');
+                        console.info(value[key]['login']);
+                        if (value[key]['login'] != undefined) {
+                            _this.correoVerificado = value[key]['login'];
+                        }
+                        else {
+                            _this.correoVerificado = false;
+                        }
                         _this.loginFirebaseUserMail(value[key]);
                     }
                 }
@@ -128,12 +135,29 @@ var LoginPage = (function () {
         try {
             var result_1 = this.afAuth.auth.signInWithEmailAndPassword(datos['prof_email'], datos['prof_password']).then(function () {
                 console.log(result_1);
-                _this.userDataUpdate['verificacion'] = datos['$key'];
-                localStorage.setItem('verificacion', datos['$key']);
                 console.log(_this.userDataUpdate);
+                console.log(_this.afAuth.auth.currentUser);
+                console.log(_this.afAuth.auth.currentUser.emailVerified);
+                console.log(_this.correoVerificado);
+                if (_this.correoVerificado == false) {
+                    if (_this.afAuth.auth.currentUser.emailVerified != false) {
+                        console.info('cambio estado login base de datos');
+                        _this.professionalsService.setLogin(datos['$key'], true);
+                        _this.userDataUpdate['verificacion'] = datos['$key'];
+                        localStorage.setItem('verificacion', datos['$key']);
+                        _this.navCtrl.setRoot('ShowPage');
+                    }
+                    else {
+                        _this.showAlertCorreoNoVerificado();
+                    }
+                }
+                else {
+                    _this.userDataUpdate['verificacion'] = datos['$key'];
+                    localStorage.setItem('verificacion', datos['$key']);
+                    _this.navCtrl.setRoot('ShowPage');
+                }
                 // let Data = {'datos':this.userDataUpdate}
                 // this.navCtrl.setRoot(ShowPage,Data);
-                _this.navCtrl.setRoot('ShowPage');
             }).catch(function (error) {
                 _this.showAlertLogin();
             });
@@ -194,6 +218,12 @@ var LoginPage = (function () {
                                 if (value[key]) {
                                     console.log(value[key]);
                                     console.info(JSON.stringify(value[key]));
+                                    if (value[key]['login'] != undefined) {
+                                        _this.correoVerificado = value[key]['login'];
+                                    }
+                                    else {
+                                        _this.correoVerificado = false;
+                                    }
                                     _this.goNextPagePrehomeFace(value[key]);
                                 }
                             }
@@ -224,16 +254,42 @@ var LoginPage = (function () {
         console.log(datos['prof_password']);
         this.userDataUpdate = { "username": datos["prof_username"], "password": datos["prof_password"], "email": datos["prof_email"], "name": datos["prof_name"], "lastName": datos["prof_lastName"], "date": datos["prof_date"], "socialSecurity": datos["prof_socialSecurity"], "zipcode": datos["prof_zipcode"], "state": datos["prof_state"], "picture": datos["prof_picture"], "pais": datos["prof_pais"], "direccion": datos["prof_direccion"], "tel": datos["prof_tel"], "star": datos["prof_star"] };
         // console.log(this.userDataUpdate);
-        this.userDataUpdate['verificacion'] = datos['$key'];
-        localStorage.setItem('verificacion', datos['$key']);
-        console.log(this.userDataUpdate);
-        this.navCtrl.setRoot('ShowPage');
+        if (this.correoVerificado == false) {
+            if (this.afAuth.auth.currentUser.emailVerified == false) {
+                this.showAlertCorreoNoVerificadoFacebook();
+            }
+        }
+        else {
+            this.userDataUpdate['verificacion'] = datos['$key'];
+            localStorage.setItem('verificacion', datos['$key']);
+            this.navCtrl.setRoot('ShowPage');
+        }
+        // this.userDataUpdate['verificacion'] = datos['$key'];
+        // localStorage.setItem('verificacion', datos['$key']);
+        // console.log(this.userDataUpdate);
+        // this.navCtrl.setRoot('ShowPage');
     };
     //-- alertas
     LoginPage.prototype.showAlertLogin = function () {
         var alert = this.alertCtrl.create({
             title: 'login failed',
             subTitle: 'Bad request wrong username or email and password',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    LoginPage.prototype.showAlertCorreoNoVerificado = function () {
+        var alert = this.alertCtrl.create({
+            title: 'login failed',
+            subTitle: 'Verify your email address for this application',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    LoginPage.prototype.showAlertCorreoNoVerificadoFacebook = function () {
+        var alert = this.alertCtrl.create({
+            title: 'login failed',
+            subTitle: 'Verify your email address for this application and login once for the form',
             buttons: ['OK']
         });
         alert.present();

@@ -31,6 +31,7 @@ export class HomePage {
   displayName;
   providerFaceBook: any;
   userDataUpdate: any;
+  correoVerificado:any;
   x: any = [];
   //camera
   uploads: any = [];
@@ -211,10 +212,37 @@ export class HomePage {
   goNextPagePrehome(datos: any) {
     console.log(datos);
     //console.log(datos['$key']);
-    localStorage.setItem('verificacion', datos['$key']);
+    
     this.userDataUpdate = { "email": datos['user_email'], "name": datos['user_name'], "pais": datos['user_pais'], "password": datos['user_password'], "picture": datos['user_picture'], "state": datos['user_state'], "tel": datos['user_tel'], "username": datos['user_username'], "verificacion": datos['$key'], "zipcode": datos['user_zipcode'] };
-    let Data = { 'datos': this.userDataUpdate }
-    this.navCtrl.setRoot('ShowPage', Data);
+    console.log(this.userDataUpdate);
+    console.log(this.afAuth.auth.currentUser.emailVerified);
+    console.log(this.afAuth.auth.currentUser);
+    console.log(this.correoVerificado);
+    
+    if (this.correoVerificado == false) {
+      if(this.afAuth.auth.currentUser != null ){
+
+        if (this.afAuth.auth.currentUser.emailVerified != false) {
+          console.info('cambio estado login base de datos');
+          
+          this.professionalsService.setLogin(datos['$key'], true);
+          localStorage.setItem('verificacion', datos['$key']);
+          let Data = { 'datos': this.userDataUpdate }
+          this.navCtrl.setRoot('ShowPage', Data);
+          
+        } else {
+          // this.showAlertCorreoNoVerificado();
+          this.cerrarSeccion();
+        }
+      }
+    } else {
+      localStorage.setItem('verificacion', datos['$key']);
+      let Data = { 'datos': this.userDataUpdate }
+      this.navCtrl.setRoot('ShowPage', Data);
+    }
+    // localStorage.setItem('verificacion', datos['$key']);
+    // let Data = { 'datos': this.userDataUpdate }
+    // this.navCtrl.setRoot('ShowPage', Data);
     // this.navCtrl.setRoot('ShowPage');
     this.desSubcribir();
   }
@@ -245,6 +273,11 @@ export class HomePage {
                 console.log('User Logueado');
                 console.log(User);
                 if (User['0']) {
+                  if (User['0']['login'] != undefined) {
+                    this.correoVerificado = User['0']['login'];
+                  } else {
+                    this.correoVerificado = false;
+                  }
                   this.goNextPagePrehome(User['0']);
                   // if(this.Userexists != undefined){
                   this.userLogeadoSub.unsubscribe();
@@ -260,6 +293,11 @@ export class HomePage {
                 console.log('User Logueado');
                 console.log(User);
                 if (User['0']) {
+                  if (User['0']['login'] != undefined) {
+                    this.correoVerificado = User['0']['login'];
+                  } else {
+                    this.correoVerificado = false;
+                  }
                   this.goNextPagePrehome(User['0']);
                   // if(this.Userexists != undefined){
                   this.userLogeadoSub.unsubscribe();
@@ -283,6 +321,15 @@ export class HomePage {
   desSubcribir() {
     if (this.userLogeadoSub != undefined) { this.userLogeadoSub.unsubscribe(); }
     if (this.Userexists != undefined) { this.Userexists.unsubscribe(); }
+  }
+
+  cerrarSeccion() {
+    this.afAuth.auth.signOut().then((value) => {
+      console.log(value);
+    }).catch((error) => console.info(error));
+    localStorage.removeItem('verificacion');
+    // this.navCtrl.setRoot('HomePage');
+    // this.loadViewUser(undefined);
   }
 
 }

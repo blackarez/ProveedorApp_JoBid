@@ -63,9 +63,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var ProviderOkPage = (function () {
-    function ProviderOkPage(navCtrl, navParams) {
+    function ProviderOkPage(navCtrl, navParams, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
         //timer
         this.segundos = 5;
         this.startTimer();
@@ -95,6 +96,7 @@ var ProviderOkPage = (function () {
             clearInterval(this.objNodeTimer);
             console.log('servicion fin');
             this.goHome();
+            this.showAlertEmail();
         }
         else {
             if (--this.segundos < 0) {
@@ -103,6 +105,15 @@ var ProviderOkPage = (function () {
             }
         }
     };
+    //-correo enviado en sign up
+    ProviderOkPage.prototype.showAlertEmail = function () {
+        var alerteMail = this.alertCtrl.create({
+            title: 'Information',
+            subTitle: 'An email has been sent to verify your acount',
+            buttons: ['OK']
+        });
+        alerteMail.present();
+    };
     return ProviderOkPage;
 }());
 ProviderOkPage = __decorate([
@@ -110,7 +121,8 @@ ProviderOkPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-provider-ok',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\provider-ok\provider-ok.html"*/'<!--\n\n  Generated template for the ProviderOkPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar>\n\n    <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>JoBid</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <img src="assets/img/JoBidProveedor.jpg" />\n\n    <div class="centrarIcon">\n\n      <ion-icon class="icon-ok" name="checkmark-circle"></ion-icon>\n\n    </div>\n\n    <p>Your account is in the process of being reviewed, all your data is being verified and you will be notified when you can use the platform..</p>\n\n     <!-- <div class="btnBottom" padding>\n\n      <button ion-button color="danger" block (click)="go()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>\n\n    </div> -->\n\n  </ion-content>\n\n'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\provider-ok\provider-ok.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], ProviderOkPage);
 
 //# sourceMappingURL=provider-ok.js.map

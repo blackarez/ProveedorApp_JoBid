@@ -242,9 +242,9 @@ export class SingupPage {
     this.professionalsService.newUser(this.userData, this.userActual);
     // let Data = {'datos':this.userData};
     // this.navCtrl.push('PaymentMethodsPage',Data);
-    if (this.correoEnviado) {
-      this.showAlertEmail();
-    }
+    // if (this.correoEnviado) {
+    //   this.showAlertEmail();
+    // }
     // this.navCtrl.push('PaymentMethodsPage');
     this.navCtrl.push('DocumentPage');
   }
@@ -304,14 +304,14 @@ export class SingupPage {
     alert.present();
   }
 
-  showAlertEmail() {
-    let alerteMail = this.alertCtrl.create({
-      title: 'Information',
-      subTitle: 'An email has been sent to verify your acount',
-      buttons: ['OK']
-    });
-    alerteMail.present();
-  }
+  // showAlertEmail() {
+  //   let alerteMail = this.alertCtrl.create({
+  //     title: 'Information',
+  //     subTitle: 'An email has been sent to verify your acount',
+  //     buttons: ['OK']
+  //   });
+  //   alerteMail.present();
+  // }
   showAlertPwd() {
     let alerteMail = this.alertCtrl.create({
       title: 'Information',

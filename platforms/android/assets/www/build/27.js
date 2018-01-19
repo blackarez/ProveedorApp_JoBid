@@ -246,24 +246,51 @@ var HomePage = (function () {
     HomePage.prototype.goNextPagePrehome = function (datos) {
         console.log(datos);
         //console.log(datos['$key']);
-        localStorage.setItem('verificacion', datos['$key']);
         this.userDataUpdate = { "email": datos['user_email'], "name": datos['user_name'], "pais": datos['user_pais'], "password": datos['user_password'], "picture": datos['user_picture'], "state": datos['user_state'], "tel": datos['user_tel'], "username": datos['user_username'], "verificacion": datos['$key'], "zipcode": datos['user_zipcode'] };
-        var Data = { 'datos': this.userDataUpdate };
-        this.navCtrl.setRoot('ShowPage', Data);
+        console.log(this.userDataUpdate);
+        console.log(this.afAuth.auth.currentUser.emailVerified);
+        console.log(this.afAuth.auth.currentUser);
+        console.log(this.correoVerificado);
+        if (this.correoVerificado == false) {
+            if (this.afAuth.auth.currentUser != null) {
+                if (this.afAuth.auth.currentUser.emailVerified != false) {
+                    console.info('cambio estado login base de datos');
+                    this.professionalsService.setLogin(datos['$key'], true);
+                    localStorage.setItem('verificacion', datos['$key']);
+                    var Data = { 'datos': this.userDataUpdate };
+                    this.navCtrl.setRoot('ShowPage', Data);
+                }
+                else {
+                    // this.showAlertCorreoNoVerificado();
+                    this.cerrarSeccion();
+                }
+            }
+        }
+        else {
+            localStorage.setItem('verificacion', datos['$key']);
+            var Data = { 'datos': this.userDataUpdate };
+            this.navCtrl.setRoot('ShowPage', Data);
+        }
+        // localStorage.setItem('verificacion', datos['$key']);
+        // let Data = { 'datos': this.userDataUpdate }
+        // this.navCtrl.setRoot('ShowPage', Data);
         // this.navCtrl.setRoot('ShowPage');
+        this.desSubcribir();
     };
     HomePage.prototype.login = function () {
         this.navCtrl.push('LoginPage');
+        this.desSubcribir();
     };
     HomePage.prototype.singup = function () {
         this.navCtrl.push('SingupPage');
+        this.desSubcribir();
     };
     HomePage.prototype.usuarioLogeado = function () {
         var _this = this;
         if (this.consultaFirebaseLogin == 1) {
             this.consultaFirebaseLogin = 2;
             console.log('contadorLoging' + this.consultaFirebaseLogin);
-            var userLogeadoSub_1 = this.afAuth.authState.subscribe(function (userAuth) {
+            this.userLogeadoSub = this.afAuth.authState.subscribe(function (userAuth) {
                 console.log('find user menu');
                 console.log(userAuth);
                 if (userAuth) {
@@ -271,14 +298,20 @@ var HomePage = (function () {
                         if (userAuth.providerData["0"].providerId == 'password') {
                             var email = userAuth.providerData["0"].email;
                             console.log(email);
-                            var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                            _this.Userexists = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
+                                    if (User['0']['login'] != undefined) {
+                                        _this.correoVerificado = User['0']['login'];
+                                    }
+                                    else {
+                                        _this.correoVerificado = false;
+                                    }
                                     _this.goNextPagePrehome(User['0']);
-                                    // if(Userexists != undefined){
-                                    userLogeadoSub_1.unsubscribe();
-                                    Userexists_1.unsubscribe();
+                                    // if(this.Userexists != undefined){
+                                    _this.userLogeadoSub.unsubscribe();
+                                    _this.Userexists.unsubscribe();
                                     console.log('unsubscribe');
                                     // }
                                 }
@@ -287,14 +320,20 @@ var HomePage = (function () {
                         else {
                             var faceUid = userAuth.uid;
                             console.log(faceUid);
-                            var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
+                            _this.Userexists = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
+                                    if (User['0']['login'] != undefined) {
+                                        _this.correoVerificado = User['0']['login'];
+                                    }
+                                    else {
+                                        _this.correoVerificado = false;
+                                    }
                                     _this.goNextPagePrehome(User['0']);
-                                    // if(Userexists != undefined){
-                                    userLogeadoSub_1.unsubscribe();
-                                    Userexists_2.unsubscribe();
+                                    // if(this.Userexists != undefined){
+                                    _this.userLogeadoSub.unsubscribe();
+                                    _this.Userexists.unsubscribe();
                                     console.log('unsubscribe');
                                     // }
                                 }
@@ -302,16 +341,32 @@ var HomePage = (function () {
                         }
                     }
                     else {
-                        userLogeadoSub_1.unsubscribe();
+                        _this.userLogeadoSub.unsubscribe();
                         console.log('unsubscribe');
                     }
                 }
                 else {
-                    userLogeadoSub_1.unsubscribe();
+                    _this.userLogeadoSub.unsubscribe();
                     console.log('unsubscribe');
                 }
             });
         }
+    };
+    HomePage.prototype.desSubcribir = function () {
+        if (this.userLogeadoSub != undefined) {
+            this.userLogeadoSub.unsubscribe();
+        }
+        if (this.Userexists != undefined) {
+            this.Userexists.unsubscribe();
+        }
+    };
+    HomePage.prototype.cerrarSeccion = function () {
+        this.afAuth.auth.signOut().then(function (value) {
+            console.log(value);
+        }).catch(function (error) { return console.info(error); });
+        localStorage.removeItem('verificacion');
+        // this.navCtrl.setRoot('HomePage');
+        // this.loadViewUser(undefined);
     };
     return HomePage;
 }());

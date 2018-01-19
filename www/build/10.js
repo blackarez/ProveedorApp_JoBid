@@ -239,7 +239,7 @@ var ShowPage = (function () {
             // console.log('userSubs-US show');
             this.userSubs.unsubscribe();
         }
-        console.info('busqueda de ofertas');
+        // console.info('busqueda de ofertas');
         this.showServices();
     };
     ShowPage.prototype.showServices = function () {
@@ -257,18 +257,18 @@ var ShowPage = (function () {
     ShowPage.prototype.getServiceProvider = function (BDListOffer) {
         var _this = this;
         // alert();
-        console.log(this.UserActual);
+        // console.log(this.UserActual);
         this.serviceSubs = this.professionalsService.getServicesProfessional(this.UserActual).subscribe(function (BDListServicesProvider) {
-            console.log('serviceSubs-S show');
+            // console.log('serviceSubs-S show');
             // console.log(BDListServicesProvider);
             var professionalServiceSubs = _this.professionalsService.getStar(_this.UserActual).subscribe(function (starProvider) {
-                console.log('professionalsService-S show');
+                // console.log('professionalsService-S show');
                 // console.log('starP');
                 // console.log(starProvider);
                 if (starProvider['$value']) {
                     _this.showListData(BDListOffer, BDListServicesProvider, starProvider['$value']);
                 }
-                console.log('professionalsService-US show');
+                // console.log('professionalsService-US show');
                 professionalServiceSubs.unsubscribe();
             });
         });
@@ -286,18 +286,18 @@ var ShowPage = (function () {
                         if (Math.round(Number(stars)) >= Math.round(Number(BDListOffer[keys].Star))) {
                             console.info('star ok');
                             // alert('star ok');
-                            console.log(BDListOffer[keys]);
+                            // console.log(BDListOffer[keys]);
                             // console.log('BDListOffer.categoria: '+BDListOffer[keys].Clasificacion.categoria);
-                            console.log(BDListOffer[keys].Clasificacion.distancia);
+                            // console.log(BDListOffer[keys].Clasificacion.distancia);
                             if (BDListOffer[keys].UserLocacion) {
-                                console.log('User-Coordenadas:latitud' + BDListOffer[keys].UserLocacion.latitud);
-                                console.log('User-Coordenadas:longitud' + BDListOffer[keys].UserLocacion.longitud);
-                                console.log('Proveedor-Coordenadas:latitud' + this_1.lat);
-                                console.log('Proveedor-Coordenadas:longitud' + this_1.lng);
+                                // console.log('User-Coordenadas:latitud' + BDListOffer[keys].UserLocacion.latitud);
+                                // console.log('User-Coordenadas:longitud' + BDListOffer[keys].UserLocacion.longitud);
+                                // console.log('Proveedor-Coordenadas:latitud' + this.lat);
+                                // console.log('Proveedor-Coordenadas:longitud' + this.lng);
                                 var distanceKilo = this_1.getDistanceKilometros(Number(this_1.lat), Number(this_1.lng), Number(BDListOffer[keys].UserLocacion.latitud), Number(BDListOffer[keys].UserLocacion.longitud));
-                                console.log('distanciaKilometros: ' + distanceKilo);
+                                // console.log('distanciaKilometros: ' + distanceKilo);
                                 var distanceMillas = this_1.getConvertKilometrosMillas(distanceKilo);
-                                console.log('distanciaMillas: ' + distanceMillas);
+                                // console.log('distanciaMillas: ' + distanceMillas);
                                 // console.log(this.getNumeroDistanceOffer(BDListOffer[keys].Clasificacion.distancia,distanceMillas));
                                 // console.log('filtros');
                                 // console.log('listOff:'+BDListOffer[keys].Clasificacion.categoria);
@@ -309,7 +309,7 @@ var ShowPage = (function () {
                                     // alert('categoria y  distancia ok');
                                     var ServiceProviderCertificate = void 0;
                                     var ServiceProviderSecurity = void 0;
-                                    console.log(BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
+                                    // console.log(BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
                                     if (BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != null && BDListServicesProvider[keySP]['serv_detail']['serv_certificate'] != undefined) {
                                         ServiceProviderCertificate = BDListServicesProvider[keySP]['serv_detail']['serv_certificate'];
                                         // console.log('listPro-cer:'+BDListServicesProvider[keySP]['serv_detail']['serv_certificate']);
@@ -347,7 +347,7 @@ var ShowPage = (function () {
                                             }
                                             // console.log(BDListOffer[key].User);
                                             this_1.userSubs = this_1.userService.getUser(BDListOffer[keys].User).subscribe(function (user) {
-                                                console.log('userSubs-S show');
+                                                // console.log('userSubs-S show');
                                                 _this.notificacion();
                                                 // console.log(user);
                                                 // console.log(user['user_picture']);
@@ -452,8 +452,8 @@ var ShowPage = (function () {
         var dLat = rad(lat2 - lat1);
         // var dLat = rad( 0);
         var dLong = rad(lon2 - lon1);
-        console.log(dLat);
-        console.log(dLong);
+        // console.log(dLat);
+        // console.log(dLong);
         // var dLong = rad( 0);
         // console.log('lat2 - lat1'+( lat2 - lat1 ));
         // console.log('lon2 - lon1'+(lon2 - lon1));
@@ -463,7 +463,7 @@ var ShowPage = (function () {
         //d= R *c;
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
-        console.log(d);
+        // console.log(d);
         return d.toFixed(3); //Retorna tres decimales
     };
     ShowPage.prototype.getConvertKilometrosMillas = function (kilo) {

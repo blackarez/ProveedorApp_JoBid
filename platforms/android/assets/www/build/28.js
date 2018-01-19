@@ -90,6 +90,7 @@ var EditUserPage = (function () {
     EditUserPage.prototype.DropService = function (id) {
         console.log(id);
         this.professionalsService.dropService(this.UserActual, id);
+        this.navCtrl.setRoot('EditUserPage');
     };
     EditUserPage.prototype.EditService = function (id) {
         console.log(id);

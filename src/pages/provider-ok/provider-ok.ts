@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ProviderOkPage page.
@@ -15,21 +15,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProviderOkPage {
   //timer
-  segundos:number= 5;
-  objNodeTimer:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  segundos: number = 5;
+  objNodeTimer: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public alertCtrl: AlertController,
+  ) {
     this.startTimer();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProviderOkPage');
   }
-  goHome(){
+  goHome() {
     this.navCtrl.setRoot('HomePage');
     this.goClose();
   }
 
-  goClose(){
+  goClose() {
     // this.afAuth.auth.signOut().then((value)=>{
     //   console.log(value);
     //   this.nav.setRoot('HomePage');
@@ -37,22 +39,35 @@ export class ProviderOkPage {
   }
 
   //--- timer
-  startTimer(){
-    this.objNodeTimer=setInterval( () => this.timer(),1000);
+  startTimer() {
+    this.objNodeTimer = setInterval(() => this.timer(), 1000);
   }
 
-  private timer(){
+  private timer() {
     console.log(this.segundos);
     // console.log(this.status);
-    if(this.segundos == 1){ 
-        clearInterval(this.objNodeTimer);
-        console.log('servicion fin');
-        this.goHome();
-    }else{
-      if(--this.segundos< 0){
+    if (this.segundos == 1) {
+      clearInterval(this.objNodeTimer);
+      console.log('servicion fin');
+      this.goHome();
+      this.showAlertEmail();
+    } else {
+      if (--this.segundos < 0) {
         // this.modificarStatus();
-        this.segundos=2;
+        this.segundos = 2;
       }
     }
   }
+
+  //-correo enviado en sign up
+
+  showAlertEmail() {
+    let alerteMail = this.alertCtrl.create({
+      title: 'Information',
+      subTitle: 'An email has been sent to verify your acount',
+      buttons: ['OK']
+    });
+    alerteMail.present();
+  }
+
 }

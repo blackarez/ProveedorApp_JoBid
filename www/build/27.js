@@ -246,10 +246,34 @@ var HomePage = (function () {
     HomePage.prototype.goNextPagePrehome = function (datos) {
         console.log(datos);
         //console.log(datos['$key']);
-        localStorage.setItem('verificacion', datos['$key']);
         this.userDataUpdate = { "email": datos['user_email'], "name": datos['user_name'], "pais": datos['user_pais'], "password": datos['user_password'], "picture": datos['user_picture'], "state": datos['user_state'], "tel": datos['user_tel'], "username": datos['user_username'], "verificacion": datos['$key'], "zipcode": datos['user_zipcode'] };
-        var Data = { 'datos': this.userDataUpdate };
-        this.navCtrl.setRoot('ShowPage', Data);
+        console.log(this.userDataUpdate);
+        console.log(this.afAuth.auth.currentUser.emailVerified);
+        console.log(this.afAuth.auth.currentUser);
+        console.log(this.correoVerificado);
+        if (this.correoVerificado == false) {
+            if (this.afAuth.auth.currentUser != null) {
+                if (this.afAuth.auth.currentUser.emailVerified != false) {
+                    console.info('cambio estado login base de datos');
+                    this.professionalsService.setLogin(datos['$key'], true);
+                    localStorage.setItem('verificacion', datos['$key']);
+                    var Data = { 'datos': this.userDataUpdate };
+                    this.navCtrl.setRoot('ShowPage', Data);
+                }
+                else {
+                    // this.showAlertCorreoNoVerificado();
+                    this.cerrarSeccion();
+                }
+            }
+        }
+        else {
+            localStorage.setItem('verificacion', datos['$key']);
+            var Data = { 'datos': this.userDataUpdate };
+            this.navCtrl.setRoot('ShowPage', Data);
+        }
+        // localStorage.setItem('verificacion', datos['$key']);
+        // let Data = { 'datos': this.userDataUpdate }
+        // this.navCtrl.setRoot('ShowPage', Data);
         // this.navCtrl.setRoot('ShowPage');
         this.desSubcribir();
     };
@@ -278,6 +302,12 @@ var HomePage = (function () {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
+                                    if (User['0']['login'] != undefined) {
+                                        _this.correoVerificado = User['0']['login'];
+                                    }
+                                    else {
+                                        _this.correoVerificado = false;
+                                    }
                                     _this.goNextPagePrehome(User['0']);
                                     // if(this.Userexists != undefined){
                                     _this.userLogeadoSub.unsubscribe();
@@ -294,6 +324,12 @@ var HomePage = (function () {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
+                                    if (User['0']['login'] != undefined) {
+                                        _this.correoVerificado = User['0']['login'];
+                                    }
+                                    else {
+                                        _this.correoVerificado = false;
+                                    }
                                     _this.goNextPagePrehome(User['0']);
                                     // if(this.Userexists != undefined){
                                     _this.userLogeadoSub.unsubscribe();
@@ -324,6 +360,14 @@ var HomePage = (function () {
             this.Userexists.unsubscribe();
         }
     };
+    HomePage.prototype.cerrarSeccion = function () {
+        this.afAuth.auth.signOut().then(function (value) {
+            console.log(value);
+        }).catch(function (error) { return console.info(error); });
+        localStorage.removeItem('verificacion');
+        // this.navCtrl.setRoot('HomePage');
+        // this.loadViewUser(undefined);
+    };
     return HomePage;
 }());
 HomePage = __decorate([
@@ -331,10 +375,12 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n\n\n<ion-content>\n\n  <!--  <h3>Ionic Menu Starter</h3>\n\n \n\n   <p>\n\n     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.\n\n   </p>\n\n   <button ion-button secondary menuToggle>Toggle Menu</button> -->\n\n\n\n  <ion-card *ngIf="userData">\n\n    <ion-card-header> {{userData.username}} </ion-card-header>\n\n    <img [src]="userData.picture">\n\n    <ion-card-content>\n\n      <p>Email: {{ userData.email}}</p>\n\n      <p>Name: {{ userData.name}}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n  <img src="assets/img/JoBidProveedor.jpg">\n\n  <h5 id="home-heading1" style="">Sing up or Log in</h5>\n\n  <div padding>\n\n    <!-- <button ion-button block color="danger" (click)="googleir()">Log in with Google</button> -->\n\n    <button ion-button block (click)="facebookir()">Sing in with Facebook</button>\n\n  </div>\n\n  <ion-grid class="tabMenu">\n\n    <ion-row>\n\n      <ion-col>\n\n        <button ion-button block color="light" (click)="singup()">\n\n          <ion-grid>\n\n            <ion-row>\n\n              <ion-icon name="contact"></ion-icon>\n\n            </ion-row>\n\n            <ion-row>\n\n              <p>sing up</p>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </button>\n\n      </ion-col>\n\n      <ion-col>\n\n        <button ion-button block color="light" (click)="login()">\n\n          <ion-grid>\n\n            <ion-row>\n\n              <ion-icon name="lock"></ion-icon>\n\n            </ion-row>\n\n            <ion-row>\n\n              <p>login</p>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"E:\z-Trabajo\proyectoIonic\gitHub\ProveedorApp_JoBid\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */],
+        __WEBPACK_IMPORTED_MODULE_5__services_professionals_service__["a" /* ProfessionalsService */],
+        __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]])
 ], HomePage);
 
-var _a, _b, _c, _d;
 //# sourceMappingURL=home.js.map
 
 /***/ })

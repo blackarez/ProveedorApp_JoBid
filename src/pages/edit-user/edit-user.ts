@@ -50,6 +50,7 @@ export class EditUserPage {
   DropService(id){
     console.log(id);
     this.professionalsService.dropService(this.UserActual,id);
+    this.navCtrl.setRoot('EditUserPage');
   }
 
   EditService(id){
