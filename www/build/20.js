@@ -69,6 +69,7 @@ var ProviderOkPage = (function () {
         this.alertCtrl = alertCtrl;
         //timer
         this.segundos = 5;
+        this.contadorTimer = 1;
         this.startTimer();
     }
     ProviderOkPage.prototype.ionViewDidLoad = function () {
@@ -93,10 +94,13 @@ var ProviderOkPage = (function () {
         console.log(this.segundos);
         // console.log(this.status);
         if (this.segundos == 1) {
-            clearInterval(this.objNodeTimer);
-            console.log('servicion fin');
-            this.goHome();
-            this.showAlertEmail();
+            if (this.contadorTimer == 1) {
+                this.contadorTimer = 2;
+                clearInterval(this.objNodeTimer);
+                console.log('servicion fin');
+                this.goHome();
+                this.showAlertEmail();
+            }
         }
         else {
             if (--this.segundos < 0) {

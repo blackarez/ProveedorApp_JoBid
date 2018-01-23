@@ -98,11 +98,6 @@ var ServiceInfoPage = (function () {
         // console.log(localStorage);
     };
     ServiceInfoPage.prototype.goSale = function () {
-        console.log('statusSubs-US service-info');
-        console.log('timerSubs-US service-info');
-        this.offerDetailSub.unsubscribe();
-        this.statusSubs.unsubscribe();
-        this.timerSubs.unsubscribe();
         this.saleService.setSaleProvider(this.DataService.idUser, this.DataService.idOff, this.userActual, '-');
         var Data = { 'datos': this.DataService };
         this.navCtrl.setRoot('ServiceSalePage', Data);
@@ -155,20 +150,12 @@ var ServiceInfoPage = (function () {
             else {
                 _this.contador = "00:00";
                 _this.NoGoSale = true;
-                console.log('statusSubs-US service-info');
-                console.log('timerSubs-US service-info');
-                _this.statusSubs.unsubscribe();
-                _this.offerDetailSub.unsubscribe();
-                _this.timerSubs.unsubscribe();
                 if (status['$value'] == 'Cancelled') {
                     _this.AlertCancelOffer();
                     _this.goShowPage();
                 }
             }
         });
-        // if(status == 'Published'){
-        // this.timerSubs.unsubscribe();
-        // }
     };
     ServiceInfoPage.prototype.loadDescripcion = function () {
         var _this = this;
@@ -184,28 +171,36 @@ var ServiceInfoPage = (function () {
                             _this.DataService.imgOffer = _this.serviceImage;
                         }
                     }
-                    // console.log('offerDetailSub-US service-info');
-                    // this.offerDetailSub.unsubscribe();
                 }
             }
         });
     };
     ServiceInfoPage.prototype.goShowPage = function () {
         this.navCtrl.setRoot('ShowPage');
-        console.log('statusSubs-US service-info');
-        console.log('timerSubs-US service-info');
-        this.offerDetailSub.unsubscribe();
-        this.statusSubs.unsubscribe();
-        this.timerSubs.unsubscribe();
     };
     //- alert
     ServiceInfoPage.prototype.AlertCancelOffer = function () {
         var alert = this.alertCtrl.create({
             title: 'Information',
+            // message: 'The auction was canceled by the Client :' + this.DataService.idOff + 'en info page',
             message: 'The auction was canceled by the Client',
             buttons: ['OK']
         });
         alert.present();
+    };
+    //terminamos las subscripciones con firebase
+    ServiceInfoPage.prototype.ionViewWillLeave = function () {
+        console.log('statusSubs-US service-info');
+        console.log('timerSubs-US service-info');
+        if (this.offerDetailSub != undefined) {
+            this.offerDetailSub.unsubscribe();
+        }
+        if (this.statusSubs != undefined) {
+            this.statusSubs.unsubscribe();
+        }
+        if (this.timerSubs != undefined) {
+            this.timerSubs.unsubscribe();
+        }
     };
     return ServiceInfoPage;
 }());

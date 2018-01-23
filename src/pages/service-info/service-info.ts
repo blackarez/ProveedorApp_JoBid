@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 // import { Component, ViewChild } from '@angular/core';
 // import { IonicPage, NavController, NavParams, Navbar, AlertController} from 'ionic-angular';
 
@@ -33,7 +33,7 @@ export class ServiceInfoPage {
   //-sub
   timerSubs: any;
   statusSubs: any;
-  offerDetailSub:any;
+  offerDetailSub: any;
 
   //-default
   serviceImage = 'assets/img/User/FotoServiceInfo.JPG';
@@ -61,11 +61,6 @@ export class ServiceInfoPage {
     // console.log(localStorage);
   }
   goSale() {
-    console.log('statusSubs-US service-info');
-    console.log('timerSubs-US service-info');
-    this.offerDetailSub.unsubscribe();
-    this.statusSubs.unsubscribe();
-    this.timerSubs.unsubscribe();
     this.saleService.setSaleProvider(this.DataService.idUser, this.DataService.idOff, this.userActual, '-');
     let Data = { 'datos': this.DataService };
     this.navCtrl.setRoot('ServiceSalePage', Data);
@@ -122,11 +117,6 @@ export class ServiceInfoPage {
         } else {
           this.contador = "00:00";
           this.NoGoSale = true;
-          console.log('statusSubs-US service-info');
-          console.log('timerSubs-US service-info');
-          this.statusSubs.unsubscribe();
-          this.offerDetailSub.unsubscribe();
-          this.timerSubs.unsubscribe();
           if (status['$value'] == 'Cancelled') {
             this.AlertCancelOffer();
             this.goShowPage();
@@ -134,11 +124,8 @@ export class ServiceInfoPage {
         }
       }
     );
-    // if(status == 'Published'){
-    // this.timerSubs.unsubscribe();
-    // }
   }
- 
+
   loadDescripcion() {
     this.offerDetailSub = this.offerService.getOffer(this.DataService.idOff).subscribe(
       (DetailBD) => {
@@ -153,8 +140,6 @@ export class ServiceInfoPage {
                 this.DataService.imgOffer = this.serviceImage;
               }
             }
-            // console.log('offerDetailSub-US service-info');
-            // this.offerDetailSub.unsubscribe();
           }
         }
       }
@@ -163,19 +148,24 @@ export class ServiceInfoPage {
 
   goShowPage() {
     this.navCtrl.setRoot('ShowPage');
-    console.log('statusSubs-US service-info');
-    console.log('timerSubs-US service-info');
-    this.offerDetailSub.unsubscribe();
-    this.statusSubs.unsubscribe();
-    this.timerSubs.unsubscribe();
   }
   //- alert
   AlertCancelOffer() {
     let alert = this.alertCtrl.create({
       title: 'Information',
+      // message: 'The auction was canceled by the Client :' + this.DataService.idOff + 'en info page',
       message: 'The auction was canceled by the Client',
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  //terminamos las subscripciones con firebase
+  ionViewWillLeave() {
+    console.log('statusSubs-US service-info');
+    console.log('timerSubs-US service-info');
+    if (this.offerDetailSub != undefined) { this.offerDetailSub.unsubscribe(); }
+    if (this.statusSubs != undefined) { this.statusSubs.unsubscribe(); }
+    if (this.timerSubs != undefined) { this.timerSubs.unsubscribe(); }
   }
 }

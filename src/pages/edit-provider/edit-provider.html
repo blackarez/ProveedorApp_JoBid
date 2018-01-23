@@ -32,7 +32,8 @@
         </ion-item>-->
       <ion-item>
         <!-- <ion-icon name="person" item-start></ion-icon> -->
-        <ion-input type="date" placeholder="Birth day" [(ngModel)]="userData.date" name="date" formControlName="date" (ionChange)="setLabel()"></ion-input>
+        <!-- <ion-input type="date" placeholder="Birth day" [(ngModel)]="userData.date" name="date" formControlName="date" (ionChange)="setLabel()"></ion-input> -->
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="userData.date" placeholder="Birth date"  name="date" formControlName="date"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-input type="number" placeholder="Social security" [(ngModel)]="userData.socialSecurity" name="socialSecurity" formControlName="socialSecurity"></ion-input>

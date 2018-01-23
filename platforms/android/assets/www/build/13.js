@@ -302,8 +302,6 @@ var ServiceSalePage = (function () {
                         _this.notificacionCancelSale();
                         _this.AlertCancelOffer();
                         _this.navCtrl.setRoot('ShowPage');
-                        console.log('PromiseUser-US sale');
-                        _this.saleSub.unsubscribe();
                     }
                 });
                 return [2 /*return*/];
@@ -313,17 +311,9 @@ var ServiceSalePage = (function () {
     ServiceSalePage.prototype.ganador = function () {
         if (this.MenosPrecio == this.myOffer) {
             this.goServiceWin();
-            console.log('saleSub-US sale');
-            this.saleSub.unsubscribe();
-            console.log('timerSubs-US sale');
-            this.timerSubs.unsubscribe();
         }
         else {
             this.navCtrl.setRoot('ShowPage');
-            console.log('saleSub-US sale');
-            this.saleSub.unsubscribe();
-            console.log('timerSubs-US sale');
-            this.timerSubs.unsubscribe();
         }
     };
     ServiceSalePage.prototype.dobleCifra = function (num) {
@@ -406,8 +396,6 @@ var ServiceSalePage = (function () {
                 _this.timerSubs.unsubscribe();
             }
         });
-        // console.log('timerSubs-US service-info');
-        // this.timerSubs.unsubscribe();
     };
     //--alert
     ServiceSalePage.prototype.detailsService = function () {
@@ -430,6 +418,7 @@ var ServiceSalePage = (function () {
     ServiceSalePage.prototype.AlertCancelOffer = function () {
         var alert = this.alertCtrl.create({
             title: 'Information',
+            // message: 'The auction was canceled by the Client :' + this.DataService.idOff + 'en sale page',
             message: 'The auction was canceled by the Client',
             buttons: ['OK'],
             enableBackdropDismiss: false
@@ -464,6 +453,17 @@ var ServiceSalePage = (function () {
         console.info('Nota: The service has been canceled');
         // this.notificacionService.mostrar('The service has been canceled',4);
         this.notificacionService.mostrar('The service has been canceled', 4);
+    };
+    //terminamos las subscripciones con firebases
+    ServiceSalePage.prototype.ionViewWillLeave = function () {
+        console.log('saleSub-US sale');
+        console.log('timerSubs-US sale');
+        if (this.saleSub != undefined) {
+            this.saleSub.unsubscribe();
+        }
+        if (this.timerSubs != undefined) {
+            this.timerSubs.unsubscribe();
+        }
     };
     return ServiceSalePage;
 }());

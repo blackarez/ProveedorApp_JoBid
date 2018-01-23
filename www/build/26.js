@@ -219,10 +219,7 @@ var LoginPage = (function () {
                                     console.log(value[key]);
                                     console.info(JSON.stringify(value[key]));
                                     if (value[key]['login'] != undefined) {
-                                        _this.correoVerificado = value[key]['login'];
-                                    }
-                                    else {
-                                        _this.correoVerificado = false;
+                                        _this.correoVerificado = true;
                                     }
                                     _this.goNextPagePrehomeFace(value[key]);
                                 }
@@ -254,12 +251,7 @@ var LoginPage = (function () {
         console.log(datos['prof_password']);
         this.userDataUpdate = { "username": datos["prof_username"], "password": datos["prof_password"], "email": datos["prof_email"], "name": datos["prof_name"], "lastName": datos["prof_lastName"], "date": datos["prof_date"], "socialSecurity": datos["prof_socialSecurity"], "zipcode": datos["prof_zipcode"], "state": datos["prof_state"], "picture": datos["prof_picture"], "pais": datos["prof_pais"], "direccion": datos["prof_direccion"], "tel": datos["prof_tel"], "star": datos["prof_star"] };
         // console.log(this.userDataUpdate);
-        if (this.correoVerificado == false) {
-            if (this.afAuth.auth.currentUser.emailVerified == false) {
-                this.showAlertCorreoNoVerificadoFacebook();
-            }
-        }
-        else {
+        if (this.correoVerificado == true) {
             this.userDataUpdate['verificacion'] = datos['$key'];
             localStorage.setItem('verificacion', datos['$key']);
             this.navCtrl.setRoot('ShowPage');

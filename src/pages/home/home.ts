@@ -26,12 +26,16 @@ import { ProfessionalsService } from '../../services/professionals.service';
   templateUrl: 'home.html',
 })
 export class HomePage {
+
+  user: any = { "birthdate": "" };
+  myDate: any;
+
   userData = null;
   mensage: string = '';
   displayName;
   providerFaceBook: any;
   userDataUpdate: any;
-  correoVerificado:any;
+  correoVerificado: any;
   x: any = [];
   //camera
   uploads: any = [];
@@ -47,6 +51,7 @@ export class HomePage {
     public afAuth: AngularFireAuth,
   ) {
     //-identifica y redirecciona usuario logeado.
+    this.user['birthdate'] = 'hola';
     this.usuarioLogeado();
     this.professionalsService.getIni();
     // this.audio();
@@ -212,24 +217,24 @@ export class HomePage {
   goNextPagePrehome(datos: any) {
     console.log(datos);
     //console.log(datos['$key']);
-    
+
     this.userDataUpdate = { "email": datos['user_email'], "name": datos['user_name'], "pais": datos['user_pais'], "password": datos['user_password'], "picture": datos['user_picture'], "state": datos['user_state'], "tel": datos['user_tel'], "username": datos['user_username'], "verificacion": datos['$key'], "zipcode": datos['user_zipcode'] };
     console.log(this.userDataUpdate);
     console.log(this.afAuth.auth.currentUser.emailVerified);
     console.log(this.afAuth.auth.currentUser);
     console.log(this.correoVerificado);
-    
+
     if (this.correoVerificado == false) {
-      if(this.afAuth.auth.currentUser != null ){
+      if (this.afAuth.auth.currentUser != null) {
 
         if (this.afAuth.auth.currentUser.emailVerified != false) {
           console.info('cambio estado login base de datos');
-          
+
           this.professionalsService.setLogin(datos['$key'], true);
           localStorage.setItem('verificacion', datos['$key']);
           let Data = { 'datos': this.userDataUpdate }
           this.navCtrl.setRoot('ShowPage', Data);
-          
+
         } else {
           // this.showAlertCorreoNoVerificado();
           this.cerrarSeccion();
@@ -294,9 +299,7 @@ export class HomePage {
                 console.log(User);
                 if (User['0']) {
                   if (User['0']['login'] != undefined) {
-                    this.correoVerificado = User['0']['login'];
-                  } else {
-                    this.correoVerificado = false;
+                    this.correoVerificado = true;
                   }
                   this.goNextPagePrehome(User['0']);
                   // if(this.Userexists != undefined){

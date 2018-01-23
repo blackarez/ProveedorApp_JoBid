@@ -82,6 +82,7 @@ var HomePage = (function () {
         this.fb = fb;
         this.professionalsService = professionalsService;
         this.afAuth = afAuth;
+        this.user = { "birthdate": "" };
         this.userData = null;
         this.mensage = '';
         this.x = [];
@@ -90,6 +91,7 @@ var HomePage = (function () {
         //contador
         this.consultaFirebaseLogin = 1;
         //-identifica y redirecciona usuario logeado.
+        this.user['birthdate'] = 'hola';
         this.usuarioLogeado();
         this.professionalsService.getIni();
         // this.audio();
@@ -325,10 +327,7 @@ var HomePage = (function () {
                                 console.log(User);
                                 if (User['0']) {
                                     if (User['0']['login'] != undefined) {
-                                        _this.correoVerificado = User['0']['login'];
-                                    }
-                                    else {
-                                        _this.correoVerificado = false;
+                                        _this.correoVerificado = true;
                                     }
                                     _this.goNextPagePrehome(User['0']);
                                     // if(this.Userexists != undefined){

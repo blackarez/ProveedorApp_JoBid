@@ -230,8 +230,6 @@ export class ServiceSalePage {
           this.notificacionCancelSale();
           this.AlertCancelOffer();
           this.navCtrl.setRoot('ShowPage');
-          console.log('PromiseUser-US sale');
-          this.saleSub.unsubscribe();
         }
       });
   }
@@ -239,16 +237,8 @@ export class ServiceSalePage {
   ganador() {
     if (this.MenosPrecio == this.myOffer) {
       this.goServiceWin();
-      console.log('saleSub-US sale');
-      this.saleSub.unsubscribe();
-      console.log('timerSubs-US sale');
-      this.timerSubs.unsubscribe();
     } else {
       this.navCtrl.setRoot('ShowPage');
-      console.log('saleSub-US sale');
-      this.saleSub.unsubscribe();
-      console.log('timerSubs-US sale');
-      this.timerSubs.unsubscribe();
     }
   }
 
@@ -328,8 +318,6 @@ export class ServiceSalePage {
         }
       }
     );
-    // console.log('timerSubs-US service-info');
-    // this.timerSubs.unsubscribe();
   }
 
   //--alert
@@ -354,6 +342,7 @@ export class ServiceSalePage {
   AlertCancelOffer() {
     let alert = this.alertCtrl.create({
       title: 'Information',
+      // message: 'The auction was canceled by the Client :' + this.DataService.idOff + 'en sale page',
       message: 'The auction was canceled by the Client',
       buttons: ['OK'],
       enableBackdropDismiss: false
@@ -389,6 +378,14 @@ export class ServiceSalePage {
     console.info('Nota: The service has been canceled');
     // this.notificacionService.mostrar('The service has been canceled',4);
     this.notificacionService.mostrar('The service has been canceled', 4);
+  }
+
+  //terminamos las subscripciones con firebases
+  ionViewWillLeave() {
+    console.log('saleSub-US sale');
+    console.log('timerSubs-US sale');
+    if (this.saleSub != undefined) { this.saleSub.unsubscribe(); }
+    if (this.timerSubs != undefined) { this.timerSubs.unsubscribe(); }
   }
 
 }

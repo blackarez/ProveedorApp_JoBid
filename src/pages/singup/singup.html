@@ -38,8 +38,9 @@
         </ion-item> -->
       <ion-item>
         <!-- <input type="date" ng-model="user.birthdate"> -->
-        <ion-input type="date" placeholder="Birth date" [(ngModel)]="userData.date" name="date" formControlName="date" (click)="setLabel()"
-          [ngClass]="{'dateclass placeholderclass':showLabel}"></ion-input>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="userData.date" placeholder="Birth date"  name="date" formControlName="date"></ion-datetime>
+        <!-- <ion-input type="date" placeholder="Birth date" [(ngModel)]="userData.date" name="date" formControlName="date" (click)="setLabel()"
+          [ngClass]="{'dateclass placeholderclass':showLabel}"></ion-input> -->
       </ion-item>
       <ion-item>
         <!-- <ion-icon name="person" item-start></ion-icon> -->

@@ -109,18 +109,13 @@ var ServiceWinPage = (function () {
                 if (status['$value'] == 'Waiting for the professional') {
                     _this.notificacionHired();
                     _this.goServiceNew();
-                    console.log('statusSub-US service-win');
-                    _this.statusSub.unsubscribe();
                 }
                 if (status['$value'] == 'Cancelled') {
                     _this.notificacionCancel();
                     _this.goIndexService();
-                    console.log('statusSub-US service-win');
-                    _this.statusSub.unsubscribe();
                 }
                 if (status['$value'] == 'CancelledProvider') {
                     _this.navCtrl.setRoot('ShowPage');
-                    _this.statusSub.unsubscribe();
                 }
             }
         });
@@ -143,8 +138,6 @@ var ServiceWinPage = (function () {
     ServiceWinPage.prototype.goIndexService = function () {
         this.showAlertCancel();
         this.navCtrl.setRoot('ShowPage');
-        // this.statusSub.unsubscribe();
-        // console.log(this.statusSub);
     };
     ServiceWinPage.prototype.goResetProvider = function () {
         this.saleService.setStatus(this.user, this.offer, 'CancelledProvider');
@@ -193,6 +186,13 @@ var ServiceWinPage = (function () {
     ServiceWinPage.prototype.notificacionCancel = function () {
         console.info('Nota: The service has been canceled');
         this.notificacionService.mostrar('The service has been canceled', 6);
+    };
+    //terminamos las subscripciones con firebase
+    ServiceWinPage.prototype.ionViewWillLeave = function () {
+        console.log('statusSub-US service-win');
+        if (this.statusSub != undefined) {
+            this.statusSub.unsubscribe();
+        }
     };
     return ServiceWinPage;
 }());
