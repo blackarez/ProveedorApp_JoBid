@@ -326,9 +326,9 @@ var HomePage = (function () {
                                 console.log('User Logueado');
                                 console.log(User);
                                 if (User['0']) {
-                                    if (User['0']['login'] != undefined) {
-                                        _this.correoVerificado = true;
-                                    }
+                                    // if (User['0']['login'] != undefined) {
+                                    _this.correoVerificado = true;
+                                    // }
                                     _this.goNextPagePrehome(User['0']);
                                     // if(this.Userexists != undefined){
                                     _this.userLogeadoSub.unsubscribe();

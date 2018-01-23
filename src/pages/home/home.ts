@@ -298,9 +298,9 @@ export class HomePage {
                 console.log('User Logueado');
                 console.log(User);
                 if (User['0']) {
-                  if (User['0']['login'] != undefined) {
-                    this.correoVerificado = true;
-                  }
+                  // if (User['0']['login'] != undefined) {
+                  this.correoVerificado = true;
+                  // }
                   this.goNextPagePrehome(User['0']);
                   // if(this.Userexists != undefined){
                   this.userLogeadoSub.unsubscribe();
