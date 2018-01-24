@@ -4306,6 +4306,10 @@ ion-item.item-md .text-input-ios, ion-item.item-md .text-input-md, ion-item.item
   font-size: 16px;
 }
 
+.braintree-dropin > .braintree-placeholder {
+  display: none;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;

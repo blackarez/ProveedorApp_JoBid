@@ -19,7 +19,7 @@
     <ion-list padding>
 
       <p>
-        <strong>I took pictures of the requested documents:</strong>
+        <strong>Take the pictures fo the requested documents:</strong>
       </p>
       <ion-item>
         <p>Photo of your social security.</p>
@@ -29,7 +29,10 @@
               <ion-list>
                 <ion-item>
                   <input type="text" placeholder="" [(ngModel)]="documentFoto" formControlName="documentFoto" name="documentFoto" />
-                  <img src="{{documentFoto}}" [hidden]="disDocumentImg">
+                  <!-- <img src="{{documentFoto}}" [hidden]="disDocumentImg"> -->
+                </ion-item>
+                <ion-item>
+                  <p [hidden]="disDocumentImg">Document ready</p>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -49,7 +52,10 @@
               <ion-list>
                 <ion-item>
                   <input type="text" placeholder="" [(ngModel)]="licenciaFoto" formControlName="licenciaFoto" name="licenciaFoto" />
-                  <img src="{{licenciaFoto}}" [hidden]="disLicenciaImg">
+                  <!-- <img src="{{licenciaFoto}}" [hidden]="disLicenciaImg"> -->
+                </ion-item>
+                <ion-item>
+                  <p [hidden]="disLicenciaImg">Document ready</p>
                 </ion-item>
               </ion-list>
             </ion-col>

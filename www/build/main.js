@@ -987,7 +987,7 @@ var ProfessionsService = (function () {
         this.professions = [
             { name: 'Care', class: 'red' },
             { name: 'Cleaning', class: 'yellow' },
-            { name: 'Janotorial', class: 'orange' },
+            { name: 'Janitorial', class: 'orange' },
             { name: 'Transportation', class: 'green' },
             { name: 'Food & Beverage', class: 'purple' },
             { name: 'Legal services', class: 'blue' },
@@ -1003,19 +1003,19 @@ var ProfessionsService = (function () {
         //console.log(nameService);
         switch (nameService) {
             case "Care": {
-                this.dataCategoria = ["Child care/Nany", "Senior care", "Family asistance", "Dog walker", "Personal shopper"];
+                this.dataCategoria = ["Child care/Nany", "Senior care", "Family assistance", "Dog walker", "Personal shopper"];
                 break;
             }
             case "Cleaning": {
                 this.dataCategoria = ["Maids", "Car washers", "Pressure cleaning", "Carpet & upholstery cleaning"];
                 break;
             }
-            case "Janotorial": {
-                this.dataCategoria = ["Handyman", "Pluming", "Electrician", "Pool Cleaner", "Luck smith"];
+            case "Janitorial": {
+                this.dataCategoria = ["Handyman", "Plumbing", "Electrician", "Pool Cleaner", "Luck smith"];
                 break;
             }
             case "Transportation": {
-                this.dataCategoria = ["Day VIP chofer", "Taxi", "Car pool", "Moving services", "Delivery"];
+                this.dataCategoria = ["Day VIP chauffeur", "Taxi", "Car pool", "Moving services", "Delivery"];
                 break;
             }
             case "Food & Beverage": {
@@ -1027,7 +1027,7 @@ var ProfessionsService = (function () {
                 break;
             }
             case "Beauty": {
-                this.dataCategoria = ["Personal trainer", "Hair cut and DIY", "Manicure and pedicure", "Makeup", "Massage"];
+                this.dataCategoria = ["Personal trainer", "Haircut and DIY", "Manicure and pedicure", "Makeup", "Massage"];
                 break;
             }
             default: {
