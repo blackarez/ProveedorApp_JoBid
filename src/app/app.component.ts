@@ -89,10 +89,18 @@ export class MyApp {
             console.log('User Logueado');
             console.log(User);
             if (User['0']) {
-              this.loadViewUser(User['0']);
-              this.mostrarUsuarioLogeado = true;
+              if (User['0']['login'] == undefined || User['0']['login'] == false) {
+                if (this.afAuth.auth.currentUser.emailVerified != false) {
+                  console.info('cambio estado login base de datos');
+                  this.mostrarUsuarioLogeado = true;
+                  this.loadViewUser(User['0']);
+                }
+              } else {
+                this.loadViewUser(User['0']);
+                this.mostrarUsuarioLogeado = true;
+              }
               if (Userexists != undefined) {
-                // Userexists.unsubscribe();
+                Userexists.unsubscribe();
               }
             }
           });
@@ -179,7 +187,7 @@ export class MyApp {
     const options: InAppBrowserOptions = {
       zoom: 'no'
     }
-    const browser = this.inAppBrowser.create('http://www.lamaletadefelix.com', '_self', options);
+    this.inAppBrowser.create('http://www.lamaletadefelix.com', '_self', options);
   }
 
 }

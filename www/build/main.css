@@ -25823,6 +25823,10 @@ ion-item.imgUser.item-ios ion-thumbnail ion-img, ion-item.imgUser.item-ios ion-t
   margin: 0 auto;
 }
 
+.linkPagina span {
+  font-style: italic;
+}
+
 .linkPagina .label {
   text-align: center;
 }
