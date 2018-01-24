@@ -1,0 +1,23 @@
+[debug] [2018-01-24T00:37:52.909Z] ----------------------------------------------------------------------
+[debug] [2018-01-24T00:37:52.912Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luis Angel Gualteros\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-01-24T00:37:52.912Z] CLI Version:   3.9.2
+[debug] [2018-01-24T00:37:52.912Z] Platform:      win32
+[debug] [2018-01-24T00:37:52.912Z] Node Version:  v8.9.3
+[debug] [2018-01-24T00:37:52.914Z] Time:          Tue Jan 23 2018 19:37:52 GMT-0500 (Hora est. Pacífico, Sudamérica)
+[debug] [2018-01-24T00:37:52.914Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-24T00:37:52.929Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-24T00:37:52.930Z] > authorizing via signed-in user
+[debug] [2018-01-24T00:37:52.934Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/provedorappjobid  
+ Tue Jan 23 2018 19:37:52 GMT-0500 (Hora est. Pacífico, Sudamérica)
+[debug] [2018-01-24T00:37:54.330Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-24T00:37:54.331Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/provedorappjobid/tokens  
+ Tue Jan 23 2018 19:37:54 GMT-0500 (Hora est. Pacífico, Sudamérica)
+[debug] [2018-01-24T00:37:55.483Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'provedorappjobid'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing www directory for upload...
+[debug] [2018-01-24T00:38:00.527Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/provedorappjobid/uploads/-L3_aNqNI9AlDYvGZtzm?fileCount=130&message=  
+ Tue Jan 23 2018 19:38:00 GMT-0500 (Hora est. Pacífico, Sudamérica)

@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 //-pages
 // import { HomePage } from '../pages/home/home';
@@ -27,6 +28,7 @@ export class MyApp {
   //-Default
   userName: string = 'hola logeado';
   srcUser: string = 'assets/img/user.png';
+  imgApp: string = 'assets/icon.png';
   star: any = '3';
   starUser: any;
 
@@ -35,13 +37,14 @@ export class MyApp {
 
   //--data
   userMenu: any;
-
   pages: Array<{ title: string, component: any }>;
+  mostrarUsuarioLogeado: boolean = false;
 
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public afAuth: AngularFireAuth,
-    private professionalsService: ProfessionalsService
+    private professionalsService: ProfessionalsService,
+    private inAppBrowser: InAppBrowser,
   ) {
     this.initializeApp();
 
@@ -87,6 +90,7 @@ export class MyApp {
             console.log(User);
             if (User['0']) {
               this.loadViewUser(User['0']);
+              this.mostrarUsuarioLogeado = true;
               if (Userexists != undefined) {
                 // Userexists.unsubscribe();
               }
@@ -100,6 +104,7 @@ export class MyApp {
             console.log(User);
             if (User['0']) {
               this.loadViewUser(User['0']);
+              this.mostrarUsuarioLogeado = true;
               if (Userexists != undefined) {
                 // Userexists.unsubscribe();
               }
@@ -107,6 +112,9 @@ export class MyApp {
           });
         }
 
+      } else {
+        console.info('find user menu - no');
+        this.mostrarUsuarioLogeado = false;
       }
     });
   }
@@ -146,7 +154,7 @@ export class MyApp {
       this.userName = 'hola logeado';
       this.srcUser = 'assets/img/user.png';
       this.star = '1';
-      this.starUser =  'one';
+      this.starUser = 'one';
     }
     // localStorage.setItem('verificacion',user['$key']);
     // this.nav.setRoot('ShowPage');
@@ -164,6 +172,14 @@ export class MyApp {
 
   goPolicies() {
     this.nav.push('PoliciesPage');
+  }
+
+
+  pagina() {
+    const options: InAppBrowserOptions = {
+      zoom: 'no'
+    }
+    const browser = this.inAppBrowser.create('http://www.lamaletadefelix.com', '_self', options);
   }
 
 }

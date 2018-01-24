@@ -41,6 +41,9 @@
     },
     "cordova-plugin-local-notification": {
       "PACKAGE_NAME": "com.JoBid.provider"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.JoBid.provider"
     }
   },
   "dependent_plugins": {

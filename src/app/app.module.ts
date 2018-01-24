@@ -6,6 +6,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 //-pages
 import { MyApp } from './app.component';
@@ -99,6 +100,7 @@ export const googleMapsKey = 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg';
     NativeAudio,
     LocalNotifications,
     Facebook,
+    InAppBrowser,
   ]
 })
 export class AppModule {}

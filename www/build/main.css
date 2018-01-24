@@ -25807,6 +25807,26 @@ ion-item.imgUser.item-ios ion-thumbnail ion-img, ion-item.imgUser.item-ios ion-t
   font-size: 20px;
 }
 
+.noLogueado {
+  float: right;
+  margin-right: 20px;
+}
+
+.imgLogo {
+  width: 100%;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.imgLogo > img {
+  width: 80px;
+  margin: 0 auto;
+}
+
+.linkPagina .label {
+  text-align: center;
+}
+
 page-add-payment-method .barraRoja {
   background: #b20000;
 }
@@ -25830,27 +25850,36 @@ page-add-payment-method .braintree-placeholder {
   margin-top: 20px;
 }
 
-page-certificates .grid .row, page-certificates .grid .col {
+page-certificates .grid .row,
+page-certificates .grid .col {
   margin: 0;
   padding: 0;
 }
 
-page-certificates .grid .row .list-md > .item-block ion-label, page-certificates .grid .row .list-ios > .item-block ion-label, page-certificates .grid .col .list-md > .item-block ion-label, page-certificates .grid .col .list-ios > .item-block ion-label {
+page-certificates .grid .row .list-md > .item-block ion-label,
+page-certificates .grid .row .list-ios > .item-block ion-label,
+page-certificates .grid .col .list-md > .item-block ion-label,
+page-certificates .grid .col .list-ios > .item-block ion-label {
   margin: 0;
 }
 
-page-certificates .grid .row input, page-certificates .grid .col input {
+page-certificates .grid .row input,
+page-certificates .grid .col input {
   height: 36px;
   width: 100%;
   padding: 5px;
 }
 
-page-certificates ion-item.item-md, page-certificates ion-item.item-ios, page-certificates .list-md, page-certificates .list-ios {
+page-certificates ion-item.item-md,
+page-certificates ion-item.item-ios,
+page-certificates .list-md,
+page-certificates .list-ios {
   padding: 0;
   margin: 0;
 }
 
-page-certificates ion-item.item-md ion-label.label, page-certificates ion-item.item-ios ion-label.label {
+page-certificates ion-item.item-md ion-label.label,
+page-certificates ion-item.item-ios ion-label.label {
   margin: 10px 0;
 }
 
@@ -25874,17 +25903,22 @@ page-document .grid {
   border-bottom: 2px solid #b20000;
 }
 
-page-document .grid .row, page-document .grid .col {
+page-document .grid .row,
+page-document .grid .col {
   margin: 0;
   padding: 0;
 }
 
-page-document .grid .row .list-md > .item-block ion-label, page-document .grid .row .list-ios > .item-block ion-label, page-document .grid .col .list-md > .item-block ion-label, page-document .grid .col .list-ios > .item-block ion-label {
+page-document .grid .row .list-md > .item-block ion-label,
+page-document .grid .row .list-ios > .item-block ion-label,
+page-document .grid .col .list-md > .item-block ion-label,
+page-document .grid .col .list-ios > .item-block ion-label {
   padding-top: 2px;
   margin: 0;
 }
 
-page-document .grid .row input, page-document .grid .col input {
+page-document .grid .row input,
+page-document .grid .col input {
   height: 36px;
   width: 100%;
   padding: 5px;
@@ -25931,7 +25965,8 @@ page-edit-provider .button-outline-md-danger {
   width: 100%;
 }
 
-page-edit-provider .row .list-md, page-edit-provider .row .list-ios {
+page-edit-provider .row .list-md,
+page-edit-provider .row .list-ios {
   margin: 0;
 }
 
@@ -25956,27 +25991,36 @@ page-edit-provider .dateclass.placeholderclass:hover::before {
   content: "";
 }
 
-page-gallery .grid .row, page-gallery .grid .col {
+page-gallery .grid .row,
+page-gallery .grid .col {
   margin: 0;
   padding: 0;
 }
 
-page-gallery .grid .row .list-md > .item-block ion-label, page-gallery .grid .row .list-ios > .item-block ion-label, page-gallery .grid .col .list-md > .item-block ion-label, page-gallery .grid .col .list-ios > .item-block ion-label {
+page-gallery .grid .row .list-md > .item-block ion-label,
+page-gallery .grid .row .list-ios > .item-block ion-label,
+page-gallery .grid .col .list-md > .item-block ion-label,
+page-gallery .grid .col .list-ios > .item-block ion-label {
   margin: 0;
 }
 
-page-gallery .grid .row input, page-gallery .grid .col input {
+page-gallery .grid .row input,
+page-gallery .grid .col input {
   height: 36px;
   width: 100%;
   padding: 5px;
 }
 
-page-gallery ion-item.item-md, page-gallery ion-item.item-ios, page-gallery .list-md, page-gallery .list-ios {
+page-gallery ion-item.item-md,
+page-gallery ion-item.item-ios,
+page-gallery .list-md,
+page-gallery .list-ios {
   padding: 0;
   margin: 0;
 }
 
-page-gallery ion-item.item-md ion-label.label, page-gallery ion-item.item-ios ion-label.label {
+page-gallery ion-item.item-md ion-label.label,
+page-gallery ion-item.item-ios ion-label.label {
   margin: 10px 0;
 }
 
@@ -26010,15 +26054,20 @@ page-my-service-info h4 {
   color: #b20000;
 }
 
-page-my-service-info h3, page-my-service-info h5, page-my-service-info h6, page-my-service-info .textoCentrado {
+page-my-service-info h3,
+page-my-service-info h5,
+page-my-service-info h6,
+page-my-service-info .textoCentrado {
   text-align: center;
 }
 
-page-my-service-info h6, page-my-service-info h3 {
+page-my-service-info h6,
+page-my-service-info h3 {
   margin: 0;
 }
 
-page-my-service-info .item-md ion-avatar > img, page-my-service-info .item-ios ion-avatar > img {
+page-my-service-info .item-md ion-avatar > img,
+page-my-service-info .item-ios ion-avatar > img {
   margin: 0;
   width: 80px;
   height: 80px;
@@ -26054,11 +26103,13 @@ page-my-services .btnItem {
   padding: 0;
 }
 
-page-my-services .list-md .item-block .item-inner, page-my-services .list-ios .item-block .item-inner {
+page-my-services .list-md .item-block .item-inner,
+page-my-services .list-ios .item-block .item-inner {
   padding: 0;
 }
 
-page-my-services .label.label-md, page-my-services .label.label-ios {
+page-my-services .label.label-md,
+page-my-services .label.label-ios {
   padding: 5px 0;
 }
 
@@ -26139,11 +26190,21 @@ page-provider-info-a .btnAddPicture button {
   box-shadow: none;
 }
 
-page-provider-info-a .textUpload, page-provider-info-a .BtnUpload, page-provider-info-a ion-item.BtnUpload.item-md, page-provider-info-a ion-item.BtnUpload.item-ios {
+page-provider-info-a .textUpload,
+page-provider-info-a .BtnUpload,
+page-provider-info-a ion-item.BtnUpload.item-md,
+page-provider-info-a ion-item.BtnUpload.item-ios {
   margin: 0;
 }
 
-page-provider-info-a .textUpload .label-md, page-provider-info-a .textUpload .label-ios, page-provider-info-a .BtnUpload .label-md, page-provider-info-a .BtnUpload .label-ios, page-provider-info-a ion-item.BtnUpload.item-md .label-md, page-provider-info-a ion-item.BtnUpload.item-md .label-ios, page-provider-info-a ion-item.BtnUpload.item-ios .label-md, page-provider-info-a ion-item.BtnUpload.item-ios .label-ios {
+page-provider-info-a .textUpload .label-md,
+page-provider-info-a .textUpload .label-ios,
+page-provider-info-a .BtnUpload .label-md,
+page-provider-info-a .BtnUpload .label-ios,
+page-provider-info-a ion-item.BtnUpload.item-md .label-md,
+page-provider-info-a ion-item.BtnUpload.item-md .label-ios,
+page-provider-info-a ion-item.BtnUpload.item-ios .label-md,
+page-provider-info-a ion-item.BtnUpload.item-ios .label-ios {
   margin: 0;
   padding: 0;
 }
@@ -26260,11 +26321,21 @@ page-service-info-a .btnAddPicture button {
   box-shadow: none;
 }
 
-page-service-info-a .textUpload, page-service-info-a .BtnUpload, page-service-info-a ion-item.BtnUpload.item-md, page-service-info-a ion-item.BtnUpload.item-ios {
+page-service-info-a .textUpload,
+page-service-info-a .BtnUpload,
+page-service-info-a ion-item.BtnUpload.item-md,
+page-service-info-a ion-item.BtnUpload.item-ios {
   margin: 0;
 }
 
-page-service-info-a .textUpload .label-md, page-service-info-a .textUpload .label-ios, page-service-info-a .BtnUpload .label-md, page-service-info-a .BtnUpload .label-ios, page-service-info-a ion-item.BtnUpload.item-md .label-md, page-service-info-a ion-item.BtnUpload.item-md .label-ios, page-service-info-a ion-item.BtnUpload.item-ios .label-md, page-service-info-a ion-item.BtnUpload.item-ios .label-ios {
+page-service-info-a .textUpload .label-md,
+page-service-info-a .textUpload .label-ios,
+page-service-info-a .BtnUpload .label-md,
+page-service-info-a .BtnUpload .label-ios,
+page-service-info-a ion-item.BtnUpload.item-md .label-md,
+page-service-info-a ion-item.BtnUpload.item-md .label-ios,
+page-service-info-a ion-item.BtnUpload.item-ios .label-md,
+page-service-info-a ion-item.BtnUpload.item-ios .label-ios {
   margin: 0;
   padding: 0;
 }
@@ -26286,11 +26357,15 @@ page-service-job h4 {
   color: #b20000;
 }
 
-page-service-job h3, page-service-job h5, page-service-job h6, page-service-job .textoCentrado {
+page-service-job h3,
+page-service-job h5,
+page-service-job h6,
+page-service-job .textoCentrado {
   text-align: center;
 }
 
-page-service-job h6, page-service-job h3 {
+page-service-job h6,
+page-service-job h3 {
   margin: 0;
 }
 
@@ -26305,7 +26380,8 @@ page-service-job .barraGris h4 {
   text-align: center;
 }
 
-page-service-job .item-md ion-avatar > img, page-service-job .item-ios ion-avatar > img {
+page-service-job .item-md ion-avatar > img,
+page-service-job .item-ios ion-avatar > img {
   margin: 0;
   width: 80px;
   height: 80px;
@@ -26344,11 +26420,15 @@ page-service-new h4 {
   color: #b20000;
 }
 
-page-service-new h3, page-service-new h5, page-service-new h6, page-service-new .textoCentrado {
+page-service-new h3,
+page-service-new h5,
+page-service-new h6,
+page-service-new .textoCentrado {
   text-align: center;
 }
 
-page-service-new h6, page-service-new h3 {
+page-service-new h6,
+page-service-new h3 {
   margin: 0;
 }
 
@@ -26363,7 +26443,8 @@ page-service-new .barraGris h4 {
   text-align: center;
 }
 
-page-service-new .item-md ion-avatar > img, page-service-new .item-ios ion-avatar > img {
+page-service-new .item-md ion-avatar > img,
+page-service-new .item-ios ion-avatar > img {
   margin: 0;
   width: 80px;
   height: 80px;
