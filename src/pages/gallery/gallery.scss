@@ -1,25 +1,31 @@
 page-gallery {
-    .grid{
+    .grid {
         // border-bottom: 2px solid $Red;
-        .row,.col{
-            margin:0;
+        .row,
+        .col {
+            margin: 0;
             padding: 0;
-            .list-md > .item-block ion-label,.list-ios > .item-block ion-label{
+            .list-md>.item-block ion-label,
+            .list-ios>.item-block ion-label {
                 // padding-top: 2px;
-                margin: 0;   
-            } 
-            input{
+                margin: 0;
+            }
+            input {
                 height: 36px;
                 width: 100%;
                 padding: 5px;
             }
         }
     }
-    ion-item.item-md, ion-item.item-ios, .list-md, .list-ios{
+    ion-item.item-md,
+    ion-item.item-ios,
+    .list-md,
+    .list-ios {
         padding: 0;
         margin: 0;
     }
-    ion-item.item-md ion-label.label, ion-item.item-ios ion-label.label{
+    ion-item.item-md ion-label.label,
+    ion-item.item-ios ion-label.label {
         margin: 10px 0;
     }
 }

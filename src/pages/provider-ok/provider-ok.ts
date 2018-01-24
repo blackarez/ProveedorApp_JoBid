@@ -17,7 +17,7 @@ export class ProviderOkPage {
   //timer
   segundos: number = 5;
   objNodeTimer: any;
-  contadorTimer:number = 1;
+  contadorTimer: number = 1;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
   ) {

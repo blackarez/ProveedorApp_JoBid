@@ -10,4 +10,4 @@ import { PoliciesPage } from './policies';
     IonicPageModule.forChild(PoliciesPage),
   ],
 })
-export class PoliciesPageModule {}
+export class PoliciesPageModule { }

@@ -15,9 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ServiceOkPage {
   //Data
-  DataService:any;
-  DataUser:any;
-  userActual:any;
+  DataService: any;
+  DataUser: any;
+  userActual: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.loadView();
   }
@@ -25,14 +25,14 @@ export class ServiceOkPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceOkPage');
   }
-  goVote(){
-    let dataService = {'service':this.DataService,"user":this.DataUser};
-    this.navCtrl.setRoot('ServiceVotePage',dataService);
+  goVote() {
+    let dataService = { 'service': this.DataService, "user": this.DataUser };
+    this.navCtrl.setRoot('ServiceVotePage', dataService);
   }
 
-  loadView(){
+  loadView() {
     //-load data
-    this.DataService =  this.navParams.get('service');
+    this.DataService = this.navParams.get('service');
     this.DataUser = this.navParams.get('user');
     console.log(this.DataUser);
     console.log(this.DataService);

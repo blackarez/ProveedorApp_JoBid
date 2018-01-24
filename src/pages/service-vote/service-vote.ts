@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //-services
-import {UserService} from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { NotificacionService } from '../../services/notificacion.service';
 /**
  * Generated class for the ServiceVotePage page.
@@ -18,17 +18,17 @@ import { NotificacionService } from '../../services/notificacion.service';
 })
 export class ServiceVotePage {
   //-data
-  DataService:any;
-  DataUser:any;
-  userActual:any;
-  user:any;
+  DataService: any;
+  DataUser: any;
+  userActual: any;
+  user: any;
   //-view
   //-view
-  vote:any=[];
+  vote: any = [];
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    private userService : UserService, 
-    private notificacionService : NotificacionService,
+    private userService: UserService,
+    private notificacionService: NotificacionService,
   ) {
     this.loadView();
     this.notificacionVote();
@@ -37,19 +37,19 @@ export class ServiceVotePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceVotePage');
   }
-  goCleaningOk(){
+  goCleaningOk() {
     console.log(this.vote);
-    this.vote['providerId']=this.userActual;
-    this.userService.setComment(this.user,this.vote);
+    this.vote['providerId'] = this.userActual;
+    this.userService.setComment(this.user, this.vote);
     //-cambiar calificacion proveedor
     let userServiceSubs = this.userService.getUser(this.user).subscribe(
-      (userDB)=>{
-        if(userServiceSubs != undefined){
+      (userDB) => {
+        if (userServiceSubs != undefined) {
           console.log('userServiceSubs S - service-vote');
-          if(userDB['user_star']){
-            let calificacion = (Number(this.vote.estrellas) + Number(userDB['user_star']) )/2;
+          if (userDB['user_star']) {
+            let calificacion = (Number(this.vote.estrellas) + Number(userDB['user_star'])) / 2;
             console.log(calificacion);
-            this.userService.setStar(this.user,calificacion);
+            this.userService.setStar(this.user, calificacion);
           }
           console.log('userServiceSubs US - service-vote');
           userServiceSubs.unsubscribe();
@@ -59,8 +59,8 @@ export class ServiceVotePage {
     this.navCtrl.setRoot('ShowPage');
   }
 
-  loadView(){
-    this.DataService =  this.navParams.get('service');
+  loadView() {
+    this.DataService = this.navParams.get('service');
     this.DataUser = this.navParams.get('user');
     console.log(this.DataService);
     console.log(this.DataUser);
@@ -73,8 +73,8 @@ export class ServiceVotePage {
   }
 
   //-notification
-  notificacionVote(){
+  notificacionVote() {
     console.info('Nota: Do not forget to rate your client');
-    this.notificacionService.mostrar('Do not forget to rate your client',7);
+    this.notificacionService.mostrar('Do not forget to rate your client', 7);
   }
 }

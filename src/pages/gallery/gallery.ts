@@ -26,20 +26,20 @@ import * as firebase from 'firebase/app';
 })
 export class GalleryPage {
   //-data
-  keyService:any;
-  UserActual:any;
+  keyService: any;
+  UserActual: any;
   //-form
-  private gallery : FormGroup;
+  private gallery: FormGroup;
 
   //view
-  fotoA:any; 
-  fotoB:any; 
-  fotoC:any; 
-  fotoD:any; 
+  fotoA: any;
+  fotoB: any;
+  fotoC: any;
+  fotoD: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private formBuilder : FormBuilder, 
-    private camera : Camera, 
-    private professionalsService : ProfessionalsService,
+    private formBuilder: FormBuilder,
+    private camera: Camera,
+    private professionalsService: ProfessionalsService,
     // private cameraService : CameraService,
   ) {
     this.keyService = this.navParams.get('datos');
@@ -53,45 +53,45 @@ export class GalleryPage {
     console.log('ionViewDidLoad GalleryPage');
   }
 
-  goService(){
+  goService() {
     //-guardar las fotos del servicio
-    let DataGallery = {"fotoA":this.fotoA,"fotoB":this.fotoB,"fotoC":this.fotoC,"fotoD":this.fotoD,};
-    this.professionalsService.setInfoServiceUserGallery(this.UserActual,DataGallery,this.keyService);
+    let DataGallery = { "fotoA": this.fotoA, "fotoB": this.fotoB, "fotoC": this.fotoC, "fotoD": this.fotoD, };
+    this.professionalsService.setInfoServiceUserGallery(this.UserActual, DataGallery, this.keyService);
     this.navCtrl.pop();
   }
 
-  fotoGaleria(foto){
+  fotoGaleria(foto) {
     switch (foto) {
       case 'A':
         console.log('fotoA');
-        this.camaraFotoA(this.UserActual+'/'+this.keyService+'/GalleryA');       
+        this.camaraFotoA(this.UserActual + '/' + this.keyService + '/GalleryA');
         break;
-        case 'B':
+      case 'B':
         console.log('fotoB');
-        this.camaraFotoB(this.UserActual+'/'+this.keyService+'/GalleryB');       
+        this.camaraFotoB(this.UserActual + '/' + this.keyService + '/GalleryB');
         break;
-        case 'C':
+      case 'C':
         console.log('fotoC');
-        this.camaraFotoC(this.UserActual+'/'+this.keyService+'/GalleryC');       
+        this.camaraFotoC(this.UserActual + '/' + this.keyService + '/GalleryC');
         break;
-        case 'D':
+      case 'D':
         console.log('fotoD');
-        this.camaraFotoD(this.UserActual+'/'+this.keyService+'/GalleryD');       
+        this.camaraFotoD(this.UserActual + '/' + this.keyService + '/GalleryD');
         break;
-      
+
       default:
         break;
     }
   }
-  getForm(){
+  getForm() {
     this.gallery = this.formBuilder.group({
-      fotoA : [''],
+      fotoA: [''],
       fotoB: [''],
       fotoC: [''],
       fotoD: [''],
     });
-    this.professionalsService.getGalleryService(this.UserActual,this.keyService).subscribe(
-      (GalleryB)=>{
+    this.professionalsService.getGalleryService(this.UserActual, this.keyService).subscribe(
+      (GalleryB) => {
         console.log(GalleryB);
         this.fotoA = GalleryB.prof_galleryA;
         this.fotoB = GalleryB.prof_galleryB;
@@ -102,9 +102,9 @@ export class GalleryPage {
   }
 
   //-camara
-  async  camaraFotoA(file){
+  async  camaraFotoA(file) {
     console.log('clickCamara');
-    try{
+    try {
       const options: CameraOptions = {
         quality: 60,
         targetHeight: 100,
@@ -118,24 +118,25 @@ export class GalleryPage {
       // alert(result);
       const image = 'data:image/jpeg;base64,' + result;
       const picture = storage().ref(file);
-      let UploadTask = picture.putString(image,'data_url');
-      
+      let UploadTask = picture.putString(image, 'data_url');
+
       // alert(UploadTask);
       // console.log(JSON.stringify(UploadTask));
       UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {},
-        (error) => { console.log(error)  },
-        () => { let url = UploadTask.snapshot.downloadURL;
+        (snapshot) => { },
+        (error) => { console.log(error) },
+        () => {
+          let url = UploadTask.snapshot.downloadURL;
           console.log(url);
           this.fotoA = url;
         }
       );
-    } catch(e){ console.error(e);}
+    } catch (e) { console.error(e); }
   }
 
-  async  camaraFotoB(file){
+  async  camaraFotoB(file) {
     console.log('clickCamara');
-    try{
+    try {
       const options: CameraOptions = {
         quality: 60,
         targetHeight: 100,
@@ -147,21 +148,22 @@ export class GalleryPage {
       const result = await this.camera.getPicture(options);
       const image = 'data:image/jpeg;base64,' + result;
       const picture = storage().ref(file);
-      let UploadTask = picture.putString(image,'data_url');
+      let UploadTask = picture.putString(image, 'data_url');
       UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {},
-        (error) => { console.log(error)  },
-        () => { let url = UploadTask.snapshot.downloadURL;
+        (snapshot) => { },
+        (error) => { console.log(error) },
+        () => {
+          let url = UploadTask.snapshot.downloadURL;
           console.log(url);
           this.fotoB = url;
         }
       );
-    } catch(e){ console.error(e);}
+    } catch (e) { console.error(e); }
   }
 
-  async  camaraFotoC(file){
+  async  camaraFotoC(file) {
     console.log('clickCamara');
-    try{
+    try {
       const options: CameraOptions = {
         quality: 60,
         targetHeight: 100,
@@ -173,21 +175,22 @@ export class GalleryPage {
       const result = await this.camera.getPicture(options);
       const image = 'data:image/jpeg;base64,' + result;
       const picture = storage().ref(file);
-      let UploadTask = picture.putString(image,'data_url');
+      let UploadTask = picture.putString(image, 'data_url');
       UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {},
-        (error) => { console.log(error)  },
-        () => { let url = UploadTask.snapshot.downloadURL;
+        (snapshot) => { },
+        (error) => { console.log(error) },
+        () => {
+          let url = UploadTask.snapshot.downloadURL;
           console.log(url);
           this.fotoC = url;
         }
       );
-    } catch(e){ console.error(e);}
+    } catch (e) { console.error(e); }
   }
 
-  async  camaraFotoD(file){
+  async  camaraFotoD(file) {
     console.log('clickCamara');
-    try{
+    try {
       const options: CameraOptions = {
         quality: 60,
         targetHeight: 100,
@@ -199,16 +202,17 @@ export class GalleryPage {
       const result = await this.camera.getPicture(options);
       const image = 'data:image/jpeg;base64,' + result;
       const picture = storage().ref(file);
-      let UploadTask = picture.putString(image,'data_url');
+      let UploadTask = picture.putString(image, 'data_url');
       UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {},
-        (error) => { console.log(error)  },
-        () => { let url = UploadTask.snapshot.downloadURL;
+        (snapshot) => { },
+        (error) => { console.log(error) },
+        () => {
+          let url = UploadTask.snapshot.downloadURL;
           console.log(url);
           this.fotoD = url;
         }
       );
-    } catch(e){ console.error(e);}
+    } catch (e) { console.error(e); }
   }
 
 }

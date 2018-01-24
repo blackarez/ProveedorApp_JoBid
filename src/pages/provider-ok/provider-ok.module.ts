@@ -10,4 +10,4 @@ import { ProviderOkPage } from './provider-ok';
     IonicPageModule.forChild(ProviderOkPage),
   ],
 })
-export class ProviderOkPageModule {}
+export class ProviderOkPageModule { }

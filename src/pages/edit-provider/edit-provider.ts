@@ -48,7 +48,7 @@ export class EditProviderPage {
   showLabel: boolean = false;
   //sub
   profSub: any;
-  SubcribeUserexists:any;
+  SubcribeUserexists: any;
 
   //--form validator
   private editProviderForm: FormGroup;

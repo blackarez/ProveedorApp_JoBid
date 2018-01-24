@@ -5,25 +5,28 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  
-    <ion-navbar>
+
+  <ion-navbar>
     <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>JoBid</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content>
-    <img src="assets/img/JoBidProveedor.jpg" />
-    <div class="centrarIcon">
-      <ion-icon class="icon-ok" name="checkmark-circle"></ion-icon>
-    </div>
-    <p>The customer has finished his rating.</p>
-    <p>A total of <span>${{DataUser.sale}}</span> has been credited to your account.</p>
-     <div class="btnBottom" padding>
-      <button ion-button color="danger" block (click)="goVote()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>
-    </div>
-  </ion-content>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>JoBid</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <img src="assets/img/JoBidProveedor.jpg" />
+  <div class="centrarIcon">
+    <ion-icon class="icon-ok" name="checkmark-circle"></ion-icon>
+  </div>
+  <p>The customer has finished his rating.</p>
+  <p>A total of
+    <span>${{DataUser.sale}}</span> has been credited to your account.</p>
+  <div class="btnBottom" padding>
+    <button ion-button color="danger" block (click)="goVote()">Continue
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </button>
+  </div>
+</ion-content>

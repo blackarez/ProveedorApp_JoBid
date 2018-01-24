@@ -10,4 +10,4 @@ import { GalleryPage } from './gallery';
     IonicPageModule.forChild(GalleryPage),
   ],
 })
-export class GalleryPageModule {}
+export class GalleryPageModule { }

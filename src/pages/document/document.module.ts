@@ -10,4 +10,4 @@ import { DocumentPage } from './document';
     IonicPageModule.forChild(DocumentPage),
   ],
 })
-export class DocumentPageModule {}
+export class DocumentPageModule { }

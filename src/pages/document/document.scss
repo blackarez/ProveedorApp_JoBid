@@ -1,31 +1,32 @@
 page-document {
-    p{
+    p {
         text-align: center;
     }
-    .btnAddPicture{
+    .btnAddPicture {
         // background:$Red; 
         // padding-left:10px; 
-        width:200px;
-        button{
-            background:$Red; 
-            color:white;
+        width: 200px;
+        button {
+            background: $Red;
+            color: white;
             border: none;
-            box-shadow: none;
-            // &.button-md:hover:not(.disable-hover){
+            box-shadow: none; // &.button-md:hover:not(.disable-hover){
             //     background: $Red;
             // } 
         }
     }
-    .grid{
+    .grid {
         border-bottom: 2px solid $Red;
-        .row,.col{
-            margin:0;
+        .row,
+        .col {
+            margin: 0;
             padding: 0;
-            .list-md > .item-block ion-label,.list-ios > .item-block ion-label{
+            .list-md>.item-block ion-label,
+            .list-ios>.item-block ion-label {
                 padding-top: 2px;
-                margin: 0;   
-            } 
-            input{
+                margin: 0;
+            }
+            input {
                 height: 36px;
                 width: 100%;
                 padding: 5px;

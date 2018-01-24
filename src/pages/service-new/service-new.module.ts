@@ -10,8 +10,8 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     IonicPageModule.forChild(ServiceNewPage),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg'  
+      apiKey: 'AIzaSyCVVePnunpdeDdD9fUNbLwYALneSYy2NPg'
     }),
   ],
 })
-export class ServiceNewPageModule {}
+export class ServiceNewPageModule { }

@@ -22,14 +22,14 @@ import { ProfessionalsService } from '../../services/professionals.service';
 })
 export class DocumentPage {
   //-form
-  private documentos : FormGroup;
+  private documentos: FormGroup;
   //-load
-  UserActual:any;
+  UserActual: any;
   //-view
-  documentFoto:string;
-  licenciaFoto:string;
-  disDocumentImg:boolean=true;
-  disLicenciaImg:boolean=true;
+  documentFoto: string;
+  licenciaFoto: string;
+  disDocumentImg: boolean = true;
+  disLicenciaImg: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder,
@@ -43,28 +43,28 @@ export class DocumentPage {
     console.log('ionViewDidLoad DocumentPage');
   }
 
-  goTerms(){
-    this.professionalsService.setDocument(this.UserActual,this.documentFoto,this.licenciaFoto);
+  goTerms() {
+    this.professionalsService.setDocument(this.UserActual, this.documentFoto, this.licenciaFoto);
     this.navCtrl.push('TermsPage');
   }
 
-  loadView(){
+  loadView() {
     this.UserActual = localStorage.getItem('verificacion');
   }
 
-  getForm(){
+  getForm() {
     this.documentos = this.formBuilder.group({
-      documentFoto : ['', Validators.required],
+      documentFoto: ['', Validators.required],
       licenciaFoto: ['', Validators.required],
       // documentFoto : [''],
       // licenciaFoto: [''],
-    });  
+    });
   }
 
-  async fotoDocumento(){
-    let file =this.UserActual+'/Document';
+  async fotoDocumento() {
+    let file = this.UserActual + '/Document';
     console.log('clickCamara');
-    try{
+    try {
       const options: CameraOptions = {
         quality: 60,
         targetHeight: 300,
@@ -76,24 +76,25 @@ export class DocumentPage {
       const result = await this.camera.getPicture(options);
       const image = 'data:image/jpeg;base64,' + result;
       const picture = storage().ref(file);
-      let UploadTask = picture.putString(image,'data_url');
+      let UploadTask = picture.putString(image, 'data_url');
       UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {},
-        (error) => { console.log(error)  },
-        () => { let url = UploadTask.snapshot.downloadURL;
+        (snapshot) => { },
+        (error) => { console.log(error) },
+        () => {
+          let url = UploadTask.snapshot.downloadURL;
           console.log(url);
           this.documentFoto = url;
           this.disDocumentImg = false;
         }
       );
-    } catch(e){ console.error(e);}
+    } catch (e) { console.error(e); }
   }
 
 
-  async fotoLicencia(){
-    let file =this.UserActual+'/Licencia';
+  async fotoLicencia() {
+    let file = this.UserActual + '/Licencia';
     console.log('clickCamara');
-    try{
+    try {
       const options: CameraOptions = {
         quality: 60,
         targetHeight: 600,
@@ -105,17 +106,18 @@ export class DocumentPage {
       const result = await this.camera.getPicture(options);
       const image = 'data:image/jpeg;base64,' + result;
       const picture = storage().ref(file);
-      let UploadTask = picture.putString(image,'data_url');
+      let UploadTask = picture.putString(image, 'data_url');
       UploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) =>  {},
-        (error) => { console.log(error)  },
-        () => { let url = UploadTask.snapshot.downloadURL;
+        (snapshot) => { },
+        (error) => { console.log(error) },
+        () => {
+          let url = UploadTask.snapshot.downloadURL;
           console.log(url);
           this.licenciaFoto = url;
           this.disLicenciaImg = false;
         }
       );
-    } catch(e){ console.error(e);}
+    } catch (e) { console.error(e); }
   }
 
 }

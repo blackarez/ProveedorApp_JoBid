@@ -170,7 +170,7 @@ export class LoginPage {
                         console.log(value[key]);
                         console.info(JSON.stringify(value[key]));
                         // if (value[key]['login'] != undefined) {
-                          this.correoVerificado = true;
+                        this.correoVerificado = true;
                         // }
                         this.goNextPagePrehomeFace(value[key]);
                       }
@@ -207,9 +207,9 @@ export class LoginPage {
 
     // console.log(this.userDataUpdate);
     // if (this.correoVerificado == true) {
-      this.userDataUpdate['verificacion'] = datos['$key'];
-      localStorage.setItem('verificacion', datos['$key']);
-      this.navCtrl.setRoot('ShowPage');
+    this.userDataUpdate['verificacion'] = datos['$key'];
+    localStorage.setItem('verificacion', datos['$key']);
+    this.navCtrl.setRoot('ShowPage');
     // }
     // this.userDataUpdate['verificacion'] = datos['$key'];
     // localStorage.setItem('verificacion', datos['$key']);

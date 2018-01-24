@@ -10,4 +10,4 @@ import { ProviderInfoBPage } from './provider-info-b';
     IonicPageModule.forChild(ProviderInfoBPage),
   ],
 })
-export class ProviderInfoBPageModule {}
+export class ProviderInfoBPageModule { }

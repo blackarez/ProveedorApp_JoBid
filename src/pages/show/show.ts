@@ -78,7 +78,7 @@ export class ShowPage {
     // console.log('serviceSubs-US show');
     // console.log('listOffer-US show');
     clearInterval(this.objNodeTimer);
-    this.StatusProvider  = false;
+    this.StatusProvider = false;
     if (this.userSubs != undefined) { this.userSubs.unsubscribe(); }
     if (this.serviceSubs != undefined) { this.serviceSubs.unsubscribe(); }
     if (this.listOffer != undefined) { this.listOffer.unsubscribe(); }

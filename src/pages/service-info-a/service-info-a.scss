@@ -1,34 +1,37 @@
 page-service-info-a {
-    p{
+    p {
         text-align: center;
     }
     .btnAddPicture {
         // background:$Red; 
         // padding-left:10px; 
-        width:200px;
+        width: 200px;
         margin: 0;
-        button{
-            background:$Red; 
-            color:white;
+        button {
+            background: $Red;
+            color: white;
             border: none;
-            box-shadow: none;
-            // &.button-md:hover:not(.disable-hover){
+            box-shadow: none; // &.button-md:hover:not(.disable-hover){
             //     background: $Red;
             // }            
         }
     }
-    .textUpload, .BtnUpload ,ion-item.BtnUpload.item-md, ion-item.BtnUpload.item-ios{
+    .textUpload,
+    .BtnUpload,
+    ion-item.BtnUpload.item-md,
+    ion-item.BtnUpload.item-ios {
         margin: 0;
-        .label-md, .label-ios{
+        .label-md,
+        .label-ios {
             margin: 0;
             padding: 0;
         }
     }
-    .textUpload{
+    .textUpload {
         margin-top: 10px;
     }
-    
 }
+
 // .alert-md .alert-head,.alert-ios .alert-head{
 //     display: none;
 // }

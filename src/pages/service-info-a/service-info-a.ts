@@ -18,62 +18,62 @@ import { ProfessionalsService } from '../../services/professionals.service';
 })
 export class ServiceInfoAPage {
   //-data view
-  service:any;
-  subService:any;
-  typeBusiness:any;
-  experiencia:any;
-  moreInformation:any;
-  certificacion:any=false;
-  seguro:any=false;
-  booelanSeguro:boolean= false;
-  booelanCertificacion:boolean= false;
+  service: any;
+  subService: any;
+  typeBusiness: any;
+  experiencia: any;
+  moreInformation: any;
+  certificacion: any = false;
+  seguro: any = false;
+  booelanSeguro: boolean = false;
+  booelanCertificacion: boolean = false;
 
-  keyService:any;
+  keyService: any;
   //-list
-  ListServices:any = [];
-  ListSubServices:any = [];
+  ListServices: any = [];
+  ListSubServices: any = [];
   //-paq
-  DataService:any=[];
+  DataService: any = [];
 
   //-userActual
-UserActual:any;
+  UserActual: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private professionsService : ProfessionsService,
+    private professionsService: ProfessionsService,
     private professionalsService: ProfessionalsService,
   ) {
-    this.ListServices=this.professionsService.getProfessions();
+    this.ListServices = this.professionsService.getProfessions();
     console.log(this.ListServices);
     this.UserActual = localStorage.getItem('verificacion');
     var Key = new Date().getTime();
-    this.keyService = "Serv_"+(Key);
+    this.keyService = "Serv_" + (Key);
   }
 
-  changeCertification(){
+  changeCertification() {
     console.log('click');
     // console.log(this.booelanCertificacion);
     let cont = 1;
-    if(this.booelanCertificacion == true  && cont == 1){
+    if (this.booelanCertificacion == true && cont == 1) {
       this.booelanCertificacion = false;
       this.certificacion = 'false';
       cont = 2;
     }
-    if(this.booelanCertificacion == false  && cont == 1){
+    if (this.booelanCertificacion == false && cont == 1) {
       this.booelanCertificacion = true;
       this.certificacion = 'true';
       cont = 2;
     }
     // console.log(this.booelanCertificacion);
   }
-  changeSeguro(){
+  changeSeguro() {
     console.log('click');
     console.log(this.booelanSeguro);
     let cont = 1;
-    if(this.booelanSeguro == true && cont == 1){
+    if (this.booelanSeguro == true && cont == 1) {
       this.booelanSeguro = false;
       this.seguro = 'false';
       cont = 2;
     }
-    if(this.booelanSeguro == false && cont == 1){
+    if (this.booelanSeguro == false && cont == 1) {
       this.booelanSeguro = true;
       this.seguro = 'true';
       cont = 2;
@@ -84,35 +84,35 @@ UserActual:any;
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiceInfoAPage');
   }
-  goProviderInfoB(){
-    if(this.booelanSeguro == true){
+  goProviderInfoB() {
+    if (this.booelanSeguro == true) {
       this.seguro = 'true';
-    }else{
+    } else {
       this.seguro = 'false';
     }
-    if(this.booelanCertificacion == true){
+    if (this.booelanCertificacion == true) {
       this.certificacion = 'true';
-    }else{
+    } else {
       this.certificacion = 'false';
     }
-    this.DataService = {"serv_service":this.service,"serv_subService":this.subService};
+    this.DataService = { "serv_service": this.service, "serv_subService": this.subService };
     // let Data = {'datos':this.DataService};
-    let DataServiceInfo = {"serv_experiencia":this.experiencia,"serv_moreInformation":this.moreInformation,"serv_insurance":this.seguro,"serv_certificate":this.certificacion};
-    this.DataService["serv_detail"]=DataServiceInfo;
+    let DataServiceInfo = { "serv_experiencia": this.experiencia, "serv_moreInformation": this.moreInformation, "serv_insurance": this.seguro, "serv_certificate": this.certificacion };
+    this.DataService["serv_detail"] = DataServiceInfo;
     console.log(this.DataService);
-    this.professionalsService.setInfoServiceUser(this.UserActual,this.DataService,this.keyService);
+    this.professionalsService.setInfoServiceUser(this.UserActual, this.DataService, this.keyService);
     this.navCtrl.setRoot('EditUserPage');
     // this.navCtrl.pop();
   }
-  
-  setSubServices(){
+
+  setSubServices() {
     console.log(this.service);
-    this.ListSubServices=this.professionsService.getCategoryByProfession(this.service);
+    this.ListSubServices = this.professionsService.getCategoryByProfession(this.service);
     console.log(this.ListSubServices);
   }
 
-  addPictures(){
-    let Data = {'datos':this.keyService};
-    this.navCtrl.push('GalleryPage',Data);
+  addPictures() {
+    let Data = { 'datos': this.keyService };
+    this.navCtrl.push('GalleryPage', Data);
   }
 }

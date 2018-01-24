@@ -10,4 +10,4 @@ import { ServiceInfoAPage } from './service-info-a';
     IonicPageModule.forChild(ServiceInfoAPage),
   ],
 })
-export class ServiceInfoAPageModule {}
+export class ServiceInfoAPageModule { }

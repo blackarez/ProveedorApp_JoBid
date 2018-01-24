@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'terms.html',
 })
 export class TermsPage {
-termsValue:any=false;
+  termsValue: any = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -22,9 +22,9 @@ termsValue:any=false;
     console.log('ionViewDidLoad TermsPage');
   }
 
-  goProviderInfo(){
+  goProviderInfo() {
     console.log(this.termsValue);
-    if(this.termsValue == true){
+    if (this.termsValue == true) {
       this.navCtrl.push('ProviderInfoAPage');
     }
   }

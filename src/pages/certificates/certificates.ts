@@ -17,9 +17,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CertificatesPage {
   //-form
-  private certificados : FormGroup;
+  private certificados: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private formBuilder : FormBuilder,
+    private formBuilder: FormBuilder,
   ) {
     this.getForm();
   }
@@ -27,11 +27,11 @@ export class CertificatesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CertificatesPage');
   }
-  goPaymentMethods(){
+  goPaymentMethods() {
     this.navCtrl.push('PaymentMethodsPage');
   }
 
-  fotoGaleria(foto){
+  fotoGaleria(foto) {
     switch (foto) {
       case 'A':
         console.log('fotoA');
@@ -45,15 +45,15 @@ export class CertificatesPage {
       case 'D':
         console.log('fotoD');
         break;
-      
+
       default:
         break;
     }
   }
 
-  getForm(){
+  getForm() {
     this.certificados = this.formBuilder.group({
-      fotoA : [''],
+      fotoA: [''],
       fotoB: [''],
       fotoC: [''],
       fotoD: [''],

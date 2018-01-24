@@ -10,4 +10,4 @@ import { PaymentsPage } from './payments';
     IonicPageModule.forChild(PaymentsPage),
   ],
 })
-export class PaymentsPageModule {}
+export class PaymentsPageModule { }

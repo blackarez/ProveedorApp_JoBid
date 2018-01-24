@@ -5,24 +5,22 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  
-    <ion-navbar>
+
+  <ion-navbar>
     <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>JoBid</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>JoBid</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
   <!-- <img src="assets/img/map.png" class="imageFull"> -->
   <div class="mapa">
     <agm-map [latitude]="providerLatitud" [longitude]="providerLongitud" [zoom]="zom">
-      <agm-marker style="z-index:9;"
-        [latitude]="Userlat"
-        [longitude]="Userlng" >
+      <agm-marker style="z-index:9;" [latitude]="Userlat" [longitude]="Userlng">
       </agm-marker>
     </agm-map>
   </div>
@@ -34,41 +32,41 @@
   <h6 id="estadoServicio">{{status}}</h6>
   <div padding>
     <ion-grid>
-    <ion-row>
-      <ion-col col-5>
-        <ion-list>
-          <ion-item>
-            <ion-avatar>
-              <img src="{{imgUser}}">
-            </ion-avatar>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col col-7>
-        <ion-row>
-          <ion-col>
-            <h4>{{nameUser}}</h4>
-            <p>{{addresUser}}</p>
-            <p>{{phoneUser}}</p>
-          </ion-col>
-        </ion-row>	
-      </ion-col>
-    </ion-row>	
-  </ion-grid>
+      <ion-row>
+        <ion-col col-5>
+          <ion-list>
+            <ion-item>
+              <ion-avatar>
+                <img src="{{imgUser}}">
+              </ion-avatar>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-7>
+          <ion-row>
+            <ion-col>
+              <h4>{{nameUser}}</h4>
+              <p>{{addresUser}}</p>
+              <p>{{phoneUser}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-  
+
   <!-- <div class="btnBottom">
     <button id="verifyYourPhone-button6" ion-button block color="danger" (click)="goCleaningVote()">Continue <ion-icon name="arrow-dropright"></ion-icon></button>
   </div> -->
-  
-  </ion-content>
+
+</ion-content>
 <ion-footer>
   <ion-toolbar>
-      <div class="btnBottom">
-        <button ion-button color="danger" block (click)="goServiceJob()">
-            Start service
-            <ion-icon name="arrow-dropright"></ion-icon> 
-        </button> 
-      </div>
+    <div class="btnBottom">
+      <button ion-button color="danger" block (click)="goServiceJob()">
+        Start service
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </div>
   </ion-toolbar>
 </ion-footer>

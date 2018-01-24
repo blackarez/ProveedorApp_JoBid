@@ -16,18 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class MyServiceInfoPage {
 
   //-data
-  DataService:any;
+  DataService: any;
 
   //-vista
-  serviceCode:string;
-  status:string;
-  imgUser:string;
-  nameUser:string;
-  addresUser:string;
-  phoneUser:string;
-  info:string;
-  sale:string;
-  idUser:string;
+  serviceCode: string;
+  status: string;
+  imgUser: string;
+  nameUser: string;
+  addresUser: string;
+  phoneUser: string;
+  info: string;
+  sale: string;
+  idUser: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.DataService = this.navParams.get('datos');
@@ -39,15 +39,15 @@ export class MyServiceInfoPage {
     console.log('ionViewDidLoad MyServiceInfoPage');
   }
 
-  loadView(){
-    this.serviceCode=this.DataService.id;
-    this.sale=this.DataService.sale;
-    this.status=this.DataService.status;
-    this.idUser=this.DataService.DataUser.id;
-    this.imgUser=this.DataService.DataUser.img;
-    this.nameUser=this.DataService.DataUser.nameUser;
-    this.addresUser=this.DataService.DataUser.address;
-    this.phoneUser=this.DataService.DataUser.tel;
+  loadView() {
+    this.serviceCode = this.DataService.id;
+    this.sale = this.DataService.sale;
+    this.status = this.DataService.status;
+    this.idUser = this.DataService.DataUser.id;
+    this.imgUser = this.DataService.DataUser.img;
+    this.nameUser = this.DataService.DataUser.nameUser;
+    this.addresUser = this.DataService.DataUser.address;
+    this.phoneUser = this.DataService.DataUser.tel;
     this.info = this.DataService.info;
   }
 

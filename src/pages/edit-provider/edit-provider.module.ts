@@ -14,4 +14,4 @@ import { OrdenarProveedorPipe } from '../../pipes/ordenar-proveedor/ordenar-prov
     IonicPageModule.forChild(EditProviderPage),
   ],
 })
-export class EditProviderPageModule {}
+export class EditProviderPageModule { }
