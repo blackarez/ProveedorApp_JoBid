@@ -99,7 +99,6 @@ var ProviderOkPage = (function () {
                 clearInterval(this.objNodeTimer);
                 console.log('servicion fin');
                 this.goHome();
-                this.showAlertEmail();
             }
         }
         else {
@@ -117,6 +116,10 @@ var ProviderOkPage = (function () {
             buttons: ['OK']
         });
         alerteMail.present();
+    };
+    //enviando alerta
+    ProviderOkPage.prototype.ionViewWillLeave = function () {
+        this.showAlertEmail();
     };
     return ProviderOkPage;
 }());

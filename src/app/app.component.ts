@@ -80,46 +80,49 @@ export class MyApp {
       console.log(userAuth);
       // alert(JSON.stringify(userAuth));
       if (userAuth) {
-        // let email=  userAuth.providerData["0"].email;
-        if (userAuth.providerData["0"].providerId == 'password') {
-          let email = userAuth.providerData["0"].email;
-          console.log(email);
-
-          let Userexists = this.professionalsService.getProfessionalExists(email).subscribe((User) => {
-            console.log('User Logueado');
-            console.log(User);
-            if (User['0']) {
-              if (User['0']['login'] == undefined || User['0']['login'] == false) {
-                if (this.afAuth.auth.currentUser.emailVerified != false) {
-                  console.info('cambio estado login base de datos');
-                  this.mostrarUsuarioLogeado = true;
+        if (userAuth != null || userAuth != undefined) {
+          // let email=  userAuth.providerData["0"].email;
+          if (userAuth.providerData["0"].providerId == 'password') {
+            let email = userAuth.providerData["0"].email;
+            console.log(email);
+            let Userexists = this.professionalsService.getProfessionalExists(email).subscribe((User) => {
+              console.log('User Logueado');
+              console.log(User);
+              if (User['0']) {
+                if (User['0']['login'] == undefined || User['0']['login'] == false) {
+                  if (this.afAuth.auth.currentUser.emailVerified != false) {
+                    console.info('cambio estado login base de datos');
+                    this.mostrarUsuarioLogeado = true;
+                    this.loadViewUser(User['0']);
+                  }
+                } else {
                   this.loadViewUser(User['0']);
+                  this.mostrarUsuarioLogeado = true;
                 }
-              } else {
+                // if (Userexists != undefined) {
+                  // Userexists.unsubscribe();
+                // }
+              }
+            });
+          } else {
+            let faceUid = userAuth.uid;
+            console.log(faceUid);
+            let Userexists = this.professionalsService.getProfessionalUidFace(faceUid).subscribe((User) => {
+              console.log('User Logueado');
+              console.log(User);
+              if (User['0']) {
                 this.loadViewUser(User['0']);
                 this.mostrarUsuarioLogeado = true;
+                // if (Userexists != undefined) {
+                  // Userexists.unsubscribe();
+                // }
               }
-              if (Userexists != undefined) {
-                Userexists.unsubscribe();
-              }
-            }
-          });
-        } else {
-          let faceUid = userAuth.uid;
-          console.log(faceUid);
-          let Userexists = this.professionalsService.getProfessionalUidFace(faceUid).subscribe((User) => {
-            console.log('User Logueado');
-            console.log(User);
-            if (User['0']) {
-              this.loadViewUser(User['0']);
-              this.mostrarUsuarioLogeado = true;
-              if (Userexists != undefined) {
-                // Userexists.unsubscribe();
-              }
-            }
-          });
+            });
+          }
+        }else {
+          console.info('find user menu - no');
+          this.mostrarUsuarioLogeado = false;
         }
-
       } else {
         console.info('find user menu - no');
         this.mostrarUsuarioLogeado = false;

@@ -1267,45 +1267,51 @@ var MyApp = (function () {
             console.log(userAuth);
             // alert(JSON.stringify(userAuth));
             if (userAuth) {
-                // let email=  userAuth.providerData["0"].email;
-                if (userAuth.providerData["0"].providerId == 'password') {
-                    var email = userAuth.providerData["0"].email;
-                    console.log(email);
-                    var Userexists_1 = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
-                        console.log('User Logueado');
-                        console.log(User);
-                        if (User['0']) {
-                            if (User['0']['login'] == undefined || User['0']['login'] == false) {
-                                if (_this.afAuth.auth.currentUser.emailVerified != false) {
-                                    console.info('cambio estado login base de datos');
-                                    _this.mostrarUsuarioLogeado = true;
-                                    _this.loadViewUser(User['0']);
+                if (userAuth != null || userAuth != undefined) {
+                    // let email=  userAuth.providerData["0"].email;
+                    if (userAuth.providerData["0"].providerId == 'password') {
+                        var email = userAuth.providerData["0"].email;
+                        console.log(email);
+                        var Userexists = _this.professionalsService.getProfessionalExists(email).subscribe(function (User) {
+                            console.log('User Logueado');
+                            console.log(User);
+                            if (User['0']) {
+                                if (User['0']['login'] == undefined || User['0']['login'] == false) {
+                                    if (_this.afAuth.auth.currentUser.emailVerified != false) {
+                                        console.info('cambio estado login base de datos');
+                                        _this.mostrarUsuarioLogeado = true;
+                                        _this.loadViewUser(User['0']);
+                                    }
                                 }
+                                else {
+                                    _this.loadViewUser(User['0']);
+                                    _this.mostrarUsuarioLogeado = true;
+                                }
+                                // if (Userexists != undefined) {
+                                // Userexists.unsubscribe();
+                                // }
                             }
-                            else {
+                        });
+                    }
+                    else {
+                        var faceUid = userAuth.uid;
+                        console.log(faceUid);
+                        var Userexists = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
+                            console.log('User Logueado');
+                            console.log(User);
+                            if (User['0']) {
                                 _this.loadViewUser(User['0']);
                                 _this.mostrarUsuarioLogeado = true;
+                                // if (Userexists != undefined) {
+                                // Userexists.unsubscribe();
+                                // }
                             }
-                            if (Userexists_1 != undefined) {
-                                Userexists_1.unsubscribe();
-                            }
-                        }
-                    });
+                        });
+                    }
                 }
                 else {
-                    var faceUid = userAuth.uid;
-                    console.log(faceUid);
-                    var Userexists_2 = _this.professionalsService.getProfessionalUidFace(faceUid).subscribe(function (User) {
-                        console.log('User Logueado');
-                        console.log(User);
-                        if (User['0']) {
-                            _this.loadViewUser(User['0']);
-                            _this.mostrarUsuarioLogeado = true;
-                            if (Userexists_2 != undefined) {
-                                // Userexists.unsubscribe();
-                            }
-                        }
-                    });
+                    console.info('find user menu - no');
+                    _this.mostrarUsuarioLogeado = false;
                 }
             }
             else {

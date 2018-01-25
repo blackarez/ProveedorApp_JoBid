@@ -53,7 +53,6 @@ export class ProviderOkPage {
         clearInterval(this.objNodeTimer);
         console.log('servicion fin');
         this.goHome();
-        this.showAlertEmail();
       }
     } else {
       if (--this.segundos < 0) {
@@ -62,9 +61,9 @@ export class ProviderOkPage {
       }
     }
   }
-
+  
   //-correo enviado en sign up
-
+  
   showAlertEmail() {
     let alerteMail = this.alertCtrl.create({
       title: 'Information',
@@ -72,6 +71,11 @@ export class ProviderOkPage {
       buttons: ['OK']
     });
     alerteMail.present();
+  }
+  
+  //enviando alerta
+  ionViewWillLeave() {
+    this.showAlertEmail();
   }
 
 }
